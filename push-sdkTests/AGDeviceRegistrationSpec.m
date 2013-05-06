@@ -50,7 +50,7 @@ describe(@"AGDeviceRegistration", ^{
             [registration registerWithClientInfo:^(id<AGClientDeviceInformation> clientInfo) {
                 
                 // apply the desired info:
-                clientInfo.token = @"8ecda0fe6d8e135cd97485a395338c1a9f4de5ee5f5fe2847d8161398e978d11";
+                clientInfo.token = @"2c948a843e6404dd013e79d82e5a0009";
                 clientInfo.mobileVariantID = @"2c948a843e6404dd013e79d82e5a0009";
                 clientInfo.deviceType = @"iPhone";
                 clientInfo.operatingSystem = @"iOS";
