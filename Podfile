@@ -6,4 +6,5 @@ pod 'AFNetworking'
 
 target 'push-sdkTests', :exclusive => true do
 	pod 'Kiwi'
+	pod 'OHHTTPStubs'
 end

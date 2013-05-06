@@ -18,13 +18,8 @@
 #import <Foundation/Foundation.h>
 #import "AGClientDeviceInformation.h"
 
-@interface AGDeviceRegistration : NSObject
+@interface AGClientDeviceInformationImpl : NSObject<AGClientDeviceInformation>
 
-
--(id) initWithServerURL:(NSURL *)url;
-
--(void) registerWithClientInfo:(void (^)(id<AGClientDeviceInformation> clientInfo)) clientInfo
-                       success:(void (^)(id responseObject))success
-                       failure:(void (^)(NSError *error))failure;
+-(NSDictionary *) extractValues;
 
 @end

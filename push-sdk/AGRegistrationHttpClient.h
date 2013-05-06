@@ -15,16 +15,10 @@
  * limitations under the License.
  */
 
-#import <Foundation/Foundation.h>
-#import "AGClientDeviceInformation.h"
+#import "AFNetworking.h"
 
-@interface AGDeviceRegistration : NSObject
+@interface AGRegistrationHttpClient : AFHTTPClient
 
-
--(id) initWithServerURL:(NSURL *)url;
-
--(void) registerWithClientInfo:(void (^)(id<AGClientDeviceInformation> clientInfo)) clientInfo
-                       success:(void (^)(id responseObject))success
-                       failure:(void (^)(NSError *error))failure;
++ (id)sharedInstanceWithURL:(NSURL *) url;
 
 @end

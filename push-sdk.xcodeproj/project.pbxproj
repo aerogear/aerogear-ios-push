@@ -19,6 +19,9 @@
 		A010C30F1737A95A00CFA575 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A010C30E1737A95A00CFA575 /* SystemConfiguration.framework */; };
 		A010C3151737A9ED00CFA575 /* AGDeviceRegistration.m in Sources */ = {isa = PBXBuildFile; fileRef = A010C3141737A9ED00CFA575 /* AGDeviceRegistration.m */; };
 		A010C3181737AA2C00CFA575 /* AGDeviceRegistrationSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = A010C3171737AA2C00CFA575 /* AGDeviceRegistrationSpec.m */; };
+		A010C31D1737D01000CFA575 /* AGClientDeviceInformationImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = A010C31C1737D00F00CFA575 /* AGClientDeviceInformationImpl.m */; };
+		A010C3211737D24F00CFA575 /* AGRegistrationHttpClient.m in Sources */ = {isa = PBXBuildFile; fileRef = A010C3201737D24F00CFA575 /* AGRegistrationHttpClient.m */; };
+		A010C3231737E46200CFA575 /* response.json in Resources */ = {isa = PBXBuildFile; fileRef = A010C3221737E46200CFA575 /* response.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +63,12 @@
 		A010C3131737A9ED00CFA575 /* AGDeviceRegistration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGDeviceRegistration.h; sourceTree = "<group>"; };
 		A010C3141737A9ED00CFA575 /* AGDeviceRegistration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGDeviceRegistration.m; sourceTree = "<group>"; };
 		A010C3171737AA2C00CFA575 /* AGDeviceRegistrationSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGDeviceRegistrationSpec.m; sourceTree = "<group>"; };
+		A010C3191737B09D00CFA575 /* AGClientDeviceInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGClientDeviceInformation.h; sourceTree = "<group>"; };
+		A010C31B1737D00F00CFA575 /* AGClientDeviceInformationImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGClientDeviceInformationImpl.h; sourceTree = "<group>"; };
+		A010C31C1737D00F00CFA575 /* AGClientDeviceInformationImpl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGClientDeviceInformationImpl.m; sourceTree = "<group>"; };
+		A010C31F1737D24F00CFA575 /* AGRegistrationHttpClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGRegistrationHttpClient.h; sourceTree = "<group>"; };
+		A010C3201737D24F00CFA575 /* AGRegistrationHttpClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGRegistrationHttpClient.m; sourceTree = "<group>"; };
+		A010C3221737E46200CFA575 /* response.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = response.json; sourceTree = "<group>"; };
 		A755D9064734444FBE2C9429 /* Pods-push-sdkTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-push-sdkTests.xcconfig"; path = "Pods/Pods-push-sdkTests.xcconfig"; sourceTree = SOURCE_ROOT; };
 		D09593524A194057A715476C /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -129,10 +138,12 @@
 		A010C2E61737A58100CFA575 /* push-sdk */ = {
 			isa = PBXGroup;
 			children = (
+				A010C31E1737D20600CFA575 /* internal */,
 				A010C2E71737A58100CFA575 /* Supporting Files */,
 				A010C3101737A97A00CFA575 /* AeroGearPush.h */,
 				A010C3131737A9ED00CFA575 /* AGDeviceRegistration.h */,
 				A010C3141737A9ED00CFA575 /* AGDeviceRegistration.m */,
+				A010C3191737B09D00CFA575 /* AGClientDeviceInformation.h */,
 			);
 			path = "push-sdk";
 			sourceTree = "<group>";
@@ -150,6 +161,7 @@
 			children = (
 				A010C2FC1737A58100CFA575 /* Supporting Files */,
 				A010C3171737AA2C00CFA575 /* AGDeviceRegistrationSpec.m */,
+				A010C3221737E46200CFA575 /* response.json */,
 			);
 			path = "push-sdkTests";
 			sourceTree = "<group>";
@@ -161,6 +173,17 @@
 				A010C2FE1737A58100CFA575 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A010C31E1737D20600CFA575 /* internal */ = {
+			isa = PBXGroup;
+			children = (
+				A010C31B1737D00F00CFA575 /* AGClientDeviceInformationImpl.h */,
+				A010C31C1737D00F00CFA575 /* AGClientDeviceInformationImpl.m */,
+				A010C31F1737D24F00CFA575 /* AGRegistrationHttpClient.h */,
+				A010C3201737D24F00CFA575 /* AGRegistrationHttpClient.m */,
+			);
+			name = internal;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -237,6 +260,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A010C3001737A58100CFA575 /* InfoPlist.strings in Resources */,
+				A010C3231737E46200CFA575 /* response.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -292,6 +316,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				A010C3151737A9ED00CFA575 /* AGDeviceRegistration.m in Sources */,
+				A010C31D1737D01000CFA575 /* AGClientDeviceInformationImpl.m in Sources */,
+				A010C3211737D24F00CFA575 /* AGRegistrationHttpClient.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

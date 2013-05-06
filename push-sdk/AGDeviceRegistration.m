@@ -16,10 +16,60 @@
  */
 
 #import "AGDeviceRegistration.h"
+#import "AGRegistrationHttpClient.h"
 
-@implementation AGDeviceRegistration
+#import "AGClientDeviceInformationImpl.h"
 
--(void)registerWithToken:(NSString *)token success:(void (^)(id))success failure:(void (^)(NSError *))failure {
+@implementation AGDeviceRegistration {
+    AGRegistrationHttpClient *_client;
+}
+
+-(id) initWithServerURL:(NSURL *)url {
+    self = [super init];
+    if (self) {
+        _client = [AGRegistrationHttpClient sharedInstanceWithURL:url];
+        _client.parameterEncoding = AFJSONParameterEncoding;
+    }
+    return self;
+}
+
+-(void)registerWithClientInfo:(void (^)(id<AGClientDeviceInformation>))clientInfo success:(void (^)(id))success failure:(void (^)(NSError *))failure {
+    
+    // default impl:
+    AGClientDeviceInformationImpl *clientInfoObject = [[AGClientDeviceInformationImpl alloc] init];
+    
+    if (clientInfo) {
+        // pass the object in:
+        clientInfo(clientInfoObject);
+    } else {
+        // throw Exception!
+    }
+    
+    // Extract the data as NSDic:
+    NSDictionary *mobileVariantInstanceData = [clientInfoObject extractValues];
+    // TODO: check if required values are missing...
+
+
+
+    // add the variant ID:
+    [_client setDefaultHeader:@"ag-mobile-app" value:clientInfoObject.mobileVariantID];
+    
+    // POST the data to the server:
+    [_client postPath:@"rest/registry/device" parameters:mobileVariantInstanceData
+      success:^(AFHTTPRequestOperation *operation, id responseObject) {
+
+         if (success) {
+             success(responseObject);
+         }
+         
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+
+        if (failure) {
+            failure(error);
+        }
+
+    }];
+    
     
 }
 

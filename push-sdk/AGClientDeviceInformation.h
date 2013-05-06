@@ -16,15 +16,17 @@
  */
 
 #import <Foundation/Foundation.h>
-#import "AGClientDeviceInformation.h"
 
-@interface AGDeviceRegistration : NSObject
+@protocol AGClientDeviceInformation <NSObject>
+
+@property (copy, nonatomic) NSString* token;
+@property (copy, nonatomic) NSString* operatingSystem;
+@property (copy, nonatomic) NSString* osVersion;
+@property (copy, nonatomic) NSString* mobileVariantID;
 
 
--(id) initWithServerURL:(NSURL *)url;
-
--(void) registerWithClientInfo:(void (^)(id<AGClientDeviceInformation> clientInfo)) clientInfo
-                       success:(void (^)(id responseObject))success
-                       failure:(void (^)(NSError *error))failure;
+@property (copy, nonatomic) NSString* deviceType;
+@property (copy, nonatomic) NSString* alias;
+@property (copy, nonatomic) NSString* category;
 
 @end

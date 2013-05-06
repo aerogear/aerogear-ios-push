@@ -19,6 +19,7 @@
 #define _AEROGEARPUSH_
 
 // imports
+#import "AGClientDeviceInformation.h"
 #import "AGDeviceRegistration.h"
 
 
