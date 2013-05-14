@@ -24,7 +24,7 @@ Pod::Spec.new do |s|
   s.source       = { :git => 'https://github.com/matzew/ag-client-push-sdk', :tag => '1.0.0' }
   s.platform     = :ios
   s.source_files = 'push-sdk/**/*.{h,m}'
-  s.public_header_files = 'push-sdk/AeroGearPush.h', 'push-sdk/AGDeviceRegistration.h'
+  s.public_header_files = 'push-sdk/AeroGearPush.h', 'push-sdk/AGDeviceRegistration.h', 'push-sdk/AGClientDeviceInformation.h'
   s.requires_arc = true
   s.dependency 'AFNetworking', '1.2.1'
 end
