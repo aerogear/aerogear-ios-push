@@ -19,14 +19,41 @@
 
 @protocol AGClientDeviceInformation <NSObject>
 
+/**
+ * The Device Token which identifies the device within APNs.
+ */
 @property (copy, nonatomic) NSString* token;
+
+/**
+ * The name of the underlying OS (e.g. iOS)
+ */
 @property (copy, nonatomic) NSString* operatingSystem;
+
+/**
+ * The version of the used OS (e.g. 6.1.3)
+ */
 @property (copy, nonatomic) NSString* osVersion;
+
+/**
+ * The ID of the mobile Variant, for which this client will be registered.
+ */
 @property (copy, nonatomic) NSString* mobileVariantID;
 
 
+/**
+ * The device type (e.g. iPhone or iPod)
+ */
 @property (copy, nonatomic) NSString* deviceType;
+
+/**
+ * Application specific alias to identify users with the system. 
+ * E.g. email address or username
+ */
 @property (copy, nonatomic) NSString* alias;
+
+/**
+ * A category, used for tagging/metadata
+ */
 @property (copy, nonatomic) NSString* category;
 
 @end
