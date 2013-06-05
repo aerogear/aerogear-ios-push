@@ -45,7 +45,7 @@
     [values setValue:_operatingSystem forKey:@"mobileOperatingSystem"];
     [values setValue:_osVersion forKey:@"osVersion"];
     [values setValue:_deviceType forKey:@"deviceType"];
-    [values setValue:_alias forKey:@"clientIdentifier"];
+    [values setValue:_alias forKey:@"alias"];
     [values setValue:_category forKey:@"category"];
     
     return values;
