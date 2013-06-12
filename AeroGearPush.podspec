@@ -17,11 +17,11 @@
 Pod::Spec.new do |s|
   s.name         = "AeroGearPush"
   s.version      = "1.0.0"
-  s.summary      = "Unified Push Client SDK"
-  s.homepage     = "https://github.com/matzew/ag-client-push-sdk"
+  s.summary      = "AeroGear UnifiedPush Client Registration SDK"
+  s.homepage     = "https://github.com/aerogear/aerogear-push-ios-registration"
   s.license      = 'Apache License, Version 2.0'
   s.author       = "Red Hat, Inc."
-  s.source       = { :git => 'https://github.com/matzew/ag-client-push-sdk', :tag => '1.0.0' }
+  s.source       = { :git => 'https://github.com/aerogear/aerogear-push-ios-registration', :tag => '1.0.0' }
   s.platform     = :ios
   s.source_files = 'push-sdk/**/*.{h,m}'
   s.public_header_files = 'push-sdk/AeroGearPush.h', 'push-sdk/AGDeviceRegistration.h', 'push-sdk/AGClientDeviceInformation.h'
