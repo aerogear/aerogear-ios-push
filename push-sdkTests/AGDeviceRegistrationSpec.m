@@ -40,32 +40,70 @@ describe(@"AGDeviceRegistration", ^{
             }];
             
             
-            registration = [[AGDeviceRegistration alloc] initWithServerURL:[NSURL URLWithString:@"http://localhost:8080/ag-push/"]];
+            registration = [[AGDeviceRegistration alloc]
+                            initWithServerURL:[NSURL URLWithString:@"http://localhost:8080/ag-push/"]];
+            
             runLoop = NO;
+           
         });
 
-        it(@"", ^{
+        it(@"shared instance should not be nil", ^{
             
+            [[AGDeviceRegistration sharedInstance] shouldNotBeNil];
+        });
+        
+        it(@"should throw an exception if configuration block is not set", ^{
+            
+            [[theBlock(^{
+                [registration registerWithClientInfo:nil
+                                             success:^(id responseObject) {}
+                                             failure:^(NSError *error) {}];
+                
+            }) should] raiseWithName:@"ConfigurationBlockMissing"];
+        });
+        
+        it(@"should throw an exception if 'deviceToken' is not set", ^{
+            
+            [[theBlock(^{
+                [registration registerWithClientInfo:^(id<AGClientDeviceInformation> clientInfo) {
+                    // apply the desired info:
+                    clientInfo.mobileVariantID = @"2c948a843e6404dd013e79d82e5a0009";
+                    
+                } success:^(id responseObject) {}
+                  failure:^(NSError *error) {}];
+
+            }) should] raiseWithName:@"ConfigurationParamsMissing"];
+        });
+        
+        it(@"should throw an exception if 'mobileVariantID' is not set", ^{
+            
+            [[theBlock(^{
+                [registration registerWithClientInfo:^(id<AGClientDeviceInformation> clientInfo) {
+                    // apply the desired info:
+                    clientInfo.deviceToken = @"2c948a843e6404dd013e79d82e5a0009";
+                    
+                } success:^(id responseObject) {}
+                                             failure:^(NSError *error) {}];
+                
+            }) should] raiseWithName:@"ConfigurationParamsMissing"];
+        });
+
+        it(@"should register to the server", ^{
             
             [registration registerWithClientInfo:^(id<AGClientDeviceInformation> clientInfo) {
                 
                 // apply the desired info:
-                clientInfo.token = @"2c948a843e6404dd013e79d82e5a0009";
+                clientInfo.deviceToken = @"2c948a843e6404dd013e79d82e5a0009";
                 clientInfo.mobileVariantID = @"2c948a843e6404dd013e79d82e5a0009";
                 clientInfo.deviceType = @"iPhone";
                 clientInfo.operatingSystem = @"iOS";
                 clientInfo.osVersion = @"6.1.3";
                 clientInfo.alias = @"mister@xyz.com";
-               
+
             } success:^(id responseObject) {
                 runLoop = YES;
-                NSLog(@"\n%@", responseObject);
-               
             } failure:^(NSError *error) {
-                NSLog(@"\nERROR");
-               
             }];
-            
             
             while(!runLoop) {
                 [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
