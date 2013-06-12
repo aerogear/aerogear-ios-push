@@ -20,11 +20,43 @@
 
 @interface AGDeviceRegistration : NSObject
 
+/**
+ * An initializer method to instantiate an AGDeviceRegistration object.
+ *
+ * @param baseURL the URL of the AeroGear Push server.
+ *
+ * @return the AGDeviceRegistration object.
+ */
+- (id) initWithServerURL:(NSURL *)url;
 
--(id) initWithServerURL:(NSURL *)url;
-
--(void) registerWithClientInfo:(void (^)(id<AGClientDeviceInformation> clientInfo)) clientInfo
+/**
+ * Registers your mobile device to the AeroGear Push server so it can
+ * start receiving messages.
+ *
+ * @param clientInfo A block object which passes in an implementation of the AGClientDeviceInformation protocol that
+ * holds configuration metadata that would be posted to the server during the registratin process.
+ *
+ * @param success A block object to be executed when the registration operation finishes successfully.
+ * This block has no return value and takes one argument: The object created from the response
+ * data of the registration request.
+ *
+ * @param failure A block object to be executed when the registration operation finishes unsuccessfully.
+ * This block has no return value and takes one argument: The `NSError` object describing
+ * the error that occurred during the registration process.
+ *
+ */
+-(void) registerWithClientInfo:(void (^)(id<AGClientDeviceInformation>)) clientInfo
                        success:(void (^)(id responseObject))success
                        failure:(void (^)(NSError *error))failure;
+
+/**
+ * Convienient method to access a shared instance of the AGDeviceRegistration object.
+ * Note that this object is initialized only after the initializer initWithServerURL:url
+ * has been called.
+ *
+ * @return the shared AGDeviceRegistration object or nil if not yet initialized.
+ */
+ + (AGDeviceRegistration*) sharedInstance;
+
 
 @end
