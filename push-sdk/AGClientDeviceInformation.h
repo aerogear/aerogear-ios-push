@@ -22,7 +22,7 @@
 /**
  * The Device Token which identifies the device within APNs.
  */
-@property (copy, nonatomic) NSString* deviceToken;
+@property (copy, nonatomic) NSData* deviceToken;
 
 /**
  * The ID of the mobile Variant, for which this client will be registered.

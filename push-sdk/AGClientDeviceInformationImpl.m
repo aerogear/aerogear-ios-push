@@ -17,6 +17,10 @@
 
 #import "AGClientDeviceInformationImpl.h"
 
+@interface AGClientDeviceInformationImpl()
+    - (NSString *) convertToNSString:(NSData *)deviceToken;
+@end
+
 @implementation AGClientDeviceInformationImpl
 
 // "push" related fields
@@ -41,7 +45,7 @@
 -(NSDictionary *) extractValues {
     NSMutableDictionary *values = [NSMutableDictionary dictionary];
     
-    [values setValue:_deviceToken forKey:@"deviceToken"];
+    [values setValue:[self convertToNSString:_deviceToken] forKey:@"deviceToken"];
     [values setValue:_alias forKey:@"alias"];
     [values setValue:_category forKey:@"category"];
 
@@ -50,6 +54,16 @@
     [values setValue:_deviceType forKey:@"deviceType"];
     
     return values;
+}
+
+// little helper to transform the NSData-based token into a (useful) String:
+- (NSString *) convertToNSString:(NSData *)deviceToken {
+    NSString *tokenStr = [deviceToken description];
+    NSString *pushToken = [[[tokenStr
+                             stringByReplacingOccurrencesOfString:@"<" withString:@""]
+                            stringByReplacingOccurrencesOfString:@">" withString:@""]
+                           stringByReplacingOccurrencesOfString:@" " withString:@""];
+    return pushToken;
 }
 
 @end

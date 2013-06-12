@@ -80,7 +80,8 @@ describe(@"AGDeviceRegistration", ^{
             [[theBlock(^{
                 [registration registerWithClientInfo:^(id<AGClientDeviceInformation> clientInfo) {
                     // apply the desired info:
-                    clientInfo.deviceToken = @"2c948a843e6404dd013e79d82e5a0009";
+                    clientInfo.deviceToken = [@"2c948a843e6404dd013e79d82e5a0009"
+                                              dataUsingEncoding:NSUTF8StringEncoding];
                     
                 } success:^(id responseObject) {}
                                              failure:^(NSError *error) {}];
@@ -93,7 +94,8 @@ describe(@"AGDeviceRegistration", ^{
             [registration registerWithClientInfo:^(id<AGClientDeviceInformation> clientInfo) {
                 
                 // apply the desired info:
-                clientInfo.deviceToken = @"2c948a843e6404dd013e79d82e5a0009";
+                clientInfo.deviceToken = [@"2c948a843e6404dd013e79d82e5a0009"
+                                          dataUsingEncoding:NSUTF8StringEncoding];
                 clientInfo.mobileVariantID = @"2c948a843e6404dd013e79d82e5a0009";
                 clientInfo.deviceType = @"iPhone";
                 clientInfo.operatingSystem = @"iOS";
