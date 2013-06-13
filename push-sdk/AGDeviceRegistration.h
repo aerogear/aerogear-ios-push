@@ -37,8 +37,7 @@
  * holds configuration metadata that would be posted to the server during the registratin process.
  *
  * @param success A block object to be executed when the registration operation finishes successfully.
- * This block has no return value and takes one argument: The object created from the response
- * data of the registration request.
+ * This block has no return value.
  *
  * @param failure A block object to be executed when the registration operation finishes unsuccessfully.
  * This block has no return value and takes one argument: The `NSError` object describing
@@ -46,7 +45,7 @@
  *
  */
 -(void) registerWithClientInfo:(void (^)(id<AGClientDeviceInformation>)) clientInfo
-                       success:(void (^)(id responseObject))success
+                       success:(void (^)(void))success
                        failure:(void (^)(NSError *error))failure;
 
 /**

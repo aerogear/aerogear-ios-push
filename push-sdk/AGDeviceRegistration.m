@@ -40,7 +40,8 @@ static AGDeviceRegistration* sharedInstance;
 }
 
 -(void)registerWithClientInfo:(void (^)(id<AGClientDeviceInformation>))clientInfo
-                      success:(void (^)(id))success failure:(void (^)(NSError *))failure {
+                      success:(void (^)(void))success
+                      failure:(void (^)(NSError *))failure {
     
     // default impl:
     AGClientDeviceInformationImpl *clientInfoObject = [[AGClientDeviceInformationImpl alloc] init];
@@ -71,7 +72,7 @@ static AGDeviceRegistration* sharedInstance;
               success:^(AFHTTPRequestOperation *operation, id responseObject) {
                   
                   if (success) {
-                      success(responseObject);
+                      success();
                   }
                   
               } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
