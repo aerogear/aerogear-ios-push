@@ -36,7 +36,10 @@ describe(@"AGDeviceRegistration", ^{
             
             // install the mock:
             [OHHTTPStubs addRequestHandler:^OHHTTPStubsResponse*(NSURLRequest *request, BOOL onlyCheck) {
-                return [OHHTTPStubsResponse responseWithFile:@"response.json" contentType:@"text/json" responseTime:1.0];
+                return [OHHTTPStubsResponse responseWithData:[NSData data]
+                                                  statusCode:200
+                                                responseTime:1.0
+                                                     headers:@{@"Content-Type":@"text/json]"}];
             }];
             
             
@@ -56,7 +59,7 @@ describe(@"AGDeviceRegistration", ^{
             
             [[theBlock(^{
                 [registration registerWithClientInfo:nil
-                                             success:^(id responseObject) {}
+                                             success:^() {}
                                              failure:^(NSError *error) {}];
                 
             }) should] raiseWithName:@"ConfigurationBlockMissing"];
@@ -69,7 +72,7 @@ describe(@"AGDeviceRegistration", ^{
                     // apply the desired info:
                     clientInfo.mobileVariantID = @"2c948a843e6404dd013e79d82e5a0009";
                     
-                } success:^(id responseObject) {}
+                } success:^() {}
                   failure:^(NSError *error) {}];
 
             }) should] raiseWithName:@"ConfigurationParamsMissing"];
@@ -83,7 +86,7 @@ describe(@"AGDeviceRegistration", ^{
                     clientInfo.deviceToken = [@"2c948a843e6404dd013e79d82e5a0009"
                                               dataUsingEncoding:NSUTF8StringEncoding];
                     
-                } success:^(id responseObject) {}
+                } success:^() {}
                                              failure:^(NSError *error) {}];
                 
             }) should] raiseWithName:@"ConfigurationParamsMissing"];
@@ -102,7 +105,7 @@ describe(@"AGDeviceRegistration", ^{
                 clientInfo.osVersion = @"6.1.3";
                 clientInfo.alias = @"mister@xyz.com";
 
-            } success:^(id responseObject) {
+            } success:^() {
                 runLoop = YES;
             } failure:^(NSError *error) {
             }];
