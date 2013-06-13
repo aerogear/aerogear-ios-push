@@ -25,7 +25,6 @@
 		A010C3181737AA2C00CFA575 /* AGDeviceRegistrationSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = A010C3171737AA2C00CFA575 /* AGDeviceRegistrationSpec.m */; };
 		A010C31D1737D01000CFA575 /* AGClientDeviceInformationImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = A010C31C1737D00F00CFA575 /* AGClientDeviceInformationImpl.m */; };
 		A010C3211737D24F00CFA575 /* AGRegistrationHttpClient.m in Sources */ = {isa = PBXBuildFile; fileRef = A010C3201737D24F00CFA575 /* AGRegistrationHttpClient.m */; };
-		A010C3231737E46200CFA575 /* response.json in Resources */ = {isa = PBXBuildFile; fileRef = A010C3221737E46200CFA575 /* response.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,7 +72,6 @@
 		A010C31C1737D00F00CFA575 /* AGClientDeviceInformationImpl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGClientDeviceInformationImpl.m; sourceTree = "<group>"; };
 		A010C31F1737D24F00CFA575 /* AGRegistrationHttpClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGRegistrationHttpClient.h; sourceTree = "<group>"; };
 		A010C3201737D24F00CFA575 /* AGRegistrationHttpClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGRegistrationHttpClient.m; sourceTree = "<group>"; };
-		A010C3221737E46200CFA575 /* response.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = response.json; sourceTree = "<group>"; };
 		A755D9064734444FBE2C9429 /* Pods-push-sdkTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-push-sdkTests.xcconfig"; path = "Pods/Pods-push-sdkTests.xcconfig"; sourceTree = SOURCE_ROOT; };
 		D09593524A194057A715476C /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -171,7 +169,6 @@
 			children = (
 				A010C2FC1737A58100CFA575 /* Supporting Files */,
 				A010C3171737AA2C00CFA575 /* AGDeviceRegistrationSpec.m */,
-				A010C3221737E46200CFA575 /* response.json */,
 			);
 			path = "push-sdkTests";
 			sourceTree = "<group>";
@@ -270,7 +267,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				A010C3001737A58100CFA575 /* InfoPlist.strings in Resources */,
-				A010C3231737E46200CFA575 /* response.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
