@@ -17,38 +17,53 @@
 
 #import "AGClientDeviceInformationImpl.h"
 
+@interface AGClientDeviceInformationImpl()
+    - (NSString *) convertToNSString:(NSData *)deviceToken;
+@end
+
 @implementation AGClientDeviceInformationImpl
 
-@synthesize token = _token;
-@synthesize operatingSystem = _operatingSystem;
-@synthesize osVersion = _osVersion;
+// "push" related fields
+@synthesize deviceToken = _deviceToken;
 @synthesize mobileVariantID = _mobileVariantID;
-
-@synthesize deviceType = _deviceType;
 @synthesize alias = _alias;
 @synthesize category = _category;
+
+// "sysinfo" metadata fields
+@synthesize operatingSystem = _operatingSystem;
+@synthesize osVersion = _osVersion;
+@synthesize deviceType = _deviceType;
 
 - (id)init {
     self = [super init];
     if (self) {
 
     }
-    
     return self;
 }
-
 
 -(NSDictionary *) extractValues {
     NSMutableDictionary *values = [NSMutableDictionary dictionary];
     
-    [values setValue:_token forKey:@"deviceToken"];
+    [values setValue:[self convertToNSString:_deviceToken] forKey:@"deviceToken"];
+    [values setValue:_alias forKey:@"alias"];
+    [values setValue:_category forKey:@"category"];
+
     [values setValue:_operatingSystem forKey:@"mobileOperatingSystem"];
     [values setValue:_osVersion forKey:@"osVersion"];
     [values setValue:_deviceType forKey:@"deviceType"];
-    [values setValue:_alias forKey:@"alias"];
-    [values setValue:_category forKey:@"category"];
     
     return values;
+}
+
+// little helper to transform the NSData-based token into a (useful) String:
+- (NSString *) convertToNSString:(NSData *)deviceToken {
+    NSString *tokenStr = [deviceToken description];
+    NSString *pushToken = [[[tokenStr
+                             stringByReplacingOccurrencesOfString:@"<" withString:@""]
+                            stringByReplacingOccurrencesOfString:@">" withString:@""]
+                           stringByReplacingOccurrencesOfString:@" " withString:@""];
+    return pushToken;
 }
 
 @end

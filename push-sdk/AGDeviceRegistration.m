@@ -20,6 +20,9 @@
 
 #import "AGClientDeviceInformationImpl.h"
 
+// will hold the shared instance of the AGDeviceRegistration
+static AGDeviceRegistration* sharedInstance;
+
 @implementation AGDeviceRegistration {
     AGRegistrationHttpClient *_client;
 }
@@ -29,11 +32,16 @@
     if (self) {
         _client = [AGRegistrationHttpClient sharedInstanceWithURL:url];
         _client.parameterEncoding = AFJSONParameterEncoding;
+        
+        sharedInstance = self;
     }
+    
     return self;
 }
 
--(void)registerWithClientInfo:(void (^)(id<AGClientDeviceInformation>))clientInfo success:(void (^)(id))success failure:(void (^)(NSError *))failure {
+-(void)registerWithClientInfo:(void (^)(id<AGClientDeviceInformation>))clientInfo
+                      success:(void (^)(void))success
+                      failure:(void (^)(NSError *))failure {
     
     // default impl:
     AGClientDeviceInformationImpl *clientInfoObject = [[AGClientDeviceInformationImpl alloc] init];
@@ -41,36 +49,43 @@
     if (clientInfo) {
         // pass the object in:
         clientInfo(clientInfoObject);
-    } else {
-        // throw Exception!
+    } else { // can't proceed with no configuration block set
+        @throw [NSException
+                exceptionWithName:@"ConfigurationBlockMissing"
+                reason:@"configuration block is missing"
+                userInfo:nil];
     }
     
-    // Extract the data as NSDic:
-    NSDictionary *mobileVariantInstanceData = [clientInfoObject extractValues];
-    // TODO: check if required values are missing...
-
-
-
+    // make sure 'deviceToken' and 'mobileVariantID' config params are set
+    if (clientInfoObject.deviceToken == nil || clientInfoObject.mobileVariantID == nil) {
+        @throw [NSException
+                exceptionWithName:@"ConfigurationParamsMissing"
+                reason:@"please ensure that 'token' and 'mobileVariantID' configurations params are set"
+                userInfo:nil];
+    }
+    
     // add the variant ID:
     [_client setDefaultHeader:@"ag-mobile-variant" value:clientInfoObject.mobileVariantID];
     
     // POST the data to the server:
-    [_client postPath:@"rest/registry/device" parameters:mobileVariantInstanceData
-      success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [_client postPath:@"rest/registry/device" parameters:[clientInfoObject extractValues]
+              success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                  
+                  if (success) {
+                      success();
+                  }
+                  
+              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                  
+                  if (failure) {
+                      failure(error);
+                  }
+                  
+              }];
+}
 
-         if (success) {
-             success(responseObject);
-         }
-         
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-
-        if (failure) {
-            failure(error);
-        }
-
-    }];
-    
-    
++ (AGDeviceRegistration*) sharedInstance {
+    return sharedInstance;
 }
 
 @end
