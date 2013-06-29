@@ -11,7 +11,8 @@ A small and handy library that helps to register iOS applications with the [Aero
 didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
 
   AGDeviceRegistration *registration = 
-    [[AGDeviceRegistration alloc] initWithServerURL:[NSURL URLWithString:@"http://192.168.0.102:8080/ag-push/"]];
+    [[AGDeviceRegistration alloc] initWithServerURL:
+	   [NSURL URLWithString:@"http://YOUR_SERVER/ag-push/"]];
 
   [registration registerWithClientInfo:^(id<AGClientDeviceInformation> clientInfo) {
 
