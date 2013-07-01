@@ -91,7 +91,23 @@ describe(@"AGDeviceRegistration", ^{
                 
             }) should] raiseWithName:@"ConfigurationParamsMissing"];
         });
+        
+        it(@"should throw an exception if 'mobileVariantSecret' is not set", ^{
+            
+            [[theBlock(^{
+                [registration registerWithClientInfo:^(id<AGClientDeviceInformation> clientInfo) {
+                    // apply the desired info:
+                    clientInfo.deviceToken = [@"2c948a843e6404dd013e79d82e5a0009"
+                                              dataUsingEncoding:NSUTF8StringEncoding];
+                    clientInfo.mobileVariantID = @"2c948a843e6404dd013e79d82e5a0009";
 
+                    
+                } success:^() {}
+                                             failure:^(NSError *error) {}];
+                
+            }) should] raiseWithName:@"ConfigurationParamsMissing"];
+        });
+        
         it(@"should register to the server", ^{
             
             [registration registerWithClientInfo:^(id<AGClientDeviceInformation> clientInfo) {
@@ -100,6 +116,7 @@ describe(@"AGDeviceRegistration", ^{
                 clientInfo.deviceToken = [@"2c948a843e6404dd013e79d82e5a0009"
                                           dataUsingEncoding:NSUTF8StringEncoding];
                 clientInfo.mobileVariantID = @"2c948a843e6404dd013e79d82e5a0009";
+                clientInfo.mobileVariantSecret = @"secret";
                 clientInfo.deviceType = @"iPhone";
                 clientInfo.operatingSystem = @"iOS";
                 clientInfo.osVersion = @"6.1.3";
@@ -115,6 +132,7 @@ describe(@"AGDeviceRegistration", ^{
             }
             
         });
+        
        
     });
     

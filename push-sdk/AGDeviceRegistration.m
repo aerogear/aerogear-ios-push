@@ -56,16 +56,16 @@ static AGDeviceRegistration* sharedInstance;
                 userInfo:nil];
     }
     
-    // make sure 'deviceToken' and 'mobileVariantID' config params are set
-    if (clientInfoObject.deviceToken == nil || clientInfoObject.mobileVariantID == nil) {
+    // make sure 'deviceToken', 'mobileVariantID' and 'mobileVariantSecret' config params are set
+    if (clientInfoObject.deviceToken == nil || clientInfoObject.mobileVariantID == nil || clientInfoObject.mobileVariantSecret == nil) {
         @throw [NSException
                 exceptionWithName:@"ConfigurationParamsMissing"
-                reason:@"please ensure that 'token' and 'mobileVariantID' configurations params are set"
+                reason:@"please ensure that 'token', 'mobileVariantID'  and 'mobileVariantSecret' configurations params are set"
                 userInfo:nil];
     }
     
-    // add the variant ID:
-    [_client setDefaultHeader:@"ag-mobile-variant" value:clientInfoObject.mobileVariantID];
+    // apply HTTP Basic:
+    [_client setAuthorizationHeaderWithUsername:clientInfoObject.mobileVariantID password:clientInfoObject.mobileVariantSecret];
     
     // POST the data to the server:
     [_client postPath:@"rest/registry/device" parameters:[clientInfoObject extractValues]

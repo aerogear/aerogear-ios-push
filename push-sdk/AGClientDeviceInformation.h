@@ -30,6 +30,11 @@
 @property (copy, nonatomic) NSString* mobileVariantID;
 
 /**
+ * The mobile Variant's secret.
+ */
+@property (copy, nonatomic) NSString* mobileVariantSecret;
+
+/**
  * Application specific alias to identify users with the system.
  * E.g. email address or username
  */
