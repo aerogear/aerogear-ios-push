@@ -25,6 +25,8 @@
 		A010C3181737AA2C00CFA575 /* AGDeviceRegistrationSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = A010C3171737AA2C00CFA575 /* AGDeviceRegistrationSpec.m */; };
 		A010C31D1737D01000CFA575 /* AGClientDeviceInformationImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = A010C31C1737D00F00CFA575 /* AGClientDeviceInformationImpl.m */; };
 		A010C3211737D24F00CFA575 /* AGRegistrationHttpClient.m in Sources */ = {isa = PBXBuildFile; fileRef = A010C3201737D24F00CFA575 /* AGRegistrationHttpClient.m */; };
+		A03AC14317817BA300FF13A7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A03AC14217817BA300FF13A7 /* CoreGraphics.framework */; };
+		A03AC14417817BB300FF13A7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A03AC14217817BA300FF13A7 /* CoreGraphics.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +74,7 @@
 		A010C31C1737D00F00CFA575 /* AGClientDeviceInformationImpl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGClientDeviceInformationImpl.m; sourceTree = "<group>"; };
 		A010C31F1737D24F00CFA575 /* AGRegistrationHttpClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGRegistrationHttpClient.h; sourceTree = "<group>"; };
 		A010C3201737D24F00CFA575 /* AGRegistrationHttpClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGRegistrationHttpClient.m; sourceTree = "<group>"; };
+		A03AC14217817BA300FF13A7 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		A755D9064734444FBE2C9429 /* Pods-push-sdkTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-push-sdkTests.xcconfig"; path = "Pods/Pods-push-sdkTests.xcconfig"; sourceTree = SOURCE_ROOT; };
 		D09593524A194057A715476C /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -81,6 +84,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A03AC14317817BA300FF13A7 /* CoreGraphics.framework in Frameworks */,
 				6F53E2BF1768A96E001966D8 /* Security.framework in Frameworks */,
 				6F53E2BE1768A967001966D8 /* MobileCoreServices.framework in Frameworks */,
 				6F53E2BD1768A963001966D8 /* SystemConfiguration.framework in Frameworks */,
@@ -93,6 +97,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A03AC14417817BB300FF13A7 /* CoreGraphics.framework in Frameworks */,
 				6F53E2BB1768A935001966D8 /* Security.framework in Frameworks */,
 				A010C30F1737A95A00CFA575 /* SystemConfiguration.framework in Frameworks */,
 				A010C30D1737A8F300CFA575 /* MobileCoreServices.framework in Frameworks */,
@@ -110,6 +115,7 @@
 		A010C2D81737A58100CFA575 = {
 			isa = PBXGroup;
 			children = (
+				A03AC14217817BA300FF13A7 /* CoreGraphics.framework */,
 				A010C2E61737A58100CFA575 /* push-sdk */,
 				A010C2FB1737A58100CFA575 /* push-sdkTests */,
 				A010C2E31737A58100CFA575 /* Frameworks */,

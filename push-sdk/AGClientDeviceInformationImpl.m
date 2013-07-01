@@ -26,6 +26,7 @@
 // "push" related fields
 @synthesize deviceToken = _deviceToken;
 @synthesize mobileVariantID = _mobileVariantID;
+@synthesize mobileVariantSecret = _mobileVariantSecret;
 @synthesize alias = _alias;
 @synthesize category = _category;
 
