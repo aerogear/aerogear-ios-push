@@ -18,6 +18,7 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
 
     [clientInfo setDeviceToken:deviceToken];
     [clientInfo setMobileVariantID:@"YOUR IOS VARIANT ID"];
+	[clientInfo setMobileVariantSecret:@"YOUR IOS VARIANT SECRET"];
 
     // --optional config--
     UIDevice *currentDevice = [UIDevice currentDevice];
