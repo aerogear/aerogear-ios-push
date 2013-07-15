@@ -60,7 +60,7 @@ static AGDeviceRegistration* sharedInstance;
     if (clientInfoObject.deviceToken == nil || clientInfoObject.variantID == nil || clientInfoObject.variantSecret == nil) {
         @throw [NSException
                 exceptionWithName:@"ConfigurationParamsMissing"
-                reason:@"please ensure that 'token', 'mobileVariantID'  and 'mobileVariantSecret' configurations params are set"
+                reason:@"please ensure that 'token', 'VariantID'  and 'VariantSecret' configurations params are set"
                 userInfo:nil];
     }
     
