@@ -57,7 +57,7 @@ static AGDeviceRegistration* sharedInstance;
     }
     
     // make sure 'deviceToken', 'mobileVariantID' and 'mobileVariantSecret' config params are set
-    if (clientInfoObject.deviceToken == nil || clientInfoObject.mobileVariantID == nil || clientInfoObject.mobileVariantSecret == nil) {
+    if (clientInfoObject.deviceToken == nil || clientInfoObject.variantID == nil || clientInfoObject.variantSecret == nil) {
         @throw [NSException
                 exceptionWithName:@"ConfigurationParamsMissing"
                 reason:@"please ensure that 'token', 'mobileVariantID'  and 'mobileVariantSecret' configurations params are set"
@@ -65,7 +65,7 @@ static AGDeviceRegistration* sharedInstance;
     }
     
     // apply HTTP Basic:
-    [_client setAuthorizationHeaderWithUsername:clientInfoObject.mobileVariantID password:clientInfoObject.mobileVariantSecret];
+    [_client setAuthorizationHeaderWithUsername:clientInfoObject.variantID password:clientInfoObject.variantSecret];
     
     // POST the data to the server:
     [_client postPath:@"rest/registry/device" parameters:[clientInfoObject extractValues]

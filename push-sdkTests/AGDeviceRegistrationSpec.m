@@ -70,7 +70,7 @@ describe(@"AGDeviceRegistration", ^{
             [[theBlock(^{
                 [registration registerWithClientInfo:^(id<AGClientDeviceInformation> clientInfo) {
                     // apply the desired info:
-                    clientInfo.mobileVariantID = @"2c948a843e6404dd013e79d82e5a0009";
+                    clientInfo.variantID = @"2c948a843e6404dd013e79d82e5a0009";
                     
                 } success:^() {}
                   failure:^(NSError *error) {}];
@@ -99,7 +99,7 @@ describe(@"AGDeviceRegistration", ^{
                     // apply the desired info:
                     clientInfo.deviceToken = [@"2c948a843e6404dd013e79d82e5a0009"
                                               dataUsingEncoding:NSUTF8StringEncoding];
-                    clientInfo.mobileVariantID = @"2c948a843e6404dd013e79d82e5a0009";
+                    clientInfo.variantID = @"2c948a843e6404dd013e79d82e5a0009";
 
                     
                 } success:^() {}
@@ -115,8 +115,8 @@ describe(@"AGDeviceRegistration", ^{
                 // apply the desired info:
                 clientInfo.deviceToken = [@"2c948a843e6404dd013e79d82e5a0009"
                                           dataUsingEncoding:NSUTF8StringEncoding];
-                clientInfo.mobileVariantID = @"2c948a843e6404dd013e79d82e5a0009";
-                clientInfo.mobileVariantSecret = @"secret";
+                clientInfo.variantID = @"2c948a843e6404dd013e79d82e5a0009";
+                clientInfo.variantSecret = @"secret";
                 clientInfo.deviceType = @"iPhone";
                 clientInfo.operatingSystem = @"iOS";
                 clientInfo.osVersion = @"6.1.3";
