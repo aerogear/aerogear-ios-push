@@ -27,12 +27,12 @@
 /**
  * The ID of the mobile Variant, for which this client will be registered.
  */
-@property (copy, nonatomic) NSString* mobileVariantID;
+@property (copy, nonatomic) NSString* variantID;
 
 /**
  * The mobile Variant's secret.
  */
-@property (copy, nonatomic) NSString* mobileVariantSecret;
+@property (copy, nonatomic) NSString* variantSecret;
 
 /**
  * Application specific alias to identify users with the system.
