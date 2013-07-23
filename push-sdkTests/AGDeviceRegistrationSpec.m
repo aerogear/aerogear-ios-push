@@ -35,7 +35,9 @@ describe(@"AGDeviceRegistration", ^{
         beforeEach(^{
             
             // install the mock:
-            [OHHTTPStubs addRequestHandler:^OHHTTPStubsResponse*(NSURLRequest *request, BOOL onlyCheck) {
+            [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *request) {
+                return YES;
+            } withStubResponse:^OHHTTPStubsResponse *(NSURLRequest *request) {
                 return [OHHTTPStubsResponse responseWithData:[NSData data]
                                                   statusCode:200
                                                 responseTime:1.0
@@ -47,65 +49,59 @@ describe(@"AGDeviceRegistration", ^{
                             initWithServerURL:[NSURL URLWithString:@"http://localhost:8080/ag-push/"]];
             
             runLoop = NO;
-           
+            
         });
-
+        
         it(@"shared instance should not be nil", ^{
             
             [[AGDeviceRegistration sharedInstance] shouldNotBeNil];
         });
         
-        it(@"should throw an exception if configuration block is not set", ^{
-            
-            [[theBlock(^{
-                [registration registerWithClientInfo:nil
-                                             success:^() {}
-                                             failure:^(NSError *error) {}];
-                
-            }) should] raiseWithName:@"ConfigurationBlockMissing"];
+        it(@"failure block should be invoked with an NSError object if configuration block is not set", ^{
+            [registration registerWithClientInfo:nil success:^() {
+                // nope...
+            } failure:^(NSError *error) {
+                [error shouldNotBeNil];
+            }
+             ];
         });
         
-        it(@"should throw an exception if 'deviceToken' is not set", ^{
+        it(@"failure block should be invoked with an NSError object if 'deviceToken' is not set", ^{
+            [registration registerWithClientInfo:^(id<AGClientDeviceInformation> clientInfo) {
+                // apply the desired info:
+                clientInfo.variantID = @"2c948a843e6404dd013e79d82e5a0009";
+            } success:^() {
+                // nope...
+            } failure:^(NSError *error) {
+                [error shouldNotBeNil];
+            }];
             
-            [[theBlock(^{
-                [registration registerWithClientInfo:^(id<AGClientDeviceInformation> clientInfo) {
-                    // apply the desired info:
-                    clientInfo.variantID = @"2c948a843e6404dd013e79d82e5a0009";
-                    
-                } success:^() {}
-                  failure:^(NSError *error) {}];
-
-            }) should] raiseWithName:@"ConfigurationParamsMissing"];
         });
         
-        it(@"should throw an exception if 'mobileVariantID' is not set", ^{
-            
-            [[theBlock(^{
-                [registration registerWithClientInfo:^(id<AGClientDeviceInformation> clientInfo) {
-                    // apply the desired info:
-                    clientInfo.deviceToken = [@"2c948a843e6404dd013e79d82e5a0009"
-                                              dataUsingEncoding:NSUTF8StringEncoding];
-                    
-                } success:^() {}
-                                             failure:^(NSError *error) {}];
-                
-            }) should] raiseWithName:@"ConfigurationParamsMissing"];
+        it(@"failure block should be invoked with an NSError object if 'mobileVariantID' is not set", ^{
+            [registration registerWithClientInfo:^(id<AGClientDeviceInformation> clientInfo) {
+                // apply the desired info:
+                clientInfo.deviceToken = [@"2c948a843e6404dd013e79d82e5a0009"
+                                          dataUsingEncoding:NSUTF8StringEncoding];
+            } success:^() {
+                // nope...
+            } failure:^(NSError *error) {
+                [error shouldNotBeNil];
+            }];
         });
         
-        it(@"should throw an exception if 'mobileVariantSecret' is not set", ^{
-            
-            [[theBlock(^{
-                [registration registerWithClientInfo:^(id<AGClientDeviceInformation> clientInfo) {
-                    // apply the desired info:
-                    clientInfo.deviceToken = [@"2c948a843e6404dd013e79d82e5a0009"
-                                              dataUsingEncoding:NSUTF8StringEncoding];
-                    clientInfo.variantID = @"2c948a843e6404dd013e79d82e5a0009";
-
-                    
-                } success:^() {}
-                                             failure:^(NSError *error) {}];
+        it(@"failure block should be invoked with an NSError object if 'mobileVariantSecret' is not set", ^{
+            [registration registerWithClientInfo:^(id<AGClientDeviceInformation> clientInfo) {
+                // apply the desired info:
+                clientInfo.deviceToken =
+                [@"2c948a843e6404dd013e79d82e5a0009" dataUsingEncoding:NSUTF8StringEncoding];
+                clientInfo.variantID = @"2c948a843e6404dd013e79d82e5a0009";
                 
-            }) should] raiseWithName:@"ConfigurationParamsMissing"];
+            } success:^() {
+                // nope...
+            } failure:^(NSError *error) {
+                [error shouldNotBeNil];
+            }];
         });
         
         it(@"should register to the server", ^{
@@ -121,7 +117,7 @@ describe(@"AGDeviceRegistration", ^{
                 clientInfo.operatingSystem = @"iOS";
                 clientInfo.osVersion = @"6.1.3";
                 clientInfo.alias = @"mister@xyz.com";
-
+                
             } success:^() {
                 runLoop = YES;
             } failure:^(NSError *error) {
@@ -133,7 +129,7 @@ describe(@"AGDeviceRegistration", ^{
             
         });
         
-       
+        
     });
     
 });

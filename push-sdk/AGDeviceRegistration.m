@@ -20,6 +20,10 @@
 
 #import "AGClientDeviceInformationImpl.h"
 
+// global NSError 'error' domain name
+NSString * const AGPushErrorDomain = @"AGPushErrorDomain";
+
+
 // will hold the shared instance of the AGDeviceRegistration
 static AGDeviceRegistration* sharedInstance;
 
@@ -50,18 +54,27 @@ static AGDeviceRegistration* sharedInstance;
         // pass the object in:
         clientInfo(clientInfoObject);
     } else { // can't proceed with no configuration block set
-        @throw [NSException
-                exceptionWithName:@"ConfigurationBlockMissing"
-                reason:@"configuration block is missing"
-                userInfo:nil];
+        if (failure) {
+            NSError *requiredArgumentsMissing =
+            [self constructNSError:@"configuration block is missing"];
+            
+            //invoke given failure block and return:
+            failure(requiredArgumentsMissing);
+            return;
+        }
     }
     
     // make sure 'deviceToken', 'mobileVariantID' and 'mobileVariantSecret' config params are set
     if (clientInfoObject.deviceToken == nil || clientInfoObject.variantID == nil || clientInfoObject.variantSecret == nil) {
-        @throw [NSException
-                exceptionWithName:@"ConfigurationParamsMissing"
-                reason:@"please ensure that 'token', 'VariantID'  and 'VariantSecret' configurations params are set"
-                userInfo:nil];
+
+        if (failure) {
+            NSError *requiredArgumentsMissing =
+              [self constructNSError:@"please ensure that 'token', 'VariantID'  and 'VariantSecret' configurations params are set"];
+            
+            //invoke given failure block and return:
+            failure(requiredArgumentsMissing);
+            return;
+        }
     }
     
     // apply HTTP Basic:
@@ -87,5 +100,24 @@ static AGDeviceRegistration* sharedInstance;
 + (AGDeviceRegistration*) sharedInstance {
     return sharedInstance;
 }
+
+#pragma mark - private util section
+
+/**
+ * Transforms given String into NSError.
+ */
+-(NSError *) constructNSError:(NSString*) message {
+    // build the required map:
+    NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
+    [userInfo setValue:message forKey:NSLocalizedDescriptionKey];
+
+    // construct the NSError object:
+    NSError* error = [NSError errorWithDomain:AGPushErrorDomain
+                                         code:0
+                                     userInfo:userInfo];
+
+    return error;
+}
+
 
 @end

@@ -34,7 +34,7 @@
  * start receiving messages.
  *
  * @param clientInfo A block object which passes in an implementation of the AGClientDeviceInformation protocol that
- * holds configuration metadata that would be posted to the server during the registratin process.
+ * holds configuration metadata that would be posted to the server during the registration process.
  *
  * @param success A block object to be executed when the registration operation finishes successfully.
  * This block has no return value.
@@ -49,7 +49,7 @@
                        failure:(void (^)(NSError *error))failure;
 
 /**
- * Convienient method to access a shared instance of the AGDeviceRegistration object.
+ * Convenient method to access a shared instance of the AGDeviceRegistration object.
  * Note that this object is initialized only after the initializer initWithServerURL:url
  * has been called.
  *
