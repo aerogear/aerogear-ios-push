@@ -21,7 +21,7 @@
 @interface AGClientDeviceInformationImpl : NSObject<AGClientDeviceInformation>
 
 /**
- * Convienient method that will encapsulate the configuration params to a dictionary
+ * Convenient method that will encapsulate the configuration params to a dictionary
  * ready to be send to the server during the registration request.
  */
 -(NSDictionary *) extractValues;

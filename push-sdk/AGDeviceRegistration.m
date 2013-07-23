@@ -111,7 +111,7 @@ static AGDeviceRegistration* sharedInstance;
     NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
     [userInfo setValue:message forKey:NSLocalizedDescriptionKey];
 
-    // constrict the NSError object:
+    // construct the NSError object:
     NSError* error = [NSError errorWithDomain:AGPushErrorDomain
                                          code:0
                                      userInfo:userInfo];

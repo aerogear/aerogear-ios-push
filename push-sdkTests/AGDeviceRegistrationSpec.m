@@ -90,7 +90,7 @@ describe(@"AGDeviceRegistration", ^{
             }];
         });
         
-        it(@"failure block should be invoked with an NSError object iif 'mobileVariantSecret' is not set", ^{
+        it(@"failure block should be invoked with an NSError object if 'mobileVariantSecret' is not set", ^{
             [registration registerWithClientInfo:^(id<AGClientDeviceInformation> clientInfo) {
                 // apply the desired info:
                 clientInfo.deviceToken =
