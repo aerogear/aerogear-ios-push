@@ -115,7 +115,6 @@
 		A010C2D81737A58100CFA575 = {
 			isa = PBXGroup;
 			children = (
-				A03AC14217817BA300FF13A7 /* CoreGraphics.framework */,
 				A010C2E61737A58100CFA575 /* push-sdk */,
 				A010C2FB1737A58100CFA575 /* push-sdkTests */,
 				A010C2E31737A58100CFA575 /* Frameworks */,
@@ -137,6 +136,7 @@
 		A010C2E31737A58100CFA575 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A03AC14217817BA300FF13A7 /* CoreGraphics.framework */,
 				6F53E2BA1768A935001966D8 /* Security.framework */,
 				A010C30E1737A95A00CFA575 /* SystemConfiguration.framework */,
 				A010C30C1737A8F300CFA575 /* MobileCoreServices.framework */,
