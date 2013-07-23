@@ -55,57 +55,51 @@ describe(@"AGDeviceRegistration", ^{
             [[AGDeviceRegistration sharedInstance] shouldNotBeNil];
         });
         
-        it(@"should throw an exception if configuration block is not set", ^{
-            
-            [[theBlock(^{
-                [registration registerWithClientInfo:nil
-                                             success:^() {}
-                                             failure:^(NSError *error) {}];
-                
-            }) should] raiseWithName:@"ConfigurationBlockMissing"];
+        it(@"failure block should be invoked with an NSError object if configuration block is not set", ^{
+            [registration registerWithClientInfo:nil success:^() {
+                // nope...
+            } failure:^(NSError *error) {
+                                             [error shouldNotBeNil];
+                                         }
+             ];
         });
         
-        it(@"should throw an exception if 'deviceToken' is not set", ^{
-            
-            [[theBlock(^{
-                [registration registerWithClientInfo:^(id<AGClientDeviceInformation> clientInfo) {
-                    // apply the desired info:
-                    clientInfo.variantID = @"2c948a843e6404dd013e79d82e5a0009";
-                    
-                } success:^() {}
-                  failure:^(NSError *error) {}];
+        it(@"failure block should be invoked with an NSError object if 'deviceToken' is not set", ^{
+            [registration registerWithClientInfo:^(id<AGClientDeviceInformation> clientInfo) {
+                // apply the desired info:
+                clientInfo.variantID = @"2c948a843e6404dd013e79d82e5a0009";
+            } success:^() {
+                // nope...
+            } failure:^(NSError *error) {
+                [error shouldNotBeNil];
+            }];
 
-            }) should] raiseWithName:@"ConfigurationParamsMissing"];
         });
         
-        it(@"should throw an exception if 'mobileVariantID' is not set", ^{
-            
-            [[theBlock(^{
-                [registration registerWithClientInfo:^(id<AGClientDeviceInformation> clientInfo) {
-                    // apply the desired info:
-                    clientInfo.deviceToken = [@"2c948a843e6404dd013e79d82e5a0009"
+        it(@"failure block should be invoked with an NSError object if 'mobileVariantID' is not set", ^{
+            [registration registerWithClientInfo:^(id<AGClientDeviceInformation> clientInfo) {
+                // apply the desired info:
+                clientInfo.deviceToken = [@"2c948a843e6404dd013e79d82e5a0009"
                                               dataUsingEncoding:NSUTF8StringEncoding];
-                    
-                } success:^() {}
-                                             failure:^(NSError *error) {}];
-                
-            }) should] raiseWithName:@"ConfigurationParamsMissing"];
+                } success:^() {
+                    // nope...
+                } failure:^(NSError *error) {
+                    [error shouldNotBeNil];
+                }];
         });
         
-        it(@"should throw an exception if 'mobileVariantSecret' is not set", ^{
-            
-            [[theBlock(^{
-                [registration registerWithClientInfo:^(id<AGClientDeviceInformation> clientInfo) {
-                    // apply the desired info:
-                    clientInfo.deviceToken = [@"2c948a843e6404dd013e79d82e5a0009"
-                                              dataUsingEncoding:NSUTF8StringEncoding];
-                    clientInfo.variantID = @"2c948a843e6404dd013e79d82e5a0009";
+        it(@"failure block should be invoked with an NSError object iif 'mobileVariantSecret' is not set", ^{
+            [registration registerWithClientInfo:^(id<AGClientDeviceInformation> clientInfo) {
+                // apply the desired info:
+                clientInfo.deviceToken =
+                    [@"2c948a843e6404dd013e79d82e5a0009" dataUsingEncoding:NSUTF8StringEncoding];
+                clientInfo.variantID = @"2c948a843e6404dd013e79d82e5a0009";
 
-                    
-                } success:^() {}
-                                             failure:^(NSError *error) {}];
-                
-            }) should] raiseWithName:@"ConfigurationParamsMissing"];
+                } success:^() {
+                    // nope...
+                } failure:^(NSError *error) {
+                    [error shouldNotBeNil];
+                }];
         });
         
         it(@"should register to the server", ^{
