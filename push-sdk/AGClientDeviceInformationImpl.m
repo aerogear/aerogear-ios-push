@@ -50,7 +50,7 @@
     [values setValue:_alias forKey:@"alias"];
     [values setValue:_category forKey:@"category"];
 
-    [values setValue:_operatingSystem forKey:@"mobileOperatingSystem"];
+    [values setValue:_operatingSystem forKey:@"operatingSystem"];
     [values setValue:_osVersion forKey:@"osVersion"];
     [values setValue:_deviceType forKey:@"deviceType"];
     
