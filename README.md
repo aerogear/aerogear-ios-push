@@ -33,6 +33,17 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
 }
 ```
 
+## Receiving Remote Notifications
+
+There are no extra hooks for receving notifications with the AeroGear library. You can use the existing delegate for receiving remote notifications while the application is running, like:
+
+```objective-c
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+  // extract desired value from the dictionary...
+}
+```
+
+
 ## AeroGear UnifiedPush Server
 
 For more information checkout our [tutorial](http://aerogear.org/docs/guides/aerogear-push-ios/).
