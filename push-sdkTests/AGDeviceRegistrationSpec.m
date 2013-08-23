@@ -30,9 +30,8 @@ describe(@"AGDeviceRegistration", ^{
     context(@"when created.....", ^{
         
         __block AGDeviceRegistration *registration;
-        __block BOOL runLoop;
-        
-        beforeEach(^{
+
+        beforeAll(^{
             
             // install the mock:
             [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *request) {
@@ -40,15 +39,13 @@ describe(@"AGDeviceRegistration", ^{
             } withStubResponse:^OHHTTPStubsResponse *(NSURLRequest *request) {
                 return [OHHTTPStubsResponse responseWithData:[NSData data]
                                                   statusCode:200
-                                                responseTime:1.0
+                                                responseTime:0 // immediate response
                                                      headers:@{@"Content-Type":@"text/json]"}];
             }];
             
             
             registration = [[AGDeviceRegistration alloc]
                             initWithServerURL:[NSURL URLWithString:@"http://localhost:8080/ag-push/"]];
-            
-            runLoop = NO;
             
         });
         
@@ -58,6 +55,7 @@ describe(@"AGDeviceRegistration", ^{
         });
         
         it(@"failure block should be invoked with an NSError object if configuration block is not set", ^{
+           
             [registration registerWithClientInfo:nil success:^() {
                 // nope...
             } failure:^(NSError *error) {
@@ -67,6 +65,7 @@ describe(@"AGDeviceRegistration", ^{
         });
         
         it(@"failure block should be invoked with an NSError object if 'deviceToken' is not set", ^{
+           
             [registration registerWithClientInfo:^(id<AGClientDeviceInformation> clientInfo) {
                 // apply the desired info:
                 clientInfo.variantID = @"2c948a843e6404dd013e79d82e5a0009";
@@ -79,6 +78,7 @@ describe(@"AGDeviceRegistration", ^{
         });
         
         it(@"failure block should be invoked with an NSError object if 'mobileVariantID' is not set", ^{
+            
             [registration registerWithClientInfo:^(id<AGClientDeviceInformation> clientInfo) {
                 // apply the desired info:
                 clientInfo.deviceToken = [@"2c948a843e6404dd013e79d82e5a0009"
@@ -91,6 +91,7 @@ describe(@"AGDeviceRegistration", ^{
         });
         
         it(@"failure block should be invoked with an NSError object if 'mobileVariantSecret' is not set", ^{
+            
             [registration registerWithClientInfo:^(id<AGClientDeviceInformation> clientInfo) {
                 // apply the desired info:
                 clientInfo.deviceToken =
@@ -106,6 +107,8 @@ describe(@"AGDeviceRegistration", ^{
         
         it(@"should register to the server", ^{
             
+            __block BOOL succeeded;
+            
             [registration registerWithClientInfo:^(id<AGClientDeviceInformation> clientInfo) {
                 
                 // apply the desired info:
@@ -119,20 +122,14 @@ describe(@"AGDeviceRegistration", ^{
                 clientInfo.alias = @"mister@xyz.com";
                 
             } success:^() {
-                runLoop = YES;
+                succeeded = YES;
+                
             } failure:^(NSError *error) {
             }];
             
-            while(!runLoop) {
-                [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
-            }
-            
+            [[expectFutureValue(theValue(succeeded)) shouldEventually] beYes];
         });
-        
-        
     });
-    
 });
-
 
 SPEC_END
