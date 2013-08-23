@@ -66,10 +66,10 @@ static AGDeviceRegistration* sharedInstance;
     
     // make sure 'deviceToken', 'mobileVariantID' and 'mobileVariantSecret' config params are set
     if (clientInfoObject.deviceToken == nil || clientInfoObject.variantID == nil || clientInfoObject.variantSecret == nil) {
-
+        
         if (failure) {
             NSError *requiredArgumentsMissing =
-              [self constructNSError:@"please ensure that 'token', 'VariantID'  and 'VariantSecret' configurations params are set"];
+            [self constructNSError:@"please ensure that 'token', 'VariantID'  and 'VariantSecret' configurations params are set"];
             
             //invoke given failure block and return:
             failure(requiredArgumentsMissing);
@@ -80,21 +80,49 @@ static AGDeviceRegistration* sharedInstance;
     // apply HTTP Basic:
     [_client setAuthorizationHeaderWithUsername:clientInfoObject.variantID password:clientInfoObject.variantSecret];
     
-    // POST the data to the server:
-    [_client postPath:@"rest/registry/device" parameters:[clientInfoObject extractValues]
-              success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                  
-                  if (success) {
-                      success();
-                  }
-                  
-              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                  
-                  if (failure) {
-                      failure(error);
-                  }
-                  
-              }];
+    // set up our request
+    NSMutableURLRequest *request = [_client requestWithMethod:@"POST"
+                                                         path:@"rest/registry/device"
+                                                   parameters:[clientInfoObject extractValues]];
+    // set up our Operation
+    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+        
+        if (success) {
+            success();
+        }
+        
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+        if (failure) {
+            failure(error);
+        }
+    }];
+    
+    // we need to cater for possible redirection
+    //
+    // NOTE:
+    //      As per Apple doc, the passed req is 'the proposed redirected request'. But we cannot return it as it is. The reason is,
+    //      user-agents (and in our case NSURLconnection) 'erroneous' after a 302-redirection modify the request's http method
+    //      and sets it to GET if the client initially performed a POST (as we do here).
+    //
+    //      See  RFC 2616 (section 10.3.3) http://www.ietf.org/rfc/rfc2616.txt
+    //      and related blog: http://tewha.net/2012/05/handling-302303-redirects/
+    //
+    //      We need to 'override' that 'default' behaviour by using a 'setRedirectResponseBlock', which will return
+    //      the original attempted NSURLRequest with the URL parameter updated to point to the new 'Location' header.
+    //
+    [operation setRedirectResponseBlock:^NSURLRequest *(NSURLConnection *connection, NSURLRequest *redirectReq, NSURLResponse *redirectResponse) {
+        
+        if (redirectResponse != nil) {  // we need to redirect
+            // update URL of the original request
+            // to the 'new' redirected one
+            request.URL = redirectReq.URL;
+        }
+        
+        return request;
+    }];
+    
+    // start up
+    [_client enqueueHTTPRequestOperation:operation];
 }
 
 + (AGDeviceRegistration*) sharedInstance {
@@ -110,12 +138,12 @@ static AGDeviceRegistration* sharedInstance;
     // build the required map:
     NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
     [userInfo setValue:message forKey:NSLocalizedDescriptionKey];
-
+    
     // construct the NSError object:
     NSError* error = [NSError errorWithDomain:AGPushErrorDomain
                                          code:0
                                      userInfo:userInfo];
-
+    
     return error;
 }
 
