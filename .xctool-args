@@ -1,0 +1,6 @@
+[
+  "-workspace", "push-sdk.xcworkspace",
+  "-scheme", "push-sdk",
+  "-sdk", "iphonesimulator",
+  "-arch", "i386"
+]
