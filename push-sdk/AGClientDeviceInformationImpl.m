@@ -28,7 +28,7 @@
 @synthesize variantID = _variantID;
 @synthesize variantSecret = _variantSecret;
 @synthesize alias = _alias;
-@synthesize category = _category;
+@synthesize categories = _categories;
 
 // "sysinfo" metadata fields
 @synthesize operatingSystem = _operatingSystem;
@@ -48,7 +48,7 @@
     
     [values setValue:[self convertToNSString:_deviceToken] forKey:@"deviceToken"];
     [values setValue:_alias forKey:@"alias"];
-    [values setValue:_category forKey:@"category"];
+    [values setValue:_categories forKey:@"categories"];
 
     [values setValue:_operatingSystem forKey:@"operatingSystem"];
     [values setValue:_osVersion forKey:@"osVersion"];
