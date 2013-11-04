@@ -8,3 +8,7 @@ script: xctool clean build test ONLY_ACTIVE_ARCH=NO
 
 notifications:
   irc: "irc.freenode.org#aerogear"
+  
+branches:
+  only:
+    - master
