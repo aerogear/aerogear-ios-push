@@ -41,9 +41,9 @@
 @property (copy, nonatomic) NSString* alias;
 
 /**
- * A category, used for tagging/metadata
+ * Some categories, used for tagging the device (metadata)
  */
-@property (copy, nonatomic) NSString* category;
+@property (strong, nonatomic) NSArray* categories;
 
 /**
  * The name of the underlying OS (e.g. iOS)

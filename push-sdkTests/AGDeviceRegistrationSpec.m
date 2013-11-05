@@ -120,6 +120,7 @@ describe(@"AGDeviceRegistration", ^{
                 clientInfo.operatingSystem = @"iOS";
                 clientInfo.osVersion = @"6.1.3";
                 clientInfo.alias = @"mister@xyz.com";
+                clientInfo.categories = @[@"football", @"sport"];
                 
             } success:^() {
                 succeeded = YES;
