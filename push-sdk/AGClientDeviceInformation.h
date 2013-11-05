@@ -43,7 +43,7 @@
 /**
  * Some categories, used for tagging the device (metadata)
  */
-@property (copy, nonatomic) NSArray* categories;
+@property (strong, nonatomic) NSArray* categories;
 
 /**
  * The name of the underlying OS (e.g. iOS)
