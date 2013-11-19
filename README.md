@@ -6,7 +6,8 @@ A small and handy library that helps to register iOS applications with the [Aero
 
 
 ## Example Usage
-```objective-c
+
+```
 - (void)application:(UIApplication *)application
 didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
 
@@ -37,12 +38,11 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
 
 There are no extra hooks for receving notifications with the AeroGear library. You can use the existing delegate for receiving remote notifications while the application is running, like:
 
-```objective-c
+```
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
   // extract desired value from the dictionary...
 }
 ```
-
 
 ## AeroGear UnifiedPush Server
 
