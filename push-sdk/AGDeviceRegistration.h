@@ -18,12 +18,15 @@
 #import <Foundation/Foundation.h>
 #import "AGClientDeviceInformation.h"
 
+/**
+ * Utility to register an iOS device with the AeroGear UnifiedPush Server.
+ */
 @interface AGDeviceRegistration : NSObject
 
 /**
  * An initializer method to instantiate an AGDeviceRegistration object.
  *
- * @param baseURL the URL of the AeroGear Push server.
+ * @param url the URL of the AeroGear Push server.
  *
  * @return the AGDeviceRegistration object.
  */

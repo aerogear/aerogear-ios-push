@@ -131,9 +131,8 @@ static AGDeviceRegistration* sharedInstance;
 
 #pragma mark - private util section
 
-/**
- * Transforms given String into NSError.
- */
+
+// Transforms given String into NSError.
 -(NSError *) constructNSError:(NSString*) message {
     // build the required map:
     NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
