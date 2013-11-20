@@ -17,6 +17,9 @@
 
 #import <Foundation/Foundation.h>
 
+/**
+ * Represents the set of allowed device metadata.
+ */	 
 @protocol AGClientDeviceInformation <NSObject>
 
 /**

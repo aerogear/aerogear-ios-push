@@ -18,6 +18,9 @@
 #import <Foundation/Foundation.h>
 #import "AGClientDeviceInformation.h"
 
+/**
+ * Internal implementation of the AGClientDeviceInformation protocol
+ */
 @interface AGClientDeviceInformationImpl : NSObject<AGClientDeviceInformation>
 
 /**
