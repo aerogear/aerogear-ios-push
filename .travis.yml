@@ -1,11 +1,12 @@
 language: objective-c
 
 before_install:
-    - brew unlink xctool
+    - gem install cocoapods
     - brew update
-    - brew install xctool
+    - brew uninstall xctool && brew install xctool
+
 script:
-    - xctool clean build test ONLY_ACTIVE_ARCH=NO
+    - xctool -workspace push-sdk.xcworkspace -scheme push-sdk -sdk iphonesimulator -configuration Release test
     - pod spec lint AeroGear-Push.podspec --verbose
 
 notifications:
