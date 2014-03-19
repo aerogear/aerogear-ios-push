@@ -43,9 +43,6 @@ static AGDeviceRegistration* sharedInstance;
         NSURLSessionConfiguration *sessionConfig =
             [NSURLSessionConfiguration defaultSessionConfiguration];
 
-        // add default headers..
-        [sessionConfig setHTTPAdditionalHeaders:@{@"Content-Type" : @"application/json"}];
-
         _session = [NSURLSession sessionWithConfiguration:sessionConfig delegate:self delegateQueue:[NSOperationQueue mainQueue]];
 
         sharedInstance = self;
@@ -72,6 +69,7 @@ static AGDeviceRegistration* sharedInstance;
 
     // set up our request
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[_baseURL URLByAppendingPathComponent:@"rest/registry/device"]];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     [request setHTTPMethod:@"POST"];
 
     // apply HTTP Basic:
