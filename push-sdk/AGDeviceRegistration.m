@@ -19,9 +19,9 @@
 
 #import "AGClientDeviceInformationImpl.h"
 
-// global NSError 'error' domain name
 NSString * const AGPushErrorDomain = @"AGPushErrorDomain";
-
+NSString * const AGNetworkingOperationFailingURLRequestErrorKey = @"AGNetworkingOperationFailingURLRequestErrorKey";
+NSString * const AGNetworkingOperationFailingURLResponseErrorKey = @"AGNetworkingOperationFailingURLResponseErrorKey";
 
 // will hold the shared instance of the AGDeviceRegistration
 static AGDeviceRegistration* sharedInstance;
@@ -38,107 +38,86 @@ static AGDeviceRegistration* sharedInstance;
     self = [super init];
     if (self) {
         _baseURL = url;
-        
+
         // initialize session
         NSURLSessionConfiguration *sessionConfig =
-        [NSURLSessionConfiguration defaultSessionConfiguration];
-        
-        sessionConfig.HTTPCookieStorage = nil;
-        
+            [NSURLSessionConfiguration defaultSessionConfiguration];
+
         // add default headers..
         [sessionConfig setHTTPAdditionalHeaders:@{@"Content-Type" : @"application/json"}];
-        
+
         _session = [NSURLSession sessionWithConfiguration:sessionConfig delegate:self delegateQueue:[NSOperationQueue mainQueue]];
-        
+
         sharedInstance = self;
     }
-    
+
     return self;
 }
 
 -(void)registerWithClientInfo:(void (^)(id<AGClientDeviceInformation>))clientInfo
                       success:(void (^)(void))success
                       failure:(void (^)(NSError *))failure {
-    
+
+    // can't proceed with no configuration block set
+    NSParameterAssert(clientInfo);
+
     // default impl:
     AGClientDeviceInformationImpl *clientInfoObject = [[AGClientDeviceInformationImpl alloc] init];
-    
-    if (clientInfo) {
-        // pass the object in:
-        clientInfo(clientInfoObject);
-    } else { // can't proceed with no configuration block set
-        if (failure) {
-            NSError *requiredArgumentsMissing =
-            [self constructNSError:@"configuration block is missing"];
-            
-            //invoke given failure block and return:
-            failure(requiredArgumentsMissing);
-            return;
-        }
-    }
-    
-    // make sure 'deviceToken', 'mobileVariantID' and 'mobileVariantSecret' config params are set
-    if (clientInfoObject.deviceToken == nil || clientInfoObject.variantID == nil || clientInfoObject.variantSecret == nil) {
-        
-        if (failure) {
-            NSError *requiredArgumentsMissing =
-            [self constructNSError:@"please ensure that 'token', 'VariantID'  and 'VariantSecret' configurations params are set"];
-            
-            //invoke given failure block and return:
-            failure(requiredArgumentsMissing);
-            return;
-        }
-    }
-    
+    // pass the object in:
+    clientInfo(clientInfoObject);
+
+    NSAssert(clientInfoObject.deviceToken, @"'token' should be set");
+    NSAssert(clientInfoObject.variantID, @"'variantID' should be set");
+    NSAssert(clientInfoObject.variantSecret, @"'variantSecret' should be set");
+
     // set up our request
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[_baseURL URLByAppendingPathComponent:@"rest/registry/device"]];
     [request setHTTPMethod:@"POST"];
-    
+
     // apply HTTP Basic:
     NSString *basicAuthCredentials = [NSString stringWithFormat:@"%@:%@", clientInfoObject.variantID, clientInfoObject.variantSecret];
-    
-    
     [request setValue:[NSString stringWithFormat:@"Basic %@",
                        [[basicAuthCredentials dataUsingEncoding:NSUTF8StringEncoding] base64EncodedStringWithOptions:0]]
-                       forHTTPHeaderField:@"Authdrization"];
-    
-    
+             forHTTPHeaderField:@"Authorization"];
+
+    // serialize request
     NSData *postData = [NSJSONSerialization dataWithJSONObject:[clientInfoObject extractValues] options:0 error:nil];
     [request setHTTPBody:postData];
-    
+
+    // attempt to register
     NSURLSessionDataTask *task = [_session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-        if (error) {
+        if (!error) {
+            NSHTTPURLResponse *httpResp = (NSHTTPURLResponse*) response;
+            if (httpResp.statusCode == 200) {
+                if (success) {
+                    success();
+                }
+
+            } else { // bad response (e.g. 401)
+                NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
+                [userInfo setValue:[NSHTTPURLResponse localizedStringForStatusCode:httpResp.statusCode] forKey:NSLocalizedDescriptionKey];
+                [userInfo setValue:request forKey:AGNetworkingOperationFailingURLRequestErrorKey];
+                [userInfo setValue:response forKey:AGNetworkingOperationFailingURLResponseErrorKey];
+
+                error = [[NSError alloc] initWithDomain:AGPushErrorDomain code:NSURLErrorBadServerResponse userInfo:userInfo];
+
+                if (failure) {
+                    failure(error);
+                }
+            }
+
+        } else { // an error has occured
             if (failure) {
                 failure(error);
             }
-        } else {
-            if (success)
-                success();
         }
     }];
-    
+
     [task resume];
 }
 
 + (AGDeviceRegistration*) sharedInstance {
     return sharedInstance;
-}
-
-#pragma mark - private util section
-
-
-// Transforms given String into NSError.
--(NSError *) constructNSError:(NSString*) message {
-    // build the required map:
-    NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
-    [userInfo setValue:message forKey:NSLocalizedDescriptionKey];
-    
-    // construct the NSError object:
-    NSError* error = [NSError errorWithDomain:AGPushErrorDomain
-                                         code:0
-                                     userInfo:userInfo];
-    
-    return error;
 }
 
 #pragma mark - NSURLSessionTask delegate
@@ -156,17 +135,22 @@ static AGDeviceRegistration* sharedInstance;
 //      We need to 'override' that 'default' behaviour by using a 'setRedirectResponseBlock', which will return
 //      the original attempted NSURLRequest with the URL parameter updated to point to the new 'Location' header.
 //
-
 - (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task
 willPerformHTTPRedirection:(NSHTTPURLResponse *)redirectResponse
-        newRequest:(NSURLRequest *)request
+        newRequest:(NSURLRequest *)redirectReq
  completionHandler:(void (^)(NSURLRequest *))completionHandler {
+
+    NSURLRequest *request = redirectReq;
     
-    NSURLRequest *newRequest = request;
-    
-    if (redirectResponse) {
-        newRequest = nil;
+    if (redirectResponse != nil) {  // we need to redirect
+        // update URL of the original request
+        // to the 'new' redirected one
+        NSMutableURLRequest *origRequest = [task.originalRequest mutableCopy];
+        origRequest.URL = redirectReq.URL;
+        
+        request = origRequest;
     }
+    
     completionHandler(request);
 }
 
