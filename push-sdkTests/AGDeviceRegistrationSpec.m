@@ -32,21 +32,8 @@ describe(@"AGDeviceRegistration", ^{
         __block AGDeviceRegistration *registration;
 
         beforeAll(^{
-            
-            // install the mock:
-            [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *request) {
-                return YES;
-            } withStubResponse:^OHHTTPStubsResponse *(NSURLRequest *request) {
-                return [OHHTTPStubsResponse responseWithData:[NSData data]
-                                                  statusCode:200
-                                                responseTime:0 // immediate response
-                                                     headers:@{@"Content-Type":@"text/json]"}];
-            }];
-            
-            
             registration = [[AGDeviceRegistration alloc]
-                            initWithServerURL:[NSURL URLWithString:@"http://localhost:8080/ag-push/"]];
-            
+                            initWithServerURL:[NSURL URLWithString:@"http://server.com"]];
         });
         
         it(@"shared instance should not be nil", ^{
@@ -54,59 +41,67 @@ describe(@"AGDeviceRegistration", ^{
             [[AGDeviceRegistration sharedInstance] shouldNotBeNil];
         });
         
-        it(@"failure block should be invoked with an NSError object if configuration block is not set", ^{
+        it(@"should fail to register if configuration block is not set", ^{
            
-            [registration registerWithClientInfo:nil success:^() {
-                // nope...
-            } failure:^(NSError *error) {
-                [error shouldNotBeNil];
-            }
-             ];
+            [[theBlock(^{
+                [registration registerWithClientInfo:nil success:nil failure:nil];
+        
+            }) should] raise];
         });
         
-        it(@"failure block should be invoked with an NSError object if 'deviceToken' is not set", ^{
-           
-            [registration registerWithClientInfo:^(id<AGClientDeviceInformation> clientInfo) {
-                // apply the desired info:
-                clientInfo.variantID = @"2c948a843e6404dd013e79d82e5a0009";
-            } success:^() {
-                // nope...
-            } failure:^(NSError *error) {
-                [error shouldNotBeNil];
-            }];
-            
-        });
-        
-        it(@"failure block should be invoked with an NSError object if 'mobileVariantID' is not set", ^{
-            
-            [registration registerWithClientInfo:^(id<AGClientDeviceInformation> clientInfo) {
-                // apply the desired info:
-                clientInfo.deviceToken = [@"2c948a843e6404dd013e79d82e5a0009"
-                                          dataUsingEncoding:NSUTF8StringEncoding];
-            } success:^() {
-                // nope...
-            } failure:^(NSError *error) {
-                [error shouldNotBeNil];
-            }];
-        });
-        
-        it(@"failure block should be invoked with an NSError object if 'mobileVariantSecret' is not set", ^{
-            
-            [registration registerWithClientInfo:^(id<AGClientDeviceInformation> clientInfo) {
-                // apply the desired info:
-                clientInfo.deviceToken =
-                [@"2c948a843e6404dd013e79d82e5a0009" dataUsingEncoding:NSUTF8StringEncoding];
-                clientInfo.variantID = @"2c948a843e6404dd013e79d82e5a0009";
+        it(@"should fail to register if 'deviceToken' is not set", ^{
+
+            [[theBlock(^{
+                [registration registerWithClientInfo:^(id<AGClientDeviceInformation> clientInfo) {
+                    // apply the desired info:
+                    clientInfo.variantID = @"2c948a843e6404dd013e79d82e5a0009";
+                } success:^() {
+                    // nope...
+                } failure:^(NSError *error) {
+                    [error shouldNotBeNil];
+                }];
                 
-            } success:^() {
-                // nope...
-            } failure:^(NSError *error) {
-                [error shouldNotBeNil];
-            }];
+            }) should] raise];
+        });
+        
+        it(@"should fail to register if 'mobileVariantID' is not set", ^{
+
+            [[theBlock(^{
+                [registration registerWithClientInfo:^(id<AGClientDeviceInformation> clientInfo) {
+                    // apply the desired info:
+                    clientInfo.deviceToken = [@"2c948a843e6404dd013e79d82e5a0009"
+                                              dataUsingEncoding:NSUTF8StringEncoding];
+                } success:nil failure:nil];
+
+            }) should] raise];
+        });
+        
+        it(@"should fail to register if 'mobileVariantSecret' is not set", ^{
+            
+            [[theBlock(^{
+                [registration registerWithClientInfo:^(id<AGClientDeviceInformation> clientInfo) {
+                    // apply the desired info:
+                    clientInfo.deviceToken =
+                    [@"2c948a843e6404dd013e79d82e5a0009" dataUsingEncoding:NSUTF8StringEncoding];
+                    clientInfo.variantID = @"2c948a843e6404dd013e79d82e5a0009";
+                    
+                 } success:nil failure:nil];
+     
+            }) should] raise];
         });
         
         it(@"should register to the server", ^{
-            
+
+            // install the mock:
+            [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *request) {
+                return YES;
+            } withStubResponse:^OHHTTPStubsResponse *(NSURLRequest *request) {
+
+                return [[OHHTTPStubsResponse responseWithData:[NSData data]
+                                                   statusCode:200
+                                                      headers:@{@"Content-Type":@"text/json]"}] responseTime:0];
+            }];
+
             __block BOOL succeeded;
             
             [registration registerWithClientInfo:^(id<AGClientDeviceInformation> clientInfo) {
@@ -126,8 +121,56 @@ describe(@"AGDeviceRegistration", ^{
                 succeeded = YES;
                 
             } failure:^(NSError *error) {
+                NSLog(@"%@", [error description]);
             }];
             
+            [[expectFutureValue(theValue(succeeded)) shouldEventually] beYes];
+        });
+
+        it(@"should correctly redirect", ^{
+
+            // the 'fictitious' redirect url
+            NSURL *redirectURL = [NSURL URLWithString:@"http://redirect.to/rest/registry/device"];
+
+            // install the mock:
+            [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *request) {
+                return YES;
+            } withStubResponse:^OHHTTPStubsResponse *(NSURLRequest *request) {
+                if ([request.URL.absoluteString isEqual:@"http://server.com/rest/registry/device"]) { // perform redirection
+                    // setup 'redirect' headers
+                    NSDictionary *headers = @{@"Location" : redirectURL.absoluteString};
+                    return [[OHHTTPStubsResponse responseWithData:[NSData data]
+                                                       statusCode:311 // redirect
+                                                          headers:headers] responseTime:0];
+                } else {
+                    return [[OHHTTPStubsResponse responseWithData:[NSData data]
+                                                       statusCode:200
+                                                          headers:@{@"Content-Type":@"text/json]"}] responseTime:0];
+                }
+            }];
+
+            __block BOOL succeeded;
+
+            [registration registerWithClientInfo:^(id<AGClientDeviceInformation> clientInfo) {
+
+                // apply the desired info:
+                clientInfo.deviceToken = [@"2c948a843e6404dd013e79d82e5a0009"
+                        dataUsingEncoding:NSUTF8StringEncoding];
+                clientInfo.variantID = @"2c948a843e6404dd013e79d82e5a0009";
+                clientInfo.variantSecret = @"secret";
+                clientInfo.deviceType = @"iPhone";
+                clientInfo.operatingSystem = @"iOS";
+                clientInfo.osVersion = @"6.1.3";
+                clientInfo.alias = @"mister@xyz.com";
+                clientInfo.categories = @[@"football", @"sport"];
+
+            } success:^() {
+                succeeded = YES;
+
+            } failure:^(NSError *error) {
+                NSLog(@"%@", [error description]);
+            }];
+
             [[expectFutureValue(theValue(succeeded)) shouldEventually] beYes];
         });
     });
