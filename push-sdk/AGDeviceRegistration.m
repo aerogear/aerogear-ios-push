@@ -132,8 +132,8 @@ static AGDeviceRegistration* sharedInstance;
 //      See  RFC 2616 (section 10.3.3) http://www.ietf.org/rfc/rfc2616.txt
 //      and related blog: http://tewha.net/2012/05/handling-302303-redirects/
 //
-//      We need to 'override' that 'default' behaviour by using a 'setRedirectResponseBlock', which will return
-//      the original attempted NSURLRequest with the URL parameter updated to point to the new 'Location' header.
+//      We need to 'override' that 'default' behaviour to return the original attempted NSURLRequest
+//      with the URL parameter updated to point to the new 'Location' header.
 //
 - (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task
 willPerformHTTPRedirection:(NSHTTPURLResponse *)redirectResponse
