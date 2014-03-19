@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		1E24316231A94448BF936F03 /* libPods-push-sdkTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 690976179180479293B024D8 /* libPods-push-sdkTests.a */; };
-		23FEB25217A7451786DEF392 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F8A96B5477848779F501C0A /* libPods.a */; };
 		6F53E2BB1768A935001966D8 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F53E2BA1768A935001966D8 /* Security.framework */; };
 		6F53E2BD1768A963001966D8 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A010C30E1737A95A00CFA575 /* SystemConfiguration.framework */; };
 		6F53E2BE1768A967001966D8 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A010C30C1737A8F300CFA575 /* MobileCoreServices.framework */; };
@@ -24,7 +23,6 @@
 		A010C3151737A9ED00CFA575 /* AGDeviceRegistration.m in Sources */ = {isa = PBXBuildFile; fileRef = A010C3141737A9ED00CFA575 /* AGDeviceRegistration.m */; };
 		A010C3181737AA2C00CFA575 /* AGDeviceRegistrationSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = A010C3171737AA2C00CFA575 /* AGDeviceRegistrationSpec.m */; };
 		A010C31D1737D01000CFA575 /* AGClientDeviceInformationImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = A010C31C1737D00F00CFA575 /* AGClientDeviceInformationImpl.m */; };
-		A010C3211737D24F00CFA575 /* AGRegistrationHttpClient.m in Sources */ = {isa = PBXBuildFile; fileRef = A010C3201737D24F00CFA575 /* AGRegistrationHttpClient.m */; };
 		A03AC14317817BA300FF13A7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A03AC14217817BA300FF13A7 /* CoreGraphics.framework */; };
 		A03AC14417817BB300FF13A7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A03AC14217817BA300FF13A7 /* CoreGraphics.framework */; };
 /* End PBXBuildFile section */
@@ -72,11 +70,8 @@
 		A010C3191737B09D00CFA575 /* AGClientDeviceInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGClientDeviceInformation.h; sourceTree = "<group>"; };
 		A010C31B1737D00F00CFA575 /* AGClientDeviceInformationImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGClientDeviceInformationImpl.h; sourceTree = "<group>"; };
 		A010C31C1737D00F00CFA575 /* AGClientDeviceInformationImpl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGClientDeviceInformationImpl.m; sourceTree = "<group>"; };
-		A010C31F1737D24F00CFA575 /* AGRegistrationHttpClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGRegistrationHttpClient.h; sourceTree = "<group>"; };
-		A010C3201737D24F00CFA575 /* AGRegistrationHttpClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGRegistrationHttpClient.m; sourceTree = "<group>"; };
 		A03AC14217817BA300FF13A7 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		A755D9064734444FBE2C9429 /* Pods-push-sdkTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-push-sdkTests.xcconfig"; path = "Pods/Pods-push-sdkTests.xcconfig"; sourceTree = SOURCE_ROOT; };
-		D09593524A194057A715476C /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,7 +84,6 @@
 				6F53E2BE1768A967001966D8 /* MobileCoreServices.framework in Frameworks */,
 				6F53E2BD1768A963001966D8 /* SystemConfiguration.framework in Frameworks */,
 				A010C2E51737A58100CFA575 /* Foundation.framework in Frameworks */,
-				23FEB25217A7451786DEF392 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -119,7 +113,6 @@
 				A010C2FB1737A58100CFA575 /* push-sdkTests */,
 				A010C2E31737A58100CFA575 /* Frameworks */,
 				A010C2E21737A58100CFA575 /* Products */,
-				D09593524A194057A715476C /* Pods.xcconfig */,
 				A755D9064734444FBE2C9429 /* Pods-push-sdkTests.xcconfig */,
 			);
 			sourceTree = "<group>";
@@ -193,8 +186,6 @@
 			children = (
 				A010C31B1737D00F00CFA575 /* AGClientDeviceInformationImpl.h */,
 				A010C31C1737D00F00CFA575 /* AGClientDeviceInformationImpl.m */,
-				A010C31F1737D24F00CFA575 /* AGRegistrationHttpClient.h */,
-				A010C3201737D24F00CFA575 /* AGRegistrationHttpClient.m */,
 			);
 			name = internal;
 			sourceTree = "<group>";
@@ -291,7 +282,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-push-sdkTests-resources.sh\"\n";
+			shellScript = "\n";
 		};
 		891C018091B0491D9B8A8620 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -305,7 +296,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			shellScript = "\n";
 		};
 		A010C2F01737A58100CFA575 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -329,7 +320,6 @@
 			files = (
 				A010C3151737A9ED00CFA575 /* AGDeviceRegistration.m in Sources */,
 				A010C31D1737D01000CFA575 /* AGClientDeviceInformationImpl.m in Sources */,
-				A010C3211737D24F00CFA575 /* AGRegistrationHttpClient.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -387,7 +377,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
@@ -410,7 +400,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -418,7 +408,6 @@
 		};
 		A010C3071737A58100CFA575 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D09593524A194057A715476C /* Pods.xcconfig */;
 			buildSettings = {
 				DSTROOT = /tmp/push_sdk.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -431,7 +420,6 @@
 		};
 		A010C3081737A58100CFA575 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D09593524A194057A715476C /* Pods.xcconfig */;
 			buildSettings = {
 				DSTROOT = /tmp/push_sdk.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
