@@ -18,6 +18,11 @@
 #import <Foundation/Foundation.h>
 #import "AGClientDeviceInformation.h"
 
+// AeroGear Push error constants
+extern NSString * const AGPushErrorDomain;
+extern NSString * const AGNetworkingOperationFailingURLRequestErrorKey;
+extern NSString * const AGNetworkingOperationFailingURLResponseErrorKey;
+
 /**
  * Utility to register an iOS device with the AeroGear UnifiedPush Server.
  */
@@ -58,7 +63,7 @@
  *
  * @return the shared AGDeviceRegistration object or nil if not yet initialized.
  */
- + (AGDeviceRegistration*) sharedInstance;
++ (AGDeviceRegistration*) sharedInstance;
 
 
 @end
