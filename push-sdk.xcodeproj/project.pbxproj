@@ -282,7 +282,8 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\n";
+			shellScript = "
+";
 		};
 		891C018091B0491D9B8A8620 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -296,7 +297,8 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\n";
+			shellScript = "
+";
 		};
 		A010C2F01737A58100CFA575 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -409,6 +411,7 @@
 		A010C3071737A58100CFA575 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				DSTROOT = /tmp/push_sdk.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "push-sdk/push-sdk-Prefix.pch";
@@ -421,6 +424,7 @@
 		A010C3081737A58100CFA575 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				DSTROOT = /tmp/push_sdk.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "push-sdk/push-sdk-Prefix.pch";
