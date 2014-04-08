@@ -12,6 +12,9 @@ CONFIGURATION="Release";
 # define project name
 PROJECT_NAME="push-sdk"
 
+# define framework name
+FRAMEWORK_NAME="AeroGearPush"
+
 # define the version of the final product
 VERSION_NAME="0.9.0"
 
@@ -19,22 +22,22 @@ VERSION_NAME="0.9.0"
 PRODUCT_NAME="lib${PROJECT_NAME}-${VERSION_NAME}.a"
 
 # define library path for the Simulator
-SIMULATOR_HEADER_DIR="${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/include/${PROJECT_NAME}"
 SIMULATOR_LIBRARY_DIR="${BUILD_DIR}/${CONFIGURATION}-iphonesimulator"
+SIMULATOR_HEADER_DIR="${SIMULATOR_LIBRARY_DIR}/include/${PROJECT_NAME}"
 SIMULATOR_LIBRARY_PATH="${SIMULATOR_LIBRARY_DIR}/${PRODUCT_NAME}"
 
 # define library path for the Device
-DEVICE_HEADER_DIR="${BUILD_DIR}/${CONFIGURATION}-iphoneos/include/${PROJECT_NAME}"
 DEVICE_LIBRARY_DIR="${BUILD_DIR}/${CONFIGURATION}-iphoneos"
+DEVICE_HEADER_DIR="${DEVICE_LIBRARY_DIR}/include/${PROJECT_NAME}"
 DEVICE_LIBRARY_PATH="${DEVICE_LIBRARY_DIR}/${PRODUCT_NAME}"
 
 # define output and library path for the Universal Library
-UNIVERSAL_HEADER_DIR="${BUILD_DIR}/${CONFIGURATION}-iphoneuniversal/include/${PROJECT_NAME}"
 UNIVERSAL_LIBRARY_DIR="${BUILD_DIR}/${CONFIGURATION}-iphoneuniversal"
+UNIVERSAL_HEADER_DIR="${UNIVERSAL_LIBRARY_DIR}/include/${PROJECT_NAME}"
 UNIVERSAL_LIBRARY_PATH="${UNIVERSAL_LIBRARY_DIR}/${PRODUCT_NAME}"
 
 # define framework path
-FRAMEWORK="${UNIVERSAL_LIBRARY_DIR}/${PRODUCT_NAME}.framework"
+FRAMEWORK="${UNIVERSAL_LIBRARY_DIR}/${FRAMEWORK_NAME}.framework"
 
 # cleaning output directories
 rm -Rf "${SIMULATOR_LIBRARY_DIR}"
@@ -84,24 +87,24 @@ cp -v ${DEVICE_HEADER_DIR}/*.h ${UNIVERSAL_HEADER_DIR}
 
 # Create framework directory structure.
 rm -rf "${FRAMEWORK}" &&
-mkdir -p "${UNIVERSAL_LIBRARY_DIR}" &&
-mkdir -p "${FRAMEWORK}/Versions/A/Headers" &&
-mkdir -p "${FRAMEWORK}/Versions/A/Resources" &&
+mkdir -p "${FRAMEWORK}/Versions/${VERSION_NAME}/Headers" &&
+mkdir -p "${FRAMEWORK}/Versions/${VERSION_NAME}/Resources" &&
 
  
 # Move files to appropriate locations in framework paths.
-cp "${UNIVERSAL_LIBRARY_PATH}" "${FRAMEWORK}/Versions/A" &&
-ln -s "A" "${FRAMEWORK}/Versions/Current" &&
+cp "${UNIVERSAL_LIBRARY_PATH}" "${FRAMEWORK}/Versions/${VERSION_NAME}" &&
+mv  "${FRAMEWORK}/Versions/${VERSION_NAME}/${PRODUCT_NAME}" "${FRAMEWORK}/Versions/${VERSION_NAME}/${FRAMEWORK_NAME}.a" &&
+ln -s "${VERSION_NAME}" "${FRAMEWORK}/Versions/Current" &&
 ln -s "Versions/Current/Headers" "${FRAMEWORK}/Headers" &&
 ln -s "Versions/Current/Resources" "${FRAMEWORK}/Resources" &&
-ln -s "Versions/Current/${PRODUCT_NAME}" "${FRAMEWORK}/${PRODUCT_NAME}"
+ln -s "Versions/Current/${FRAMEWORK_NAME}.a" "${FRAMEWORK}/${FRAMEWORK_NAME}.a"
 
 # Check the architectures included in the fat file (should be i386 armv6 armv7)
-lipo -info "${FRAMEWORK}/${PRODUCT_NAME}"
+lipo -info "${FRAMEWORK}/${FRAMEWORK_NAME}.a"
 
 # The -a ensures that the headers maintain the source modification date so that we don't constantly
 # cause propagating rebuilds of files that import these headers.
-cp -a ${UNIVERSAL_HEADER_DIR}/*.h ${FRAMEWORK}/Versions/A/Headers
+cp -a ${UNIVERSAL_HEADER_DIR}/*.h ${FRAMEWORK}/Versions/${VERSION_NAME}/Headers
 
 
 
