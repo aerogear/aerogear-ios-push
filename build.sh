@@ -54,12 +54,13 @@ cp -v ${BUILD_DIR}/${PROJECT_NAME}/AeroGearPush.h ${DEVICE_HEADER_DIR}
 echo '==== BUILDING Simulator Library of project: ' ${PROJECT_NAME} ' in path: ' ${SIMULATOR_LIBRARY_DIR} ' with configuration: ' ${CONFIGURATION};
 
 # Step 1. Build Simulator library
-xcodebuild -project ${PROJECT_NAME}.xcodeproj -sdk iphonesimulator -target ${PROJECT_NAME} -configuration ${CONFIGURATION} clean build TARGET_BUILD_DIR=${SIMULATOR_LIBRARY_DIR}
+xcodebuild -project ${PROJECT_NAME}.xcodeproj -sdk iphonesimulator -target ${PROJECT_NAME} -configuration ${CONFIGURATION} clean build TARGET_BUILD_DIR=${SIMULATOR_LIBRARY_DIR} PRODUCT_NAME=${PROJECT_NAME}-${VERSION_NAME}
 
 echo '==== BUILDING Device Library of project: ' ${PROJECT_NAME} ' in path: ' ${DEVICE_LIBRARY_DIR} ' with configuration: ' ${CONFIGURATION};
 
 # Step 2. Build Device library
-xcodebuild -project ${PROJECT_NAME}.xcodeproj -sdk iphoneos -target ${PROJECT_NAME} -configuration ${CONFIGURATION} clean build TARGET_BUILD_DIR=${DEVICE_LIBRARY_DIR}
+xcodebuild -project ${PROJECT_NAME}.xcodeproj -sdk iphoneos -target ${PROJECT_NAME} -configuration ${CONFIGURATION} clean build TARGET_BUILD_DIR=${DEVICE_LIBRARY_DIR} PRODUCT_NAME=${PROJECT_NAME}-${VERSION_NAME}
+
 
 echo '==== BUILDING Universal Library of project ' ${PROJECT_NAME} ' in path: ' ${UNIVERSAL_LIBRARY_DIR} ' with configuration: ' ${CONFIGURATION};
 
