@@ -93,14 +93,14 @@ mkdir -p "${FRAMEWORK}/Versions/${VERSION_NAME}/Resources" &&
  
 # Move files to appropriate locations in framework paths.
 cp "${UNIVERSAL_LIBRARY_PATH}" "${FRAMEWORK}/Versions/${VERSION_NAME}" &&
-mv  "${FRAMEWORK}/Versions/${VERSION_NAME}/${PRODUCT_NAME}" "${FRAMEWORK}/Versions/${VERSION_NAME}/${FRAMEWORK_NAME}.a" &&
+mv  "${FRAMEWORK}/Versions/${VERSION_NAME}/${PRODUCT_NAME}" "${FRAMEWORK}/Versions/${VERSION_NAME}/${FRAMEWORK_NAME}" &&
 ln -s "${VERSION_NAME}" "${FRAMEWORK}/Versions/Current" &&
 ln -s "Versions/Current/Headers" "${FRAMEWORK}/Headers" &&
 ln -s "Versions/Current/Resources" "${FRAMEWORK}/Resources" &&
-ln -s "Versions/Current/${FRAMEWORK_NAME}.a" "${FRAMEWORK}/${FRAMEWORK_NAME}.a"
+ln -s "Versions/Current/${FRAMEWORK_NAME}" "${FRAMEWORK}/${FRAMEWORK_NAME}"
 
 # Check the architectures included in the fat file (should be i386 armv6 armv7)
-lipo -info "${FRAMEWORK}/${FRAMEWORK_NAME}.a"
+lipo -info "${FRAMEWORK}/${FRAMEWORK_NAME}"
 
 # The -a ensures that the headers maintain the source modification date so that we don't constantly
 # cause propagating rebuilds of files that import these headers.
