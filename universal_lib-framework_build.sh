@@ -47,8 +47,8 @@ mkdir -p "${DEVICE_HEADER_DIR}"
 mkdir -p "${UNIVERSAL_HEADER_DIR}"
 
 # Copying public header file
-cp -v ${BUILD_DIR}/${PROJECT_NAME}/*.h ${SIMULATOR_HEADER_DIR}
-cp -v ${BUILD_DIR}/${PROJECT_NAME}/*.h ${DEVICE_HEADER_DIR}
+cp -v ${BUILD_DIR}/${PROJECT_NAME}/AeroGearPush.h ${SIMULATOR_HEADER_DIR}
+cp -v ${BUILD_DIR}/${PROJECT_NAME}/AeroGearPush.h ${DEVICE_HEADER_DIR}
 
 
 echo '==== BUILDING Simulator Library of project: ' ${PROJECT_NAME} ' in path: ' ${SIMULATOR_LIBRARY_DIR} ' with configuration: ' ${CONFIGURATION};
