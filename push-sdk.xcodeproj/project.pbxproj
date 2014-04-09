@@ -53,6 +53,7 @@
 		5F8A96B5477848779F501C0A /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		690976179180479293B024D8 /* libPods-push-sdkTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-push-sdkTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F53E2BA1768A935001966D8 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		6FF89BEF18F572B000C19EE6 /* push-sdk-fmwk-info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "push-sdk-fmwk-info.plist"; sourceTree = "<group>"; };
 		A010C2E11737A58100CFA575 /* libpush-sdk.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libpush-sdk.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A010C2E41737A58100CFA575 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A010C2E81737A58100CFA575 /* push-sdk-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "push-sdk-Prefix.pch"; sourceTree = "<group>"; };
@@ -159,6 +160,7 @@
 			isa = PBXGroup;
 			children = (
 				A010C2E81737A58100CFA575 /* push-sdk-Prefix.pch */,
+				6FF89BEF18F572B000C19EE6 /* push-sdk-fmwk-info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -282,7 +284,8 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\n";
+			shellScript = "
+";
 		};
 		891C018091B0491D9B8A8620 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -296,7 +299,8 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\n";
+			shellScript = "
+";
 		};
 		A010C2F01737A58100CFA575 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
