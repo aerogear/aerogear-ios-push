@@ -106,6 +106,9 @@ lipo -info "${FRAMEWORK}/${FRAMEWORK_NAME}"
 # cause propagating rebuilds of files that import these headers.
 cp -a ${UNIVERSAL_HEADER_DIR}/*.h ${FRAMEWORK}/Versions/${VERSION_NAME}/Headers
 
+# replace placeholder in framework plist with framework name and copy to the bundle
+cat "./${PROJECT_NAME}/push-sdk-fmwk-info.plist" | sed 's/${FRAMEWORK_NAME}/'"${FRAMEWORK_NAME}"'/' > ${FRAMEWORK}/Versions/${VERSION_NAME}/Resources/Info.plist
+
 
 
 
