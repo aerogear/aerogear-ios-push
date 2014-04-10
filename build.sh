@@ -37,7 +37,7 @@ UNIVERSAL_HEADER_DIR="${UNIVERSAL_LIBRARY_DIR}/include/${PROJECT_NAME}"
 UNIVERSAL_LIBRARY_PATH="${UNIVERSAL_LIBRARY_DIR}/${PRODUCT_NAME}"
 
 # define framework path
-FRAMEWORK="${UNIVERSAL_LIBRARY_DIR}/${FRAMEWORK_NAME}.framework"
+FRAMEWORK="${BUILD_DIR}/${CONFIGURATION}-framework/${FRAMEWORK_NAME}.framework"
 
 # cleaning output directories
 rm -Rf "${SIMULATOR_LIBRARY_DIR}"
@@ -88,7 +88,7 @@ cp -v ${DEVICE_HEADER_DIR}/*.h ${UNIVERSAL_HEADER_DIR}
 # Create framework directory structure.
 rm -rf "${FRAMEWORK}" &&
 mkdir -p "${FRAMEWORK}/Versions/${VERSION_NAME}/Headers" &&
-mkdir -p "${FRAMEWORK}/Versions/${VERSION_NAME}/Resources" &&
+mkdir -p "${FRAMEWORK}/Versions/${VERSION_NAME}/Resources"
 
  
 # Move files to appropriate locations in framework paths.
@@ -110,6 +110,24 @@ cp -a ${UNIVERSAL_HEADER_DIR}/*.h ${FRAMEWORK}/Versions/${VERSION_NAME}/Headers
 cat "./${PROJECT_NAME}/push-sdk-fmwk-info.plist" | sed 's/${FRAMEWORK_NAME}/'"${FRAMEWORK_NAME}"'/' > ${FRAMEWORK}/Versions/${VERSION_NAME}/Resources/Info.plist
 
 
+#########################################
+#### ZIPPING LIBRARIES AND FRAMEWORK ####
+#########################################
 
+echo '==== Building zipped files of Libraries and Framework ===='
+
+ditto -c -k --keepParent ${SIMULATOR_LIBRARY_DIR} ${CONFIGURATION}-iphonesimulator-${VERSION_NAME}.zip
+ditto -c -k --keepParent ${DEVICE_LIBRARY_DIR} ${CONFIGURATION}-iphoneos-${VERSION_NAME}.zip
+ditto -c -k --keepParent ${UNIVERSAL_LIBRARY_DIR} ${CONFIGURATION}-iphoneuniversal-${VERSION_NAME}.zip
+ditto -c -k --keepParent ${BUILD_DIR}/${CONFIGURATION}-framework ${CONFIGURATION}-framework-${VERSION_NAME}.zip
+
+##################################################
+#### BUILDING .DMG OF LIBRARIES AND FRAMEWORK ####
+##################################################
+
+hdiutil create -volname ${CONFIGURATION}-iphonesimulator-${VERSION_NAME} -srcfolder ${SIMULATOR_LIBRARY_DIR} -ov -format UDZO ${CONFIGURATION}-iphonesimulator-${VERSION_NAME}.dmg
+hdiutil create -volname ${CONFIGURATION}-iphoneos-${VERSION_NAME} -srcfolder ${DEVICE_LIBRARY_DIR} -ov -format UDZO ${CONFIGURATION}-iphoneos-${VERSION_NAME}.dmg
+hdiutil create -volname ${CONFIGURATION}-iphoneuniversal-${VERSION_NAME} -srcfolder ${UNIVERSAL_LIBRARY_DIR} -ov -format UDZO ${CONFIGURATION}-iphoneuniversal-${VERSION_NAME}.dmg
+hdiutil create -volname ${CONFIGURATION}-framework-${VERSION_NAME} -srcfolder ${BUILD_DIR}/${CONFIGURATION}-framework -ov -format UDZO ${CONFIGURATION}-framework-${VERSION_NAME}.dmg
 
 
