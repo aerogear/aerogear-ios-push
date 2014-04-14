@@ -41,13 +41,17 @@ UNIVERSAL_LIBRARY_PATH="${UNIVERSAL_LIBRARY_DIR}/${PRODUCT_LIBRARY_NAME}"
 # define framework path
 FRAMEWORK="${BUILD_DIR}/${PRODUCT_NAME}-framework/${PRODUCT_NAME}.framework"
 
+# define product sources path
+PRODUCT_SOURCES_PATH="${BUILD_DIR}/${PRODUCT_NAME}-sources-${VERSION_NAME}"
+
 # cleaning output build folder
 rm -Rf ${BUILD_DIR}
 
 # creating output directories
-mkdir -p "${SIMULATOR_HEADER_DIR}"
-mkdir -p "${DEVICE_HEADER_DIR}"
-mkdir -p "${UNIVERSAL_HEADER_DIR}"
+mkdir -p ${SIMULATOR_HEADER_DIR}
+mkdir -p ${DEVICE_HEADER_DIR}
+mkdir -p ${UNIVERSAL_HEADER_DIR}
+mkdir -p ${PRODUCT_SOURCES_PATH}
 
 # Copying public header file
 cp -v ./${PROJECT_NAME}/AeroGearPush.h ${SIMULATOR_HEADER_DIR}
@@ -56,6 +60,10 @@ cp -v ./${PROJECT_NAME}/AGDeviceRegistration.h ${SIMULATOR_HEADER_DIR}
 
 cp -v ${SIMULATOR_HEADER_DIR}/*.h ${DEVICE_HEADER_DIR}
 
+
+# Copying source files
+cp -v  -R ./${PROJECT_NAME} ${PRODUCT_SOURCES_PATH}
+cp -v ./LICENSE ${PRODUCT_SOURCES_PATH}
 
 echo '==== BUILDING Simulator Library of project: ' ${PROJECT_NAME} ' in path: ' ${SIMULATOR_LIBRARY_DIR} ' with configuration: ' ${CONFIGURATION};
 
@@ -128,5 +136,20 @@ hdiutil create -volname ${PRODUCT_NAME}-iphonesimulator-${VERSION_NAME} -srcfold
 hdiutil create -volname ${PRODUCT_NAME}-iphoneos-${VERSION_NAME} -srcfolder ${DEVICE_LIBRARY_DIR} -ov -format UDZO ${BUILD_DIR}/${PRODUCT_NAME}-iphoneos-${VERSION_NAME}.dmg
 hdiutil create -volname ${PRODUCT_NAME}-iphoneuniversal-${VERSION_NAME} -srcfolder ${UNIVERSAL_LIBRARY_DIR} -ov -format UDZO ${BUILD_DIR}/${PRODUCT_NAME}-iphoneuniversal-${VERSION_NAME}.dmg
 hdiutil create -volname ${PRODUCT_NAME}-framework-${VERSION_NAME} -srcfolder ${BUILD_DIR}/${PRODUCT_NAME}-framework -ov -format UDZO ${BUILD_DIR}/${PRODUCT_NAME}-framework-${VERSION_NAME}.dmg
+
+
+#########################
+#### ZIPPING SOURCES ####
+#########################
+
+echo '==== Building zipped files of sources ===='
+
+ditto -c -k --keepParent ${PRODUCT_SOURCES_PATH} ${PRODUCT_SOURCES_PATH}.zip
+
+##################################
+#### BUILDING .DMG OF SOURCES ####
+##################################
+
+hdiutil create -volname ${PRODUCT_SOURCES_PATH} -srcfolder ${PRODUCT_SOURCES_PATH} -ov -format UDZO ${PRODUCT_SOURCES_PATH}.dmg
 
 
