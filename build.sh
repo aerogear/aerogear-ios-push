@@ -153,3 +153,27 @@ ditto -c -k --keepParent ${PRODUCT_SOURCES_PATH} ${PRODUCT_SOURCES_PATH}.zip
 hdiutil create -volname ${PRODUCT_SOURCES_PATH} -srcfolder ${PRODUCT_SOURCES_PATH} -ov -format UDZO ${PRODUCT_SOURCES_PATH}.dmg
 
 
+
+#######################
+#### API DOC BUILD ####
+#######################
+
+APPLEDOC_FOLDER=./Docset
+
+./appledoc.sh
+
+##########################
+#### ZIPPING API DOC  ####
+##########################
+
+echo '==== Building zipped files of API doc ===='
+
+ditto -c -k --keepParent ${APPLEDOC_FOLDER} ${BUILD_DIR}/${PRODUCT_NAME}-docs-${VERSION_NAME}.zip
+
+
+##################################
+#### BUILDING .DMG OF API DOC ####
+##################################
+
+hdiutil create -volname ${PRODUCT_NAME}-docs-${VERSION_NAME} -srcfolder ${APPLEDOC_FOLDER} -ov -format UDZO ${BUILD_DIR}/${PRODUCT_NAME}-docs-${VERSION_NAME}.dmg
+
