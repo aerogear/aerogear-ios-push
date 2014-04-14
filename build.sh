@@ -21,6 +21,9 @@ VERSION_NAME="0.9.0"
 # define final product name
 PRODUCT_NAME="lib${PROJECT_NAME}-${VERSION_NAME}.a"
 
+# define output build folder
+BUILD_FOLDER="build"
+
 # define library path for the Simulator
 SIMULATOR_LIBRARY_DIR="${BUILD_DIR}/${CONFIGURATION}-iphonesimulator"
 SIMULATOR_HEADER_DIR="${SIMULATOR_LIBRARY_DIR}/include/${PROJECT_NAME}"
@@ -40,9 +43,11 @@ UNIVERSAL_LIBRARY_PATH="${UNIVERSAL_LIBRARY_DIR}/${PRODUCT_NAME}"
 FRAMEWORK="${BUILD_DIR}/${CONFIGURATION}-framework/${FRAMEWORK_NAME}.framework"
 
 # cleaning output directories
-rm -Rf "${SIMULATOR_LIBRARY_DIR}"
-rm -Rf "${DEVICE_LIBRARY_DIR}"
-rm -Rf "${UNIVERSAL_LIBRARY_DIR}"
+rm -Rf ${BUILD_FOLDER}
+rm -Rf ${SIMULATOR_LIBRARY_DIR}
+rm -Rf ${DEVICE_LIBRARY_DIR}
+rm -Rf ${UNIVERSAL_LIBRARY_DIR}
+rm -rf ${FRAMEWORK}
 
 # creating output directories
 mkdir -p "${SIMULATOR_HEADER_DIR}"
@@ -86,7 +91,6 @@ cp -v ${DEVICE_HEADER_DIR}/*.h ${UNIVERSAL_HEADER_DIR}
 
 
 # Create framework directory structure.
-rm -rf "${FRAMEWORK}" &&
 mkdir -p "${FRAMEWORK}/Versions/${VERSION_NAME}/Headers" &&
 mkdir -p "${FRAMEWORK}/Versions/${VERSION_NAME}/Resources"
 
