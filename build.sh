@@ -19,7 +19,7 @@ FRAMEWORK_NAME="AeroGearPush"
 VERSION_NAME="0.9.0"
 
 # define final product name
-PRODUCT_NAME="lib${PROJECT_NAME}-${VERSION_NAME}.a"
+PRODUCT_LIBRARY_NAME="lib${PROJECT_NAME}-${VERSION_NAME}.a"
 
 # define output build folder
 BUILD_FOLDER="build"
@@ -27,17 +27,17 @@ BUILD_FOLDER="build"
 # define library path for the Simulator
 SIMULATOR_LIBRARY_DIR="${BUILD_DIR}/${CONFIGURATION}-iphonesimulator"
 SIMULATOR_HEADER_DIR="${SIMULATOR_LIBRARY_DIR}/include/${PROJECT_NAME}"
-SIMULATOR_LIBRARY_PATH="${SIMULATOR_LIBRARY_DIR}/${PRODUCT_NAME}"
+SIMULATOR_LIBRARY_PATH="${SIMULATOR_LIBRARY_DIR}/${PRODUCT_LIBRARY_NAME}"
 
 # define library path for the Device
 DEVICE_LIBRARY_DIR="${BUILD_DIR}/${CONFIGURATION}-iphoneos"
 DEVICE_HEADER_DIR="${DEVICE_LIBRARY_DIR}/include/${PROJECT_NAME}"
-DEVICE_LIBRARY_PATH="${DEVICE_LIBRARY_DIR}/${PRODUCT_NAME}"
+DEVICE_LIBRARY_PATH="${DEVICE_LIBRARY_DIR}/${PRODUCT_LIBRARY_NAME}"
 
 # define output and library path for the Universal Library
 UNIVERSAL_LIBRARY_DIR="${BUILD_DIR}/${CONFIGURATION}-iphoneuniversal"
 UNIVERSAL_HEADER_DIR="${UNIVERSAL_LIBRARY_DIR}/include/${PROJECT_NAME}"
-UNIVERSAL_LIBRARY_PATH="${UNIVERSAL_LIBRARY_DIR}/${PRODUCT_NAME}"
+UNIVERSAL_LIBRARY_PATH="${UNIVERSAL_LIBRARY_DIR}/${PRODUCT_LIBRARY_NAME}"
 
 # define framework path
 FRAMEWORK="${BUILD_DIR}/${CONFIGURATION}-framework/${FRAMEWORK_NAME}.framework"
@@ -97,7 +97,7 @@ mkdir -p "${FRAMEWORK}/Versions/${VERSION_NAME}/Resources"
  
 # Move files to appropriate locations in framework paths.
 cp "${UNIVERSAL_LIBRARY_PATH}" "${FRAMEWORK}/Versions/${VERSION_NAME}" &&
-mv  "${FRAMEWORK}/Versions/${VERSION_NAME}/${PRODUCT_NAME}" "${FRAMEWORK}/Versions/${VERSION_NAME}/${FRAMEWORK_NAME}" &&
+mv  "${FRAMEWORK}/Versions/${VERSION_NAME}/${PRODUCT_LIBRARY_NAME}" "${FRAMEWORK}/Versions/${VERSION_NAME}/${FRAMEWORK_NAME}" &&
 ln -s "${VERSION_NAME}" "${FRAMEWORK}/Versions/Current" &&
 ln -s "Versions/Current/Headers" "${FRAMEWORK}/Headers" &&
 ln -s "Versions/Current/Resources" "${FRAMEWORK}/Resources" &&
