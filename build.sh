@@ -42,7 +42,7 @@ UNIVERSAL_LIBRARY_PATH="${UNIVERSAL_LIBRARY_DIR}/${PRODUCT_LIBRARY_NAME}"
 FRAMEWORK="${BUILD_DIR}/${PRODUCT_NAME}-framework/${PRODUCT_NAME}.framework"
 
 # cleaning output build folder
-rm -Rf ${BUILD_FOLDER}
+rm -Rf ${BUILD_DIR}
 
 # creating output directories
 mkdir -p "${SIMULATOR_HEADER_DIR}"
