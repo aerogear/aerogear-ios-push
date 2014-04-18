@@ -17,7 +17,7 @@ The build script will generate a buid folder containing an universal static lib 
 
 ## Adding the library to your project 
 
-You have different options to add aerogear-push-registration library to your project for building your project.
+You have different options to add aerogear-push-registration library to your project.
 
 ### Approach 1: use CocoaPods 
 
