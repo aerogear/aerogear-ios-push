@@ -15,13 +15,15 @@ The build script will generate a buid folder containing an universal static lib 
 **NOTE** on 64 bits architecture: From Xcode 5.1 release inwards, Apple changes the "Standard Architectures" to also include the arm64 architecture. See "Building" section on the [Xcode 5.1 release notes](https://developer.apple.com/library/mac/releasenotes/DeveloperTools/RN-Xcode/xc5_release_notes/xc5_release_notes.html#//apple_ref/doc/uid/TP40001051-CH2-SW2). When building with Xcode 5.0, the built library will not support 64 bits architecture. **We recommend you to build with Xcode 5.1+**
 
 
-## Building your project 
+## Adding the library to your project 
 
-You have different options for expressing dependencies to build your project.
+You have different options to add aerogear-push-registration library to your project for building your project.
 
 ### Approach 1: use CocoaPods 
 
-Using [CocoaPods](http://cocoapods.org/) for dependency management, you will include source code as dependency;
+The library is available on CocoaPods[http://cocoapods.org/?q=aerogear-Push], just include it in your 'Podfile':
+
+    pod 'AeroGear-Push'
 
 **Before**, you can run the app, you need to run the following command:
 
@@ -33,7 +35,7 @@ After that you just need to open the ```YourProject.xcworkspace``` file in XCode
 
 * step 1: copy lib
 
-From [aerogear-push-ios-registration](https://github.com/aerogear/aerogear-push-ios-registration):
+After you have built the library (see "Building the library" section), from [aerogear-push-ios-registration](https://github.com/aerogear/aerogear-push-ios-registration) directory, run the copy command:
 
     cp -R build/AeroGearPush-iphoneuniversal/* ../<YourProjectFolder>
 
@@ -57,13 +59,13 @@ Click on the Build Settings tab, and locate the Other linker Flags setting and a
 
 * step 1: copy framework
 
-From [aerogear-push-ios-registration](https://github.com/aerogear/aerogear-push-ios-registration):
+After you have built the framework (see "Building the library" section), from [aerogear-push-ios-registration](https://github.com/aerogear/aerogear-push-ios-registration) directory, run the copy command:
 
     cp -R build/AeroGearPush-framework/AeroGearPush.framework ../<YourProjectFolder>
 
-* step 2: add framwork to Build Phases
+* step 2: add framework to Build Phases
 
-Go to <YourProject> targets. In Build Phases / Link Binary With Libraries add AeroGearPush.framwork
+Go to <YourProject> targets. In Build Phases / Link Binary With Libraries add AeroGearPush.framework
 
 * step 3: angle bracket your import
 
