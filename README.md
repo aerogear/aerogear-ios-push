@@ -21,7 +21,7 @@ You have different options to add aerogear-push-registration library to your pro
 
 ### Approach 1: use CocoaPods 
 
-The library is available on CocoaPods[http://cocoapods.org/?q=aerogear-Push], just include it in your 'Podfile':
+The library is available on [CocoaPods](http://cocoapods.org/?q=aerogear-Push), just include it in your 'Podfile':
 
     pod 'AeroGear-Push'
 
