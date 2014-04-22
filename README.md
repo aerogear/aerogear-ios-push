@@ -79,7 +79,7 @@ You can use [aerogear-push-helloworld](https://github.com/aerogear/aerogear-push
 
 ## Example Usage
 
-```
+```ObjC
 - (void)application:(UIApplication *)application
 didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
 
@@ -110,7 +110,7 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
 
 There are no extra hooks for receiving notifications with the AeroGear library. You can use the existing delegate for receiving remote notifications while the application is running, like:
 
-```
+```ObjC
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
   // extract desired value from the dictionary...
 }
