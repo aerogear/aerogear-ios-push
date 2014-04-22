@@ -99,9 +99,9 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     [clientInfo setOsVersion:[currentDevice systemVersion]];
     [clientInfo setDeviceType: [currentDevice model]];
 	} success:^() {
-      NSLog(@"PushEE registration worked");
+      NSLog(@"UnifiedPush Server registration worked");
 	} failure:^(NSError *error) {
-      NSLog(@"PushEE registration Error: %@", error);
+      NSLog(@"UnifiedPush Server registration Error: %@", error);
   }];
 }
 ```
