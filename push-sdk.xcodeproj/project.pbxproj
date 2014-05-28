@@ -9,9 +9,6 @@
 /* Begin PBXBuildFile section */
 		1E24316231A94448BF936F03 /* libPods-push-sdkTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 690976179180479293B024D8 /* libPods-push-sdkTests.a */; };
 		6F53E2BB1768A935001966D8 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F53E2BA1768A935001966D8 /* Security.framework */; };
-		6F53E2BD1768A963001966D8 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A010C30E1737A95A00CFA575 /* SystemConfiguration.framework */; };
-		6F53E2BE1768A967001966D8 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A010C30C1737A8F300CFA575 /* MobileCoreServices.framework */; };
-		6F53E2BF1768A96E001966D8 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F53E2BA1768A935001966D8 /* Security.framework */; };
 		A010C2E51737A58100CFA575 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A010C2E41737A58100CFA575 /* Foundation.framework */; };
 		A010C2F41737A58100CFA575 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A010C2F31737A58100CFA575 /* SenTestingKit.framework */; };
 		A010C2F61737A58100CFA575 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A010C2F51737A58100CFA575 /* UIKit.framework */; };
@@ -23,7 +20,6 @@
 		A010C3151737A9ED00CFA575 /* AGDeviceRegistration.m in Sources */ = {isa = PBXBuildFile; fileRef = A010C3141737A9ED00CFA575 /* AGDeviceRegistration.m */; };
 		A010C3181737AA2C00CFA575 /* AGDeviceRegistrationSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = A010C3171737AA2C00CFA575 /* AGDeviceRegistrationSpec.m */; };
 		A010C31D1737D01000CFA575 /* AGClientDeviceInformationImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = A010C31C1737D00F00CFA575 /* AGClientDeviceInformationImpl.m */; };
-		A03AC14317817BA300FF13A7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A03AC14217817BA300FF13A7 /* CoreGraphics.framework */; };
 		A03AC14417817BB300FF13A7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A03AC14217817BA300FF13A7 /* CoreGraphics.framework */; };
 /* End PBXBuildFile section */
 
@@ -80,10 +76,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A03AC14317817BA300FF13A7 /* CoreGraphics.framework in Frameworks */,
-				6F53E2BF1768A96E001966D8 /* Security.framework in Frameworks */,
-				6F53E2BE1768A967001966D8 /* MobileCoreServices.framework in Frameworks */,
-				6F53E2BD1768A963001966D8 /* SystemConfiguration.framework in Frameworks */,
 				A010C2E51737A58100CFA575 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
