@@ -43,26 +43,12 @@ class AGClientDeviceInformationImpl: NSObject, AGClientDeviceInformation {
         if (deviceToken) {
             jsonObject["deviceToken"] = convertToString(deviceToken!)
         }
-        
-        if (alias) {
-            jsonObject["alias"] = alias!
-        }
-        
-        if (categories) {
-            jsonObject["categories"] = categories!
-        }
-        
-        if (operatingSystem) {
-            jsonObject["operatingSystem"] = operatingSystem!
-        }
-        
-        if (osVersion) {
-            jsonObject["osVersion"] = osVersion!
-        }
-        
-        if (deviceType) {
-            jsonObject["deviceType"] = deviceType!
-        }
+
+        jsonObject["alias"] = alias
+        jsonObject["categories"] = categories
+        jsonObject["operatingSystem"] = operatingSystem
+        jsonObject["osVersion"] = osVersion
+        jsonObject["deviceType"] = deviceType
         
         return jsonObject;
     }
