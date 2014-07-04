@@ -40,10 +40,7 @@ class AGClientDeviceInformationImpl: NSObject, AGClientDeviceInformation {
 
         var jsonObject =  Dictionary<String, AnyObject>()
         
-        if (deviceToken) {
-            jsonObject["deviceToken"] = convertToString(deviceToken!)
-        }
-
+        jsonObject["deviceToken"] = convertToString(deviceToken)
         jsonObject["alias"] = alias
         jsonObject["categories"] = categories
         jsonObject["operatingSystem"] = operatingSystem
@@ -53,12 +50,13 @@ class AGClientDeviceInformationImpl: NSObject, AGClientDeviceInformation {
         return jsonObject;
     }
     
-    // little helper to transform the NSData-based token into a (useful) String:
-    func convertToString(deviceToken: NSData) -> String {
-        let token = deviceToken.description
-
+    // Helper to transform the NSData-based token into a (useful) String:
+    func convertToString(deviceToken: NSData?) -> String? {
+        if let token = deviceToken?.description {
         return token.stringByReplacingOccurrencesOfString("<", withString: "")
             .stringByReplacingOccurrencesOfString(">", withString: "")
             .stringByReplacingOccurrencesOfString(" ", withString: "")
+        }
+        return nil
     }
 }
