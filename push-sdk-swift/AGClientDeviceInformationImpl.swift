@@ -26,7 +26,7 @@ class AGClientDeviceInformationImpl: NSObject, AGClientDeviceInformation {
     var variantID: String?
     var variantSecret: String?
     var alias: String?
-    var categories: Array<String>?
+    var categories: [String]?
     var operatingSystem: String?
     var osVersion: String?
     var deviceType: String?
@@ -35,10 +35,10 @@ class AGClientDeviceInformationImpl: NSObject, AGClientDeviceInformation {
         super.init()        
     }
     
-    func extractValues() -> Dictionary<String, AnyObject> {
+    func extractValues() -> [String: AnyObject] {
         let token = convertToString(deviceToken!)
 
-        var jsonObject =  Dictionary<String, AnyObject>()
+        var jsonObject =  [String: AnyObject]()
         
         jsonObject["deviceToken"] = convertToString(deviceToken)
         jsonObject["alias"] = alias
@@ -53,10 +53,11 @@ class AGClientDeviceInformationImpl: NSObject, AGClientDeviceInformation {
     // Helper to transform the NSData-based token into a (useful) String:
     func convertToString(deviceToken: NSData?) -> String? {
         if let token = deviceToken?.description {
-        return token.stringByReplacingOccurrencesOfString("<", withString: "")
-            .stringByReplacingOccurrencesOfString(">", withString: "")
-            .stringByReplacingOccurrencesOfString(" ", withString: "")
+            return token.stringByReplacingOccurrencesOfString("<", withString: "")
+                .stringByReplacingOccurrencesOfString(">", withString: "")
+                .stringByReplacingOccurrencesOfString(" ", withString: "")
         }
+        
         return nil
     }
 }
