@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6F2484CB197C550800E0C211 /* AGURLSessionStubs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F2484C8197C550000E0C211 /* AGURLSessionStubs.framework */; };
 		6F46417219654E4A00D2B1C9 /* AGDeviceRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F46417119654E4A00D2B1C9 /* AGDeviceRegistration.swift */; };
 		6F464174196564A500D2B1C9 /* AGClientDeviceInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F464173196564A500D2B1C9 /* AGClientDeviceInformation.swift */; };
 		6F4641771965660300D2B1C9 /* AGClientDeviceInformationImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4641761965660300D2B1C9 /* AGClientDeviceInformationImpl.swift */; };
@@ -16,6 +17,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		6F2484C7197C550000E0C211 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6F2484C2197C550000E0C211 /* AGURLSessionStubs.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 6F3C40A1197BCCD80072D66A;
+			remoteInfo = AGURLSessionStubs;
+		};
+		6F2484C9197C550000E0C211 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6F2484C2197C550000E0C211 /* AGURLSessionStubs.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 6F3C40AC197BCCD80072D66A;
+			remoteInfo = AGURLSessionStubsTests;
+		};
 		6F71353E19646266009B26D8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6F71352819646266009B26D8 /* Project object */;
@@ -40,6 +55,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6F2484C2197C550000E0C211 /* AGURLSessionStubs.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AGURLSessionStubs.xcodeproj; path = AGURLSessionStubs/AGURLSessionStubs.xcodeproj; sourceTree = "<group>"; };
 		6F46417119654E4A00D2B1C9 /* AGDeviceRegistration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AGDeviceRegistration.swift; sourceTree = "<group>"; };
 		6F464173196564A500D2B1C9 /* AGClientDeviceInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AGClientDeviceInformation.swift; sourceTree = "<group>"; };
 		6F4641761965660300D2B1C9 /* AGClientDeviceInformationImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AGClientDeviceInformationImpl.swift; sourceTree = "<group>"; };
@@ -63,6 +79,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F2484CB197C550800E0C211 /* AGURLSessionStubs.framework in Frameworks */,
 				6F71353D19646266009B26D8 /* AeroGearPush.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -70,6 +87,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6F2484C3197C550000E0C211 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6F2484C8197C550000E0C211 /* AGURLSessionStubs.framework */,
+				6F2484CA197C550000E0C211 /* AGURLSessionStubsTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		6F464175196565EE00D2B1C9 /* Internal */ = {
 			isa = PBXGroup;
 			children = (
@@ -120,6 +146,7 @@
 		6F71354019646266009B26D8 /* push-sdk-swiftTests */ = {
 			isa = PBXGroup;
 			children = (
+				6F2484C2197C550000E0C211 /* AGURLSessionStubs.xcodeproj */,
 				6F71354319646266009B26D8 /* AGDeviceRegistrationTests.swift */,
 				6F71354119646266009B26D8 /* Supporting Files */,
 			);
@@ -214,6 +241,12 @@
 			mainGroup = 6F71352719646266009B26D8;
 			productRefGroup = 6F71353219646266009B26D8 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 6F2484C3197C550000E0C211 /* Products */;
+					ProjectRef = 6F2484C2197C550000E0C211 /* AGURLSessionStubs.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				6F71353019646266009B26D8 /* AeroGearPush */,
@@ -221,6 +254,23 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		6F2484C8197C550000E0C211 /* AGURLSessionStubs.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = AGURLSessionStubs.framework;
+			remoteRef = 6F2484C7197C550000E0C211 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		6F2484CA197C550000E0C211 /* AGURLSessionStubsTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = AGURLSessionStubsTests.xctest;
+			remoteRef = 6F2484C9197C550000E0C211 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		6F71352F19646266009B26D8 /* Resources */ = {
