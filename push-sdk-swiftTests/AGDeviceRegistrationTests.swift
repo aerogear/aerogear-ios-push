@@ -18,34 +18,39 @@
 import XCTest
 import UIKit
 import AeroGearPush
+import AGURLSessionStubs
 
 class AGDeviceRegistrationTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
     }
     
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
     
     func testRegistrationWithServerShouldWork() {
+        // set up http stub
+        StubsManager.stubRequestsPassingTest({ (request: NSURLRequest!) -> Bool in
+            return true
+        }, withStubResponse:( { (request: NSURLRequest!) -> StubResponse in
+            return StubResponse(data:NSData.data(), statusCode: 200, headers: ["Content-Type" : "text/json"])
+        }))
         
         // async test expectation
         let registrationExpectation = expectationWithDescription("UPS registration");
         
         // setup registration
-        let registration = AGDeviceRegistration(serverURL: NSURL(string: "<# URL of the running AeroGear UnifiedPush Server #>"))
+        let registration = AGDeviceRegistration(serverURL: NSURL(string: "http://server.com"))
         
         // attemp to register
         registration.registerWithClientInfo({ (clientInfo: AGClientDeviceInformation!) -> () in
 
             // setup configuration
-            clientInfo.deviceToken = "token".dataUsingEncoding(NSUTF8StringEncoding) // dummy token
-            clientInfo.variantID = "<# Variant Id #>"
-            clientInfo.variantSecret = "<# Variant Secret #>"
+            clientInfo.deviceToken = "dummy_token_for_testing_purposes".dataUsingEncoding(NSUTF8StringEncoding) // dummy token
+            clientInfo.variantID = "8bd6e6a3-df6b-466c-8292-ed062f2427e8"
+            clientInfo.variantSecret = "1c9a6066-e0e5-4bcb-ab78-994335f59874"
             
             // apply the token, to identify THIS device
             let currentDevice = UIDevice()
@@ -55,6 +60,7 @@ class AGDeviceRegistrationTests: XCTestCase {
             clientInfo.operatingSystem = currentDevice.systemName
             clientInfo.osVersion = currentDevice.systemVersion
             clientInfo.deviceType = currentDevice.model
+            clientInfo.alias = "registered from swift"
             },
             
             success: {() -> () in
@@ -67,7 +73,60 @@ class AGDeviceRegistrationTests: XCTestCase {
                 registrationExpectation.fulfill()
             })
         
-        waitForExpectationsWithTimeout(10, handler: {(error: NSError!) -> () in
-        })
+        waitForExpectationsWithTimeout(10, handler: nil)
     }
+
+    /*
+    func testRedirectionShouldWork() {
+        // set up http stub
+        StubsManager.stubRequestsPassingTest({ (request: NSURLRequest!) -> Bool in
+            return true
+        }, withStubResponse:( { (request: NSURLRequest!) -> StubResponse in
+            if request.URL.absoluteString == "http://server.com/rest/registry/device" { // perform redirection
+                let headers = ["Location": "http://redirect.to/rest/registry/device"]
+                return StubResponse(data:NSData.data(), statusCode: 311, headers: headers)
+            
+            } else {
+                return StubResponse(data:NSData.data(), statusCode: 200, headers: ["Content-Type" : "text/json"])
+            }
+        }))
+
+        // async test expectation
+        let registrationExpectation = expectationWithDescription("UPS registration with redirect");
+
+        // setup registration
+        let registration = AGDeviceRegistration(serverURL: NSURL(string: "http://server.com"))
+        
+        // attemp to register
+        registration.registerWithClientInfo({ (clientInfo: AGClientDeviceInformation!) -> () in
+            
+            // setup configuration
+            clientInfo.deviceToken = "dummy_token_for_testing_purposes".dataUsingEncoding(NSUTF8StringEncoding) // dummy token
+            clientInfo.variantID = "8bd6e6a3-df6b-466c-8292-ed062f2427e8"
+            clientInfo.variantSecret = "1c9a6066-e0e5-4bcb-ab78-994335f59874"
+            
+            // apply the token, to identify THIS device
+            let currentDevice = UIDevice()
+            
+            // --optional config--
+            // set some 'useful' hardware information params
+            clientInfo.operatingSystem = currentDevice.systemName
+            clientInfo.osVersion = currentDevice.systemVersion
+            clientInfo.deviceType = currentDevice.model
+            clientInfo.alias = "registered from swift"
+            },
+            
+            success: {() -> () in
+                registrationExpectation.fulfill()
+            },
+            
+            failure: {(error: NSError!) -> () in
+                XCTAssertTrue(false, "should have register")
+                
+                registrationExpectation.fulfill()
+            })
+        
+        waitForExpectationsWithTimeout(10, handler: nil)
+    }
+    */
 }
