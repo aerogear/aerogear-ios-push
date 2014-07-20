@@ -1,0 +1,3 @@
+[submodule "push-sdk-swiftTests/AGURLSessionStubs"]
+	path = push-sdk-swiftTests/AGURLSessionStubs
+	url = https://github.com/cvasilak/AGURLSessionStubs.git
