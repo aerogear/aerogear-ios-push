@@ -20,7 +20,7 @@ import Foundation
 /**
  * Utility to register an iOS device with the AeroGear UnifiedPush Server.
  */
-class AGDeviceRegistration: NSObject, NSURLSessionTaskDelegate {
+public class AGDeviceRegistration: NSObject, NSURLSessionTaskDelegate {
     
     struct AGDeviceRegistrationError {
         static let AGPushErrorDomain = "AGPushErrorDomain"
@@ -31,7 +31,7 @@ class AGDeviceRegistration: NSObject, NSURLSessionTaskDelegate {
     let serverURL: NSURL
     let session: NSURLSession!
     
-    init(serverURL: NSURL) {
+    public init(serverURL: NSURL) {
         self.serverURL = serverURL;
 
         super.init()
@@ -40,7 +40,7 @@ class AGDeviceRegistration: NSObject, NSURLSessionTaskDelegate {
         self.session = NSURLSession(configuration: sessionConfig, delegate: self, delegateQueue: NSOperationQueue.mainQueue())
     }
     
-    func registerWithClientInfo(clientInfo: ((config: AGClientDeviceInformation) -> Void)!,
+    public func registerWithClientInfo(clientInfo: ((config: AGClientDeviceInformation) -> Void)!,
         success:(() -> Void)!, failure:((NSError) -> Void)!) -> Void {
             
             let clientInfoObject = AGClientDeviceInformationImpl()
@@ -109,7 +109,7 @@ class AGDeviceRegistration: NSObject, NSURLSessionTaskDelegate {
     //      with the URL parameter updated to point to the new 'Location' header.
     //
     */
-    func URLSession(session: NSURLSession!, task: NSURLSessionTask!, willPerformHTTPRedirection redirectResponse: NSHTTPURLResponse!, newRequest redirectReq: NSURLRequest!, completionHandler: ((NSURLRequest!) -> Void)!) {
+    public func URLSession(session: NSURLSession!, task: NSURLSessionTask!, willPerformHTTPRedirection redirectResponse: NSHTTPURLResponse!, newRequest redirectReq: NSURLRequest!, completionHandler: ((NSURLRequest!) -> Void)!) {
         
         var request = redirectReq;
 

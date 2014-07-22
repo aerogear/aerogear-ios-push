@@ -51,7 +51,7 @@ class AGClientDeviceInformationImpl: NSObject, AGClientDeviceInformation {
     }
     
     // Helper to transform the NSData-based token into a (useful) String:
-    func convertToString(deviceToken: NSData?) -> String? {
+    private func convertToString(deviceToken: NSData?) -> String? {
         if let token = deviceToken?.description {
             return token.stringByReplacingOccurrencesOfString("<", withString: "")
                 .stringByReplacingOccurrencesOfString(">", withString: "")
