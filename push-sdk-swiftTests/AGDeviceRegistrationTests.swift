@@ -28,8 +28,10 @@ class AGDeviceRegistrationTests: XCTestCase {
     
     override func tearDown() {
         super.tearDown()
+        
+        StubsManager.removeAllStubs()
     }
-    
+
     func testRegistrationWithServerShouldWork() {
         // set up http stub
         StubsManager.stubRequestsPassingTest({ (request: NSURLRequest!) -> Bool in
@@ -48,7 +50,7 @@ class AGDeviceRegistrationTests: XCTestCase {
         registration.registerWithClientInfo({ (clientInfo: AGClientDeviceInformation!) -> () in
 
             // setup configuration
-            clientInfo.deviceToken = "dummy_token_for_testing_purposes".dataUsingEncoding(NSUTF8StringEncoding) // dummy token
+            clientInfo.deviceToken = "2c948a843e6404dd013e79d82e5a0009".dataUsingEncoding(NSUTF8StringEncoding) // dummy token
             clientInfo.variantID = "8bd6e6a3-df6b-466c-8292-ed062f2427e8"
             clientInfo.variantSecret = "1c9a6066-e0e5-4bcb-ab78-994335f59874"
             
@@ -63,11 +65,11 @@ class AGDeviceRegistrationTests: XCTestCase {
             clientInfo.alias = "registered from swift"
             },
             
-            success: {() -> () in
+            success: {
                 registrationExpectation.fulfill()
             },
             
-            failure: {(error: NSError!) -> () in
+            failure: {(error: NSError!) in
                 XCTAssertTrue(false, "should have register")
                 
                 registrationExpectation.fulfill()
@@ -76,8 +78,7 @@ class AGDeviceRegistrationTests: XCTestCase {
         waitForExpectationsWithTimeout(10, handler: nil)
     }
 
-    /*
-    func testRedirectionShouldWork() {
+    func testRedirectionAndRegistrationWithServerShouldWork() {
         // set up http stub
         StubsManager.stubRequestsPassingTest({ (request: NSURLRequest!) -> Bool in
             return true
@@ -85,7 +86,7 @@ class AGDeviceRegistrationTests: XCTestCase {
             if request.URL.absoluteString == "http://server.com/rest/registry/device" { // perform redirection
                 let headers = ["Location": "http://redirect.to/rest/registry/device"]
                 return StubResponse(data:NSData.data(), statusCode: 311, headers: headers)
-            
+
             } else {
                 return StubResponse(data:NSData.data(), statusCode: 200, headers: ["Content-Type" : "text/json"])
             }
@@ -101,7 +102,7 @@ class AGDeviceRegistrationTests: XCTestCase {
         registration.registerWithClientInfo({ (clientInfo: AGClientDeviceInformation!) -> () in
             
             // setup configuration
-            clientInfo.deviceToken = "dummy_token_for_testing_purposes".dataUsingEncoding(NSUTF8StringEncoding) // dummy token
+            clientInfo.deviceToken = "2c948a843e6404dd013e79d82e5a0009".dataUsingEncoding(NSUTF8StringEncoding) // dummy token
             clientInfo.variantID = "8bd6e6a3-df6b-466c-8292-ed062f2427e8"
             clientInfo.variantSecret = "1c9a6066-e0e5-4bcb-ab78-994335f59874"
             
@@ -116,11 +117,11 @@ class AGDeviceRegistrationTests: XCTestCase {
             clientInfo.alias = "registered from swift"
             },
             
-            success: {() -> () in
+            success: {
                 registrationExpectation.fulfill()
             },
             
-            failure: {(error: NSError!) -> () in
+            failure: {(error: NSError!) in
                 XCTAssertTrue(false, "should have register")
                 
                 registrationExpectation.fulfill()
@@ -128,5 +129,4 @@ class AGDeviceRegistrationTests: XCTestCase {
         
         waitForExpectationsWithTimeout(10, handler: nil)
     }
-    */
 }
