@@ -43,6 +43,9 @@ public class AGDeviceRegistration: NSObject, NSURLSessionTaskDelegate {
     public func registerWithClientInfo(clientInfo: ((config: AGClientDeviceInformation) -> Void)!,
         success:(() -> Void)!, failure:((NSError) -> Void)!) -> Void {
             
+            // can't proceed with no configuration block set
+            assert(clientInfo, "configuration block not set")
+
             let clientInfoObject = AGClientDeviceInformationImpl()
         
             clientInfo(config: clientInfoObject)
