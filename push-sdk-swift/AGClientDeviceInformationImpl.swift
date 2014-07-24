@@ -36,8 +36,6 @@ class AGClientDeviceInformationImpl: NSObject, AGClientDeviceInformation {
     }
     
     func extractValues() -> [String: AnyObject] {
-        let token = convertToString(deviceToken!)
-
         var jsonObject =  [String: AnyObject]()
         
         jsonObject["deviceToken"] = convertToString(deviceToken)
