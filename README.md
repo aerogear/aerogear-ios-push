@@ -9,8 +9,8 @@ A small and handy library written in [Swift](https://developer.apple.com/swift/)
 Follow these steps to add the library in your swift project.
 
 1. [Clone this repository and checkout `"swift"` branch](#1-clone-this-repository)
-2. [Add `AeroGearPush.xcodeproj` to your application target](#2-add-to-your-app-target)
-3. [Link `AeroGearPush.framework`](#3-link-framework) to your build settings
+2. [Add `AeroGearPush.xcodeproj` to your application target](#2-add-aerogearpush-xcodeproj-to-your-application-target)
+3. [Link `AeroGearPush.framework` to your build settings](#3-link-aerogearpush-framework-to-your-build-settings)
 4. Start writing your app!
 
 > **NOTE:** Hopefully in the future  and as the Swift language and tools around it mature, more straightforward distribution mechanisms will be employed using e.g [cocoapods](http://cocoapods.org) and framework builds. Currently neither cocoapods nor binary framework builds support Swift. For more information, consult this [mail thread](http://aerogear-dev.1069024.n5.nabble.com/aerogear-dev-Swift-Frameworks-Static-libs-and-Cocoapods-td8456.html) that describes the current situation.
@@ -81,7 +81,6 @@ The project uses [AGURLSessionStubs]((https://github.com/cvasilak/AGURLSessionSt
 
 ```bash
 git submodule init && git submodule update
-
 ```
 
 You are now ready to run the tests.
