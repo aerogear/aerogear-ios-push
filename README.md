@@ -30,7 +30,7 @@ Right-click on the group containing your application target and select `Add File
 
 Next, select `AeroGearPush.xcodeproj`, which you downloaded in step 1.
 
-![](http://cl.ly/image/0C0J3I2I0d2d/add-framework-selector.png)
+![](http://f.cl.ly/items/1p3X0c153F0y3h3L3f3k/add-framework-selector.png)
 
 ### 3. Link `AeroGearPush.framework` to your build settings
 
