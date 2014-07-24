@@ -31,6 +31,13 @@ public class AGDeviceRegistration: NSObject, NSURLSessionTaskDelegate {
     let serverURL: NSURL
     let session: NSURLSession!
     
+    /**
+    * An initializer method to instantiate an AGDeviceRegistration object.
+    *
+    * @param serverURL the URL of the AeroGear Push server.
+    *
+    * @return the AGDeviceRegistration object.
+    */
     public init(serverURL: NSURL) {
         self.serverURL = serverURL;
 
@@ -40,6 +47,21 @@ public class AGDeviceRegistration: NSObject, NSURLSessionTaskDelegate {
         self.session = NSURLSession(configuration: sessionConfig, delegate: self, delegateQueue: NSOperationQueue.mainQueue())
     }
     
+    /**
+    * Registers your mobile device to the AeroGear Push server so it can
+    * start receiving messages.
+    *
+    * @param clientInfo A block object which passes in an implementation of the AGClientDeviceInformation protocol that
+    * holds configuration metadata that would be posted to the server during the registration process.
+    *
+    * @param success A block object to be executed when the registration operation finishes successfully.
+    * This block has no return value.
+    *
+    * @param failure A block object to be executed when the registration operation finishes unsuccessfully.
+    * This block has no return value and takes one argument: The `NSError` object describing
+    * the error that occurred during the registration process.
+    *
+    */
     public func registerWithClientInfo(clientInfo: ((config: AGClientDeviceInformation) -> Void)!,
         success:(() -> Void)!, failure:((NSError) -> Void)!) -> Void {
             
