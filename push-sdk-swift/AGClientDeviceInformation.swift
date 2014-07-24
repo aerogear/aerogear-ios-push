@@ -63,4 +63,5 @@ public protocol AGClientDeviceInformation {
      * The device type (e.g. iPhone or iPod)
      */
     var deviceType: String? { get set }
+    
 }

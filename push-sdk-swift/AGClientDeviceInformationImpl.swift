@@ -60,4 +60,5 @@ class AGClientDeviceInformationImpl: NSObject, AGClientDeviceInformation {
         
         return nil
     }
+    
 }
