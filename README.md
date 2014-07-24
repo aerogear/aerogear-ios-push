@@ -77,7 +77,7 @@ If you run into any problems, please [file an issue](http://issues.jboss.org/bro
 
 ## Running tests
 
-The project uses [AGURLSessionStubs]((https://github.com/cvasilak/AGURLSessionStub s) framework for stubbing it's http network requests. Before running the tests, ensure that a copy is added in your project using `git submodule`. On the root directory of the project run:
+The project uses [AGURLSessionStubs](https://github.com/cvasilak/AGURLSessionStubs) framework for stubbing it's http network requests. Before running the tests, ensure that a copy is added in your project using `git submodule`. On the root directory of the project run:
 
 ```bash
 git submodule init && git submodule update
