@@ -47,7 +47,7 @@ class AGDeviceRegistrationTests: XCTestCase {
         let registration = AGDeviceRegistration(serverURL: NSURL(string: "http://server.com"))
         
         // attemp to register
-        registration.registerWithClientInfo({ (clientInfo: AGClientDeviceInformation!) -> () in
+        registration.registerWithClientInfo({ (clientInfo: AGClientDeviceInformation!) in
 
             // setup configuration
             clientInfo.deviceToken = "2c948a843e6404dd013e79d82e5a0009".dataUsingEncoding(NSUTF8StringEncoding) // dummy token
@@ -62,7 +62,6 @@ class AGDeviceRegistrationTests: XCTestCase {
             clientInfo.operatingSystem = currentDevice.systemName
             clientInfo.osVersion = currentDevice.systemVersion
             clientInfo.deviceType = currentDevice.model
-            clientInfo.alias = "registered from swift"
             },
             
             success: {
@@ -99,7 +98,7 @@ class AGDeviceRegistrationTests: XCTestCase {
         let registration = AGDeviceRegistration(serverURL: NSURL(string: "http://server.com"))
         
         // attemp to register
-        registration.registerWithClientInfo({ (clientInfo: AGClientDeviceInformation!) -> () in
+        registration.registerWithClientInfo({ (clientInfo: AGClientDeviceInformation!) in
             
             // setup configuration
             clientInfo.deviceToken = "2c948a843e6404dd013e79d82e5a0009".dataUsingEncoding(NSUTF8StringEncoding) // dummy token
@@ -114,7 +113,6 @@ class AGDeviceRegistrationTests: XCTestCase {
             clientInfo.operatingSystem = currentDevice.systemName
             clientInfo.osVersion = currentDevice.systemVersion
             clientInfo.deviceType = currentDevice.model
-            clientInfo.alias = "registered from swift"
             },
             
             success: {
