@@ -82,7 +82,7 @@ public class AGDeviceRegistration: NSObject, NSURLSessionTaskDelegate {
             request.HTTPMethod = "POST"
             
             // apply HTTP Basic
-            let basicAuthCredentials: NSData! = "\(clientInfoObject.variantID):\(clientInfoObject.variantSecret)".dataUsingEncoding(          NSUTF8StringEncoding)
+            let basicAuthCredentials: NSData! = "\(clientInfoObject.variantID):\(clientInfoObject.variantSecret)".dataUsingEncoding(NSUTF8StringEncoding)
             let base64Encoded = basicAuthCredentials.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.fromRaw(0)!)
             
             request.setValue("Basic \(base64Encoded)", forHTTPHeaderField: "Authorization")
@@ -141,7 +141,7 @@ public class AGDeviceRegistration: NSObject, NSURLSessionTaskDelegate {
         if redirectResponse { // we need to redirect
             // update URL of the original request
             // to the 'new' redirected one
-            var origRequest = task.originalRequest .mutableCopy() as NSMutableURLRequest
+            var origRequest = task.originalRequest.mutableCopy() as NSMutableURLRequest
             origRequest.URL = redirectReq.URL
             request = origRequest
         }
