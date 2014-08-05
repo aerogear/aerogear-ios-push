@@ -118,4 +118,4 @@ There are no extra hooks for receiving notifications with the AeroGear library. 
 
 ## AeroGear UnifiedPush Server
 
-For more information checkout our [tutorial](http://aerogear.org/docs/guides/aerogear-push-ios/).
+For more information checkout our [tutorial](http://aerogear.org/docs/unifiedpush/aerogear-push-ios/).
