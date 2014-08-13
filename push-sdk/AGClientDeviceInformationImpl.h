@@ -25,7 +25,7 @@
 
 /**
  * Convenient method that will encapsulate the configuration params to a JSON object / dictionary
- * ready to be send to the server during the registration request.
+ * ready to be sent to the server during the registration request.
  */
 -(NSDictionary *) extractValues;
 
