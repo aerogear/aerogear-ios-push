@@ -1,4 +1,4 @@
-# aerogear-push-ios-registration [![Build Status](https://travis-ci.org/aerogear/aerogear-push-ios-registration.png)](https://travis-ci.org/aerogear/aerogear-push-ios-registration)
+# aerogear-ios-push [![Build Status](https://travis-ci.org/aerogear/aerogear-ios-push.png)](https://travis-ci.org/aerogear/aerogear-ios-push)
 
 **iOS Push Notification Registration SDK for the AeroGear UnifiedPush Server**
 
@@ -35,7 +35,7 @@ After that you just need to open the ```YourProject.xcworkspace``` file in XCode
 
 * step 1: copy lib
 
-After you have built the library (see "Building the library" section), from [aerogear-push-ios-registration](https://github.com/aerogear/aerogear-push-ios-registration) directory, run the copy command:
+After you have built the library (see "Building the library" section), from [aerogear-ios-push](https://github.com/aerogear/aerogear-ios-push) directory, run the copy command:
 
     cp -R build/AeroGearPush-iphoneuniversal/* ../<YourProjectFolder>
 
@@ -59,7 +59,7 @@ Click on the Build Settings tab, and locate the Other linker Flags setting and a
 
 * step 1: copy framework
 
-After you have built the framework (see "Building the library" section), from [aerogear-push-ios-registration](https://github.com/aerogear/aerogear-push-ios-registration) directory, run the copy command:
+After you have built the framework (see "Building the library" section), from [aerogear-ios-push](https://github.com/aerogear/aerogear-ios-push) directory, run the copy command:
 
     cp -R build/AeroGearPush-framework/AeroGearPush.framework ../<YourProjectFolder>
 
