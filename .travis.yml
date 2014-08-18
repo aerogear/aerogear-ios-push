@@ -1,12 +1,11 @@
 language: objective-c
 
 before_install:
-    - gem install cocoapods
-    - brew update
-    - brew uninstall xctool && brew install xctool
+    - gem install cocoapods -v 0.33.1 --no-rdoc --no-ri --no-document --quiet
+    - gem install xcpretty -v 0.1.6 --no-rdoc --no-ri --no-document --quiet
 
 script:
-    - xctool -workspace push-sdk.xcworkspace -scheme push-sdk -sdk iphonesimulator -configuration Release test
+    - set -o pipefail && xcodebuild -workspace  push-sdk.xcworkspace -scheme push-sdk -sdk iphonesimulator -configuration Release clean test | xcpretty -c
     - pod spec lint AeroGear-Push.podspec --verbose
 
 notifications:
