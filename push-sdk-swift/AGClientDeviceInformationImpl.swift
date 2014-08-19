@@ -31,7 +31,7 @@ class AGClientDeviceInformationImpl: NSObject, AGClientDeviceInformation {
     var osVersion: String?
     var deviceType: String?
  
-    init() {
+    override init() {
         super.init()        
     }
     

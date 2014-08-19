@@ -66,15 +66,15 @@ public class AGDeviceRegistration: NSObject, NSURLSessionTaskDelegate {
         success:(() -> Void)!, failure:((NSError) -> Void)!) -> Void {
             
             // can't proceed with no configuration block set
-            assert(clientInfo, "configuration block not set")
+            assert(clientInfo != nil, "configuration block not set")
 
             let clientInfoObject = AGClientDeviceInformationImpl()
         
             clientInfo(config: clientInfoObject)
         
-            assert(clientInfoObject.deviceToken, "'token' should be set")
-            assert(clientInfoObject.variantID, "'variantID' should be set")
-            assert(clientInfoObject.variantSecret, "'variantSecret' should be set");
+            assert(clientInfoObject.deviceToken != nil, "'token' should be set")
+            assert(clientInfoObject.variantID != nil, "'variantID' should be set")
+            assert(clientInfoObject.variantSecret != nil, "'variantSecret' should be set");
             
             // set up our request
             let request = NSMutableURLRequest(URL: serverURL.URLByAppendingPathComponent("/rest/registry/device"))
@@ -93,7 +93,7 @@ public class AGDeviceRegistration: NSObject, NSURLSessionTaskDelegate {
             request.HTTPBody = postData
             
             let task = session.dataTaskWithRequest(request) {(data, response, error) in
-                    if error {
+                    if error != nil {
                         failure(error)
                         return
                     }
@@ -138,7 +138,7 @@ public class AGDeviceRegistration: NSObject, NSURLSessionTaskDelegate {
         
         var request = redirectReq;
 
-        if redirectResponse { // we need to redirect
+        if (redirectResponse != nil) { // we need to redirect
             // update URL of the original request
             // to the 'new' redirected one
             var origRequest = task.originalRequest.mutableCopy() as NSMutableURLRequest
