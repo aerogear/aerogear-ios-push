@@ -2,7 +2,7 @@ Pod::Spec.new do |s|
   s.name         = "AeroGear-Push"
   s.version      = "1.0.0"
   s.summary      = "AeroGear UnifiedPush Client Registration SDK."
-  s.homepage     = "https://github.com/aerogear/aerogear-push-ios-registration"
+  s.homepage     = "https://github.com/aerogear/aerogear-ios-push"
   s.license      = 'Apache License, Version 2.0'
   s.author       = "Red Hat, Inc."
   s.source       = { :git => 'https://github.com/aerogear/aerogear-ios-push.git', :tag => '1.0.0' }
