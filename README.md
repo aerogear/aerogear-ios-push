@@ -18,7 +18,7 @@ Follow these steps to add the library in your swift project.
 ### 1. Clone this repository
 
 ```
-git clone git@github.com:aerogear/aerogear-push-ios-registration.git
+git clone git@github.com:aerogear/aerogear-ios-push.git
 git checkout swift
 ```
 
