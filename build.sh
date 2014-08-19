@@ -18,7 +18,7 @@ PROJECT_NAME="push-sdk"
 PRODUCT_NAME="AeroGearPush"
 
 # define the version of the final product
-VERSION_NAME="0.9.1"
+VERSION_NAME="1.0.0"
 
 # define final product name
 PRODUCT_LIBRARY_NAME="lib${PROJECT_NAME}-${VERSION_NAME}.a"
@@ -63,7 +63,7 @@ cp -v ${SIMULATOR_HEADER_DIR}/*.h ${DEVICE_HEADER_DIR}
 
 # Copying source files
 cp -v  -R ./${PROJECT_NAME} ${PRODUCT_SOURCES_PATH}
-cp -v ./LICENSE ${PRODUCT_SOURCES_PATH}
+cp -v ./LICENSE.txt ${PRODUCT_SOURCES_PATH}
 
 echo '==== BUILDING Simulator Library of project: ' ${PROJECT_NAME} ' in path: ' ${SIMULATOR_LIBRARY_DIR} ' with configuration: ' ${CONFIGURATION};
 
