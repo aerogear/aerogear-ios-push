@@ -77,7 +77,7 @@ public class AGDeviceRegistration: NSObject, NSURLSessionTaskDelegate {
             assert(clientInfoObject.variantSecret != nil, "'variantSecret' should be set");
             
             // set up our request
-            let request = NSMutableURLRequest(URL: serverURL.URLByAppendingPathComponent("/rest/registry/device"))
+            let request = NSMutableURLRequest(URL: serverURL.URLByAppendingPathComponent("rest/registry/device"))
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")
             request.HTTPMethod = "POST"
             
