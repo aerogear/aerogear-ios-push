@@ -1,3 +1,3 @@
 [submodule "push-sdk-swiftTests/aerogear-ios-httpstub"]
 	path = push-sdk-swiftTests/aerogear-ios-httpstub
-	url = https://github.com/aerogear/aerogear-ios-httpstub
+	url = https://github.com/aerogear/aerogear-ios-httpstub.git
