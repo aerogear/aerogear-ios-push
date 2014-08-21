@@ -40,7 +40,7 @@ Link the framework during your application target's `Link Binary with Libraries`
 
 ### 4. Start writing your app!
 
-If you run into any problems, please [file an issue](http://issues.jboss.org/browse/AEROGEAR) and join our [mailing list](https://lists.jboss.org/mailman/listinfo/aerogear-dev)
+If you run into any problems, please [file an issue](http://issues.jboss.org/browse/AEROGEAR) and/or ask our [user mailing list](https://lists.jboss.org/mailman/listinfo/aerogear-users). You can also join our [dev mailing list](https://lists.jboss.org/mailman/listinfo/aerogear-dev).  
 
 ## Example Usage
 
@@ -77,7 +77,7 @@ If you run into any problems, please [file an issue](http://issues.jboss.org/bro
 
 ## Running tests
 
-The project uses [AGURLSessionStubs](https://github.com/cvasilak/AGURLSessionStubs) framework for stubbing it's http network requests. Before running the tests, ensure that a copy is added in your project using `git submodule`. On the root directory of the project run:
+The project uses [aerogear-ios-httpstub](https://github.com/aerogear/aerogear-ios-httpstub) framework for stubbing it's http network requests. Before running the tests, ensure that a copy is added in your project using `git submodule`. On the root directory of the project run:
 
 ```bash
 git submodule init && git submodule update
@@ -87,4 +87,4 @@ You are now ready to run the tests.
 
 ## AeroGear UnifiedPush Server
 
-For more information, checkout our [tutorial](http://aerogear.org/docs/guides/aerogear-push-ios/).
+For more information, checkout our [tutorial](http://aerogear.org/docs/unifiedpush/aerogear-push-ios/).
