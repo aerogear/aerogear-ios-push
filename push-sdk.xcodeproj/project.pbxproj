@@ -223,7 +223,7 @@
 			name = "push-sdkTests";
 			productName = "push-sdkTests";
 			productReference = A010C2F21737A58100CFA575 /* push-sdkTests.octest */;
-			productType = "com.apple.product-type.bundle";
+			productType = "com.apple.product-type.bundle.ocunit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -433,6 +433,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
 					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+					"\"$(PLATFORM_DIR)/Developer/Library/Frameworks\"\n\n",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "push-sdk/push-sdk-Prefix.pch";
@@ -449,6 +450,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
 					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+					"\"$(PLATFORM_DIR)/Developer/Library/Frameworks\"\n\n",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "push-sdk/push-sdk-Prefix.pch";
