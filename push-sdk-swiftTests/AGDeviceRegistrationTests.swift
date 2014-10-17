@@ -37,14 +37,14 @@ class AGDeviceRegistrationTests: XCTestCase {
         StubsManager.stubRequestsPassingTest({ (request: NSURLRequest!) -> Bool in
             return true
         }, withStubResponse:( { (request: NSURLRequest!) -> StubResponse in
-            return StubResponse(data:NSData.data(), statusCode: 200, headers: ["Content-Type" : "text/json"])
+            return StubResponse(data:NSData(), statusCode: 200, headers: ["Content-Type" : "text/json"])
         }))
         
         // async test expectation
         let registrationExpectation = expectationWithDescription("UPS registration");
         
         // setup registration
-        let registration = AGDeviceRegistration(serverURL: NSURL(string: "http://server.com"))
+        let registration = AGDeviceRegistration(serverURL: NSURL(string: "http://server.com")!)
         
         // attemp to register
         registration.registerWithClientInfo({ (clientInfo: AGClientDeviceInformation!) in
@@ -84,10 +84,10 @@ class AGDeviceRegistrationTests: XCTestCase {
         }, withStubResponse:( { (request: NSURLRequest!) -> StubResponse in
             if request.URL.absoluteString == "http://server.com/rest/registry/device" { // perform redirection
                 let headers = ["Location": "http://redirect.to/rest/registry/device"]
-                return StubResponse(data:NSData.data(), statusCode: 311, headers: headers)
+                return StubResponse(data:NSData(), statusCode: 311, headers: headers)
 
             } else {
-                return StubResponse(data:NSData.data(), statusCode: 200, headers: ["Content-Type" : "text/json"])
+                return StubResponse(data:NSData(), statusCode: 200, headers: ["Content-Type" : "text/json"])
             }
         }))
 
@@ -95,7 +95,7 @@ class AGDeviceRegistrationTests: XCTestCase {
         let registrationExpectation = expectationWithDescription("UPS registration with redirect");
 
         // setup registration
-        let registration = AGDeviceRegistration(serverURL: NSURL(string: "http://server.com"))
+        let registration = AGDeviceRegistration(serverURL: NSURL(string: "http://server.com")!)
         
         // attemp to register
         registration.registerWithClientInfo({ (clientInfo: AGClientDeviceInformation!) in

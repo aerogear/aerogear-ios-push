@@ -83,12 +83,12 @@ public class AGDeviceRegistration: NSObject, NSURLSessionTaskDelegate {
             
             // apply HTTP Basic
             let basicAuthCredentials: NSData! = "\(clientInfoObject.variantID!):\(clientInfoObject.variantSecret!)".dataUsingEncoding(NSUTF8StringEncoding)
-            let base64Encoded = basicAuthCredentials.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.fromRaw(0)!)
+            let base64Encoded = basicAuthCredentials.base64EncodedStringWithOptions(NSDataBase64EncodingOptions(0))
             
             request.setValue("Basic \(base64Encoded)", forHTTPHeaderField: "Authorization")
             
             // serialize request
-            let postData = NSJSONSerialization.dataWithJSONObject(clientInfoObject.extractValues(), options: NSJSONWritingOptions.fromMask(0), error: nil)
+            let postData = NSJSONSerialization.dataWithJSONObject(clientInfoObject.extractValues(), options:nil, error: nil)
             
             request.HTTPBody = postData
             
