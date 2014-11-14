@@ -12,6 +12,8 @@
 		6F4641771965660300D2B1C9 /* AGClientDeviceInformationImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4641761965660300D2B1C9 /* AGClientDeviceInformationImpl.swift */; };
 		6F46D37B19A3A726001799DB /* AeroGearPush.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F71353119646266009B26D8 /* AeroGearPush.framework */; };
 		6F46D37C19A3A729001799DB /* AGURLSessionStubs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F46D37819A3A704001799DB /* AGURLSessionStubs.framework */; };
+		6F4970DD1A1688DB00A1B50F /* AGURLSessionStubs.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 6F46D37819A3A704001799DB /* AGURLSessionStubs.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		6F4970DE1A1688DF00A1B50F /* AeroGearPush.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 6F71353119646266009B26D8 /* AeroGearPush.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6F71353719646266009B26D8 /* push-sdk-swift.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F71353619646266009B26D8 /* push-sdk-swift.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6F71354419646266009B26D8 /* AGDeviceRegistrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F71354319646266009B26D8 /* AGDeviceRegistrationTests.swift */; };
 /* End PBXBuildFile section */
@@ -53,6 +55,21 @@
 			remoteInfo = "push-sdk-swift";
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		6F4970DA1A1688CB00A1B50F /* Copy Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				6F4970DE1A1688DF00A1B50F /* AeroGearPush.framework in Copy Frameworks */,
+				6F4970DD1A1688DB00A1B50F /* AGURLSessionStubs.framework in Copy Frameworks */,
+			);
+			name = "Copy Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		6F46417119654E4A00D2B1C9 /* AGDeviceRegistration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AGDeviceRegistration.swift; sourceTree = "<group>"; };
@@ -200,6 +217,7 @@
 				6F71353819646266009B26D8 /* Sources */,
 				6F71353919646266009B26D8 /* Frameworks */,
 				6F71353A19646266009B26D8 /* Resources */,
+				6F4970DA1A1688CB00A1B50F /* Copy Frameworks */,
 			);
 			buildRules = (
 			);
