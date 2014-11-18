@@ -1,4 +1,4 @@
-# aerogear-push-ios-registration
+# aerogear-ios-push [![Build Status](https://travis-ci.org/aerogear/aerogear-ios-push.png)](https://travis-ci.org/aerogear/aerogear-ios-push)
 
 **iOS Push Notification Registration SDK for the AeroGear UnifiedPush Server**
 
