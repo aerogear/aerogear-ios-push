@@ -23,7 +23,7 @@ To add the library in your project, you can either use [Cocoapods](http://cocoap
 At this time, Cocoapods support for Swift frameworks is supported in a [pre-release](http://blog.cocoapods.org/Pod-Authors-Guide-to-CocoaPods-Frameworks/). In your ```Podfile``` add:
 
 ```
-pod 'AeroGearPushSwift'
+pod 'AeroGear-Push-Swift'
 ```
 
 and then:
