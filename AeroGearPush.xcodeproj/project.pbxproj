@@ -12,9 +12,10 @@
 		6F464174196564A500D2B1C9 /* AGClientDeviceInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F464173196564A500D2B1C9 /* AGClientDeviceInformation.swift */; };
 		6F4641771965660300D2B1C9 /* AGClientDeviceInformationImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4641761965660300D2B1C9 /* AGClientDeviceInformationImpl.swift */; };
 		6F46D37B19A3A726001799DB /* AeroGearPush.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F71353119646266009B26D8 /* AeroGearPush.framework */; };
-		6F4970DE1A1688DF00A1B50F /* AeroGearPush.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 6F71353119646266009B26D8 /* AeroGearPush.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6F71353719646266009B26D8 /* push-sdk-swift.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F71353619646266009B26D8 /* push-sdk-swift.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6F71354419646266009B26D8 /* AGDeviceRegistrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F71354319646266009B26D8 /* AGDeviceRegistrationTests.swift */; };
+		6F7448531A6D62BC003B3FC1 /* AeroGearPush.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 6F71353119646266009B26D8 /* AeroGearPush.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		6F7448541A6D62C0003B3FC1 /* AeroGearHttpStub.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 48AC63661A6D348D00E2FB7A /* AeroGearHttpStub.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,7 +63,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				6F4970DE1A1688DF00A1B50F /* AeroGearPush.framework in Copy Frameworks */,
+				6F7448541A6D62C0003B3FC1 /* AeroGearHttpStub.framework in Copy Frameworks */,
+				6F7448531A6D62BC003B3FC1 /* AeroGearPush.framework in Copy Frameworks */,
 			);
 			name = "Copy Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
