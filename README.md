@@ -47,7 +47,7 @@ If you run into any problems, please [file an issue](http://issues.jboss.org/bro
 ```swift
   func application(application: UIApplication!, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData!) {
      // setup registration
-    let registration = AGDeviceRegistration(serverURL: NSURL(string: "<# URL of the running AeroGear UnifiedPush Server #>"))
+    let registration = AGDeviceRegistration(serverURL: NSURL(string: "<# URL of the running AeroGear UnifiedPush Server #>")!)
     
     // attemp to register
     registration.registerWithClientInfo({ (clientInfo: AGClientDeviceInformation!) in
