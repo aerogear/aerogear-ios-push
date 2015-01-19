@@ -7,31 +7,30 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		48AC63691A6D350C00E2FB7A /* AeroGearHttpStub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48AC63661A6D348D00E2FB7A /* AeroGearHttpStub.framework */; };
 		6F46417219654E4A00D2B1C9 /* AGDeviceRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F46417119654E4A00D2B1C9 /* AGDeviceRegistration.swift */; };
 		6F464174196564A500D2B1C9 /* AGClientDeviceInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F464173196564A500D2B1C9 /* AGClientDeviceInformation.swift */; };
 		6F4641771965660300D2B1C9 /* AGClientDeviceInformationImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4641761965660300D2B1C9 /* AGClientDeviceInformationImpl.swift */; };
 		6F46D37B19A3A726001799DB /* AeroGearPush.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F71353119646266009B26D8 /* AeroGearPush.framework */; };
-		6F46D37C19A3A729001799DB /* AGURLSessionStubs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F46D37819A3A704001799DB /* AGURLSessionStubs.framework */; };
-		6F4970DD1A1688DB00A1B50F /* AGURLSessionStubs.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 6F46D37819A3A704001799DB /* AGURLSessionStubs.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6F4970DE1A1688DF00A1B50F /* AeroGearPush.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 6F71353119646266009B26D8 /* AeroGearPush.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6F71353719646266009B26D8 /* push-sdk-swift.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F71353619646266009B26D8 /* push-sdk-swift.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6F71354419646266009B26D8 /* AGDeviceRegistrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F71354319646266009B26D8 /* AGDeviceRegistrationTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		6F46D37719A3A704001799DB /* PBXContainerItemProxy */ = {
+		48AC63651A6D348D00E2FB7A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 6F46D37219A3A704001799DB /* AGURLSessionStubs.xcodeproj */;
+			containerPortal = 48AC63601A6D348C00E2FB7A /* AeroGearHttpStub.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 6F3C40A1197BCCD80072D66A;
-			remoteInfo = AGURLSessionStubs;
+			remoteGlobalIDString = 48E2E00A1A5FD5DA00883A9E;
+			remoteInfo = AeroGearHttpStub;
 		};
-		6F46D37919A3A704001799DB /* PBXContainerItemProxy */ = {
+		48AC63671A6D348D00E2FB7A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 6F46D37219A3A704001799DB /* AGURLSessionStubs.xcodeproj */;
+			containerPortal = 48AC63601A6D348C00E2FB7A /* AeroGearHttpStub.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 6F3C40AC197BCCD80072D66A;
-			remoteInfo = AGURLSessionStubsTests;
+			remoteGlobalIDString = 48E2E0151A5FD5DA00883A9E;
+			remoteInfo = AeroGearHttpStubTests;
 		};
 		6F71353E19646266009B26D8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -64,7 +63,6 @@
 			dstSubfolderSpec = 10;
 			files = (
 				6F4970DE1A1688DF00A1B50F /* AeroGearPush.framework in Copy Frameworks */,
-				6F4970DD1A1688DB00A1B50F /* AGURLSessionStubs.framework in Copy Frameworks */,
 			);
 			name = "Copy Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -72,10 +70,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		48AC63601A6D348C00E2FB7A /* AeroGearHttpStub.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AeroGearHttpStub.xcodeproj; path = "aerogear-ios-httpstub/AeroGearHttpStub.xcodeproj"; sourceTree = "<group>"; };
 		6F46417119654E4A00D2B1C9 /* AGDeviceRegistration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AGDeviceRegistration.swift; sourceTree = "<group>"; };
 		6F464173196564A500D2B1C9 /* AGClientDeviceInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AGClientDeviceInformation.swift; sourceTree = "<group>"; };
 		6F4641761965660300D2B1C9 /* AGClientDeviceInformationImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AGClientDeviceInformationImpl.swift; sourceTree = "<group>"; };
-		6F46D37219A3A704001799DB /* AGURLSessionStubs.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AGURLSessionStubs.xcodeproj; path = "aerogear-ios-httpstub/AGURLSessionStubs.xcodeproj"; sourceTree = "<group>"; };
 		6F71353119646266009B26D8 /* AeroGearPush.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AeroGearPush.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F71353519646266009B26D8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6F71353619646266009B26D8 /* push-sdk-swift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "push-sdk-swift.h"; path = "push-sdk-swift/push-sdk-swift.h"; sourceTree = "<group>"; };
@@ -96,7 +94,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6F46D37C19A3A729001799DB /* AGURLSessionStubs.framework in Frameworks */,
+				48AC63691A6D350C00E2FB7A /* AeroGearHttpStub.framework in Frameworks */,
 				6F46D37B19A3A726001799DB /* AeroGearPush.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -104,21 +102,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		48AC63611A6D348C00E2FB7A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				48AC63661A6D348D00E2FB7A /* AeroGearHttpStub.framework */,
+				48AC63681A6D348D00E2FB7A /* AeroGearHttpStubTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		6F464175196565EE00D2B1C9 /* Internal */ = {
 			isa = PBXGroup;
 			children = (
 				6F4641761965660300D2B1C9 /* AGClientDeviceInformationImpl.swift */,
 			);
 			name = Internal;
-			sourceTree = "<group>";
-		};
-		6F46D37319A3A704001799DB /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				6F46D37819A3A704001799DB /* AGURLSessionStubs.framework */,
-				6F46D37A19A3A704001799DB /* AGURLSessionStubsTests.xctest */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		6F71352719646266009B26D8 = {
@@ -163,7 +161,7 @@
 		6F71354019646266009B26D8 /* push-sdk-swiftTests */ = {
 			isa = PBXGroup;
 			children = (
-				6F46D37219A3A704001799DB /* AGURLSessionStubs.xcodeproj */,
+				48AC63601A6D348C00E2FB7A /* AeroGearHttpStub.xcodeproj */,
 				6F71354319646266009B26D8 /* AGDeviceRegistrationTests.swift */,
 				6F71354119646266009B26D8 /* Supporting Files */,
 			);
@@ -261,8 +259,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 6F46D37319A3A704001799DB /* Products */;
-					ProjectRef = 6F46D37219A3A704001799DB /* AGURLSessionStubs.xcodeproj */;
+					ProductGroup = 48AC63611A6D348C00E2FB7A /* Products */;
+					ProjectRef = 48AC63601A6D348C00E2FB7A /* AeroGearHttpStub.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -274,18 +272,18 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		6F46D37819A3A704001799DB /* AGURLSessionStubs.framework */ = {
+		48AC63661A6D348D00E2FB7A /* AeroGearHttpStub.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
-			path = AGURLSessionStubs.framework;
-			remoteRef = 6F46D37719A3A704001799DB /* PBXContainerItemProxy */;
+			path = AeroGearHttpStub.framework;
+			remoteRef = 48AC63651A6D348D00E2FB7A /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		6F46D37A19A3A704001799DB /* AGURLSessionStubsTests.xctest */ = {
+		48AC63681A6D348D00E2FB7A /* AeroGearHttpStubTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
-			path = AGURLSessionStubsTests.xctest;
-			remoteRef = 6F46D37919A3A704001799DB /* PBXContainerItemProxy */;
+			path = AeroGearHttpStubTests.xctest;
+			remoteRef = 48AC63671A6D348D00E2FB7A /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */

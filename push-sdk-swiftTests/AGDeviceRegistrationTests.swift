@@ -18,7 +18,7 @@
 import XCTest
 import UIKit
 import AeroGearPush
-import AGURLSessionStubs
+import AeroGearHttpStub
 
 class AGDeviceRegistrationTests: XCTestCase {
     
