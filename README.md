@@ -4,41 +4,48 @@
 
 A small and handy library written in [Swift](https://developer.apple.com/swift/) that helps to register iOS applications with the [AeroGear UnifiedPush Server](https://github.com/aerogear/aerogear-unified-push-server).
 
+### Build, test and play with aerogear-ios-push
+
+1. Clone this project
+
+2. Get the dependencies
+
+The project uses [aerogear-ios-httpstub](https://github.com/aerogear/aerogear-ios-httpstub) framework for stubbing its http network requests and utilizes [cocoapods](http://cocoapods.org) 0.36.0 pre-release for handling its dependencies. As a pre-requisite, install [cocoapods pre-release](http://blog.cocoapods.org/Pod-Authors-Guide-to-CocoaPods-Frameworks/) and then install the pod. On the root directory of the project run:
+```bash
+pod install
+```
+3. open AeroGearPushSwift.xcworkspace
+
 ## Adding the library to your project 
+To add the library in your project, you can either use [Cocoapods](http://cocoapods.org) or manual install in your project. See the respective sections below for instructions:
 
-Follow these steps to add the library in your swift project.
-
-1. [Clone this repository and checkout `"swift"` branch](#1-clone-this-repository)
-2. [Add `AeroGearPush.xcodeproj` to your application target](#2-add-aerogearpush-xcodeproj-to-your-application-target)
-3. [Link `AeroGearPush.framework` to your build settings](#3-link-aerogearpush-framework-to-your-build-settings)
-4. Start writing your app!
-
-> **NOTE:** Hopefully in the future and as the Swift language and tools around it mature, more straightforward distribution mechanisms will be employed using e.g [cocoapods](http://cocoapods.org) and framework builds. Currently neither cocoapods nor binary framework builds support Swift. For more information, consult this [mail thread](http://aerogear-dev.1069024.n5.nabble.com/aerogear-dev-Swift-Frameworks-Static-libs-and-Cocoapods-td8456.html) that describes the current situation.
-
-### 1. Clone this repository
+### Using [Cocoapods](http://cocoapods.org)
+At this time, Cocoapods support for Swift frameworks is supported in a [pre-release](http://blog.cocoapods.org/Pod-Authors-Guide-to-CocoaPods-Frameworks/). In your ```Podfile``` add:
 
 ```
-git clone git@github.com:aerogear/aerogear-ios-push.git
-git checkout swift
+pod 'AeroGear-Push-Swift'
 ```
 
-### 2. Add `AeroGearPush.xcodeproj` to your application target
+and then:
 
-Right-click on the group containing your application target and select `Add Files To YourApp`
+```bash
+pod install
+```
 
-![](http://f.cl.ly/items/082h0J2u200h0Q281U15/add-framework.png)
+to install your dependencies
 
-Next, select `AeroGearPush.xcodeproj`, which you downloaded in step 1.
+### Manual Installation
+Follow these steps to add the library in your Swift project:
 
-![](http://f.cl.ly/items/1p3X0c153F0y3h3L3f3k/add-framework-selector.png)
+1. Add AeroGearPush as a [submodule](http://git-scm.com/docs/git-submodule) in your project. Open a terminal and navigate to your project directory. Then enter:
+```bash
+git submodule add https://github.com/aerogear/aerogear-ios-push.git
+```
+2. Open the `aerogear-ios-push` folder, and drag the `AeroGearPush.xcodeproj` into the file navigator in Xcode.
+3. In Xcode select your application target  and under the "Targets" heading section, ensure that the 'iOS  Deployment Target'  matches the application target of AeroGearPush.framework (Currently set to 8.0).
+5. Select the  "Build Phases"  heading section,  expand the "Target Dependencies" group and add  `AeroGearPush.framework`.
+7. Click on the `+` button at the top left of the panel and select "New Copy Files Phase". Rename this new phase to "Copy Frameworks", set the "Destination" to "Frameworks", and add `AeroGearPush.framework`.
 
-### 3. Link `AeroGearPush.framework` to your build settings
-
-Link the framework during your application target's `Link Binary with Libraries` build phase.
-
-![](http://f.cl.ly/items/032r3k0R1G3m3y2G0f09/link-framework.png)
-
-### 4. Start writing your app!
 
 If you run into any problems, please [file an issue](http://issues.jboss.org/browse/AEROGEAR) and/or ask our [user mailing list](https://lists.jboss.org/mailman/listinfo/aerogear-users). You can also join our [dev mailing list](https://lists.jboss.org/mailman/listinfo/aerogear-dev).  
 
@@ -74,16 +81,6 @@ If you run into any problems, please [file an issue](http://issues.jboss.org/bro
         })
 }
 ```
-
-## Running tests
-
-The project uses [aerogear-ios-httpstub](https://github.com/aerogear/aerogear-ios-httpstub) framework for stubbing it's http network requests. Before running the tests, ensure that a copy is added in your project using `git submodule`. On the root directory of the project run:
-
-```bash
-git submodule init && git submodule update
-```
-
-You are now ready to run the tests.
 
 ## AeroGear UnifiedPush Server
 

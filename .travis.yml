@@ -1,8 +1,11 @@
 language: objective-c
-osx_image: xcode61
-xcode_project: AeroGearPush.xcodeproj
+osx_image: xcode611
+xcode_workspace: AeroGearPush.xcworkspace
 xcode_scheme: AeroGearPush
 xcode_sdk: iphonesimulator
+
+before_install:
+    - gem install cocoapods --pre --no-rdoc --no-ri --no-document --quiet
 
 notifications:
   irc: "irc.freenode.org#aerogear"
