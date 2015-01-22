@@ -17,7 +17,7 @@ pod install
 3. open AeroGearPushSwift.xcworkspace
 
 ## Adding the library to your project 
-To add the library in your project, you can either use [Cocoapods](http://cocoapods.org) or manual install in your project. See the respective sections below for instructions:
+To add the library in your project, you can either use [Cocoapods](http://cocoapods.org) or manual install either by dragging the code or building a ```framework``` to install in your project. See the respective sections below for instructions:
 
 ### Using [Cocoapods](http://cocoapods.org)
 At this time, Cocoapods support for Swift frameworks is supported in a [pre-release](http://blog.cocoapods.org/Pod-Authors-Guide-to-CocoaPods-Frameworks/). In your ```Podfile``` add:
@@ -35,6 +35,8 @@ pod install
 to install your dependencies
 
 ### Manual Installation
+
+#### Drag-and-Drop the project
 Follow these steps to add the library in your Swift project:
 
 1. Add AeroGearPush as a [submodule](http://git-scm.com/docs/git-submodule) in your project. Open a terminal and navigate to your project directory. Then enter:
@@ -48,6 +50,20 @@ git submodule add https://github.com/aerogear/aerogear-ios-push.git
 
 
 If you run into any problems, please [file an issue](http://issues.jboss.org/browse/AEROGEAR) and/or ask our [user mailing list](https://lists.jboss.org/mailman/listinfo/aerogear-users). You can also join our [dev mailing list](https://lists.jboss.org/mailman/listinfo/aerogear-dev).  
+
+#### Using a ```.framework``` build
+
+To build the library simply run the build script:
+
+    build.sh
+
+The build script will generate a ```build``` folder in the current directory, containing an universal framework library that you can drag-and-drop in your project. The framework build resides in:
+
+    build/Release-universal/AeroGearPush.framework
+
+Now, on your application targets’ “General” settings tab and in the “Linked Frameworks and Libraries” section, drag-and-drop the the framework build.  Then click the 'Build Phases' tab, click the '+' symbol, select "New Copy Files Phase", expand the section, select 'Frameworks' from the Destination combo box.  Click the '+' symbol and select the 'AeroGearPush.framework'
+
+You are now ready to use the library in your project.
 
 ## Example Usage
 
