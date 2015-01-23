@@ -5,7 +5,7 @@ Pod::Spec.new do |s|
   s.homepage     = "https://github.com/aerogear/aerogear-ios-push"
   s.license      = 'Apache License, Version 2.0'
   s.author       = "Red Hat, Inc."
-  s.source       = { :git => 'https://github.com/aerogear/aerogear-ios-push.git', :branch => 'master' }
+  s.source       = { :git => 'https://github.com/aerogear/aerogear-ios-push.git', :tag => '1.0.0-swift' }
   s.platform     = :ios, 8.0
   s.source_files = 'push-sdk-swift/*.{swift}' 
   s.module_name  = "AeroGearPush"
