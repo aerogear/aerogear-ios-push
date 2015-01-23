@@ -61,7 +61,7 @@ The build script will generate a ```build``` folder in the current directory, co
 
     build/Release-universal/AeroGearPush.framework
 
-Now, on your application targets’ “General” settings tab and in the “Linked Frameworks and Libraries” section, drag-and-drop the the framework build.  Then click the 'Build Phases' tab, click the '+' symbol, select "New Copy Files Phase", expand the section, select 'Frameworks' from the Destination combo box.  Click the '+' symbol and select the 'AeroGearPush.framework'
+Now, on your application targets’ “General” settings tab and in the “Linked Frameworks and Libraries” section, drag-and-drop the framework build.  Then click the 'Build Phases' tab, click the '+' symbol, select "New Copy Files Phase", expand the section, select 'Frameworks' from the Destination combo box.  Click the '+' symbol and select the 'AeroGearPush.framework'
 
 You are now ready to use the library in your project.
 
