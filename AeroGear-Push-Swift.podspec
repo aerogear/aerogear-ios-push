@@ -9,5 +9,6 @@ Pod::Spec.new do |s|
   s.platform     = :ios, 8.0
   s.source_files = 'push-sdk-swift/*.{swift}' 
   s.module_name  = "AeroGearPush"
-  s.framework  = "Foundation"
+  s.framework    = "Foundation"
+  s.requires_arc = true
 end
