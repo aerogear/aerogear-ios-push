@@ -8,7 +8,7 @@ A small and handy library written in [Swift](https://developer.apple.com/swift/)
 | --------------- | ------------- |
 | License:        | Apache License, Version 2.0  |
 | Build:          | Cocoapods  |
-| Documentation:  | https://aerogear.org/docs/guides/aerogear-ios-2.X/ |
+| Documentation:  | https://aerogear.org/docs/unifiedpush/aerogear-push-ios/ |
 | Issue tracker:  | https://issues.jboss.org/browse/AGIOS  |
 | Mailing lists:  | [aerogear-users](http://aerogear-users.1116366.n5.nabble.com/) ([subscribe](https://lists.jboss.org/mailman/listinfo/aerogear-users))  |
 |                 | [aerogear-dev](http://aerogear-dev.1069024.n5.nabble.com/) ([subscribe](https://lists.jboss.org/mailman/listinfo/aerogear-dev))  |
