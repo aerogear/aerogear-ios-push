@@ -4,5 +4,5 @@ xcodeproj 'AeroGearPush.xcodeproj'
 platform :ios, '8.0'
 
 target 'AeroGearPushTests' do
-    pod 'AeroGearHttpStub', :git => "https://github.com/aerogear/aerogear-ios-httpstub.git", :branch => "master"
+	pod 'OHHTTPStubs', '3.1.10'
 end
