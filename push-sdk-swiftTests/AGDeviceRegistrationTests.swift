@@ -18,7 +18,7 @@
 import XCTest
 import UIKit
 import AeroGearPush
-import AeroGearHttpStub
+import OHHTTPStubs
 
 class AGDeviceRegistrationTests: XCTestCase {
     
@@ -29,15 +29,15 @@ class AGDeviceRegistrationTests: XCTestCase {
     override func tearDown() {
         super.tearDown()
         
-        StubsManager.removeAllStubs()
+        OHHTTPStubs.removeAllStubs()
     }
 
     func testRegistrationWithServerShouldWork() {
         // set up http stub
-        StubsManager.stubRequestsPassingTest({ (request: NSURLRequest!) -> Bool in
+        OHHTTPStubs.stubRequestsPassingTest({ (request: NSURLRequest!) -> Bool in
             return true
-        }, withStubResponse:( { (request: NSURLRequest!) -> StubResponse in
-            return StubResponse(data:NSData(), statusCode: 200, headers: ["Content-Type" : "text/json"])
+        }, withStubResponse:( { (request: NSURLRequest!) -> OHHTTPStubsResponse in
+            return OHHTTPStubsResponse(data:NSData(), statusCode: 200, headers: ["Content-Type" : "text/json"])
         }))
         
         // async test expectation
@@ -79,15 +79,15 @@ class AGDeviceRegistrationTests: XCTestCase {
 
     func testRedirectionAndRegistrationWithServerShouldWork() {
         // set up http stub
-        StubsManager.stubRequestsPassingTest({ (request: NSURLRequest!) -> Bool in
+        OHHTTPStubs.stubRequestsPassingTest({ (request: NSURLRequest!) -> Bool in
             return true
-        }, withStubResponse:( { (request: NSURLRequest!) -> StubResponse in
+        }, withStubResponse:( { (request: NSURLRequest!) -> OHHTTPStubsResponse in
             if request.URL.absoluteString == "http://server.com/rest/registry/device" { // perform redirection
                 let headers = ["Location": "http://redirect.to/rest/registry/device"]
-                return StubResponse(data:NSData(), statusCode: 311, headers: headers)
+                return OHHTTPStubsResponse(data:NSData(), statusCode: 311, headers: headers)
 
             } else {
-                return StubResponse(data:NSData(), statusCode: 200, headers: ["Content-Type" : "text/json"])
+                return OHHTTPStubsResponse(data:NSData(), statusCode: 200, headers: ["Content-Type" : "text/json"])
             }
         }))
 
