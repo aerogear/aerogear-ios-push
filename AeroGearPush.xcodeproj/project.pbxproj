@@ -14,7 +14,7 @@
 		6F4970DE1A1688DF00A1B50F /* AeroGearPush.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 6F71353119646266009B26D8 /* AeroGearPush.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6F71353719646266009B26D8 /* push-sdk-swift.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F71353619646266009B26D8 /* push-sdk-swift.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6F71354419646266009B26D8 /* AGDeviceRegistrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F71354319646266009B26D8 /* AGDeviceRegistrationTests.swift */; };
-		F05E88E47B4F4E4CB2927042 /* libPods-AeroGearPushTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 34AA6169D6AAE0270F9C7E1C /* libPods-AeroGearPushTests.a */; };
+		CF391D0AFB2C0A95C93485BC /* Pods_AeroGearPushTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 461564FBC4A35A78E3C153B6 /* Pods_AeroGearPushTests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,8 +58,7 @@
 /* Begin PBXFileReference section */
 		0B47BCF781ECC4F3C23BCD38 /* Pods-AeroGearPushTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AeroGearPushTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AeroGearPushTests/Pods-AeroGearPushTests.debug.xcconfig"; sourceTree = "<group>"; };
 		0B6769DCED2430AF77B19BDF /* Pods-AeroGearPushTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AeroGearPushTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-AeroGearPushTests/Pods-AeroGearPushTests.release.xcconfig"; sourceTree = "<group>"; };
-		34AA6169D6AAE0270F9C7E1C /* libPods-AeroGearPushTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AeroGearPushTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		484648941A9C914E00A2D5DE /* AeroGearPushTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AeroGearPushTests-Bridging-Header.h"; sourceTree = "<group>"; };
+		461564FBC4A35A78E3C153B6 /* Pods_AeroGearPushTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AeroGearPushTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F46417119654E4A00D2B1C9 /* AGDeviceRegistration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AGDeviceRegistration.swift; sourceTree = "<group>"; };
 		6F464173196564A500D2B1C9 /* AGClientDeviceInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AGClientDeviceInformation.swift; sourceTree = "<group>"; };
 		6F4641761965660300D2B1C9 /* AGClientDeviceInformationImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AGClientDeviceInformationImpl.swift; sourceTree = "<group>"; };
@@ -84,7 +83,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6F46D37B19A3A726001799DB /* AeroGearPush.framework in Frameworks */,
-				F05E88E47B4F4E4CB2927042 /* libPods-AeroGearPushTests.a in Frameworks */,
+				CF391D0AFB2C0A95C93485BC /* Pods_AeroGearPushTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -103,7 +102,7 @@
 		3C59207F1D0D2DD4859E84C9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				34AA6169D6AAE0270F9C7E1C /* libPods-AeroGearPushTests.a */,
+				461564FBC4A35A78E3C153B6 /* Pods_AeroGearPushTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -169,7 +168,6 @@
 			isa = PBXGroup;
 			children = (
 				6F71354219646266009B26D8 /* Info.plist */,
-				484648941A9C914E00A2D5DE /* AeroGearPushTests-Bridging-Header.h */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -216,6 +214,7 @@
 				6F71353A19646266009B26D8 /* Resources */,
 				6F4970DA1A1688CB00A1B50F /* Copy Frameworks */,
 				38F339355EDD518D3ABE654D /* Copy Pods Resources */,
+				9CB1A0EA48F723B6C8917D6D /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -311,6 +310,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AeroGearPushTests/Pods-AeroGearPushTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9CB1A0EA48F723B6C8917D6D /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AeroGearPushTests/Pods-AeroGearPushTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -489,7 +503,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				METAL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_NAME = AeroGearPushTests;
-				SWIFT_OBJC_BRIDGING_HEADER = "push-sdk-swiftTests/AeroGearPushTests-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 			};
 			name = Debug;
 		};
@@ -505,7 +519,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				METAL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = AeroGearPushTests;
-				SWIFT_OBJC_BRIDGING_HEADER = "push-sdk-swiftTests/AeroGearPushTests-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 			};
 			name = Release;
 		};

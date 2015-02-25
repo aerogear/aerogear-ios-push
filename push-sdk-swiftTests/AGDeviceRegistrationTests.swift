@@ -18,6 +18,7 @@
 import XCTest
 import UIKit
 import AeroGearPush
+import OHHTTPStubs
 
 class AGDeviceRegistrationTests: XCTestCase {
     
