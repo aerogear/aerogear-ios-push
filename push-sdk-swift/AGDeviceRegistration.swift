@@ -148,4 +148,16 @@ public class AGDeviceRegistration: NSObject, NSURLSessionTaskDelegate {
         
         completionHandler(request)
     }
+
+    /**
+    * Provides support for self signed certificates, if the hostname of the aerogear server matches the hostname in the certificate.
+    */
+    public func URLSession(session: NSURLSession, task: NSURLSessionTask, didReceiveChallenge challenge: NSURLAuthenticationChallenge, completionHandler: (NSURLSessionAuthChallengeDisposition, NSURLCredential!) -> Void) {
+        if challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust && challenge.protectionSpace.host == serverURL.host! {
+            let credentials = NSURLCredential(forTrust: challenge.protectionSpace.serverTrust!)
+            completionHandler(NSURLSessionAuthChallengeDisposition.UseCredential, credentials)
+        } else {
+            completionHandler(NSURLSessionAuthChallengeDisposition.CancelAuthenticationChallenge, nil)
+        }
+    }
 }
