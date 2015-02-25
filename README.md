@@ -115,6 +115,8 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
 }
 ```
 
+> NOTE: If your UPS server installation uses a ```self-signed certificate```, you can find a quick solution on how to enable support on our [troubleshooting page](https://aerogear.org/docs/unifiedpush/aerogear-push-ios/troubleshooting/#_question_failure_to_connect_when_server_uses_a_self_signed_certificate), as well as links for further information on how to properly enable it on your iOS production applications.
+
 ## Receiving Remote Notifications
 
 There are no extra hooks for receiving notifications with the AeroGear library. You can use the existing delegate for receiving remote notifications while the application is running, like:
