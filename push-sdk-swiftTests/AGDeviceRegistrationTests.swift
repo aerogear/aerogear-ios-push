@@ -82,7 +82,7 @@ class AGDeviceRegistrationTests: XCTestCase {
         OHHTTPStubs.stubRequestsPassingTest({ (request: NSURLRequest!) -> Bool in
             return true
         }, withStubResponse:( { (request: NSURLRequest!) -> OHHTTPStubsResponse in
-            if request.URL.absoluteString == "http://server.com/rest/registry/device" { // perform redirection
+            if request.URL!.absoluteString == "http://server.com/rest/registry/device" { // perform redirection
                 let headers = ["Location": "http://redirect.to/rest/registry/device"]
                 return OHHTTPStubsResponse(data:NSData(), statusCode: 311, headers: headers)
 
