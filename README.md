@@ -1,6 +1,6 @@
 # aerogear-ios-push [![Build Status](https://travis-ci.org/aerogear/aerogear-ios-push.png)](https://travis-ci.org/aerogear/aerogear-ios-push)
 
-> This module is beta software, it currently supports Xcode 6.1.1
+> This module is beta software, it currently supports Xcode 6.3
 
 **iOS Push Notification Registration SDK for the AeroGear UnifiedPush Server**
 

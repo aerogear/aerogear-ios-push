@@ -29,7 +29,7 @@ public class AGDeviceRegistration: NSObject, NSURLSessionTaskDelegate {
     }
     
     let serverURL: NSURL
-    let session: NSURLSession!
+    var session: NSURLSession!
     
     /**
     * An initializer method to instantiate an AGDeviceRegistration object.
@@ -46,6 +46,7 @@ public class AGDeviceRegistration: NSObject, NSURLSessionTaskDelegate {
         let sessionConfig = NSURLSessionConfiguration.defaultSessionConfiguration()
         self.session = NSURLSession(configuration: sessionConfig, delegate: self, delegateQueue: NSOperationQueue.mainQueue())
     }
+    
     
     /**
     * Registers your mobile device to the AeroGear Push server so it can
@@ -99,7 +100,7 @@ public class AGDeviceRegistration: NSObject, NSURLSessionTaskDelegate {
                     }
                     
                     // verity HTTP status
-                    let httpResp = response as NSHTTPURLResponse
+                    let httpResp = response as! NSHTTPURLResponse
 
                     // did we succeed?
                     if httpResp.statusCode == 200 {
@@ -134,17 +135,16 @@ public class AGDeviceRegistration: NSObject, NSURLSessionTaskDelegate {
     //      with the URL parameter updated to point to the new 'Location' header.
     //
     */
-    public func URLSession(session: NSURLSession!, task: NSURLSessionTask!, willPerformHTTPRedirection redirectResponse: NSHTTPURLResponse!, newRequest redirectReq: NSURLRequest!, completionHandler: ((NSURLRequest!) -> Void)!) {
+    public func URLSession(session: NSURLSession, task: NSURLSessionTask, willPerformHTTPRedirection redirectResponse: NSHTTPURLResponse, newRequest redirectReq: NSURLRequest, completionHandler: ((NSURLRequest!) -> Void)) {
         
         var request = redirectReq;
 
-        if (redirectResponse != nil) { // we need to redirect
-            // update URL of the original request
-            // to the 'new' redirected one
-            var origRequest = task.originalRequest.mutableCopy() as NSMutableURLRequest
-            origRequest.URL = redirectReq.URL
-            request = origRequest
-        }
+        // we need to redirect
+        // update URL of the original request
+        // to the 'new' redirected one
+        var origRequest = task.originalRequest.mutableCopy() as! NSMutableURLRequest
+        origRequest.URL = redirectReq.URL
+        request = origRequest
         
         completionHandler(request)
     }
