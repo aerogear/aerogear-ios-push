@@ -63,7 +63,7 @@ public class AGDeviceRegistration: NSObject, NSURLSessionTaskDelegate {
     * the error that occurred during the registration process.
     *
     */
-    public func registerWithClientInfo(clientInfo: ((config: AGClientDeviceInformation) -> Void)!,
+    public func registerWithClientInfo(clientInfo: ((config: AGClientDeviceInformation) -> Void)!, metricsId: String? = nil,
         success:(() -> Void)!, failure:((NSError) -> Void)!) -> Void {
             
             // can't proceed with no configuration block set
@@ -88,6 +88,10 @@ public class AGDeviceRegistration: NSObject, NSURLSessionTaskDelegate {
             
             request.setValue("Basic \(base64Encoded)", forHTTPHeaderField: "Authorization")
             
+            // if metrics push id is provided add it to header
+            if let metricsId = metricsId {
+                request.setValue(metricsId, forHTTPHeaderField: "aerogear-push-id")
+            }
             // serialize request
             let postData = NSJSONSerialization.dataWithJSONObject(clientInfoObject.extractValues(), options:nil, error: nil)
             
