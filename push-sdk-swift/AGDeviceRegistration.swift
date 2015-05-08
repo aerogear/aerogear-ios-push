@@ -123,7 +123,16 @@ public class AGDeviceRegistration: NSObject, NSURLSessionTaskDelegate {
             
             task.resume()
     }
-
+    
+    /**
+    * Send metrics to the AeroGear Push server when the app is first launched or bring from background to 
+    * foreground due to a push notification.
+    *
+    * @param messageId The identifier of this push notification.
+    *
+    * @param completionHandler A block object to be executed when the send metrics operation finishes. 
+    * Defaulted to no action.
+    */
     public func sendMetrics(messageId: String, completionHandler: ((error: NSError? ) -> Void) = {(error: NSError?) in }) {
         let variantId = NSUserDefaults.standardUserDefaults().valueForKey("variantID") as? String
         let variantSecret = NSUserDefaults.standardUserDefaults().valueForKey("variantSecret") as? String
