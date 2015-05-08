@@ -127,4 +127,54 @@ class AGDeviceRegistrationTests: XCTestCase {
         
         waitForExpectationsWithTimeout(10, handler: nil)
     }
+    
+    func testSendMetricsShouldWork() {
+        NSUserDefaults.standardUserDefaults().setValue("VARIANT", forKey: "variantID")
+        NSUserDefaults.standardUserDefaults().setValue("SECRET", forKey: "variantSecret")
+        // set up http stub
+        OHHTTPStubs.stubRequestsPassingTest({ (request: NSURLRequest!) -> Bool in
+            return true
+            }, withStubResponse:( { (request: NSURLRequest!) -> OHHTTPStubsResponse in
+                return OHHTTPStubsResponse(data:NSData(), statusCode: 200, headers: ["Content-Type" : "text/json"])
+            }))
+        
+        // async test expectation
+        let sendMetricsExpectation = expectationWithDescription("Send Metrics");
+        
+        // setup registration
+        let registration = AGDeviceRegistration(serverURL: NSURL(string: "http://server.com")!)
+        
+        // attemp to register
+        registration.sendMetrics("WWWW") { (error) -> Void in
+            assert(error == nil, "Metrics sent without error")
+            sendMetricsExpectation.fulfill()
+        }
+        
+        waitForExpectationsWithTimeout(10, handler: nil)
+    }
+    
+    func testSendMetricsShouldFail() {
+        NSUserDefaults.standardUserDefaults().removeObjectForKey("variantID")
+        NSUserDefaults.standardUserDefaults().removeObjectForKey("variantSecret")
+        // set up http stub
+        OHHTTPStubs.stubRequestsPassingTest({ (request: NSURLRequest!) -> Bool in
+            return true
+            }, withStubResponse:( { (request: NSURLRequest!) -> OHHTTPStubsResponse in
+                return OHHTTPStubsResponse(data:NSData(), statusCode: 200, headers: ["Content-Type" : "text/json"])
+            }))
+        
+        // async test expectation
+        let sendMetricsExpectation = expectationWithDescription("Send Metrics");
+        
+        // setup registration
+        let registration = AGDeviceRegistration(serverURL: NSURL(string: "http://server.com")!)
+        
+        // attemp to register
+        registration.sendMetrics("WWWW") { (error) -> Void in
+            assert(error != nil, "Registration should happen before sending metrics")
+            sendMetricsExpectation.fulfill()
+        }
+        
+        waitForExpectationsWithTimeout(10, handler: nil)
+    }
 }

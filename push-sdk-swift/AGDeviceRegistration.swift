@@ -77,6 +77,10 @@ public class AGDeviceRegistration: NSObject, NSURLSessionTaskDelegate {
             assert(clientInfoObject.variantID != nil, "'variantID' should be set")
             assert(clientInfoObject.variantSecret != nil, "'variantSecret' should be set");
             
+            // locally stored information
+            NSUserDefaults.standardUserDefaults().setObject(clientInfoObject.variantID, forKey: "variantID")
+            NSUserDefaults.standardUserDefaults().setObject(clientInfoObject.variantSecret, forKey: "variantSecret")
+            
             // set up our request
             let request = NSMutableURLRequest(URL: serverURL.URLByAppendingPathComponent("rest/registry/device"))
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -118,6 +122,54 @@ public class AGDeviceRegistration: NSObject, NSURLSessionTaskDelegate {
             }
             
             task.resume()
+    }
+
+    public func sendMetrics(messageId: String, completionHandler: ((error: NSError? ) -> Void) = {(error: NSError?) in }) {
+        let variantId = NSUserDefaults.standardUserDefaults().valueForKey("variantID") as? String
+        let variantSecret = NSUserDefaults.standardUserDefaults().valueForKey("variantSecret") as? String
+        
+        if let variantId = variantId, let variantSecret = variantSecret {
+            // set up our request
+            let request = NSMutableURLRequest(URL: serverURL.URLByAppendingPathComponent("rest/registry/device/pushMessage/\(messageId)"))
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.HTTPMethod = "PUT"
+            
+            // apply HTTP Basic
+            let basicAuthCredentials: NSData! = "\(variantId):\(variantSecret)".dataUsingEncoding(NSUTF8StringEncoding)
+            let base64Encoded = basicAuthCredentials.base64EncodedStringWithOptions(NSDataBase64EncodingOptions(0))
+            
+            request.setValue("Basic \(base64Encoded)", forHTTPHeaderField: "Authorization")
+            
+            let task = session.dataTaskWithRequest(request) {(data, response, error) in
+                if error != nil {
+                    completionHandler(error: error)
+                    return
+                }
+                
+                // verity HTTP status
+                let httpResp = response as! NSHTTPURLResponse
+                
+                // did we succeed?
+                if httpResp.statusCode == 200 {
+                    completionHandler(error: nil)
+                    
+                } else { // nope, client request error (e.g. 401 /* Unauthorized */)
+                    let userInfo = [NSLocalizedDescriptionKey : NSHTTPURLResponse.localizedStringForStatusCode(httpResp.statusCode),
+                        AGDeviceRegistrationError.AGNetworkingOperationFailingURLRequestErrorKey: request,
+                        AGDeviceRegistrationError.AGNetworkingOperationFailingURLResponseErrorKey: response];
+                    
+                    let error = NSError(domain:AGDeviceRegistrationError.AGPushErrorDomain, code: NSURLErrorBadServerResponse, userInfo: userInfo)
+                    
+                    completionHandler(error: error)
+                }
+            }
+            
+            task.resume()
+        } else {
+            let userInfo = [NSLocalizedDescriptionKey : "Registration should be done prior to metrics collection"];
+            let error = NSError(domain:AGDeviceRegistrationError.AGPushErrorDomain, code: 0, userInfo: userInfo)
+            completionHandler(error: error)
+        }
     }
     
     /*
