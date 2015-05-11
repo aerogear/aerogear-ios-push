@@ -16,7 +16,7 @@
 */
 
 import Foundation
-
+import UIKit
 /**
  * Utility to register an iOS device with the AeroGear UnifiedPush Server.
  */
@@ -125,6 +125,43 @@ public class AGDeviceRegistration: NSObject, NSURLSessionTaskDelegate {
     }
     
     /**
+    * Send metrics to the AeroGear Push server when the app is first launched or bring from background to
+    * foreground due to a push notification.
+    *
+    * @param messageId The identifier of this push notification.
+    *
+    * @param completionHandler A block object to be executed when the send metrics operation finishes.
+    * Defaulted to no action.
+    */
+    public func sendMetricWhenAppLaunched(launchOptions: [NSObject:AnyObject]?, completionHandler: ((error: NSError? ) -> Void) = {(error: NSError?) in }) {
+        if let options = launchOptions {
+            if let option : NSDictionary = options[UIApplicationLaunchOptionsRemoteNotificationKey] as? NSDictionary {
+                if let metrics = option["aerogear-push-id"] as? String {
+                    self.sendMetrics(metrics, completionHandler: completionHandler)
+                }
+            }
+        }
+    }
+    
+    /**
+    * Send metrics to the AeroGear Push server when the app is first launched or bring from background to
+    * foreground due to a push notification.
+    *
+    * @param messageId The identifier of this push notification.
+    *
+    * @param completionHandler A block object to be executed when the send metrics operation finishes.
+    * Defaulted to no action.
+    */
+    public func sendMetricsWhenAppAwoken(applicationState: UIApplicationState, userInfo: [NSObject:AnyObject], completionHandler: ((error: NSError? ) -> Void) = {(error: NSError?) in }) {
+        if applicationState == .Inactive || applicationState == .Background  {
+            //opened from a push notification when the app was on background
+            if let messageId = userInfo["aerogear-push-id"] as? String {
+                self.sendMetrics(messageId, completionHandler: completionHandler)
+            }
+        }
+    }
+    
+    /**
     * Send metrics to the AeroGear Push server when the app is first launched or bring from background to 
     * foreground due to a push notification.
     *
@@ -133,7 +170,7 @@ public class AGDeviceRegistration: NSObject, NSURLSessionTaskDelegate {
     * @param completionHandler A block object to be executed when the send metrics operation finishes. 
     * Defaulted to no action.
     */
-    public func sendMetrics(messageId: String, completionHandler: ((error: NSError? ) -> Void) = {(error: NSError?) in }) {
+    private func sendMetrics(messageId: String, completionHandler: ((error: NSError? ) -> Void) = {(error: NSError?) in }) {
         let variantId = NSUserDefaults.standardUserDefaults().valueForKey("variantID") as? String
         let variantSecret = NSUserDefaults.standardUserDefaults().valueForKey("variantSecret") as? String
         
