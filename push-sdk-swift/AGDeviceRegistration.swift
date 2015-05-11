@@ -16,7 +16,6 @@
 */
 
 import Foundation
-import UIKit
 /**
  * Utility to register an iOS device with the AeroGear UnifiedPush Server.
  */
@@ -122,100 +121,6 @@ public class AGDeviceRegistration: NSObject, NSURLSessionTaskDelegate {
             }
             
             task.resume()
-    }
-    
-    /**
-    * Send metrics to the AeroGear Push server when the app is first launched or bring from background to
-    * foreground due to a push notification.
-    *
-    * @param messageId The identifier of this push notification.
-    *
-    * @param completionHandler A block object to be executed when the send metrics operation finishes.
-    * Defaulted to no action.
-    */
-    public func sendMetricWhenAppLaunched(launchOptions: [NSObject:AnyObject]?, completionHandler: ((error: NSError? ) -> Void) = {(error: NSError?) in }) {
-        if let options = launchOptions {
-            if let option : NSDictionary = options[UIApplicationLaunchOptionsRemoteNotificationKey] as? NSDictionary {
-                if let metrics = option["aerogear-push-id"] as? String {
-                    self.sendMetrics(metrics, completionHandler: completionHandler)
-                }
-            }
-        }
-    }
-    
-    /**
-    * Send metrics to the AeroGear Push server when the app is first launched or bring from background to
-    * foreground due to a push notification.
-    *
-    * @param messageId The identifier of this push notification.
-    *
-    * @param completionHandler A block object to be executed when the send metrics operation finishes.
-    * Defaulted to no action.
-    */
-    public func sendMetricsWhenAppAwoken(applicationState: UIApplicationState, userInfo: [NSObject:AnyObject], completionHandler: ((error: NSError? ) -> Void) = {(error: NSError?) in }) {
-        if applicationState == .Inactive || applicationState == .Background  {
-            //opened from a push notification when the app was on background
-            if let messageId = userInfo["aerogear-push-id"] as? String {
-                self.sendMetrics(messageId, completionHandler: completionHandler)
-            }
-        }
-    }
-    
-    /**
-    * Send metrics to the AeroGear Push server when the app is first launched or bring from background to 
-    * foreground due to a push notification.
-    *
-    * @param messageId The identifier of this push notification.
-    *
-    * @param completionHandler A block object to be executed when the send metrics operation finishes. 
-    * Defaulted to no action.
-    */
-    private func sendMetrics(messageId: String, completionHandler: ((error: NSError? ) -> Void) = {(error: NSError?) in }) {
-        let variantId = NSUserDefaults.standardUserDefaults().valueForKey("variantID") as? String
-        let variantSecret = NSUserDefaults.standardUserDefaults().valueForKey("variantSecret") as? String
-        
-        if let variantId = variantId, let variantSecret = variantSecret {
-            // set up our request
-            let request = NSMutableURLRequest(URL: serverURL.URLByAppendingPathComponent("rest/registry/device/pushMessage/\(messageId)"))
-            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-            request.HTTPMethod = "PUT"
-            
-            // apply HTTP Basic
-            let basicAuthCredentials: NSData! = "\(variantId):\(variantSecret)".dataUsingEncoding(NSUTF8StringEncoding)
-            let base64Encoded = basicAuthCredentials.base64EncodedStringWithOptions(NSDataBase64EncodingOptions(0))
-            
-            request.setValue("Basic \(base64Encoded)", forHTTPHeaderField: "Authorization")
-            
-            let task = session.dataTaskWithRequest(request) {(data, response, error) in
-                if error != nil {
-                    completionHandler(error: error)
-                    return
-                }
-                
-                // verity HTTP status
-                let httpResp = response as! NSHTTPURLResponse
-                
-                // did we succeed?
-                if httpResp.statusCode == 200 {
-                    completionHandler(error: nil)
-                    
-                } else { // nope, client request error (e.g. 401 /* Unauthorized */)
-                    let userInfo = [NSLocalizedDescriptionKey : NSHTTPURLResponse.localizedStringForStatusCode(httpResp.statusCode),
-                        AGDeviceRegistrationError.AGNetworkingOperationFailingURLRequestErrorKey: request,
-                        AGDeviceRegistrationError.AGNetworkingOperationFailingURLResponseErrorKey: response];
-                    
-                    let error = NSError(domain:AGDeviceRegistrationError.AGPushErrorDomain, code: NSURLErrorBadServerResponse, userInfo: userInfo)
-                    
-                    completionHandler(error: error)
-                }
-            }
-            
-            task.resume()
-        } else {
-            let userInfo = [NSLocalizedDescriptionKey : "Registration should be done prior to metrics collection"];
-            let error = NSError(domain:AGDeviceRegistrationError.AGPushErrorDomain, code: 0, userInfo: userInfo)
-            completionHandler(error: error)
-        }
     }
     
     /*

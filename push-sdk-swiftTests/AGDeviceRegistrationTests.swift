@@ -141,11 +141,10 @@ class AGDeviceRegistrationTests: XCTestCase {
         // async test expectation
         let sendMetricsExpectation = expectationWithDescription("Send Metrics");
         
-        // setup registration
-        let registration = AGDeviceRegistration(serverURL: NSURL(string: "http://server.com")!)
-        
+        var options: [NSObject:AnyObject] = [:]
+        options[UIApplicationLaunchOptionsRemoteNotificationKey] = ["aerogear-push-id":"123456"]
         // attemp to register
-        registration.sendMetrics("WWWW") { (error) -> Void in
+        AGPushAnalytics.sendMetricsWhenAppLaunched(NSURL(string: "http://server.com")!, launchOptions: options) { (error) -> Void in
             assert(error == nil, "Metrics sent without error")
             sendMetricsExpectation.fulfill()
         }
@@ -169,8 +168,11 @@ class AGDeviceRegistrationTests: XCTestCase {
         // setup registration
         let registration = AGDeviceRegistration(serverURL: NSURL(string: "http://server.com")!)
         
+        var options: [NSObject:AnyObject] = [:]
+        options[UIApplicationLaunchOptionsRemoteNotificationKey] = ["aerogear-push-id":"123456"]
+        
         // attemp to register
-        registration.sendMetrics("WWWW") { (error) -> Void in
+        AGPushAnalytics.sendMetricsWhenAppLaunched(NSURL(string: "http://server.com")!, launchOptions: options) { (error) -> Void in
             assert(error != nil, "Registration should happen before sending metrics")
             sendMetricsExpectation.fulfill()
         }
