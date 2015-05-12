@@ -36,11 +36,11 @@ public class AGPushAnalytics {
     * @param completionHandler A block object to be executed when the send metrics operation finishes.
     * Defaulted to no action.
     */
-    class public func sendMetricsWhenAppLaunched(serverURL: NSURL, launchOptions: [NSObject:AnyObject]?, completionHandler: ((error: NSError? ) -> Void) = {(error: NSError?) in }) {
+    class public func sendMetricsWhenAppLaunched(launchOptions: [NSObject:AnyObject]?, completionHandler: ((error: NSError? ) -> Void) = {(error: NSError?) in }) {
         if let options = launchOptions {
             if let option : NSDictionary = options[UIApplicationLaunchOptionsRemoteNotificationKey] as? NSDictionary {
                 if let metrics = option["aerogear-push-id"] as? String {
-                    sendMetrics(serverURL, messageId: metrics, completionHandler: completionHandler)
+                    sendMetrics(metrics, completionHandler: completionHandler)
                 }
             }
         }
@@ -55,11 +55,11 @@ public class AGPushAnalytics {
     * @param completionHandler A block object to be executed when the send metrics operation finishes.
     * Defaulted to no action.
     */
-    class public func sendMetricsWhenAppAwoken(serverURL: NSURL, applicationState: UIApplicationState, userInfo: [NSObject:AnyObject], completionHandler: ((error: NSError? ) -> Void) = {(error: NSError?) in }) {
+    class public func sendMetricsWhenAppAwoken(applicationState: UIApplicationState, userInfo: [NSObject:AnyObject], completionHandler: ((error: NSError? ) -> Void) = {(error: NSError?) in }) {
         if applicationState == .Inactive || applicationState == .Background  {
             //opened from a push notification when the app was on background
             if let messageId = userInfo["aerogear-push-id"] as? String {
-                sendMetrics(serverURL, messageId: messageId, completionHandler: completionHandler)
+                sendMetrics(messageId, completionHandler: completionHandler)
             }
         }
     }
@@ -73,13 +73,16 @@ public class AGPushAnalytics {
     * @param completionHandler A block object to be executed when the send metrics operation finishes.
     * Defaulted to no action.
     */
-    class private func sendMetrics(serverURL: NSURL, messageId: String, completionHandler: ((error: NSError? ) -> Void) = {(error: NSError?) in }) {
+    class private func sendMetrics(messageId: String, completionHandler: ((error: NSError? ) -> Void) = {(error: NSError?) in }) {
         let variantId = NSUserDefaults.standardUserDefaults().valueForKey("variantID") as? String
         let variantSecret = NSUserDefaults.standardUserDefaults().valueForKey("variantSecret") as? String
+        let urlString = NSUserDefaults.standardUserDefaults().valueForKey("serverURL") as? String
         
-        if let variantId = variantId, let variantSecret = variantSecret {
+        
+        if let variantId = variantId, let variantSecret = variantSecret, let urlString = urlString {
+            let serverURL = NSURL(string: urlString)
             // set up our request
-            let request = NSMutableURLRequest(URL: serverURL.URLByAppendingPathComponent("rest/registry/device/pushMessage/\(messageId)"))
+            let request = NSMutableURLRequest(URL: serverURL!.URLByAppendingPathComponent("rest/registry/device/pushMessage/\(messageId)"))
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")
             request.HTTPMethod = "PUT"
             

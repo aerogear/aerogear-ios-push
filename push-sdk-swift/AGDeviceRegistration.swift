@@ -79,6 +79,7 @@ public class AGDeviceRegistration: NSObject, NSURLSessionTaskDelegate {
             // locally stored information
             NSUserDefaults.standardUserDefaults().setObject(clientInfoObject.variantID, forKey: "variantID")
             NSUserDefaults.standardUserDefaults().setObject(clientInfoObject.variantSecret, forKey: "variantSecret")
+            NSUserDefaults.standardUserDefaults().setObject(self.serverURL.absoluteString, forKey: "serverURL")
             
             // set up our request
             let request = NSMutableURLRequest(URL: serverURL.URLByAppendingPathComponent("rest/registry/device"))

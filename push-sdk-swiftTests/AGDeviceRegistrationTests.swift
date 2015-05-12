@@ -131,6 +131,8 @@ class AGDeviceRegistrationTests: XCTestCase {
     func testSendMetricsShouldWork() {
         NSUserDefaults.standardUserDefaults().setValue("VARIANT", forKey: "variantID")
         NSUserDefaults.standardUserDefaults().setValue("SECRET", forKey: "variantSecret")
+        NSUserDefaults.standardUserDefaults().setValue("http://server.com", forKey: "serverURL")
+        
         // set up http stub
         OHHTTPStubs.stubRequestsPassingTest({ (request: NSURLRequest!) -> Bool in
             return true
@@ -144,7 +146,7 @@ class AGDeviceRegistrationTests: XCTestCase {
         var options: [NSObject:AnyObject] = [:]
         options[UIApplicationLaunchOptionsRemoteNotificationKey] = ["aerogear-push-id":"123456"]
         // attemp to register
-        AGPushAnalytics.sendMetricsWhenAppLaunched(NSURL(string: "http://server.com")!, launchOptions: options) { (error) -> Void in
+        AGPushAnalytics.sendMetricsWhenAppLaunched(options) { (error) -> Void in
             assert(error == nil, "Metrics sent without error")
             sendMetricsExpectation.fulfill()
         }
@@ -155,6 +157,7 @@ class AGDeviceRegistrationTests: XCTestCase {
     func testSendMetricsShouldFail() {
         NSUserDefaults.standardUserDefaults().removeObjectForKey("variantID")
         NSUserDefaults.standardUserDefaults().removeObjectForKey("variantSecret")
+        NSUserDefaults.standardUserDefaults().removeObjectForKey("serverURL")
         // set up http stub
         OHHTTPStubs.stubRequestsPassingTest({ (request: NSURLRequest!) -> Bool in
             return true
@@ -172,7 +175,7 @@ class AGDeviceRegistrationTests: XCTestCase {
         options[UIApplicationLaunchOptionsRemoteNotificationKey] = ["aerogear-push-id":"123456"]
         
         // attemp to register
-        AGPushAnalytics.sendMetricsWhenAppLaunched(NSURL(string: "http://server.com")!, launchOptions: options) { (error) -> Void in
+        AGPushAnalytics.sendMetricsWhenAppLaunched(options) { (error) -> Void in
             assert(error != nil, "Registration should happen before sending metrics")
             sendMetricsExpectation.fulfill()
         }
