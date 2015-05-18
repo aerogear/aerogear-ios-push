@@ -87,7 +87,7 @@ You can use [aerogear-push-helloworld](https://github.com/aerogear/aerogear-push
 **NOTE**: Please refer to the 64 bits note above. 
 
 ## Example Usage
-
+### Push registration
 ```
 - (void)application:(UIApplication *)application
 didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
@@ -126,7 +126,26 @@ There are no extra hooks for receiving notifications with the AeroGear library. 
   // extract desired value from the dictionary...
 }
 ```
+### Push analytics
 
+If you are interested in monitoring how a push message relates to the usage of your app, you can use metrics. Those emtrics are displayed in the AeroGear UnifiedPush Server's console.
+
+* Send metrics when app is launched due to push notification
+```objc
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+    [AGPushAnalytics sendMetricsWhenAppLaunched:launchOptions];
+    return YES;
+}
+
+```
+* Send metrics when the app is brought from background to foreground due to a push notification
+```objc
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult result))completionHandler {    
+    [AGPushAnalytics sendMetricsWhenAppAwoken:application.applicationState userInfo: userInfo];
+}
+```
 ## AeroGear UnifiedPush Server
 
 For more information checkout our [tutorial](http://aerogear.org/docs/unifiedpush/aerogear-push-ios/).

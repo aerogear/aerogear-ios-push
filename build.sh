@@ -57,6 +57,7 @@ mkdir -p ${PRODUCT_SOURCES_PATH}
 cp -v ./${PROJECT_NAME}/AeroGearPush.h ${SIMULATOR_HEADER_DIR}
 cp -v ./${PROJECT_NAME}/AGClientDeviceInformation.h ${SIMULATOR_HEADER_DIR}
 cp -v ./${PROJECT_NAME}/AGDeviceRegistration.h ${SIMULATOR_HEADER_DIR}
+cp -v ./${PROJECT_NAME}/AGPushAnalytics.h ${SIMULATOR_HEADER_DIR}
 
 cp -v ${SIMULATOR_HEADER_DIR}/*.h ${DEVICE_HEADER_DIR}
 

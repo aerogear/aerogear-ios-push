@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1E24316231A94448BF936F03 /* libPods-push-sdkTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 690976179180479293B024D8 /* libPods-push-sdkTests.a */; };
+		482A24EF1B0A189F00CE5BDC /* AGPushAnalytics.m in Sources */ = {isa = PBXBuildFile; fileRef = 482A24EE1B0A189F00CE5BDC /* AGPushAnalytics.m */; };
 		6F53E2BB1768A935001966D8 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F53E2BA1768A935001966D8 /* Security.framework */; };
 		A010C2E51737A58100CFA575 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A010C2E41737A58100CFA575 /* Foundation.framework */; };
 		A010C2F41737A58100CFA575 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A010C2F31737A58100CFA575 /* SenTestingKit.framework */; };
@@ -46,10 +47,14 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3BFACB4DBB32DE6AB10BCA68 /* Pods-push-sdkTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-push-sdkTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-push-sdkTests/Pods-push-sdkTests.release.xcconfig"; sourceTree = "<group>"; };
+		482A24EE1B0A189F00CE5BDC /* AGPushAnalytics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGPushAnalytics.m; sourceTree = "<group>"; };
+		482A24F01B0A18D500CE5BDC /* AGPushAnalytics.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AGPushAnalytics.h; sourceTree = "<group>"; };
 		5F8A96B5477848779F501C0A /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		690976179180479293B024D8 /* libPods-push-sdkTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-push-sdkTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F53E2BA1768A935001966D8 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		6FF89BEF18F572B000C19EE6 /* push-sdk-fmwk-info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "push-sdk-fmwk-info.plist"; sourceTree = "<group>"; };
+		8564B376890B868A05FBA59D /* Pods-push-sdkTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-push-sdkTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-push-sdkTests/Pods-push-sdkTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A010C2E11737A58100CFA575 /* libpush-sdk.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libpush-sdk.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A010C2E41737A58100CFA575 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A010C2E81737A58100CFA575 /* push-sdk-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "push-sdk-Prefix.pch"; sourceTree = "<group>"; };
@@ -68,7 +73,6 @@
 		A010C31B1737D00F00CFA575 /* AGClientDeviceInformationImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGClientDeviceInformationImpl.h; sourceTree = "<group>"; };
 		A010C31C1737D00F00CFA575 /* AGClientDeviceInformationImpl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGClientDeviceInformationImpl.m; sourceTree = "<group>"; };
 		A03AC14217817BA300FF13A7 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		A755D9064734444FBE2C9429 /* Pods-push-sdkTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-push-sdkTests.xcconfig"; path = "Pods/Pods-push-sdkTests.xcconfig"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +103,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		26EAEE2BE45550C8D8056301 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				8564B376890B868A05FBA59D /* Pods-push-sdkTests.debug.xcconfig */,
+				3BFACB4DBB32DE6AB10BCA68 /* Pods-push-sdkTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		A010C2D81737A58100CFA575 = {
 			isa = PBXGroup;
 			children = (
@@ -106,7 +119,7 @@
 				A010C2FB1737A58100CFA575 /* push-sdkTests */,
 				A010C2E31737A58100CFA575 /* Frameworks */,
 				A010C2E21737A58100CFA575 /* Products */,
-				A755D9064734444FBE2C9429 /* Pods-push-sdkTests.xcconfig */,
+				26EAEE2BE45550C8D8056301 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -144,6 +157,8 @@
 				A010C3131737A9ED00CFA575 /* AGDeviceRegistration.h */,
 				A010C3141737A9ED00CFA575 /* AGDeviceRegistration.m */,
 				A010C3191737B09D00CFA575 /* AGClientDeviceInformation.h */,
+				482A24F01B0A18D500CE5BDC /* AGPushAnalytics.h */,
+				482A24EE1B0A189F00CE5BDC /* AGPushAnalytics.m */,
 			);
 			path = "push-sdk";
 			sourceTree = "<group>";
@@ -276,8 +291,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "
-";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-push-sdkTests/Pods-push-sdkTests-resources.sh\"\n";
 		};
 		891C018091B0491D9B8A8620 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -314,6 +328,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				482A24EF1B0A189F00CE5BDC /* AGPushAnalytics.m in Sources */,
 				A010C3151737A9ED00CFA575 /* AGDeviceRegistration.m in Sources */,
 				A010C31D1737D01000CFA575 /* AGClientDeviceInformationImpl.m in Sources */,
 			);
@@ -428,7 +443,7 @@
 		};
 		A010C30A1737A58100CFA575 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A755D9064734444FBE2C9429 /* Pods-push-sdkTests.xcconfig */;
+			baseConfigurationReference = 8564B376890B868A05FBA59D /* Pods-push-sdkTests.debug.xcconfig */;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
@@ -445,7 +460,7 @@
 		};
 		A010C30B1737A58100CFA575 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A755D9064734444FBE2C9429 /* Pods-push-sdkTests.xcconfig */;
+			baseConfigurationReference = 3BFACB4DBB32DE6AB10BCA68 /* Pods-push-sdkTests.release.xcconfig */;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(SDKROOT)/Developer/Library/Frameworks\"",

@@ -21,6 +21,6 @@
 // imports
 #import "AGClientDeviceInformation.h"
 #import "AGDeviceRegistration.h"
-
+#import "AGPushAnalytics.h"
 
 #endif /* _AEROGEARPUSH_ */

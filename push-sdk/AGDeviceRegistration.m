@@ -66,6 +66,11 @@ static AGDeviceRegistration* sharedInstance;
     NSAssert(clientInfoObject.deviceToken, @"'token' should be set");
     NSAssert(clientInfoObject.variantID, @"'variantID' should be set");
     NSAssert(clientInfoObject.variantSecret, @"'variantSecret' should be set");
+    
+    // locally stored information
+    [[NSUserDefaults standardUserDefaults] setObject: clientInfoObject.variantID forKey: @"variantID"];
+    [[NSUserDefaults standardUserDefaults] setObject: clientInfoObject.variantSecret forKey: @"variantSecret"];
+    [[NSUserDefaults standardUserDefaults] setObject: _baseURL.absoluteString forKey: @"serverURL"];
 
     // set up our request
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[_baseURL URLByAppendingPathComponent:@"rest/registry/device"]];
