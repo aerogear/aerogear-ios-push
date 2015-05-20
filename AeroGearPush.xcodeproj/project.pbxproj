@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		482A24ED1B09D4BF00CE5BDC /* AGPushAnalyticsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482A24EB1B09D45000CE5BDC /* AGPushAnalyticsTests.swift */; };
+		48EDFAE61B00E8D300F8D11F /* AGPushAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48EDFAE51B00E8D300F8D11F /* AGPushAnalytics.swift */; };
 		6F46417219654E4A00D2B1C9 /* AGDeviceRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F46417119654E4A00D2B1C9 /* AGDeviceRegistration.swift */; };
 		6F464174196564A500D2B1C9 /* AGClientDeviceInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F464173196564A500D2B1C9 /* AGClientDeviceInformation.swift */; };
 		6F4641771965660300D2B1C9 /* AGClientDeviceInformationImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4641761965660300D2B1C9 /* AGClientDeviceInformationImpl.swift */; };
@@ -59,6 +61,8 @@
 		0B47BCF781ECC4F3C23BCD38 /* Pods-AeroGearPushTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AeroGearPushTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AeroGearPushTests/Pods-AeroGearPushTests.debug.xcconfig"; sourceTree = "<group>"; };
 		0B6769DCED2430AF77B19BDF /* Pods-AeroGearPushTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AeroGearPushTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-AeroGearPushTests/Pods-AeroGearPushTests.release.xcconfig"; sourceTree = "<group>"; };
 		461564FBC4A35A78E3C153B6 /* Pods_AeroGearPushTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AeroGearPushTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		482A24EB1B09D45000CE5BDC /* AGPushAnalyticsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AGPushAnalyticsTests.swift; sourceTree = "<group>"; };
+		48EDFAE51B00E8D300F8D11F /* AGPushAnalytics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AGPushAnalytics.swift; sourceTree = "<group>"; };
 		6F46417119654E4A00D2B1C9 /* AGDeviceRegistration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AGDeviceRegistration.swift; sourceTree = "<group>"; };
 		6F464173196564A500D2B1C9 /* AGClientDeviceInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AGClientDeviceInformation.swift; sourceTree = "<group>"; };
 		6F4641761965660300D2B1C9 /* AGClientDeviceInformationImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AGClientDeviceInformationImpl.swift; sourceTree = "<group>"; };
@@ -142,6 +146,7 @@
 				6F464175196565EE00D2B1C9 /* Internal */,
 				6F46417119654E4A00D2B1C9 /* AGDeviceRegistration.swift */,
 				6F464173196564A500D2B1C9 /* AGClientDeviceInformation.swift */,
+				48EDFAE51B00E8D300F8D11F /* AGPushAnalytics.swift */,
 				6F71353419646266009B26D8 /* Supporting Files */,
 			);
 			path = "push-sdk-swift";
@@ -159,6 +164,7 @@
 			isa = PBXGroup;
 			children = (
 				6F71354319646266009B26D8 /* AGDeviceRegistrationTests.swift */,
+				482A24EB1B09D45000CE5BDC /* AGPushAnalyticsTests.swift */,
 				6F71354119646266009B26D8 /* Supporting Files */,
 			);
 			path = "push-sdk-swiftTests";
@@ -334,6 +340,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				48EDFAE61B00E8D300F8D11F /* AGPushAnalytics.swift in Sources */,
 				6F4641771965660300D2B1C9 /* AGClientDeviceInformationImpl.swift in Sources */,
 				6F46417219654E4A00D2B1C9 /* AGDeviceRegistration.swift in Sources */,
 				6F464174196564A500D2B1C9 /* AGClientDeviceInformation.swift in Sources */,
@@ -344,6 +351,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				482A24ED1B09D4BF00CE5BDC /* AGPushAnalyticsTests.swift in Sources */,
 				6F71354419646266009B26D8 /* AGDeviceRegistrationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -127,4 +127,5 @@ class AGDeviceRegistrationTests: XCTestCase {
         
         waitForExpectationsWithTimeout(10, handler: nil)
     }
+    
 }

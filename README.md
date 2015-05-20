@@ -76,6 +76,8 @@ You are now ready to use the library in your project.
 
 ## Example Usage
 
+### Push registration
+
 ```swift
   func application(application: UIApplication!, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData!) {
      // setup registration
@@ -107,6 +109,24 @@ You are now ready to use the library in your project.
 }
 ```
 > NOTE: If your UPS server installation uses a ```self-signed certificate```, you can find a quick solution on how to enable support on our [troubleshooting page](https://aerogear.org/docs/unifiedpush/aerogear-push-ios/troubleshooting/#_question_failure_to_connect_when_server_uses_a_self_signed_certificate), as well as links for further information on how to properly enable it on your iOS production applications.
+
+### Push analytics
+
+If you are interested in monitoring how a push message relates to the usage of your app, you can use metrics. Those emtrics are displayed in the AeroGear UnifiedPush Server's console.
+
+* Send metrics when app is launched due to push notification
+```swift
+func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        AGPushAnalytics.sendMetricsWhenAppLaunched(launchOptions)
+        return true
+    }
+```
+* Send metrics when the app is brought from background to foreground due to a push notification
+```swift
+    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject: AnyObject]) {
+        AGPushAnalytics.sendMetricsWhenAppAwoken(application.applicationState, userInfo: userInfo)
+    }
+```
 
 ## AeroGear UnifiedPush Server
 

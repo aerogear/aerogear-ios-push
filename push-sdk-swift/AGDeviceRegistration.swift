@@ -16,7 +16,6 @@
 */
 
 import Foundation
-
 /**
  * Utility to register an iOS device with the AeroGear UnifiedPush Server.
  */
@@ -76,6 +75,11 @@ public class AGDeviceRegistration: NSObject, NSURLSessionTaskDelegate {
             assert(clientInfoObject.deviceToken != nil, "'token' should be set")
             assert(clientInfoObject.variantID != nil, "'variantID' should be set")
             assert(clientInfoObject.variantSecret != nil, "'variantSecret' should be set");
+            
+            // locally stored information
+            NSUserDefaults.standardUserDefaults().setObject(clientInfoObject.variantID, forKey: "variantID")
+            NSUserDefaults.standardUserDefaults().setObject(clientInfoObject.variantSecret, forKey: "variantSecret")
+            NSUserDefaults.standardUserDefaults().setObject(self.serverURL.absoluteString, forKey: "serverURL")
             
             // set up our request
             let request = NSMutableURLRequest(URL: serverURL.URLByAppendingPathComponent("rest/registry/device"))
