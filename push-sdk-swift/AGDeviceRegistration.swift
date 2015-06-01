@@ -27,7 +27,7 @@ public class AGDeviceRegistration: NSObject, NSURLSessionTaskDelegate {
         static let AGNetworkingOperationFailingURLResponseErrorKey = "AGNetworkingOperationFailingURLResponseErrorKey"
     }
     
-    let serverURL: NSURL
+    var serverURL: NSURL
     var session: NSURLSession!
     
     /**
@@ -71,12 +71,30 @@ public class AGDeviceRegistration: NSObject, NSURLSessionTaskDelegate {
             let clientInfoObject = AGClientDeviceInformationImpl()
         
             clientInfo(config: clientInfoObject)
-        
+            
+            // Check if config is available in plist file
+            if clientInfoObject.variantID == nil && NSBundle.mainBundle().objectForInfoDictionaryKey("variantID") != nil {
+                clientInfoObject.variantID = NSBundle.mainBundle().objectForInfoDictionaryKey("variantID") as? String
+            }
+            
+            if clientInfoObject.variantSecret == nil && NSBundle.mainBundle().objectForInfoDictionaryKey("variantSecret") != nil {
+                clientInfoObject.variantSecret = NSBundle.mainBundle().objectForInfoDictionaryKey("variantSecret") as? String
+            }
+            
+            if self.serverURL.absoluteString == nil && NSBundle.mainBundle().objectForInfoDictionaryKey("serverURL") != nil {
+                if let url = NSURL(string: (NSBundle.mainBundle().objectForInfoDictionaryKey("serverURL") as! String)) {
+                    self.serverURL = url
+                } else {
+                    assert(self.serverURL.absoluteString != nil, "'serverURL' should be set")
+                }
+            }
+            
+            // Fail if not all config mandatory items are present
             assert(clientInfoObject.deviceToken != nil, "'token' should be set")
             assert(clientInfoObject.variantID != nil, "'variantID' should be set")
             assert(clientInfoObject.variantSecret != nil, "'variantSecret' should be set");
             
-            // locally stored information
+            // locally stored information (used for metrics)
             NSUserDefaults.standardUserDefaults().setObject(clientInfoObject.variantID, forKey: "variantID")
             NSUserDefaults.standardUserDefaults().setObject(clientInfoObject.variantSecret, forKey: "variantSecret")
             NSUserDefaults.standardUserDefaults().setObject(self.serverURL.absoluteString, forKey: "serverURL")
