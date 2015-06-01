@@ -27,7 +27,7 @@ public class AGDeviceRegistration: NSObject, NSURLSessionTaskDelegate {
         static let AGNetworkingOperationFailingURLResponseErrorKey = "AGNetworkingOperationFailingURLResponseErrorKey"
     }
     
-    var serverURL: NSURL
+    var serverURL: NSURL!
     var session: NSURLSession!
     
     /**
@@ -46,6 +46,16 @@ public class AGDeviceRegistration: NSObject, NSURLSessionTaskDelegate {
         self.session = NSURLSession(configuration: sessionConfig, delegate: self, delegateQueue: NSOperationQueue.mainQueue())
     }
     
+    /**
+    * An initializer method to instantiate an AGDeviceRegistration object.
+    *
+    * @return the AGDeviceRegistration object.
+    */
+    public override init() {
+        super.init()
+        let sessionConfig = NSURLSessionConfiguration.defaultSessionConfiguration()
+        self.session = NSURLSession(configuration: sessionConfig, delegate: self, delegateQueue: NSOperationQueue.mainQueue())
+    }
     
     /**
     * Registers your mobile device to the AeroGear Push server so it can
