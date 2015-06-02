@@ -58,8 +58,20 @@ public class AGDeviceRegistration: NSObject, NSURLSessionTaskDelegate {
     }
     
     /**
-    * Registers your mobile device to the AeroGear Push server so it can
-    * start receiving messages.
+    * Registers your mobile device to the AeroGear Push server so it can start receiving messages. 
+    * Registration information can be provided within clientInfo block or by providin a plist file 
+    * containing the require registration information as below:
+    * <plist version="1.0">
+    *   <dict>
+    *     <key>serverURL</key>
+    *     <string>pushServerURL e.g http(s)//host:port/context</string>
+    *     <key>variantID</key>
+    *     <string>variantID e.g. 1234456-234320</string>
+    *     <key>variantSecret</key>
+    *     <string>variantSecret e.g. 1234456-234320</string>
+    *     ...
+    *   </dict>
+    *  </plist>
     *
     * @param clientInfo A block object which passes in an implementation of the AGClientDeviceInformation protocol that
     * holds configuration metadata that would be posted to the server during the registration process.
@@ -91,7 +103,7 @@ public class AGDeviceRegistration: NSObject, NSURLSessionTaskDelegate {
                 clientInfoObject.variantSecret = NSBundle.mainBundle().objectForInfoDictionaryKey("variantSecret") as? String
             }
             
-            if self.serverURL.absoluteString == nil && NSBundle.mainBundle().objectForInfoDictionaryKey("serverURL") != nil {
+            if self.serverURL?.absoluteString == nil && NSBundle.mainBundle().objectForInfoDictionaryKey("serverURL") != nil {
                 if let url = NSURL(string: (NSBundle.mainBundle().objectForInfoDictionaryKey("serverURL") as! String)) {
                     self.serverURL = url
                 } else {
