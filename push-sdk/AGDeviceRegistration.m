@@ -51,7 +51,7 @@ static AGDeviceRegistration* sharedInstance;
     return self;
 }
 
--(id) initWithServerURL {
+-(id) init {
     self = [super init];
     if (self) {
         // initialize session
