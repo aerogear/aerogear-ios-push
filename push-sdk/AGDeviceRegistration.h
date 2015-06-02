@@ -46,8 +46,8 @@ extern NSString * const AGNetworkingOperationFailingURLResponseErrorKey;
 
 
 /**
- * Registers your mobile device to the AeroGear Push server so it can start receiving messages.
- * Registration information can be provided within clientInfo block or by providin a plist file
+ * Registers your mobile device to the AeroGear UnifiedPush server so it can start receiving messages.
+ * Registration information can be provided within clientInfo block or by providing a plist file
  * containing the require registration information as below:
  * <plist version="1.0">
  *   <dict>
