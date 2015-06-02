@@ -108,6 +108,48 @@ You are now ready to use the library in your project.
         })
 }
 ```
+
+### Push registration using plist config file
+
+In the ```AppDelegate.swift``` file:
+```swift
+  func application(application: UIApplication!, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData!) {
+     // setup registration
+    let registration = AGDeviceRegistration()
+    
+    // attemp to register
+    registration.registerWithClientInfo({ (clientInfo: AGClientDeviceInformation!) in
+        // setup configuration
+        clientInfo.deviceToken = deviceToken
+        let currentDevice = UIDevice()
+        // set some 'useful' hardware information params
+        clientInfo.operatingSystem = currentDevice.systemName
+        clientInfo.osVersion = currentDevice.systemVersion
+        clientInfo.deviceType = currentDevice.model
+        },       
+        success: {
+            println("UnifiedPush Server registration succeeded")
+        },
+        failure: {(error: NSError!) in
+            println("failed to register, error: \(error.description)")
+        })
+}
+```
+
+In your application ```info.plist```, add the following properties:
+```xml
+<plist version="1.0">
+<dict>
+  <key>serverURL</key>
+  <string><# URL of the running AeroGear UnifiedPush Server #></string>
+  <key>variantID</key>
+  <string><# Variant Id #></string>
+  <key>variantSecret</key>
+  <string><# Variant Secret #></string>
+</dict>
+</plist>
+```
+
 > NOTE: If your UPS server installation uses a ```self-signed certificate```, you can find a quick solution on how to enable support on our [troubleshooting page](https://aerogear.org/docs/unifiedpush/aerogear-push-ios/troubleshooting/#_question_failure_to_connect_when_server_uses_a_self_signed_certificate), as well as links for further information on how to properly enable it on your iOS production applications.
 
 ### Push analytics
