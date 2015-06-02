@@ -87,7 +87,7 @@ static AGDeviceRegistration* sharedInstance;
         clientInfoObject.variantSecret = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"variantSecret"];
     }
     
-    if (clientInfoObject.variantSecret == nil && [[NSBundle mainBundle] objectForInfoDictionaryKey:@"serverURL"] != nil) {
+    if (_baseURL == nil && [[NSBundle mainBundle] objectForInfoDictionaryKey:@"serverURL"] != nil) {
         NSURL* url = [[NSURL alloc] initWithString: [[NSBundle mainBundle] objectForInfoDictionaryKey:@"serverURL"]];
         if (url) {
             _baseURL = url;

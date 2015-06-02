@@ -42,7 +42,7 @@ extern NSString * const AGNetworkingOperationFailingURLResponseErrorKey;
  *
  * @return the AGDeviceRegistration object.
  */
-- (id) initWithServerURL;
+- (id) init;
 
 
 /**
