@@ -38,8 +38,28 @@ extern NSString * const AGNetworkingOperationFailingURLResponseErrorKey;
 - (id) initWithServerURL:(NSURL *)url;
 
 /**
- * Registers your mobile device to the AeroGear Push server so it can
- * start receiving messages.
+ * An initializer method to instantiate an AGDeviceRegistration object.
+ *
+ * @return the AGDeviceRegistration object.
+ */
+- (id) init;
+
+
+/**
+ * Registers your mobile device to the AeroGear UnifiedPush server so it can start receiving messages.
+ * Registration information can be provided within clientInfo block or by providing a plist file
+ * containing the require registration information as below:
+ * <plist version="1.0">
+ *   <dict>
+ *     <key>serverURL</key>
+ *     <string>pushServerURL e.g http(s)//host:port/context</string>
+ *     <key>variantID</key>
+ *     <string>variantID e.g. 1234456-234320</string>
+ *     <key>variantSecret</key>
+ *     <string>variantSecret e.g. 1234456-234320</string>
+ *     ...
+ *   </dict>
+ *  </plist>
  *
  * @param clientInfo A block object which passes in an implementation of the AGClientDeviceInformation protocol that
  * holds configuration metadata that would be posted to the server during the registration process.

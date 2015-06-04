@@ -88,7 +88,7 @@ You can use [aerogear-push-helloworld](https://github.com/aerogear/aerogear-push
 
 ## Example Usage
 ### Push registration
-```
+```ObjC
 - (void)application:(UIApplication *)application
 didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
 
@@ -113,6 +113,43 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
       NSLog(@"UnifiedPush Server registration Error: %@", error);
   }];
 }
+```
+
+### Push registration with app plist
+In the ```ppDelegate.m``` file:
+```ObjC
+- (void)application:(UIApplication *)application
+didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+
+  AGDeviceRegistration *registration = 
+    [[AGDeviceRegistration alloc] init];
+
+  [registration registerWithClientInfo:^(id<AGClientDeviceInformation> clientInfo) {
+
+    [clientInfo setDeviceToken:deviceToken];
+    UIDevice *currentDevice = [UIDevice currentDevice];
+    [clientInfo setOperatingSystem:[currentDevice systemName]];
+    [clientInfo setOsVersion:[currentDevice systemVersion]];
+    [clientInfo setDeviceType: [currentDevice model]];
+  } success:^() {
+      NSLog(@"UnifiedPush Server registration worked");
+  } failure:^(NSError *error) {
+      NSLog(@"UnifiedPush Server registration Error: %@", error);
+  }];
+}
+```
+In your application info.plist, add the following properties:
+```xml
+<plist version="1.0">
+<dict>
+  <key>serverURL</key>
+  <string><# URL of the running AeroGear UnifiedPush Server #></string>
+  <key>variantID</key>
+  <string><# Variant Id #></string>
+  <key>variantSecret</key>
+  <string><# Variant Secret #></string>
+</dict>
+</plist>
 ```
 
 > NOTE: If your UPS server installation uses a ```self-signed certificate```, you can find a quick solution on how to enable support on our [troubleshooting page](https://aerogear.org/docs/unifiedpush/aerogear-push-ios/troubleshooting/#_question_failure_to_connect_when_server_uses_a_self_signed_certificate), as well as links for further information on how to properly enable it on your iOS production applications.

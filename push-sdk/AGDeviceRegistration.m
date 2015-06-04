@@ -51,6 +51,21 @@ static AGDeviceRegistration* sharedInstance;
     return self;
 }
 
+-(id) init {
+    self = [super init];
+    if (self) {
+        // initialize session
+        NSURLSessionConfiguration *sessionConfig =
+        [NSURLSessionConfiguration defaultSessionConfiguration];
+        
+        _session = [NSURLSession sessionWithConfiguration:sessionConfig delegate:self delegateQueue:[NSOperationQueue mainQueue]];
+        
+        sharedInstance = self;
+    }
+    
+    return self;
+}
+
 -(void)registerWithClientInfo:(void (^)(id<AGClientDeviceInformation>))clientInfo
                       success:(void (^)(void))success
                       failure:(void (^)(NSError *))failure {
@@ -63,6 +78,24 @@ static AGDeviceRegistration* sharedInstance;
     // pass the object in:
     clientInfo(clientInfoObject);
 
+    // Check if config is available in plist file
+    if (clientInfoObject.variantID == nil && [[NSBundle mainBundle] objectForInfoDictionaryKey:@"variantID"] != nil) {
+        clientInfoObject.variantID = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"variantID"];
+    }
+    
+    if (clientInfoObject.variantSecret == nil && [[NSBundle mainBundle] objectForInfoDictionaryKey:@"variantSecret"] != nil) {
+        clientInfoObject.variantSecret = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"variantSecret"];
+    }
+    
+    if (_baseURL == nil && [[NSBundle mainBundle] objectForInfoDictionaryKey:@"serverURL"] != nil) {
+        NSURL* url = [[NSURL alloc] initWithString: [[NSBundle mainBundle] objectForInfoDictionaryKey:@"serverURL"]];
+        if (url) {
+            _baseURL = url;
+        } else {
+            NSAssert(_baseURL.absoluteString != nil, @"'serverURL' should be set");
+        }
+    }
+    
     NSAssert(clientInfoObject.deviceToken, @"'token' should be set");
     NSAssert(clientInfoObject.variantID, @"'variantID' should be set");
     NSAssert(clientInfoObject.variantSecret, @"'variantSecret' should be set");
