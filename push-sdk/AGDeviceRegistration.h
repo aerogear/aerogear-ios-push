@@ -38,7 +38,16 @@ extern NSString * const AGNetworkingOperationFailingURLResponseErrorKey;
 - (id) initWithServerURL:(NSURL *)url;
 
 /**
- * An initializer method to instantiate an AGDeviceRegistration object.
+ * An initializer method to instantiate an AGDeviceRegistration object with config plist file.
+ *
+ * @param configFile name.
+ *
+ * @return the AGDeviceRegistration object.
+ */
+- (id) initWithFile:(NSString*)configFile;
+
+/**
+ * An initializer method to instantiate an AGDeviceRegistration object with default app plist config file.
  *
  * @return the AGDeviceRegistration object.
  */
