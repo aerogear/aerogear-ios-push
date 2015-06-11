@@ -29,6 +29,7 @@ public class AGDeviceRegistration: NSObject, NSURLSessionTaskDelegate {
     
     var serverURL: NSURL!
     var session: NSURLSession!
+    var config: String?
     
     /**
     * An initializer method to instantiate an AGDeviceRegistration object.
@@ -46,6 +47,15 @@ public class AGDeviceRegistration: NSObject, NSURLSessionTaskDelegate {
         self.session = NSURLSession(configuration: sessionConfig, delegate: self, delegateQueue: NSOperationQueue.mainQueue())
     }
     
+    /**
+    * An initializer method to instantiate an AGDeviceRegistration object with default app plist config file.
+    *
+    * @return the AGDeviceRegistration object.
+    */
+    public convenience init(config: String) {
+        self.init()
+        self.config = config
+    }
     /**
     * An initializer method to instantiate an AGDeviceRegistration object.
     *
@@ -95,16 +105,16 @@ public class AGDeviceRegistration: NSObject, NSURLSessionTaskDelegate {
             clientInfo(config: clientInfoObject)
             
             // Check if config is available in plist file
-            if clientInfoObject.variantID == nil && NSBundle.mainBundle().objectForInfoDictionaryKey("variantID") != nil {
-                clientInfoObject.variantID = NSBundle.mainBundle().objectForInfoDictionaryKey("variantID") as? String
+            if clientInfoObject.variantID == nil && self.configValueForKey("variantID") != nil {
+                clientInfoObject.variantID = self.configValueForKey("variantID")
             }
             
-            if clientInfoObject.variantSecret == nil && NSBundle.mainBundle().objectForInfoDictionaryKey("variantSecret") != nil {
-                clientInfoObject.variantSecret = NSBundle.mainBundle().objectForInfoDictionaryKey("variantSecret") as? String
+            if clientInfoObject.variantSecret == nil && self.configValueForKey("variantSecret") != nil {
+                clientInfoObject.variantSecret = self.configValueForKey("variantSecret")
             }
             
-            if self.serverURL?.absoluteString == nil && NSBundle.mainBundle().objectForInfoDictionaryKey("serverURL") != nil {
-                if let url = NSURL(string: (NSBundle.mainBundle().objectForInfoDictionaryKey("serverURL") as! String)) {
+            if self.serverURL?.absoluteString == nil && self.configValueForKey("serverURL") != nil {
+                if let urlString = self.configValueForKey("serverURL"), let url = NSURL(string: urlString) {
                     self.serverURL = url
                 } else {
                     assert(self.serverURL.absoluteString != nil, "'serverURL' should be set")
@@ -191,5 +201,24 @@ public class AGDeviceRegistration: NSObject, NSURLSessionTaskDelegate {
         request = origRequest
         
         completionHandler(request)
+    }
+
+    
+    private func configValueForKey(key: String) -> String? {
+        var value: String?
+        if let config = self.config { // specified plist config file
+            let path = NSBundle(forClass: AGDeviceRegistration.self).pathForResource(config, ofType:"plist")
+            var properties = NSMutableDictionary(contentsOfFile: path!)
+            if let properties = properties {
+                value = properties[key as String] as? String
+            }
+        } else {
+            value = NSBundle.mainBundle().objectForInfoDictionaryKey(key) as? String
+        }
+        if (value == nil && value!.isEmpty)  {
+            return nil
+        } else {
+            return value
+        }
     }
 }
