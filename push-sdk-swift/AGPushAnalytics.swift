@@ -19,7 +19,7 @@ import Foundation
 import UIKit
 
 /**
-* Utility class used to send metrics information to the AeroGear UnifiedPush Server when the app is opened due to a Push notification.
+Utility class used to send metrics information to the AeroGear UnifiedPush Server when the app is opened due to a Push notification.
 */
 public class AGPushAnalytics {
     struct AGPushAnalyticsError {
@@ -28,13 +28,11 @@ public class AGPushAnalytics {
         static let AGNetworkingOperationFailingURLResponseErrorKey = "AGNetworkingOperationFailingURLResponseErrorKey"
     }
     /**
-    * Send metrics to the AeroGear Push server when the app is first launched or bring from background to
-    * foreground due to a push notification.
-    *
-    * @param messageId The identifier of this push notification.
-    *
-    * @param completionHandler A block object to be executed when the send metrics operation finishes.
-    * Defaulted to no action.
+    Send metrics to the AeroGear Push server when the app is launched due to a push notification.
+    
+    :param: launchOptions contains the message id used to collect metrics.
+    
+    :param: completionHandler A block object to be executed when the send metrics operation finishes. Defaulted to no action.
     */
     class public func sendMetricsWhenAppLaunched(launchOptions: [NSObject:AnyObject]?, completionHandler: ((error: NSError? ) -> Void) = {(error: NSError?) in }) {
         if let options = launchOptions {
@@ -47,13 +45,12 @@ public class AGPushAnalytics {
     }
     
     /**
-    * Send metrics to the AeroGear Push server when the app is first launched or bring from background to
-    * foreground due to a push notification.
-    *
-    * @param messageId The identifier of this push notification.
-    *
-    * @param completionHandler A block object to be executed when the send metrics operation finishes.
-    * Defaulted to no action.
+    Send metrics to the AeroGear Push server when the app is brought from background to
+    foreground due to a push notification.
+    
+    :param: applicationState to make sure the app was in background.
+    :param: userInfo contains the message id used to collect metrics.
+    :param: completionHandler A block object to be executed when the send metrics operation finishes. Defaulted to no action.
     */
     class public func sendMetricsWhenAppAwoken(applicationState: UIApplicationState, userInfo: [NSObject:AnyObject], completionHandler: ((error: NSError? ) -> Void) = {(error: NSError?) in }) {
         if applicationState == .Inactive || applicationState == .Background  {
@@ -64,15 +61,6 @@ public class AGPushAnalytics {
         }
     }
     
-    /**
-    * Send metrics to the AeroGear Push server when the app is first launched or bring from background to
-    * foreground due to a push notification.
-    *
-    * @param messageId The identifier of this push notification.
-    *
-    * @param completionHandler A block object to be executed when the send metrics operation finishes.
-    * Defaulted to no action.
-    */
     class private func sendMetrics(messageId: String, completionHandler: ((error: NSError? ) -> Void) = {(error: NSError?) in }) {
         let variantId = NSUserDefaults.standardUserDefaults().valueForKey("variantID") as? String
         let variantSecret = NSUserDefaults.standardUserDefaults().valueForKey("variantSecret") as? String

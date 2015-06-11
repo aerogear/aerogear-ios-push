@@ -17,7 +17,7 @@
 
 import Foundation
 /**
- * Utility to register an iOS device with the AeroGear UnifiedPush Server.
+ Utility to register an iOS device with the AeroGear UnifiedPush Server.
  */
 public class AGDeviceRegistration: NSObject, NSURLSessionTaskDelegate {
     
@@ -32,11 +32,11 @@ public class AGDeviceRegistration: NSObject, NSURLSessionTaskDelegate {
     var config: String?
     
     /**
-    * An initializer method to instantiate an AGDeviceRegistration object.
-    *
-    * @param serverURL the URL of the AeroGear Push server.
-    *
-    * @return the AGDeviceRegistration object.
+    An initializer method to instantiate an AGDeviceRegistration object.
+    
+    :param: serverURL the URL of the AeroGear Push server.
+    
+    :returns: the AGDeviceRegistration object.
     */
     public init(serverURL: NSURL) {
         self.serverURL = serverURL;
@@ -48,18 +48,19 @@ public class AGDeviceRegistration: NSObject, NSURLSessionTaskDelegate {
     }
     
     /**
-    * An initializer method to instantiate an AGDeviceRegistration object with default app plist config file.
-    *
-    * @return the AGDeviceRegistration object.
+    An initializer method to instantiate an AGDeviceRegistration object with default app plist config file.
+    
+    :param: config file name where to fetch AeroGear UnifiedPush server configuration.
+    :returns: the AGDeviceRegistration object.
     */
     public convenience init(config: String) {
         self.init()
         self.config = config
     }
     /**
-    * An initializer method to instantiate an AGDeviceRegistration object.
-    *
-    * @return the AGDeviceRegistration object.
+    An initializer method to instantiate an AGDeviceRegistration object.
+    
+    :returns: the AGDeviceRegistration object.
     */
     public override init() {
         super.init()
@@ -68,31 +69,30 @@ public class AGDeviceRegistration: NSObject, NSURLSessionTaskDelegate {
     }
     
     /**
-    * Registers your mobile device to the AeroGear UnifiedPush server so it can start receiving messages.
-    * Registration information can be provided within clientInfo block or by providing a plist file 
-    * containing the require registration information as below:
-    * <plist version="1.0">
-    *   <dict>
-    *     <key>serverURL</key>
-    *     <string>pushServerURL e.g http(s)//host:port/context</string>
-    *     <key>variantID</key>
-    *     <string>variantID e.g. 1234456-234320</string>
-    *     <key>variantSecret</key>
-    *     <string>variantSecret e.g. 1234456-234320</string>
-    *     ...
-    *   </dict>
-    *  </plist>
-    *
-    * @param clientInfo A block object which passes in an implementation of the AGClientDeviceInformation protocol that
-    * holds configuration metadata that would be posted to the server during the registration process.
-    *
-    * @param success A block object to be executed when the registration operation finishes successfully.
-    * This block has no return value.
-    *
-    * @param failure A block object to be executed when the registration operation finishes unsuccessfully.
-    * This block has no return value and takes one argument: The `NSError` object describing
-    * the error that occurred during the registration process.
-    *
+    Registers your mobile device to the AeroGear UnifiedPush server so it can start receiving messages.
+    Registration information can be provided within clientInfo block or by providing a plist file
+    containing the require registration information as below:
+     <plist version="1.0">
+        <dict>
+         <key>serverURL</key>
+         <string>pushServerURL e.g http(s)//host:port/context</string>
+         <key>variantID</key>
+         <string>variantID e.g. 1234456-234320</string>
+         <key>variantSecret</key>
+         <string>variantSecret e.g. 1234456-234320</string>
+         ...
+       </dict>
+      </plist>
+    
+    :param: clientInfo A block object which passes in an implementation of the AGClientDeviceInformation protocol that
+    holds configuration metadata that would be posted to the server during the registration process.
+    
+    :param: success A block object to be executed when the registration operation finishes successfully.
+    This block has no return value.
+    
+    :param: failure A block object to be executed when the registration operation finishes unsuccessfully.
+    This block has no return value and takes one argument: The `NSError` object describing
+    the error that occurred during the registration process.
     */
     public func registerWithClientInfo(clientInfo: ((config: AGClientDeviceInformation) -> Void)!,
         success:(() -> Void)!, failure:((NSError) -> Void)!) -> Void {
@@ -174,20 +174,18 @@ public class AGDeviceRegistration: NSObject, NSURLSessionTaskDelegate {
             task.resume()
     }
     
-    /*
-    // we need to cater for possible redirection
-    //
-    // NOTE:
-    //      As per Apple doc, the passed req is 'the proposed redirected request'. But we cannot return it as it is. The reason is,
-    //      user-agents (and in our case NSURLconnection) 'erroneous' after a 302-redirection modify the request's http method
-    //      and sets it to GET if the client initially performed a POST (as we do here).
-    //
-    //      See  RFC 2616 (section 10.3.3) http://www.ietf.org/rfc/rfc2616.txt
-    //      and related blog: http://tewha.net/2012/05/handling-302303-redirects/
-    //
-    //      We need to 'override' that 'default' behaviour to return the original attempted NSURLRequest
-    //      with the URL parameter updated to point to the new 'Location' header.
-    //
+    /**
+    We need to cater for possible redirection
+    NOTE:
+          As per Apple doc, the passed req is 'the proposed redirected request'. But we cannot return it as it is. The reason is,
+          user-agents (and in our case NSURLconnection) 'erroneous' after a 302-redirection modify the request's http method
+          and sets it to GET if the client initially performed a POST (as we do here).
+    
+          See  RFC 2616 (section 10.3.3) http://www.ietf.org/rfc/rfc2616.txt
+          and related blog: http://tewha.net/2012/05/handling-302303-redirects/
+    
+          We need to 'override' that 'default' behaviour to return the original attempted NSURLRequest
+          with the URL parameter updated to point to the new 'Location' header.
     */
     public func URLSession(session: NSURLSession, task: NSURLSessionTask, willPerformHTTPRedirection redirectResponse: NSHTTPURLResponse, newRequest redirectReq: NSURLRequest, completionHandler: ((NSURLRequest!) -> Void)) {
         
