@@ -18,6 +18,10 @@
 		48289C061B2EEE5D004AF471 /* AGPushAnalytics.m in Sources */ = {isa = PBXBuildFile; fileRef = 48289BFE1B2EEE5D004AF471 /* AGPushAnalytics.m */; };
 		48289C081B2EEE78004AF471 /* AGDeviceRegistrationSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 48289C071B2EEE78004AF471 /* AGDeviceRegistrationSpec.m */; };
 		48289C0D1B2EF25C004AF471 /* AGPushAnalyticsSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 48289C0C1B2EF25C004AF471 /* AGPushAnalyticsSpec.m */; };
+		48289C551B2F082A004AF471 /* libpush-sdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 48289C4A1B2F082A004AF471 /* libpush-sdk.a */; };
+		48289C611B2F0859004AF471 /* AGClientDeviceInformationImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = 48289BFA1B2EEE5D004AF471 /* AGClientDeviceInformationImpl.m */; };
+		48289C621B2F0859004AF471 /* AGDeviceRegistration.m in Sources */ = {isa = PBXBuildFile; fileRef = 48289BFC1B2EEE5D004AF471 /* AGDeviceRegistration.m */; };
+		48289C631B2F0859004AF471 /* AGPushAnalytics.m in Sources */ = {isa = PBXBuildFile; fileRef = 48289BFE1B2EEE5D004AF471 /* AGPushAnalytics.m */; };
 		5C18F90CC0E512A66E4B5789 /* libPods-pushsdkTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 30277CD3D67E463A98C74ED2 /* libPods-pushsdkTests.a */; };
 /* End PBXBuildFile section */
 
@@ -29,14 +33,33 @@
 			remoteGlobalIDString = 48289BDD1B2EEDF2004AF471;
 			remoteInfo = "push-sdk";
 		};
+		48289C561B2F082A004AF471 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A010C2D91737A58100CFA575 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 48289C491B2F082A004AF471;
+			remoteInfo = "push-sdk";
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		48289C481B2F082A004AF471 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		30277CD3D67E463A98C74ED2 /* libPods-pushsdkTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-pushsdkTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BFACB4DBB32DE6AB10BCA68 /* Pods-push-sdkTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-push-sdkTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-push-sdkTests/Pods-push-sdkTests.release.xcconfig"; sourceTree = "<group>"; };
 		48289BDE1B2EEDF2004AF471 /* pushsdk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = pushsdk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		48289BE11B2EEDF2004AF471 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		48289BE81B2EEDF2004AF471 /* push-sdkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = "push-sdkTests.xctest"; path = pushsdkTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		48289BE81B2EEDF2004AF471 /* pushsdkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = pushsdkTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		48289BEE1B2EEDF2004AF471 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		48289BF71B2EEE5D004AF471 /* AeroGearPush.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AeroGearPush.h; sourceTree = "<group>"; };
 		48289BF81B2EEE5D004AF471 /* AGClientDeviceInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGClientDeviceInformation.h; sourceTree = "<group>"; };
@@ -48,6 +71,8 @@
 		48289BFE1B2EEE5D004AF471 /* AGPushAnalytics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGPushAnalytics.m; sourceTree = "<group>"; };
 		48289C071B2EEE78004AF471 /* AGDeviceRegistrationSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGDeviceRegistrationSpec.m; sourceTree = "<group>"; };
 		48289C0C1B2EF25C004AF471 /* AGPushAnalyticsSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGPushAnalyticsSpec.m; sourceTree = "<group>"; };
+		48289C4A1B2F082A004AF471 /* libpush-sdk.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libpush-sdk.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		48289C541B2F082A004AF471 /* push-sdkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "push-sdkTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F8A96B5477848779F501C0A /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		690976179180479293B024D8 /* libPods-push-sdkTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-push-sdkTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F53E2BA1768A935001966D8 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -76,6 +101,21 @@
 			files = (
 				48289BE91B2EEDF2004AF471 /* pushsdk.framework in Frameworks */,
 				5C18F90CC0E512A66E4B5789 /* libPods-pushsdkTests.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		48289C471B2F082A004AF471 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		48289C511B2F082A004AF471 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				48289C551B2F082A004AF471 /* libpush-sdk.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -150,7 +190,9 @@
 			isa = PBXGroup;
 			children = (
 				48289BDE1B2EEDF2004AF471 /* pushsdk.framework */,
-				48289BE81B2EEDF2004AF471 /* push-sdkTests.xctest */,
+				48289BE81B2EEDF2004AF471 /* pushsdkTests.xctest */,
+				48289C4A1B2F082A004AF471 /* libpush-sdk.a */,
+				48289C541B2F082A004AF471 /* push-sdkTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -225,7 +267,42 @@
 			);
 			name = pushsdkTests;
 			productName = "push-sdkTests";
-			productReference = 48289BE81B2EEDF2004AF471 /* push-sdkTests.xctest */;
+			productReference = 48289BE81B2EEDF2004AF471 /* pushsdkTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		48289C491B2F082A004AF471 /* push-sdk */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 48289C5F1B2F082A004AF471 /* Build configuration list for PBXNativeTarget "push-sdk" */;
+			buildPhases = (
+				48289C461B2F082A004AF471 /* Sources */,
+				48289C471B2F082A004AF471 /* Frameworks */,
+				48289C481B2F082A004AF471 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "push-sdk";
+			productName = "push-sdk";
+			productReference = 48289C4A1B2F082A004AF471 /* libpush-sdk.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		48289C531B2F082A004AF471 /* push-sdkTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 48289C601B2F082A004AF471 /* Build configuration list for PBXNativeTarget "push-sdkTests" */;
+			buildPhases = (
+				48289C501B2F082A004AF471 /* Sources */,
+				48289C511B2F082A004AF471 /* Frameworks */,
+				48289C521B2F082A004AF471 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				48289C571B2F082A004AF471 /* PBXTargetDependency */,
+			);
+			name = "push-sdkTests";
+			productName = "push-sdkTests";
+			productReference = 48289C541B2F082A004AF471 /* push-sdkTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -241,6 +318,12 @@
 						CreatedOnToolsVersion = 6.3.2;
 					};
 					48289BE71B2EEDF2004AF471 = {
+						CreatedOnToolsVersion = 6.3.2;
+					};
+					48289C491B2F082A004AF471 = {
+						CreatedOnToolsVersion = 6.3.2;
+					};
+					48289C531B2F082A004AF471 = {
 						CreatedOnToolsVersion = 6.3.2;
 					};
 				};
@@ -259,6 +342,8 @@
 			targets = (
 				48289BDD1B2EEDF2004AF471 /* pushsdk */,
 				48289BE71B2EEDF2004AF471 /* pushsdkTests */,
+				48289C491B2F082A004AF471 /* push-sdk */,
+				48289C531B2F082A004AF471 /* push-sdkTests */,
 			);
 		};
 /* End PBXProject section */
@@ -272,6 +357,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		48289BE61B2EEDF2004AF471 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		48289C521B2F082A004AF471 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -333,6 +425,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		48289C461B2F082A004AF471 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				48289C611B2F0859004AF471 /* AGClientDeviceInformationImpl.m in Sources */,
+				48289C621B2F0859004AF471 /* AGDeviceRegistration.m in Sources */,
+				48289C631B2F0859004AF471 /* AGPushAnalytics.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		48289C501B2F082A004AF471 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -340,6 +449,11 @@
 			isa = PBXTargetDependency;
 			target = 48289BDD1B2EEDF2004AF471 /* pushsdk */;
 			targetProxy = 48289BEA1B2EEDF2004AF471 /* PBXContainerItemProxy */;
+		};
+		48289C571B2F082A004AF471 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 48289C491B2F082A004AF471 /* push-sdk */;
+			targetProxy = 48289C561B2F082A004AF471 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -486,6 +600,124 @@
 			};
 			name = Release;
 		};
+		48289C5B1B2F082A004AF471 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		48289C5C1B2F082A004AF471 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		48289C5D1B2F082A004AF471 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = "push-sdkTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		48289C5E1B2F082A004AF471 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = "push-sdkTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		A010C3041737A58100CFA575 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -559,6 +791,22 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		48289C5F1B2F082A004AF471 /* Build configuration list for PBXNativeTarget "push-sdk" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				48289C5B1B2F082A004AF471 /* Debug */,
+				48289C5C1B2F082A004AF471 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		48289C601B2F082A004AF471 /* Build configuration list for PBXNativeTarget "push-sdkTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				48289C5D1B2F082A004AF471 /* Debug */,
+				48289C5E1B2F082A004AF471 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		A010C2DC1737A58100CFA575 /* Build configuration list for PBXProject "push-sdk" */ = {
 			isa = XCConfigurationList;
