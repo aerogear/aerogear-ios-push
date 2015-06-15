@@ -53,18 +53,7 @@ static AGDeviceRegistration* sharedInstance;
 }
 
 -(id) init {
-    self = [super init];
-    if (self) {
-        // initialize session
-        NSURLSessionConfiguration *sessionConfig =
-        [NSURLSessionConfiguration defaultSessionConfiguration];
-        
-        _session = [NSURLSession sessionWithConfiguration:sessionConfig delegate:self delegateQueue:[NSOperationQueue mainQueue]];
-        
-        sharedInstance = self;
-    }
-    
-    return self;
+    return [self initWithFile:nil];
 }
 
 -(id) initWithFile:(NSString*)configFile {
@@ -119,6 +108,7 @@ static AGDeviceRegistration* sharedInstance;
     NSAssert(clientInfoObject.variantSecret, @"'variantSecret' should be set");
     
     // locally stored information
+    [[NSUserDefaults standardUserDefaults] setObject: clientInfoObject.deviceToken forKey: @"deviceToken"];
     [[NSUserDefaults standardUserDefaults] setObject: clientInfoObject.variantID forKey: @"variantID"];
     [[NSUserDefaults standardUserDefaults] setObject: clientInfoObject.variantSecret forKey: @"variantSecret"];
     [[NSUserDefaults standardUserDefaults] setObject: _baseURL.absoluteString forKey: @"serverURL"];
