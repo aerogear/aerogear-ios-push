@@ -17,6 +17,7 @@
 		48289C051B2EEE5D004AF471 /* AGPushAnalytics.h in Headers */ = {isa = PBXBuildFile; fileRef = 48289BFD1B2EEE5D004AF471 /* AGPushAnalytics.h */; };
 		48289C061B2EEE5D004AF471 /* AGPushAnalytics.m in Sources */ = {isa = PBXBuildFile; fileRef = 48289BFE1B2EEE5D004AF471 /* AGPushAnalytics.m */; };
 		48289C081B2EEE78004AF471 /* AGDeviceRegistrationSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 48289C071B2EEE78004AF471 /* AGDeviceRegistrationSpec.m */; };
+		48289C0D1B2EF25C004AF471 /* AGPushAnalyticsSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 48289C0C1B2EF25C004AF471 /* AGPushAnalyticsSpec.m */; };
 		5C18F90CC0E512A66E4B5789 /* libPods-pushsdkTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 30277CD3D67E463A98C74ED2 /* libPods-pushsdkTests.a */; };
 /* End PBXBuildFile section */
 
@@ -46,6 +47,7 @@
 		48289BFD1B2EEE5D004AF471 /* AGPushAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGPushAnalytics.h; sourceTree = "<group>"; };
 		48289BFE1B2EEE5D004AF471 /* AGPushAnalytics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGPushAnalytics.m; sourceTree = "<group>"; };
 		48289C071B2EEE78004AF471 /* AGDeviceRegistrationSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGDeviceRegistrationSpec.m; sourceTree = "<group>"; };
+		48289C0C1B2EF25C004AF471 /* AGPushAnalyticsSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGPushAnalyticsSpec.m; sourceTree = "<group>"; };
 		5F8A96B5477848779F501C0A /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		690976179180479293B024D8 /* libPods-push-sdkTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-push-sdkTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F53E2BA1768A935001966D8 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -119,6 +121,7 @@
 			isa = PBXGroup;
 			children = (
 				48289C071B2EEE78004AF471 /* AGDeviceRegistrationSpec.m */,
+				48289C0C1B2EF25C004AF471 /* AGPushAnalyticsSpec.m */,
 				48289BED1B2EEDF2004AF471 /* Supporting Files */,
 			);
 			path = "push-sdkTests";
@@ -326,6 +329,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				48289C081B2EEE78004AF471 /* AGDeviceRegistrationSpec.m in Sources */,
+				48289C0D1B2EF25C004AF471 /* AGPushAnalyticsSpec.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
