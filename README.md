@@ -21,8 +21,9 @@ To build the library simply run the build script:
 
 The build script will generate a buid folder containing an universal static lib and a framework, sources and documentation are also packaged.
 
-**NOTE** on 64 bits architecture: From Xcode 5.1 release inwards, Apple changes the "Standard Architectures" to also include the arm64 architecture. See "Building" section on the [Xcode 5.1 release notes](https://developer.apple.com/library/mac/releasenotes/DeveloperTools/RN-Xcode/xc5_release_notes/xc5_release_notes.html#//apple_ref/doc/uid/TP40001051-CH2-SW2). When building with Xcode 5.0, the built library will not support 64 bits architecture. **We recommend you to build with Xcode 5.1+**
+The push-sdk.xcodeproject contains two framework targets ```pushsdk``` to build dynamic framework supported from iOS8 and used when runnning unit tests and ```push-sdk``` to building static framework supported from iOS7.
 
+**NOTE** Dynamic framework name should not contain ```-``` symbols.
 
 ## Adding the library to your project 
 

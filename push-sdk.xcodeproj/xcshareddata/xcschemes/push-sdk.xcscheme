@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "A010C2E01737A58100CFA575"
-               BuildableName = "libpush-sdk.a"
-               BlueprintName = "push-sdk"
+               BlueprintIdentifier = "48289BDD1B2EEDF2004AF471"
+               BuildableName = "pushsdk.framework"
+               BlueprintName = "pushsdk"
                ReferencedContainer = "container:push-sdk.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -32,9 +32,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "A010C2F11737A58100CFA575"
-               BuildableName = "push-sdkTests.octest"
-               BlueprintName = "push-sdkTests"
+               BlueprintIdentifier = "48289BE71B2EEDF2004AF471"
+               BuildableName = "pushsdkTests.xctest"
+               BlueprintName = "pushsdkTests"
                ReferencedContainer = "container:push-sdk.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -49,6 +49,15 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       allowLocationSimulation = "YES">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "48289BDD1B2EEDF2004AF471"
+            BuildableName = "pushsdk.framework"
+            BlueprintName = "pushsdk"
+            ReferencedContainer = "container:push-sdk.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
