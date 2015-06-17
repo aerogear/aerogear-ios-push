@@ -8,5 +8,6 @@ Pod::Spec.new do |s|
   s.source       = { :git => 'https://github.com/aerogear/aerogear-ios-push.git', :tag => '1.1.0-beta.1' }
   s.platform     = :ios, 7.0
   s.source_files = 'push-sdk/**/*.{h,m}'
+  s.public_header_files = 'push-sdk/AeroGearPush.h', 'push-sdk/AGDeviceRegistration.h', 'push-sdk/AGClientDeviceInformation.h', 'push-sdk/AGPushAnalytics.h'
   s.requires_arc = true
 end
