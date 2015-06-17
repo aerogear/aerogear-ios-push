@@ -103,6 +103,12 @@ static AGDeviceRegistration* sharedInstance;
         }
     }
     
+    // deviceToken could be nil then retrieved it from local storage (from previous register).
+    // This is the use case when you update categories.
+    if (clientInfoObject.deviceToken == nil) {
+        clientInfoObject.deviceToken =  [[NSUserDefaults standardUserDefaults] objectForKey:@"deviceToken"];
+    }
+    
     NSAssert(clientInfoObject.deviceToken, @"'token' should be set");
     NSAssert(clientInfoObject.variantID, @"'variantID' should be set");
     NSAssert(clientInfoObject.variantSecret, @"'variantSecret' should be set");
