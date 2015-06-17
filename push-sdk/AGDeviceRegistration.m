@@ -53,18 +53,7 @@ static AGDeviceRegistration* sharedInstance;
 }
 
 -(id) init {
-    self = [super init];
-    if (self) {
-        // initialize session
-        NSURLSessionConfiguration *sessionConfig =
-        [NSURLSessionConfiguration defaultSessionConfiguration];
-        
-        _session = [NSURLSession sessionWithConfiguration:sessionConfig delegate:self delegateQueue:[NSOperationQueue mainQueue]];
-        
-        sharedInstance = self;
-    }
-    
-    return self;
+    return [self initWithFile:nil];
 }
 
 -(id) initWithFile:(NSString*)configFile {
@@ -114,11 +103,18 @@ static AGDeviceRegistration* sharedInstance;
         }
     }
     
+    // deviceToken could be nil then retrieved it from local storage (from previous register).
+    // This is the use case when you update categories.
+    if (clientInfoObject.deviceToken == nil) {
+        clientInfoObject.deviceToken =  [[NSUserDefaults standardUserDefaults] objectForKey:@"deviceToken"];
+    }
+    
     NSAssert(clientInfoObject.deviceToken, @"'token' should be set");
     NSAssert(clientInfoObject.variantID, @"'variantID' should be set");
     NSAssert(clientInfoObject.variantSecret, @"'variantSecret' should be set");
     
     // locally stored information
+    [[NSUserDefaults standardUserDefaults] setObject: clientInfoObject.deviceToken forKey: @"deviceToken"];
     [[NSUserDefaults standardUserDefaults] setObject: clientInfoObject.variantID forKey: @"variantID"];
     [[NSUserDefaults standardUserDefaults] setObject: clientInfoObject.variantSecret forKey: @"variantSecret"];
     [[NSUserDefaults standardUserDefaults] setObject: _baseURL.absoluteString forKey: @"serverURL"];
