@@ -121,12 +121,19 @@ public class AGDeviceRegistration: NSObject, NSURLSessionTaskDelegate {
                 }
             }
             
+            // deviceToken could be nil then retrieved it from local storage (from previous register).
+            // This is the use case when you update categories.
+            if clientInfoObject.deviceToken == nil {
+                clientInfoObject.deviceToken = NSUserDefaults.standardUserDefaults().objectForKey("deviceToken") as? NSData
+            }
+            
             // Fail if not all config mandatory items are present
             assert(clientInfoObject.deviceToken != nil, "'token' should be set")
             assert(clientInfoObject.variantID != nil, "'variantID' should be set")
             assert(clientInfoObject.variantSecret != nil, "'variantSecret' should be set");
             
             // locally stored information (used for metrics)
+            NSUserDefaults.standardUserDefaults().setObject(clientInfoObject.deviceToken, forKey: "deviceToken")
             NSUserDefaults.standardUserDefaults().setObject(clientInfoObject.variantID, forKey: "variantID")
             NSUserDefaults.standardUserDefaults().setObject(clientInfoObject.variantSecret, forKey: "variantSecret")
             NSUserDefaults.standardUserDefaults().setObject(self.serverURL.absoluteString, forKey: "serverURL")
