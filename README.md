@@ -166,8 +166,12 @@ func application(application: UIApplication, didFinishLaunchingWithOptions launc
 ```
 * Send metrics when the app is brought from background to foreground due to a push notification
 ```swift
-    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject: AnyObject]) {
+    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject: AnyObject], fetchCompletionHandler: (UIBackgroundFetchResult) -> Void) {      
+        // Send metrics when app is launched due to push notification
         AGPushAnalytics.sendMetricsWhenAppAwoken(application.applicationState, userInfo: userInfo)
+        
+        // Do stuff ...
+        fetchCompletionHandler(UIBackgroundFetchResult.NoData)
     }
 ```
 
