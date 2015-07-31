@@ -212,7 +212,7 @@ public class AGDeviceRegistration: NSObject, NSURLSessionTaskDelegate {
     private func configValueForKey(key: String) -> String? {
         var value: String?
         if let config = self.config { // specified plist config file
-            let path = NSBundle(forClass: AGDeviceRegistration.self).pathForResource(config, ofType:"plist")
+            let path = NSBundle.mainBundle().pathForResource(config, ofType: "plist")
             var properties = NSMutableDictionary(contentsOfFile: path!)
             if let properties = properties {
                 value = properties[key as String] as? String
