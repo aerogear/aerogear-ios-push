@@ -34,9 +34,9 @@ public class AGDeviceRegistration: NSObject, NSURLSessionTaskDelegate {
     /**
     An initializer method to instantiate an AGDeviceRegistration object.
     
-    :param: serverURL the URL of the AeroGear Push server.
+    - parameter serverURL: the URL of the AeroGear Push server.
     
-    :returns: the AGDeviceRegistration object.
+    - returns: the AGDeviceRegistration object.
     */
     public init(serverURL: NSURL) {
         self.serverURL = serverURL;
@@ -50,8 +50,8 @@ public class AGDeviceRegistration: NSObject, NSURLSessionTaskDelegate {
     /**
     An initializer method to instantiate an AGDeviceRegistration object with default app plist config file.
     
-    :param: config file name where to fetch AeroGear UnifiedPush server configuration.
-    :returns: the AGDeviceRegistration object.
+    - parameter config: file name where to fetch AeroGear UnifiedPush server configuration.
+    - returns: the AGDeviceRegistration object.
     */
     public convenience init(config: String) {
         self.init()
@@ -60,7 +60,7 @@ public class AGDeviceRegistration: NSObject, NSURLSessionTaskDelegate {
     /**
     An initializer method to instantiate an AGDeviceRegistration object.
     
-    :returns: the AGDeviceRegistration object.
+    - returns: the AGDeviceRegistration object.
     */
     public override init() {
         super.init()
@@ -84,13 +84,13 @@ public class AGDeviceRegistration: NSObject, NSURLSessionTaskDelegate {
        </dict>
       </plist>
     
-    :param: clientInfo A block object which passes in an implementation of the AGClientDeviceInformation protocol that
+    - parameter clientInfo: A block object which passes in an implementation of the AGClientDeviceInformation protocol that
     holds configuration metadata that would be posted to the server during the registration process.
     
-    :param: success A block object to be executed when the registration operation finishes successfully.
+    - parameter success: A block object to be executed when the registration operation finishes successfully.
     This block has no return value.
     
-    :param: failure A block object to be executed when the registration operation finishes unsuccessfully.
+    - parameter failure: A block object to be executed when the registration operation finishes unsuccessfully.
     This block has no return value and takes one argument: The `NSError` object describing
     the error that occurred during the registration process.
     */
@@ -117,7 +117,7 @@ public class AGDeviceRegistration: NSObject, NSURLSessionTaskDelegate {
                 if let urlString = self.configValueForKey("serverURL"), let url = NSURL(string: urlString) {
                     self.serverURL = url
                 } else {
-                    assert(self.serverURL.absoluteString != nil, "'serverURL' should be set")
+                    assert(self.serverURL?.absoluteString != nil, "'serverURL' should be set")
                 }
             }
             
@@ -145,17 +145,22 @@ public class AGDeviceRegistration: NSObject, NSURLSessionTaskDelegate {
             
             // apply HTTP Basic
             let basicAuthCredentials: NSData! = "\(clientInfoObject.variantID!):\(clientInfoObject.variantSecret!)".dataUsingEncoding(NSUTF8StringEncoding)
-            let base64Encoded = basicAuthCredentials.base64EncodedStringWithOptions(NSDataBase64EncodingOptions(0))
+            let base64Encoded = basicAuthCredentials.base64EncodedStringWithOptions(NSDataBase64EncodingOptions(rawValue: 0))
             
             request.setValue("Basic \(base64Encoded)", forHTTPHeaderField: "Authorization")
             
             // serialize request
-            let postData = NSJSONSerialization.dataWithJSONObject(clientInfoObject.extractValues(), options:nil, error: nil)
+            let postData: NSData?
+            do {
+                postData = try NSJSONSerialization.dataWithJSONObject(clientInfoObject.extractValues(), options:[])
+            } catch _ {
+                postData = nil
+            }
             
             request.HTTPBody = postData
             
             let task = session.dataTaskWithRequest(request) {(data, response, error) in
-                    if error != nil {
+                    if let error = error {
                         failure(error)
                         return
                     }
@@ -170,7 +175,7 @@ public class AGDeviceRegistration: NSObject, NSURLSessionTaskDelegate {
                     } else { // nope, client request error (e.g. 401 /* Unauthorized */)
                         let userInfo = [NSLocalizedDescriptionKey : NSHTTPURLResponse.localizedStringForStatusCode(httpResp.statusCode),
                             AGDeviceRegistrationError.AGNetworkingOperationFailingURLRequestErrorKey: request,
-                            AGDeviceRegistrationError.AGNetworkingOperationFailingURLResponseErrorKey: response];
+                            AGDeviceRegistrationError.AGNetworkingOperationFailingURLResponseErrorKey: response!];
                         
                         let error = NSError(domain:AGDeviceRegistrationError.AGPushErrorDomain, code: NSURLErrorBadServerResponse, userInfo: userInfo)
 
@@ -194,14 +199,14 @@ public class AGDeviceRegistration: NSObject, NSURLSessionTaskDelegate {
           We need to 'override' that 'default' behaviour to return the original attempted NSURLRequest
           with the URL parameter updated to point to the new 'Location' header.
     */
-    public func URLSession(session: NSURLSession, task: NSURLSessionTask, willPerformHTTPRedirection redirectResponse: NSHTTPURLResponse, newRequest redirectReq: NSURLRequest, completionHandler: ((NSURLRequest!) -> Void)) {
+    public func URLSession(session: NSURLSession, task: NSURLSessionTask, willPerformHTTPRedirection redirectResponse: NSHTTPURLResponse, newRequest redirectReq: NSURLRequest, completionHandler: ((NSURLRequest?) -> Void)) {
         
         var request = redirectReq;
 
         // we need to redirect
         // update URL of the original request
         // to the 'new' redirected one
-        var origRequest = task.originalRequest.mutableCopy() as! NSMutableURLRequest
+        let origRequest = task.originalRequest!.mutableCopy() as! NSMutableURLRequest
         origRequest.URL = redirectReq.URL
         request = origRequest
         
@@ -213,7 +218,7 @@ public class AGDeviceRegistration: NSObject, NSURLSessionTaskDelegate {
         var value: String?
         if let config = self.config { // specified plist config file
             let path = NSBundle.mainBundle().pathForResource(config, ofType: "plist")
-            var properties = NSMutableDictionary(contentsOfFile: path!)
+            let properties = NSMutableDictionary(contentsOfFile: path!)
             if let properties = properties {
                 value = properties[key as String] as? String
             }
