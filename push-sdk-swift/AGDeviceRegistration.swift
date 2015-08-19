@@ -34,9 +34,9 @@ public class AGDeviceRegistration: NSObject, NSURLSessionTaskDelegate {
     /**
     An initializer method to instantiate an AGDeviceRegistration object.
     
-    :param: serverURL the URL of the AeroGear Push server.
+    - parameter serverURL: the URL of the AeroGear Push server.
     
-    :returns: the AGDeviceRegistration object.
+    - returns: the AGDeviceRegistration object.
     */
     public init(serverURL: NSURL) {
         self.serverURL = serverURL;
@@ -50,8 +50,8 @@ public class AGDeviceRegistration: NSObject, NSURLSessionTaskDelegate {
     /**
     An initializer method to instantiate an AGDeviceRegistration object with default app plist config file.
     
-    :param: config file name where to fetch AeroGear UnifiedPush server configuration.
-    :returns: the AGDeviceRegistration object.
+    - parameter config: file name where to fetch AeroGear UnifiedPush server configuration.
+    - returns: the AGDeviceRegistration object.
     */
     public convenience init(config: String) {
         self.init()
@@ -60,7 +60,7 @@ public class AGDeviceRegistration: NSObject, NSURLSessionTaskDelegate {
     /**
     An initializer method to instantiate an AGDeviceRegistration object.
     
-    :returns: the AGDeviceRegistration object.
+    - returns: the AGDeviceRegistration object.
     */
     public override init() {
         super.init()
@@ -84,13 +84,13 @@ public class AGDeviceRegistration: NSObject, NSURLSessionTaskDelegate {
        </dict>
       </plist>
     
-    :param: clientInfo A block object which passes in an implementation of the AGClientDeviceInformation protocol that
+    - parameter clientInfo: A block object which passes in an implementation of the AGClientDeviceInformation protocol that
     holds configuration metadata that would be posted to the server during the registration process.
     
-    :param: success A block object to be executed when the registration operation finishes successfully.
+    - parameter success: A block object to be executed when the registration operation finishes successfully.
     This block has no return value.
     
-    :param: failure A block object to be executed when the registration operation finishes unsuccessfully.
+    - parameter failure: A block object to be executed when the registration operation finishes unsuccessfully.
     This block has no return value and takes one argument: The `NSError` object describing
     the error that occurred during the registration process.
     */

@@ -30,9 +30,9 @@ public class AGPushAnalytics {
     /**
     Send metrics to the AeroGear Push server when the app is launched due to a push notification.
     
-    :param: launchOptions contains the message id used to collect metrics.
+    - parameter launchOptions: contains the message id used to collect metrics.
     
-    :param: completionHandler A block object to be executed when the send metrics operation finishes. Defaulted to no action.
+    - parameter completionHandler: A block object to be executed when the send metrics operation finishes. Defaulted to no action.
     */
     class public func sendMetricsWhenAppLaunched(launchOptions: [NSObject:AnyObject]?, completionHandler: ((error: NSError? ) -> Void) = {(error: NSError?) in }) {
         if let options = launchOptions {
@@ -48,9 +48,9 @@ public class AGPushAnalytics {
     Send metrics to the AeroGear Push server when the app is brought from background to
     foreground due to a push notification.
     
-    :param: applicationState to make sure the app was in background.
-    :param: userInfo contains the message id used to collect metrics.
-    :param: completionHandler A block object to be executed when the send metrics operation finishes. Defaulted to no action.
+    - parameter applicationState: to make sure the app was in background.
+    - parameter userInfo: contains the message id used to collect metrics.
+    - parameter completionHandler: A block object to be executed when the send metrics operation finishes. Defaulted to no action.
     */
     class public func sendMetricsWhenAppAwoken(applicationState: UIApplicationState, userInfo: [NSObject:AnyObject], completionHandler: ((error: NSError? ) -> Void) = {(error: NSError?) in }) {
         if applicationState == .Inactive || applicationState == .Background  {
