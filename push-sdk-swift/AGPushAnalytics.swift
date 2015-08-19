@@ -76,7 +76,7 @@ public class AGPushAnalytics {
             
             // apply HTTP Basic
             let basicAuthCredentials: NSData! = "\(variantId):\(variantSecret)".dataUsingEncoding(NSUTF8StringEncoding)
-            let base64Encoded = basicAuthCredentials.base64EncodedStringWithOptions(NSDataBase64EncodingOptions(0))
+            let base64Encoded = basicAuthCredentials.base64EncodedStringWithOptions(NSDataBase64EncodingOptions(rawValue: 0))
             
             request.setValue("Basic \(base64Encoded)", forHTTPHeaderField: "Authorization")
             
@@ -99,7 +99,7 @@ public class AGPushAnalytics {
                 } else { // nope, client request error (e.g. 401 /* Unauthorized */)
                     let userInfo = [NSLocalizedDescriptionKey : NSHTTPURLResponse.localizedStringForStatusCode(httpResp.statusCode),
                         AGPushAnalyticsError.AGNetworkingOperationFailingURLRequestErrorKey: request,
-                        AGPushAnalyticsError.AGNetworkingOperationFailingURLResponseErrorKey: response];
+                        AGPushAnalyticsError.AGNetworkingOperationFailingURLResponseErrorKey: response!];
                     
                     let error = NSError(domain:AGPushAnalyticsError.AGPushAnalyticsErrorDomain, code: NSURLErrorBadServerResponse, userInfo: userInfo)
                     

@@ -38,7 +38,7 @@ class AGPushAnalyticsTests: XCTestCase {
         NSUserDefaults.standardUserDefaults().setValue("http://server.com", forKey: "serverURL")
         
         // set up http stub
-        OHHTTPStubs.stubRequestsPassingTest({ (request: NSURLRequest!) -> Bool in
+        OHHTTPStubs.stubRequestsPassingTest({ _ in
             return true
             }, withStubResponse:( { (request: NSURLRequest!) -> OHHTTPStubsResponse in
                 return OHHTTPStubsResponse(data:NSData(), statusCode: 200, headers: ["Content-Type" : "text/json"])
@@ -63,7 +63,7 @@ class AGPushAnalyticsTests: XCTestCase {
         NSUserDefaults.standardUserDefaults().removeObjectForKey("variantSecret")
         NSUserDefaults.standardUserDefaults().removeObjectForKey("serverURL")
         // set up http stub
-        OHHTTPStubs.stubRequestsPassingTest({ (request: NSURLRequest!) -> Bool in
+        OHHTTPStubs.stubRequestsPassingTest({ _ in
             return true
             }, withStubResponse:( { (request: NSURLRequest!) -> OHHTTPStubsResponse in
                 return OHHTTPStubsResponse(data:NSData(), statusCode: 200, headers: ["Content-Type" : "text/json"])
@@ -73,7 +73,7 @@ class AGPushAnalyticsTests: XCTestCase {
         let sendMetricsExpectation = expectationWithDescription("Send Metrics");
         
         // setup registration
-        let registration = AGDeviceRegistration(serverURL: NSURL(string: "http://server.com")!)
+        _ = AGDeviceRegistration(serverURL: NSURL(string: "http://server.com")!)
         
         var options: [NSObject:AnyObject] = [:]
         options[UIApplicationLaunchOptionsRemoteNotificationKey] = ["aerogear-push-id":"123456"]
