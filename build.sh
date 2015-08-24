@@ -18,7 +18,7 @@ PROJECT_NAME="push-sdk"
 PRODUCT_NAME="AeroGearPush"
 
 # define the version of the final product
-VERSION_NAME="1.1.0-beta.2"
+VERSION_NAME="1.1.1"
 
 # define final product name
 PRODUCT_LIBRARY_NAME="lib${PROJECT_NAME}-${VERSION_NAME}.a"
