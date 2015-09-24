@@ -1,6 +1,6 @@
 # aerogear-ios-push [![Build Status](https://travis-ci.org/aerogear/aerogear-ios-push.png)](https://travis-ci.org/aerogear/aerogear-ios-push)
 
-> This module currently build with Xcode 6.4 and supports iOS8. 
+> This module currently build with Xcode 7 and supports iOS8, iOS9. 
 > For iOS7 support see [ObjC version in 1.x_dev branch](https://github.com/aerogear/aerogear-ios-push/tree/1.x_dev).
 
 **iOS Push Notification Registration SDK for the AeroGear UnifiedPush Server**
