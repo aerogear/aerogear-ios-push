@@ -34,7 +34,7 @@ class AGDeviceRegistrationTests: XCTestCase {
 
     func testRegistrationWithServerShouldWork() {
         // set up http stub
-        OHHTTPStubs.stubRequestsPassingTest({ (request: NSURLRequest!) -> Bool in
+        OHHTTPStubs.stubRequestsPassingTest({ _ in
             return true
         }, withStubResponse:( { (request: NSURLRequest!) -> OHHTTPStubsResponse in
             return OHHTTPStubsResponse(data:NSData(), statusCode: 200, headers: ["Content-Type" : "text/json"])
@@ -79,7 +79,7 @@ class AGDeviceRegistrationTests: XCTestCase {
 
     func testRedirectionAndRegistrationWithServerShouldWork() {
         // set up http stub
-        OHHTTPStubs.stubRequestsPassingTest({ (request: NSURLRequest!) -> Bool in
+        OHHTTPStubs.stubRequestsPassingTest({ _ in
             return true
         }, withStubResponse:( { (request: NSURLRequest!) -> OHHTTPStubsResponse in
             if request.URL!.absoluteString == "http://server.com/rest/registry/device" { // perform redirection
