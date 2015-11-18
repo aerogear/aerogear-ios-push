@@ -74,7 +74,7 @@ xcodebuild -project ${PROJECT_NAME}.xcodeproj -sdk iphonesimulator -target ${PRO
 echo '==== BUILDING Device Library of project: ' ${PROJECT_NAME} ' in path: ' ${DEVICE_LIBRARY_DIR} ' with configuration: ' ${CONFIGURATION};
 
 # Step 2. Build Device library
-xcodebuild -project ${PROJECT_NAME}.xcodeproj -sdk iphoneos -target ${PROJECT_NAME} -configuration ${CONFIGURATION} clean build TARGET_BUILD_DIR=${DEVICE_LIBRARY_DIR} PRODUCT_NAME=${PROJECT_NAME}-${VERSION_NAME}
+xcodebuild -project ${PROJECT_NAME}.xcodeproj -sdk iphoneos -target ${PROJECT_NAME} -configuration ${CONFIGURATION} clean build VALID_ARCHS="armv7 armv7s arm64" ARCHS="armv7 armv7s arm64" TARGET_BUILD_DIR=${DEVICE_LIBRARY_DIR} PRODUCT_NAME=${PROJECT_NAME}-${VERSION_NAME}
 
 
 echo '==== BUILDING Universal Library of project ' ${PROJECT_NAME} ' in path: ' ${UNIVERSAL_LIBRARY_DIR} ' with configuration: ' ${CONFIGURATION};
