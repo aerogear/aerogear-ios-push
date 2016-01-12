@@ -126,6 +126,42 @@ describe(@"AGDeviceRegistration", ^{
             
             [[expectFutureValue(theValue(succeeded)) shouldEventually] beYes];
         });
+        
+        it(@"should register with config file", ^{
+            registration = [[AGDeviceRegistration alloc]
+                            initWithFile:@"pushproperties"];
+            [registration overridePushProperties:@{@"serverURL": @"http://hello.org"}];
+            __block NSString* urlString;
+            
+            // install the mock:
+            [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *request) {
+                urlString = request.URL.absoluteString;
+                return YES;
+            } withStubResponse:^OHHTTPStubsResponse *(NSURLRequest *request) {
+                
+                return [[OHHTTPStubsResponse responseWithData:[NSData data]
+                                                   statusCode:200
+                                                      headers:@{@"Content-Type":@"text/json]"}] responseTime:0];
+            }];
+            
+            __block BOOL succeeded;
+            
+            [registration registerWithClientInfo:^(id<AGClientDeviceInformation> clientInfo) {
+                
+                // apply the desired info:
+                clientInfo.deviceToken = [@"2c948a843e6404dd013e79d82e5a0009"
+                                          dataUsingEncoding:NSUTF8StringEncoding];
+                
+            } success:^() {
+                succeeded = YES;
+                
+            } failure:^(NSError *error) {
+                NSLog(@"%@", [error description]);
+            }];
+            
+            [[expectFutureValue(theValue(succeeded)) shouldEventually] beYes];
+            [[expectFutureValue(theValue(urlString)) shouldEventually] isEqual:theValue(@"http://hello.org/rest/registry/device")];
+        });
 
         it(@"should correctly redirect", ^{
 

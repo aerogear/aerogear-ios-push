@@ -21,6 +21,7 @@
 		48289C611B2F0859004AF471 /* AGClientDeviceInformationImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = 48289BFA1B2EEE5D004AF471 /* AGClientDeviceInformationImpl.m */; };
 		48289C621B2F0859004AF471 /* AGDeviceRegistration.m in Sources */ = {isa = PBXBuildFile; fileRef = 48289BFC1B2EEE5D004AF471 /* AGDeviceRegistration.m */; };
 		48289C631B2F0859004AF471 /* AGPushAnalytics.m in Sources */ = {isa = PBXBuildFile; fileRef = 48289BFE1B2EEE5D004AF471 /* AGPushAnalytics.m */; };
+		48AAA6E61C44FCFD0048C53A /* pushproperties.plist in Resources */ = {isa = PBXBuildFile; fileRef = 48AAA6E51C44FCFD0048C53A /* pushproperties.plist */; };
 		5C18F90CC0E512A66E4B5789 /* libPods-pushsdkTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 30277CD3D67E463A98C74ED2 /* libPods-pushsdkTests.a */; };
 /* End PBXBuildFile section */
 
@@ -64,6 +65,7 @@
 		48289C071B2EEE78004AF471 /* AGDeviceRegistrationSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGDeviceRegistrationSpec.m; sourceTree = "<group>"; };
 		48289C0C1B2EF25C004AF471 /* AGPushAnalyticsSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGPushAnalyticsSpec.m; sourceTree = "<group>"; };
 		48289C4A1B2F082A004AF471 /* libpush-sdk.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libpush-sdk.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		48AAA6E51C44FCFD0048C53A /* pushproperties.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = pushproperties.plist; sourceTree = "<group>"; };
 		5F8A96B5477848779F501C0A /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		690976179180479293B024D8 /* libPods-push-sdkTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-push-sdkTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F53E2BA1768A935001966D8 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -154,6 +156,7 @@
 			isa = PBXGroup;
 			children = (
 				48289BEE1B2EEDF2004AF471 /* Info.plist */,
+				48AAA6E51C44FCFD0048C53A /* pushproperties.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -241,6 +244,7 @@
 				48289BE51B2EEDF2004AF471 /* Frameworks */,
 				48289BE61B2EEDF2004AF471 /* Resources */,
 				14A5211A3A2661B5D6FC2392 /* Copy Pods Resources */,
+				5F31A2BA7E9748675B67241D /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -313,6 +317,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				48AAA6E61C44FCFD0048C53A /* pushproperties.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -339,6 +344,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-pushsdkTests/Pods-pushsdkTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5F31A2BA7E9748675B67241D /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-pushsdkTests/Pods-pushsdkTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		B7633F66FC8250F770B9B313 /* Check Pods Manifest.lock */ = {
