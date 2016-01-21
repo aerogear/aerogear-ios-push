@@ -38,7 +38,8 @@ extern NSString * const AGNetworkingOperationFailingURLResponseErrorKey;
 - (id) initWithServerURL:(NSURL *)url;
 
 /**
- * An initializer method to instantiate an AGDeviceRegistration object with config plist file.
+ * An initializer method to instantiate an AGDeviceRegistration object with config plist
+ * file containing push registration properties.
  *
  * @param configFile name.
  *
@@ -53,6 +54,13 @@ extern NSString * const AGNetworkingOperationFailingURLResponseErrorKey;
  */
 - (id) init;
 
+/**
+ * A method to override properties required to register. For exemple,
+ * Unified Push Server URL is override when dictionary conatin "serverURL" key.
+ *
+ * @param pushProperties name.
+ */
+- (void) overridePushProperties:(NSDictionary*)pushProperties;
 
 /**
  * Registers your mobile device to the AeroGear UnifiedPush server so it can start receiving messages.

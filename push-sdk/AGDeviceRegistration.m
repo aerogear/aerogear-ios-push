@@ -33,6 +33,7 @@ static AGDeviceRegistration* sharedInstance;
     NSURL *_baseURL;
     NSURLSession *_session;
     NSString* _configFile;
+    NSDictionary* _overrideProperties;
 }
 
 -(id) initWithServerURL:(NSURL *)url {
@@ -45,7 +46,7 @@ static AGDeviceRegistration* sharedInstance;
         [NSURLSessionConfiguration defaultSessionConfiguration];
         
         _session = [NSURLSession sessionWithConfiguration:sessionConfig delegate:self delegateQueue:[NSOperationQueue mainQueue]];
-        
+        _overrideProperties = nil;
         sharedInstance = self;
     }
     
@@ -65,10 +66,15 @@ static AGDeviceRegistration* sharedInstance;
         
         _session = [NSURLSession sessionWithConfiguration:sessionConfig delegate:self delegateQueue:[NSOperationQueue mainQueue]];
         _configFile = configFile;
+        _overrideProperties = nil;
         sharedInstance = self;
     }
     
     return self;
+}
+
+- (void) overridePushProperties:(NSDictionary*)pushProperties {
+    _overrideProperties = pushProperties;
 }
 
 -(void)registerWithClientInfo:(void (^)(id<AGClientDeviceInformation>))clientInfo
@@ -208,7 +214,9 @@ willPerformHTTPRedirection:(NSHTTPURLResponse *)redirectResponse
 
 - (NSString *) configValueForKey:(NSString *)key {
     NSString* value;
-    if (_configFile) { // specified plist config file
+    if (_overrideProperties[key]) {
+        value = _overrideProperties[key];
+    } else if (_configFile) { // specified plist config file
         NSString* path = [[NSBundle bundleForClass:[self class]] pathForResource:_configFile ofType:@"plist"];
         NSMutableDictionary* properties = [NSMutableDictionary dictionaryWithContentsOfFile:path];
         value = properties[key];
