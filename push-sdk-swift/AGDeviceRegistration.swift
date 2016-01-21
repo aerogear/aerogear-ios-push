@@ -30,6 +30,7 @@ public class AGDeviceRegistration: NSObject, NSURLSessionTaskDelegate {
     var serverURL: NSURL!
     var session: NSURLSession!
     var config: String?
+    var overrrideProperties: [String: String]?
     
     /**
     An initializer method to instantiate an AGDeviceRegistration object.
@@ -66,6 +67,10 @@ public class AGDeviceRegistration: NSObject, NSURLSessionTaskDelegate {
         super.init()
         let sessionConfig = NSURLSessionConfiguration.defaultSessionConfiguration()
         self.session = NSURLSession(configuration: sessionConfig, delegate: self, delegateQueue: NSOperationQueue.mainQueue())
+    }
+    
+    public func overridePushProperties(pushProperties: [String: String]) {
+        overrrideProperties = pushProperties;
     }
     
     /**
@@ -216,7 +221,9 @@ public class AGDeviceRegistration: NSObject, NSURLSessionTaskDelegate {
     
     private func configValueForKey(key: String) -> String? {
         var value: String?
-        if let config = self.config { // specified plist config file
+        if let overrideProperties = self.overrrideProperties, serverURLPropertie = overrideProperties[key] {
+            value = serverURLPropertie
+        } else if let config = self.config { // specified plist config file
             let path = NSBundle.mainBundle().pathForResource(config, ofType: "plist")
             let properties = NSMutableDictionary(contentsOfFile: path!)
             if let properties = properties {

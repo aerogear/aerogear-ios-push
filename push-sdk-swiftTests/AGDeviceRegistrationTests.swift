@@ -76,6 +76,55 @@ class AGDeviceRegistrationTests: XCTestCase {
         
         waitForExpectationsWithTimeout(10, handler: nil)
     }
+    
+    func testRegistrationWithServerURLOverridenShouldWork() {
+        var urlString: String?
+        // set up http stub
+        OHHTTPStubs.stubRequestsPassingTest({ request in
+            urlString =  request.URL?.absoluteString
+            return true
+            }, withStubResponse:( { (request: NSURLRequest!) -> OHHTTPStubsResponse in
+                return OHHTTPStubsResponse(data:NSData(), statusCode: 200, headers: ["Content-Type" : "text/json"])
+            }))
+        
+        // async test expectation
+        let registrationExpectation = expectationWithDescription("UPS registration");
+        
+        // setup registration
+        let registration = AGDeviceRegistration(config: "pushproperties")
+        registration.overridePushProperties(["serverURL": "http://serveroverridden.com"])
+        
+        // attemp to register
+        registration.registerWithClientInfo({ (clientInfo: AGClientDeviceInformation!) in
+            
+            // setup configuration
+            clientInfo.deviceToken = "2c948a843e6404dd013e79d82e5a0009".dataUsingEncoding(NSUTF8StringEncoding) // dummy token
+            clientInfo.variantID = "8bd6e6a3-df6b-466c-8292-ed062f2427e8"
+            clientInfo.variantSecret = "1c9a6066-e0e5-4bcb-ab78-994335f59874"
+            
+            // apply the token, to identify THIS device
+            let currentDevice = UIDevice()
+            
+            // --optional config--
+            // set some 'useful' hardware information params
+            clientInfo.operatingSystem = currentDevice.systemName
+            clientInfo.osVersion = currentDevice.systemVersion
+            clientInfo.deviceType = currentDevice.model
+            },
+            
+            success: {
+                assert(urlString == "http://serveroverridden.com/rest/registry/device")
+                registrationExpectation.fulfill()
+            },
+            
+            failure: {(error: NSError!) in
+                XCTAssertTrue(false, "should have register")
+                
+                registrationExpectation.fulfill()
+        })
+        
+        waitForExpectationsWithTimeout(10, handler: nil)
+    }
 
     func testRedirectionAndRegistrationWithServerShouldWork() {
         // set up http stub
