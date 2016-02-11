@@ -10,7 +10,7 @@ A small and handy library written in [Swift](https://developer.apple.com/swift/)
 |                 | Project Info  |
 | --------------- | ------------- |
 | License:        | Apache License, Version 2.0  |
-| Build:          | Cocoapods  |
+| Build:          | CocoaPods  |
 | Documentation:  | https://aerogear.org/docs/unifiedpush/aerogear-push-ios/ |
 | Issue tracker:  | https://issues.jboss.org/browse/AGIOS  |
 | Mailing lists:  | [aerogear-users](http://aerogear-users.1116366.n5.nabble.com/) ([subscribe](https://lists.jboss.org/mailman/listinfo/aerogear-users))  |
@@ -29,9 +29,9 @@ pod install
 3. open AeroGearPushSwift.xcworkspace
 
 ## Adding the library to your project 
-To add the library in your project, you can either use [Cocoapods](http://cocoapods.org) or manual install either by dragging the code or building a ```framework``` to install in your project. See the respective sections below for instructions:
+To add the library in your project, you can either use [CocoaPods](http://cocoapods.org) or manual install either by dragging the code or building a ```framework``` to install in your project. See the respective sections below for instructions:
 
-### Using [Cocoapods](http://cocoapods.org)
+### Using [CocoaPods](http://cocoapods.org)
 Support for Swift frameworks is supported from [CocoaPods-0.36+ release](https://cocoapods.org/) upwards. In your ```Podfile``` add:
 
 ```
