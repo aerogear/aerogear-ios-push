@@ -1,6 +1,6 @@
 source 'https://github.com/CocoaPods/Specs.git'
 
-xcodeproj 'AeroGearPush.xcodeproj'
+project 'AeroGearPush.xcodeproj'
 platform :ios, '8.0'
 use_frameworks!
 

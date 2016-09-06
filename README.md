@@ -22,7 +22,7 @@ A small and handy library written in [Swift](https://developer.apple.com/swift/)
 
 2. Get the dependencies
 
-The project uses [OHHTTPStubs](https://github.com/AliSoftware/OHHTTPStubs) framework for stubbing its http network requests and utilizes [cocoapods](http://cocoapods.org) 0.36+ release for handling its dependencies. As a pre-requisite, install [cocoapods](https://cocoapods.org/) and then install the pod. On the root directory of the project run:
+The project uses [OHHTTPStubs](https://github.com/AliSoftware/OHHTTPStubs) framework for stubbing its http network requests and utilizes [cocoapods](http://cocoapods.org) 0.36+ release for handling its dependencies. As a pre-requisite, install [CocoaPods](https://cocoapods.org/) and then install the pod. On the root directory of the project run:
 ```bash
 pod install
 ```
@@ -32,7 +32,7 @@ pod install
 To add the library in your project, you can either use [CocoaPods](http://cocoapods.org) or manual install either by dragging the code or building a ```framework``` to install in your project. See the respective sections below for instructions:
 
 ### Using [CocoaPods](http://cocoapods.org)
-Support for Swift frameworks is supported from [CocoaPods-0.36+ release](https://cocoapods.org/) upwards. In your ```Podfile``` add:
+In your ```Podfile``` add:
 
 ```
 pod 'AeroGear-Push-Swift'
