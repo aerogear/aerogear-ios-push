@@ -22,7 +22,7 @@ A small and handy library written in [Swift](https://developer.apple.com/swift/)
 
 2. Get the dependencies
 
-The project uses [OHHTTPStubs](https://github.com/AliSoftware/OHHTTPStubs) framework for stubbing its http network requests and utilizes [cocoapods](http://cocoapods.org) 0.36+ release for handling its dependencies. As a pre-requisite, install [cocoapods](https://cocoapods.org/) and then install the pod. On the root directory of the project run:
+The project uses [OHHTTPStubs](https://github.com/AliSoftware/OHHTTPStubs) framework for stubbing its http network requests and utilizes [CocoaPods](http://cocoapods.org) for handling its dependencies. As a pre-requisite, install [CocoaPods](https://cocoapods.org/) and then install the pod. On the root directory of the project run:
 ```bash
 pod install
 ```
@@ -31,8 +31,7 @@ pod install
 ## Adding the library to your project 
 To add the library in your project, you can either use [CocoaPods](http://cocoapods.org) or manual install either by dragging the code or building a ```framework``` to install in your project. See the respective sections below for instructions:
 
-### Using [CocoaPods](http://cocoapods.org)
-Support for Swift frameworks is supported from [CocoaPods-0.36+ release](https://cocoapods.org/) upwards. In your ```Podfile``` add:
+In your ```Podfile``` add:
 
 ```
 pod 'AeroGear-Push-Swift'
@@ -45,35 +44,6 @@ pod install
 ```
 
 to install your dependencies
-
-### Manual Installation
-
-#### Drag-and-Drop the project
-Follow these steps to add the library in your Swift project:
-
-1. Add AeroGearPush as a [submodule](http://git-scm.com/docs/git-submodule) in your project. Open a terminal and navigate to your project directory. Then enter:
-```bash
-git submodule add https://github.com/aerogear/aerogear-ios-push.git
-```
-2. Open the `aerogear-ios-push` folder, and drag the `AeroGearPush.xcodeproj` into the file navigator in Xcode.
-3. In Xcode select your application target  and under the "Targets" heading section, ensure that the 'iOS  Deployment Target'  matches the application target of AeroGearPush.framework (Currently set to 8.0).
-5. Select the  "Build Phases"  heading section,  expand the "Target Dependencies" group and add  `AeroGearPush.framework`.
-7. Click on the `+` button at the top left of the panel and select "New Copy Files Phase". Rename this new phase to "Copy Frameworks", set the "Destination" to "Frameworks", and add `AeroGearPush.framework`.
-
-
-#### Using a ```.framework``` build
-
-To build the library simply run the build script:
-
-    build.sh
-
-The build script will generate a ```build``` folder in the current directory, containing an universal framework library that you can drag-and-drop in your project. The framework build resides in:
-
-    build/Release-universal/AeroGearPush.framework
-
-Now, on your application targets’ “General” settings tab and in the “Linked Frameworks and Libraries” section, drag-and-drop the framework build.  Then click the 'Build Phases' tab, click the '+' symbol, select "New Copy Files Phase", expand the section, select 'Frameworks' from the Destination combo box.  Click the '+' symbol and select the 'AeroGearPush.framework'
-
-You are now ready to use the library in your project.
 
 ## Example Usage
 
