@@ -70,7 +70,7 @@ public class AGPushAnalytics {
         if let variantId = variantId, let variantSecret = variantSecret, let urlString = urlString {
             let serverURL = NSURL(string: urlString)
             // set up our request
-            let request = NSMutableURLRequest(URL: serverURL!.URLByAppendingPathComponent("rest/registry/device/pushMessage/\(messageId)"))
+            let request = NSMutableURLRequest(URL: serverURL!.URLByAppendingPathComponent("rest/registry/device/pushMessage/\(messageId)")!)
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")
             request.HTTPMethod = "PUT"
             
@@ -115,4 +115,3 @@ public class AGPushAnalytics {
         }
     }
 }
-    
