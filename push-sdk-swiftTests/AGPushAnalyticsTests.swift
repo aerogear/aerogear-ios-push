@@ -24,11 +24,18 @@ class AGPushAnalyticsTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
+        NSUserDefaults.standardUserDefaults().removeObjectForKey("variantID")
+        NSUserDefaults.standardUserDefaults().removeObjectForKey("variantSecret")
+        NSUserDefaults.standardUserDefaults().removeObjectForKey("serverURL")
+        NSUserDefaults.resetStandardUserDefaults()
     }
     
     override func tearDown() {
         super.tearDown()
-        
+        NSUserDefaults.standardUserDefaults().removeObjectForKey("variantID")
+        NSUserDefaults.standardUserDefaults().removeObjectForKey("variantSecret")
+        NSUserDefaults.standardUserDefaults().removeObjectForKey("serverURL")
+        NSUserDefaults.resetStandardUserDefaults()
         OHHTTPStubs.removeAllStubs()
     }
  
@@ -59,9 +66,6 @@ class AGPushAnalyticsTests: XCTestCase {
     }
     
     func testSendMetricsShouldFail() {
-        NSUserDefaults.standardUserDefaults().removeObjectForKey("variantID")
-        NSUserDefaults.standardUserDefaults().removeObjectForKey("variantSecret")
-        NSUserDefaults.standardUserDefaults().removeObjectForKey("serverURL")
         // set up http stub
         OHHTTPStubs.stubRequestsPassingTest({ _ in
             return true

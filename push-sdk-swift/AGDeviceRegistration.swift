@@ -144,7 +144,7 @@ public class AGDeviceRegistration: NSObject, NSURLSessionTaskDelegate {
             NSUserDefaults.standardUserDefaults().setObject(self.serverURL.absoluteString, forKey: "serverURL")
             
             // set up our request
-            let request = NSMutableURLRequest(URL: serverURL.URLByAppendingPathComponent("rest/registry/device"))
+            let request = NSMutableURLRequest(URL: serverURL.URLByAppendingPathComponent("rest/registry/device")!)
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")
             request.HTTPMethod = "POST"
             
