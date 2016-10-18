@@ -26,7 +26,7 @@ public protocol AGClientDeviceInformation {
     /**
     The Device Token which identifies the device within APNs.
      */
-    var deviceToken: NSData? { get set }
+    var deviceToken: Data? { get set }
     
     /**
     The ID of the mobile Variant, for which this client will be registered.

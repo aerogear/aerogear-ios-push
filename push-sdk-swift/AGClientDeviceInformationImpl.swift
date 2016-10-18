@@ -22,7 +22,7 @@ import Foundation
  */
 class AGClientDeviceInformationImpl: NSObject, AGClientDeviceInformation {
     
-    var deviceToken: NSData?
+    var deviceToken: Data?
     var variantID: String?
     var variantSecret: String?
     var alias: String?
@@ -38,22 +38,22 @@ class AGClientDeviceInformationImpl: NSObject, AGClientDeviceInformation {
     func extractValues() -> [String: AnyObject] {
         var jsonObject =  [String: AnyObject]()
         
-        jsonObject["deviceToken"] = convertToString(deviceToken)
-        jsonObject["alias"] = alias
-        jsonObject["categories"] = categories
-        jsonObject["operatingSystem"] = operatingSystem
-        jsonObject["osVersion"] = osVersion
-        jsonObject["deviceType"] = deviceType
+        jsonObject["deviceToken"] = convertToString(deviceToken) as AnyObject?
+        jsonObject["alias"] = alias as AnyObject?
+        jsonObject["categories"] = categories as AnyObject?
+        jsonObject["operatingSystem"] = operatingSystem as AnyObject?
+        jsonObject["osVersion"] = osVersion as AnyObject?
+        jsonObject["deviceType"] = deviceType as AnyObject?
         
         return jsonObject;
     }
     
     // Helper to transform the NSData-based token into a (useful) String:
-    private func convertToString(deviceToken: NSData?) -> String? {
+    fileprivate func convertToString(_ deviceToken: Data?) -> String? {
         if let token = deviceToken?.description {
-            return token.stringByReplacingOccurrencesOfString("<", withString: "")
-                .stringByReplacingOccurrencesOfString(">", withString: "")
-                .stringByReplacingOccurrencesOfString(" ", withString: "")
+            return token.replacingOccurrences(of: "<", with: "")
+                .replacingOccurrences(of: ">", with: "")
+                .replacingOccurrences(of: " ", with: "")
         }
         
         return nil
