@@ -24,63 +24,63 @@ class AGPushAnalyticsTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        NSUserDefaults.standardUserDefaults().removeObjectForKey("variantID")
-        NSUserDefaults.standardUserDefaults().removeObjectForKey("variantSecret")
-        NSUserDefaults.standardUserDefaults().removeObjectForKey("serverURL")
-        NSUserDefaults.resetStandardUserDefaults()
+        UserDefaults.standard.removeObject(forKey: "variantID")
+        UserDefaults.standard.removeObject(forKey: "variantSecret")
+        UserDefaults.standard.removeObject(forKey: "serverURL")
+        UserDefaults.resetStandardUserDefaults()
     }
     
     override func tearDown() {
         super.tearDown()
-        NSUserDefaults.standardUserDefaults().removeObjectForKey("variantID")
-        NSUserDefaults.standardUserDefaults().removeObjectForKey("variantSecret")
-        NSUserDefaults.standardUserDefaults().removeObjectForKey("serverURL")
-        NSUserDefaults.resetStandardUserDefaults()
+        UserDefaults.standard.removeObject(forKey: "variantID")
+        UserDefaults.standard.removeObject(forKey: "variantSecret")
+        UserDefaults.standard.removeObject(forKey: "serverURL")
+        UserDefaults.resetStandardUserDefaults()
         OHHTTPStubs.removeAllStubs()
     }
  
     func testSendMetricsShouldWork() {
-        NSUserDefaults.standardUserDefaults().setValue("VARIANT", forKey: "variantID")
-        NSUserDefaults.standardUserDefaults().setValue("SECRET", forKey: "variantSecret")
-        NSUserDefaults.standardUserDefaults().setValue("http://server.com", forKey: "serverURL")
+        UserDefaults.standard.setValue("VARIANT", forKey: "variantID")
+        UserDefaults.standard.setValue("SECRET", forKey: "variantSecret")
+        UserDefaults.standard.setValue("http://server.com", forKey: "serverURL")
         
         // set up http stub
-        OHHTTPStubs.stubRequestsPassingTest({ _ in
+        OHHTTPStubs.stubRequests(passingTest: { _ in
             return true
-            }, withStubResponse:( { (request: NSURLRequest!) -> OHHTTPStubsResponse in
-                return OHHTTPStubsResponse(data:NSData(), statusCode: 200, headers: ["Content-Type" : "text/json"])
+            }, withStubResponse:( { (request: URLRequest!) -> OHHTTPStubsResponse in
+                return OHHTTPStubsResponse(data:Data(), statusCode: 200, headers: ["Content-Type" : "text/json"])
             }))
         
         // async test expectation
-        let sendMetricsExpectation = expectationWithDescription("Send Metrics");
+        let sendMetricsExpectation = expectation(description: "Send Metrics");
         
-        var options: [NSObject:AnyObject] = [:]
-        options[UIApplicationLaunchOptionsRemoteNotificationKey] = ["aerogear-push-id":"123456"]
+        var options: [AnyHashable: Any] = [:]
+        options[UIApplicationLaunchOptionsKey.remoteNotification] = ["aerogear-push-id":"123456"]
         // attemp to register
         AGPushAnalytics.sendMetricsWhenAppLaunched(options) { (error) -> Void in
             assert(error == nil, "Metrics sent without error")
             sendMetricsExpectation.fulfill()
         }
         
-        waitForExpectationsWithTimeout(10, handler: nil)
+        waitForExpectations(timeout: 10, handler: nil)
     }
     
     func testSendMetricsShouldFail() {
         // set up http stub
-        OHHTTPStubs.stubRequestsPassingTest({ _ in
+        OHHTTPStubs.stubRequests(passingTest: { _ in
             return true
-            }, withStubResponse:( { (request: NSURLRequest!) -> OHHTTPStubsResponse in
-                return OHHTTPStubsResponse(data:NSData(), statusCode: 200, headers: ["Content-Type" : "text/json"])
+            }, withStubResponse:( { (request: URLRequest!) -> OHHTTPStubsResponse in
+                return OHHTTPStubsResponse(data:Data(), statusCode: 200, headers: ["Content-Type" : "text/json"])
             }))
         
         // async test expectation
-        let sendMetricsExpectation = expectationWithDescription("Send Metrics");
+        let sendMetricsExpectation = expectation(description: "Send Metrics");
         
         // setup registration
-        _ = AGDeviceRegistration(serverURL: NSURL(string: "http://server.com")!)
+        _ = AGDeviceRegistration(serverURL: URL(string: "http://server.com")!)
         
-        var options: [NSObject:AnyObject] = [:]
-        options[UIApplicationLaunchOptionsRemoteNotificationKey] = ["aerogear-push-id":"123456"]
+        var options: [AnyHashable: Any] = [:]
+        options[UIApplicationLaunchOptionsKey.remoteNotification] = ["aerogear-push-id":"123456"]
         
         // attemp to register
         AGPushAnalytics.sendMetricsWhenAppLaunched(options) { (error) -> Void in
@@ -88,6 +88,6 @@ class AGPushAnalyticsTests: XCTestCase {
             sendMetricsExpectation.fulfill()
         }
         
-        waitForExpectationsWithTimeout(10, handler: nil)
+        waitForExpectations(timeout: 10, handler: nil)
     }
 }

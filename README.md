@@ -5,7 +5,7 @@
 
 **iOS Push Notification Registration SDK for the AeroGear UnifiedPush Server**
 
-A small and handy library written in [Swift](https://developer.apple.com/swift/) that helps to register iOS applications with the [AeroGear UnifiedPush Server](https://github.com/aerogear/aerogear-unified-push-server).
+A small and handy library written in [Swift 3.0](https://developer.apple.com/swift/) that helps to register iOS applications with the [AeroGear UnifiedPush Server](https://github.com/aerogear/aerogear-unified-push-server).
 
 |                 | Project Info  |
 | --------------- | ------------- |
@@ -26,7 +26,7 @@ The project uses [OHHTTPStubs](https://github.com/AliSoftware/OHHTTPStubs) frame
 ```bash
 pod install
 ```
-3. open AeroGearPushSwift.xcworkspace
+3. open AeroGearPush.xcworkspace
 
 ## Adding the library to your project 
 To add the library in your project, you can either use [CocoaPods](http://cocoapods.org) or manual install either by dragging the code or building a ```framework``` to install in your project. See the respective sections below for instructions:
