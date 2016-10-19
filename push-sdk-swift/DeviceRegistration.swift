@@ -19,12 +19,12 @@ import Foundation
 /**
  Utility to register an iOS device with the AeroGear UnifiedPush Server.
  */
-open class AGDeviceRegistration: NSObject, URLSessionTaskDelegate {
+open class DeviceRegistration: NSObject, URLSessionTaskDelegate {
     
-    struct AGDeviceRegistrationError {
-        static let AGPushErrorDomain = "AGPushErrorDomain"
-        static let AGNetworkingOperationFailingURLRequestErrorKey = "AGNetworkingOperationFailingURLRequestErrorKey"
-        static let AGNetworkingOperationFailingURLResponseErrorKey = "AGNetworkingOperationFailingURLResponseErrorKey"
+    struct DeviceRegistrationError {
+        static let PushErrorDomain = "PushErrorDomain"
+        static let NetworkingOperationFailingURLRequestErrorKey = "NetworkingOperationFailingURLRequestErrorKey"
+        static let NetworkingOperationFailingURLResponseErrorKey = "NetworkingOperationFailingURLResponseErrorKey"
     }
     
     var serverURL: URL!
@@ -33,11 +33,11 @@ open class AGDeviceRegistration: NSObject, URLSessionTaskDelegate {
     var overrrideProperties: [String: String]?
     
     /**
-    An initializer method to instantiate an AGDeviceRegistration object.
+    An initializer method to instantiate an DeviceRegistration object.
     
     :param: serverURL the URL of the AeroGear Push server.
     
-    :returns: the AGDeviceRegistration object.
+    :returns: the DeviceRegistration object.
     */
     public init(serverURL: URL) {
         self.serverURL = serverURL;
@@ -49,19 +49,19 @@ open class AGDeviceRegistration: NSObject, URLSessionTaskDelegate {
     }
     
     /**
-    An initializer method to instantiate an AGDeviceRegistration object with default app plist config file.
+    An initializer method to instantiate an DeviceRegistration object with default app plist config file.
     
     :param: config file name where to fetch AeroGear UnifiedPush server configuration.
-    :returns: the AGDeviceRegistration object.
+    :returns: the DeviceRegistration object.
     */
     public convenience init(config: String) {
         self.init()
         self.config = config
     }
     /**
-    An initializer method to instantiate an AGDeviceRegistration object.
+    An initializer method to instantiate an DeviceRegistration object.
     
-    :returns: the AGDeviceRegistration object.
+    :returns: the DeviceRegistration object.
     */
     public override init() {
         super.init()
@@ -89,7 +89,7 @@ open class AGDeviceRegistration: NSObject, URLSessionTaskDelegate {
        </dict>
       </plist>
     
-    :param: clientInfo A block object which passes in an implementation of the AGClientDeviceInformation protocol that
+    :param: clientInfo A block object which passes in an implementation of the ClientDeviceInformation protocol that
     holds configuration metadata that would be posted to the server during the registration process.
     
     :param: success A block object to be executed when the registration operation finishes successfully.
@@ -99,13 +99,13 @@ open class AGDeviceRegistration: NSObject, URLSessionTaskDelegate {
     This block has no return value and takes one argument: The `NSError` object describing
     the error that occurred during the registration process.
     */
-    open func registerWithClientInfo(_ clientInfo: ((_ config: AGClientDeviceInformation) -> Void)!,
+    open func registerWithClientInfo(_ clientInfo: ((_ config: ClientDeviceInformation) -> Void)!,
         success:(() -> Void)!, failure:((NSError) -> Void)!) -> Void {
             
             // can't proceed with no configuration block set
             assert(clientInfo != nil, "configuration block not set")
 
-            let clientInfoObject = AGClientDeviceInformationImpl()
+            let clientInfoObject = ClientDeviceInformationImpl()
         
             clientInfo(clientInfoObject)
             
@@ -179,10 +179,10 @@ open class AGDeviceRegistration: NSObject, URLSessionTaskDelegate {
 
                     } else { // nope, client request error (e.g. 401 /* Unauthorized */)
                         let userInfo = [NSLocalizedDescriptionKey : HTTPURLResponse.localizedString(forStatusCode: httpResp.statusCode),
-                            AGDeviceRegistrationError.AGNetworkingOperationFailingURLRequestErrorKey: request,
-                            AGDeviceRegistrationError.AGNetworkingOperationFailingURLResponseErrorKey: response!] as [String : Any];
+                            DeviceRegistrationError.NetworkingOperationFailingURLRequestErrorKey: request,
+                            DeviceRegistrationError.NetworkingOperationFailingURLResponseErrorKey: response!] as [String : Any];
                         
-                        let error = NSError(domain:AGDeviceRegistrationError.AGPushErrorDomain, code: NSURLErrorBadServerResponse, userInfo: userInfo)
+                        let error = NSError(domain:DeviceRegistrationError.PushErrorDomain, code: NSURLErrorBadServerResponse, userInfo: userInfo)
 
                         failure(error)
                     }

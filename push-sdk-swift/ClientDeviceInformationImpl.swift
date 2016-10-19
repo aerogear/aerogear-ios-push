@@ -18,9 +18,9 @@
 import Foundation
 
 /**
- * Internal implementation of the AGClientDeviceInformation protocol
+ * Internal implementation of the ClientDeviceInformation protocol
  */
-class AGClientDeviceInformationImpl: NSObject, AGClientDeviceInformation {
+class ClientDeviceInformationImpl: NSObject, ClientDeviceInformation {
     
     var deviceToken: Data?
     var variantID: String?

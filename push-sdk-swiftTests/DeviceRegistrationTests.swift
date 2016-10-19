@@ -20,7 +20,7 @@ import UIKit
 import AeroGearPush
 import OHHTTPStubs
 
-class AGDeviceRegistrationTests: XCTestCase {
+class DeviceRegistrationTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
@@ -44,10 +44,10 @@ class AGDeviceRegistrationTests: XCTestCase {
         let registrationExpectation = expectation(description: "UPS registration");
         
         // setup registration
-        let registration = AGDeviceRegistration(serverURL: URL(string: "http://server.com")!)
+        let registration = DeviceRegistration(serverURL: URL(string: "http://server.com")!)
         
         // attemp to register
-        registration.registerWithClientInfo({ (clientInfo: AGClientDeviceInformation!) in
+        registration.registerWithClientInfo({ (clientInfo: ClientDeviceInformation!) in
 
             // setup configuration
             clientInfo.deviceToken = "2c948a843e6404dd013e79d82e5a0009".data(using: String.Encoding.utf8) // dummy token
@@ -91,11 +91,11 @@ class AGDeviceRegistrationTests: XCTestCase {
         let registrationExpectation = expectation(description: "UPS registration");
         
         // setup registration
-        let registration = AGDeviceRegistration(config: "pushproperties")
+        let registration = DeviceRegistration(config: "pushproperties")
         registration.overridePushProperties(["serverURL": "http://serveroverridden.com"])
         
         // attemp to register
-        registration.registerWithClientInfo({ (clientInfo: AGClientDeviceInformation!) in
+        registration.registerWithClientInfo({ (clientInfo: ClientDeviceInformation!) in
             
             // setup configuration
             clientInfo.deviceToken = "2c948a843e6404dd013e79d82e5a0009".data(using: String.Encoding.utf8) // dummy token
@@ -144,10 +144,10 @@ class AGDeviceRegistrationTests: XCTestCase {
         let registrationExpectation = expectation(description: "UPS registration with redirect");
 
         // setup registration
-        let registration = AGDeviceRegistration(serverURL: URL(string: "http://server.com")!)
+        let registration = DeviceRegistration(serverURL: URL(string: "http://server.com")!)
         
         // attemp to register
-        registration.registerWithClientInfo({ (clientInfo: AGClientDeviceInformation!) in
+        registration.registerWithClientInfo({ (clientInfo: ClientDeviceInformation!) in
             
             // setup configuration
             clientInfo.deviceToken = "2c948a843e6404dd013e79d82e5a0009".data(using: String.Encoding.utf8) // dummy token

@@ -20,7 +20,7 @@ import UIKit
 import AeroGearPush
 import OHHTTPStubs
 
-class AGPushAnalyticsTests: XCTestCase {
+class PushAnalyticsTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
@@ -57,7 +57,7 @@ class AGPushAnalyticsTests: XCTestCase {
         var options: [AnyHashable: Any] = [:]
         options[UIApplicationLaunchOptionsKey.remoteNotification] = ["aerogear-push-id":"123456"]
         // attemp to register
-        AGPushAnalytics.sendMetricsWhenAppLaunched(options) { (error) -> Void in
+        PushAnalytics.sendMetricsWhenAppLaunched(options) { (error) -> Void in
             assert(error == nil, "Metrics sent without error")
             sendMetricsExpectation.fulfill()
         }
@@ -77,13 +77,13 @@ class AGPushAnalyticsTests: XCTestCase {
         let sendMetricsExpectation = expectation(description: "Send Metrics");
         
         // setup registration
-        _ = AGDeviceRegistration(serverURL: URL(string: "http://server.com")!)
+        _ = DeviceRegistration(serverURL: URL(string: "http://server.com")!)
         
         var options: [AnyHashable: Any] = [:]
         options[UIApplicationLaunchOptionsKey.remoteNotification] = ["aerogear-push-id":"123456"]
         
         // attemp to register
-        AGPushAnalytics.sendMetricsWhenAppLaunched(options) { (error) -> Void in
+        PushAnalytics.sendMetricsWhenAppLaunched(options) { (error) -> Void in
             assert(error != nil, "Registration should happen before sending metrics")
             sendMetricsExpectation.fulfill()
         }

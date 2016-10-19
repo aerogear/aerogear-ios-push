@@ -8,16 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		455BE13E4277B151286D252A /* Pods_AeroGearPushTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05D4BCD108233945916B37DF /* Pods_AeroGearPushTests.framework */; };
-		482A24ED1B09D4BF00CE5BDC /* AGPushAnalyticsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482A24EB1B09D45000CE5BDC /* AGPushAnalyticsTests.swift */; };
+		482A24ED1B09D4BF00CE5BDC /* PushAnalyticsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482A24EB1B09D45000CE5BDC /* PushAnalyticsTests.swift */; };
 		48AAA6E81C450DA90048C53A /* pushproperties.plist in Resources */ = {isa = PBXBuildFile; fileRef = 48AAA6E71C450DA90048C53A /* pushproperties.plist */; };
-		48EDFAE61B00E8D300F8D11F /* AGPushAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48EDFAE51B00E8D300F8D11F /* AGPushAnalytics.swift */; };
-		6F46417219654E4A00D2B1C9 /* AGDeviceRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F46417119654E4A00D2B1C9 /* AGDeviceRegistration.swift */; };
-		6F464174196564A500D2B1C9 /* AGClientDeviceInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F464173196564A500D2B1C9 /* AGClientDeviceInformation.swift */; };
-		6F4641771965660300D2B1C9 /* AGClientDeviceInformationImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4641761965660300D2B1C9 /* AGClientDeviceInformationImpl.swift */; };
+		48EDFAE61B00E8D300F8D11F /* PushAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48EDFAE51B00E8D300F8D11F /* PushAnalytics.swift */; };
+		6F46417219654E4A00D2B1C9 /* DeviceRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F46417119654E4A00D2B1C9 /* DeviceRegistration.swift */; };
+		6F464174196564A500D2B1C9 /* ClientDeviceInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F464173196564A500D2B1C9 /* ClientDeviceInformation.swift */; };
+		6F4641771965660300D2B1C9 /* ClientDeviceInformationImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4641761965660300D2B1C9 /* ClientDeviceInformationImpl.swift */; };
 		6F46D37B19A3A726001799DB /* AeroGearPush.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F71353119646266009B26D8 /* AeroGearPush.framework */; };
 		6F4970DE1A1688DF00A1B50F /* AeroGearPush.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 6F71353119646266009B26D8 /* AeroGearPush.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6F71353719646266009B26D8 /* push-sdk-swift.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F71353619646266009B26D8 /* push-sdk-swift.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		6F71354419646266009B26D8 /* AGDeviceRegistrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F71354319646266009B26D8 /* AGDeviceRegistrationTests.swift */; };
+		6F71354419646266009B26D8 /* DeviceRegistrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F71354319646266009B26D8 /* DeviceRegistrationTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,19 +61,19 @@
 /* Begin PBXFileReference section */
 		05D4BCD108233945916B37DF /* Pods_AeroGearPushTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AeroGearPushTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C2A5D518A7E93769A13252A /* Pods-AeroGearPushTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AeroGearPushTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AeroGearPushTests/Pods-AeroGearPushTests.debug.xcconfig"; sourceTree = "<group>"; };
-		482A24EB1B09D45000CE5BDC /* AGPushAnalyticsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AGPushAnalyticsTests.swift; sourceTree = "<group>"; };
+		482A24EB1B09D45000CE5BDC /* PushAnalyticsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushAnalyticsTests.swift; sourceTree = "<group>"; };
 		48AAA6E71C450DA90048C53A /* pushproperties.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = pushproperties.plist; sourceTree = "<group>"; };
-		48EDFAE51B00E8D300F8D11F /* AGPushAnalytics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AGPushAnalytics.swift; sourceTree = "<group>"; };
+		48EDFAE51B00E8D300F8D11F /* PushAnalytics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushAnalytics.swift; sourceTree = "<group>"; };
 		6EA6D52ABF5A679A23B4F606 /* Pods-AeroGearPushTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AeroGearPushTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-AeroGearPushTests/Pods-AeroGearPushTests.release.xcconfig"; sourceTree = "<group>"; };
-		6F46417119654E4A00D2B1C9 /* AGDeviceRegistration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AGDeviceRegistration.swift; sourceTree = "<group>"; };
-		6F464173196564A500D2B1C9 /* AGClientDeviceInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AGClientDeviceInformation.swift; sourceTree = "<group>"; };
-		6F4641761965660300D2B1C9 /* AGClientDeviceInformationImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AGClientDeviceInformationImpl.swift; sourceTree = "<group>"; };
+		6F46417119654E4A00D2B1C9 /* DeviceRegistration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceRegistration.swift; sourceTree = "<group>"; };
+		6F464173196564A500D2B1C9 /* ClientDeviceInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientDeviceInformation.swift; sourceTree = "<group>"; };
+		6F4641761965660300D2B1C9 /* ClientDeviceInformationImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientDeviceInformationImpl.swift; sourceTree = "<group>"; };
 		6F71353119646266009B26D8 /* AeroGearPush.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AeroGearPush.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F71353519646266009B26D8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6F71353619646266009B26D8 /* push-sdk-swift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "push-sdk-swift.h"; sourceTree = "<group>"; };
 		6F71353C19646266009B26D8 /* AeroGearPushTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AeroGearPushTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F71354219646266009B26D8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6F71354319646266009B26D8 /* AGDeviceRegistrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AGDeviceRegistrationTests.swift; sourceTree = "<group>"; };
+		6F71354319646266009B26D8 /* DeviceRegistrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceRegistrationTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,7 +99,7 @@
 		6F464175196565EE00D2B1C9 /* Internal */ = {
 			isa = PBXGroup;
 			children = (
-				6F4641761965660300D2B1C9 /* AGClientDeviceInformationImpl.swift */,
+				6F4641761965660300D2B1C9 /* ClientDeviceInformationImpl.swift */,
 			);
 			name = Internal;
 			sourceTree = "<group>";
@@ -129,9 +129,9 @@
 			children = (
 				6F71353619646266009B26D8 /* push-sdk-swift.h */,
 				6F464175196565EE00D2B1C9 /* Internal */,
-				6F46417119654E4A00D2B1C9 /* AGDeviceRegistration.swift */,
-				6F464173196564A500D2B1C9 /* AGClientDeviceInformation.swift */,
-				48EDFAE51B00E8D300F8D11F /* AGPushAnalytics.swift */,
+				6F46417119654E4A00D2B1C9 /* DeviceRegistration.swift */,
+				6F464173196564A500D2B1C9 /* ClientDeviceInformation.swift */,
+				48EDFAE51B00E8D300F8D11F /* PushAnalytics.swift */,
 				6F71353419646266009B26D8 /* Supporting Files */,
 			);
 			path = "push-sdk-swift";
@@ -148,8 +148,8 @@
 		6F71354019646266009B26D8 /* push-sdk-swiftTests */ = {
 			isa = PBXGroup;
 			children = (
-				6F71354319646266009B26D8 /* AGDeviceRegistrationTests.swift */,
-				482A24EB1B09D45000CE5BDC /* AGPushAnalyticsTests.swift */,
+				6F71354319646266009B26D8 /* DeviceRegistrationTests.swift */,
+				482A24EB1B09D45000CE5BDC /* PushAnalyticsTests.swift */,
 				6F71354119646266009B26D8 /* Supporting Files */,
 			);
 			path = "push-sdk-swiftTests";
@@ -348,10 +348,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				48EDFAE61B00E8D300F8D11F /* AGPushAnalytics.swift in Sources */,
-				6F4641771965660300D2B1C9 /* AGClientDeviceInformationImpl.swift in Sources */,
-				6F46417219654E4A00D2B1C9 /* AGDeviceRegistration.swift in Sources */,
-				6F464174196564A500D2B1C9 /* AGClientDeviceInformation.swift in Sources */,
+				48EDFAE61B00E8D300F8D11F /* PushAnalytics.swift in Sources */,
+				6F4641771965660300D2B1C9 /* ClientDeviceInformationImpl.swift in Sources */,
+				6F46417219654E4A00D2B1C9 /* DeviceRegistration.swift in Sources */,
+				6F464174196564A500D2B1C9 /* ClientDeviceInformation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -359,8 +359,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				482A24ED1B09D4BF00CE5BDC /* AGPushAnalyticsTests.swift in Sources */,
-				6F71354419646266009B26D8 /* AGDeviceRegistrationTests.swift in Sources */,
+				482A24ED1B09D4BF00CE5BDC /* PushAnalyticsTests.swift in Sources */,
+				6F71354419646266009B26D8 /* DeviceRegistrationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

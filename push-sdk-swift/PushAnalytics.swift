@@ -21,11 +21,11 @@ import UIKit
 /**
 Utility class used to send metrics information to the AeroGear UnifiedPush Server when the app is opened due to a Push notification.
 */
-open class AGPushAnalytics {
-    struct AGPushAnalyticsError {
-        static let AGPushAnalyticsErrorDomain = "AGPushAnalyticsErrorDomain"
-        static let AGNetworkingOperationFailingURLRequestErrorKey = "AGNetworkingOperationFailingURLRequestErrorKey"
-        static let AGNetworkingOperationFailingURLResponseErrorKey = "AGNetworkingOperationFailingURLResponseErrorKey"
+open class PushAnalytics {
+    struct PushAnalyticsError {
+        static let PushAnalyticsErrorDomain = "PushAnalyticsErrorDomain"
+        static let NetworkingOperationFailingURLRequestErrorKey = "NetworkingOperationFailingURLRequestErrorKey"
+        static let NetworkingOperationFailingURLResponseErrorKey = "NetworkingOperationFailingURLResponseErrorKey"
     }
     /**
     Send metrics to the AeroGear Push server when the app is launched due to a push notification.
@@ -98,10 +98,10 @@ open class AGPushAnalytics {
                     
                 } else { // nope, client request error (e.g. 401 /* Unauthorized */)
                     let userInfo = [NSLocalizedDescriptionKey : HTTPURLResponse.localizedString(forStatusCode: httpResp.statusCode),
-                        AGPushAnalyticsError.AGNetworkingOperationFailingURLRequestErrorKey: request,
-                        AGPushAnalyticsError.AGNetworkingOperationFailingURLResponseErrorKey: response!] as [String : Any];
+                        PushAnalyticsError.NetworkingOperationFailingURLRequestErrorKey: request,
+                        PushAnalyticsError.NetworkingOperationFailingURLResponseErrorKey: response!] as [String : Any];
                     
-                    let error = NSError(domain:AGPushAnalyticsError.AGPushAnalyticsErrorDomain, code: NSURLErrorBadServerResponse, userInfo: userInfo)
+                    let error = NSError(domain:PushAnalyticsError.PushAnalyticsErrorDomain, code: NSURLErrorBadServerResponse, userInfo: userInfo)
                     
                     completionHandler(error)
                 }
@@ -110,7 +110,7 @@ open class AGPushAnalytics {
             task.resume()
         } else {
             let userInfo = [NSLocalizedDescriptionKey : "Registration should be done prior to metrics collection"];
-            let error = NSError(domain:AGPushAnalyticsError.AGPushAnalyticsErrorDomain, code: 0, userInfo: userInfo)
+            let error = NSError(domain:PushAnalyticsError.PushAnalyticsErrorDomain, code: 0, userInfo: userInfo)
             completionHandler(error)
         }
     }

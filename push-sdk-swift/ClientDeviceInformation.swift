@@ -21,7 +21,7 @@ import Foundation
  Represents the set of allowed device metadata.
  */
 @objc 
-public protocol AGClientDeviceInformation {
+public protocol ClientDeviceInformation {
     
     /**
     The Device Token which identifies the device within APNs.

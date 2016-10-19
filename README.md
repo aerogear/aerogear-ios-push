@@ -52,10 +52,10 @@ to install your dependencies
 ```swift
   func application(application: UIApplication!, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData!) {
      // setup registration
-    let registration = AGDeviceRegistration(serverURL: NSURL(string: "<# URL of the running AeroGear UnifiedPush Server #>")!)
+    let registration = DeviceRegistration(serverURL: NSURL(string: "<# URL of the running AeroGear UnifiedPush Server #>")!)
     
     // attemp to register
-    registration.registerWithClientInfo({ (clientInfo: AGClientDeviceInformation!) in
+    registration.registerWithClientInfo({ (clientInfo: ClientDeviceInformation!) in
         // setup configuration
         clientInfo.deviceToken = deviceToken
         clientInfo.variantID = "<# Variant Id #>"
@@ -86,10 +86,10 @@ In the ```AppDelegate.swift``` file:
 ```swift
   func application(application: UIApplication!, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData!) {
      // setup registration
-    let registration = AGDeviceRegistration()
+    let registration = DeviceRegistration()
     
     // attemp to register
-    registration.registerWithClientInfo({ (clientInfo: AGClientDeviceInformation!) in
+    registration.registerWithClientInfo({ (clientInfo: ClientDeviceInformation!) in
         // setup configuration
         clientInfo.deviceToken = deviceToken
         let currentDevice = UIDevice()
@@ -130,7 +130,7 @@ If you are interested in monitoring how a push message relates to the usage of y
 * Send metrics when app is launched due to push notification
 ```swift
 func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        AGPushAnalytics.sendMetricsWhenAppLaunched(launchOptions)
+        PushAnalytics.sendMetricsWhenAppLaunched(launchOptions)
         return true
     }
 ```
@@ -138,7 +138,7 @@ func application(application: UIApplication, didFinishLaunchingWithOptions launc
 ```swift
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject: AnyObject], fetchCompletionHandler: (UIBackgroundFetchResult) -> Void) {      
         // Send metrics when app is launched due to push notification
-        AGPushAnalytics.sendMetricsWhenAppAwoken(application.applicationState, userInfo: userInfo)
+        PushAnalytics.sendMetricsWhenAppAwoken(application.applicationState, userInfo: userInfo)
         
         // Do stuff ...
         fetchCompletionHandler(UIBackgroundFetchResult.NoData)
