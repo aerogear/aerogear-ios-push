@@ -5,7 +5,7 @@ platform :ios, '8.0'
 use_frameworks!
 
 target 'AeroGearPushTests' do
-	pod 'OHHTTPStubs', '5.2.1'
+	pod 'OHHTTPStubs', '5.2.0'
 end
 
 # Workaround to fix swift version to 3.0 for Pods.
