@@ -21,11 +21,11 @@ import UIKit
 /**
 Utility class used to send metrics information to the AeroGear UnifiedPush Server when the app is opened due to a Push notification.
 */
-public class AGPushAnalytics {
-    struct AGPushAnalyticsError {
-        static let AGPushAnalyticsErrorDomain = "AGPushAnalyticsErrorDomain"
-        static let AGNetworkingOperationFailingURLRequestErrorKey = "AGNetworkingOperationFailingURLRequestErrorKey"
-        static let AGNetworkingOperationFailingURLResponseErrorKey = "AGNetworkingOperationFailingURLResponseErrorKey"
+open class PushAnalytics {
+    struct PushAnalyticsError {
+        static let PushAnalyticsErrorDomain = "PushAnalyticsErrorDomain"
+        static let NetworkingOperationFailingURLRequestErrorKey = "NetworkingOperationFailingURLRequestErrorKey"
+        static let NetworkingOperationFailingURLResponseErrorKey = "NetworkingOperationFailingURLResponseErrorKey"
     }
     /**
     Send metrics to the AeroGear Push server when the app is launched due to a push notification.
@@ -34,9 +34,9 @@ public class AGPushAnalytics {
     
     :param: completionHandler A block object to be executed when the send metrics operation finishes. Defaulted to no action.
     */
-    class public func sendMetricsWhenAppLaunched(launchOptions: [NSObject:AnyObject]?, completionHandler: ((error: NSError? ) -> Void) = {(error: NSError?) in }) {
+    class open func sendMetricsWhenAppLaunched(_ launchOptions: [AnyHashable: Any]?, completionHandler: @escaping ((_ error: NSError? ) -> Void) = {(error: NSError?) in }) {
         if let options = launchOptions {
-            if let option : NSDictionary = options[UIApplicationLaunchOptionsRemoteNotificationKey] as? NSDictionary {
+            if let option : NSDictionary = options[UIApplicationLaunchOptionsKey.remoteNotification] as? NSDictionary {
                 if let metrics = option["aerogear-push-id"] as? String {
                     sendMetrics(metrics, completionHandler: completionHandler)
                 }
@@ -52,8 +52,8 @@ public class AGPushAnalytics {
     :param: userInfo contains the message id used to collect metrics.
     :param: completionHandler A block object to be executed when the send metrics operation finishes. Defaulted to no action.
     */
-    class public func sendMetricsWhenAppAwoken(applicationState: UIApplicationState, userInfo: [NSObject:AnyObject], completionHandler: ((error: NSError? ) -> Void) = {(error: NSError?) in }) {
-        if applicationState == .Inactive || applicationState == .Background  {
+    class open func sendMetricsWhenAppAwoken(_ applicationState: UIApplicationState, userInfo: [AnyHashable: Any], completionHandler: @escaping ((_ error: NSError? ) -> Void) = {(error: NSError?) in }) {
+        if applicationState == .inactive || applicationState == .background  {
             //opened from a push notification when the app was on background
             if let messageId = userInfo["aerogear-push-id"] as? String {
                 sendMetrics(messageId, completionHandler: completionHandler)
@@ -61,57 +61,57 @@ public class AGPushAnalytics {
         }
     }
     
-    class private func sendMetrics(messageId: String, completionHandler: ((error: NSError? ) -> Void) = {(error: NSError?) in }) {
-        let variantId = NSUserDefaults.standardUserDefaults().valueForKey("variantID") as? String
-        let variantSecret = NSUserDefaults.standardUserDefaults().valueForKey("variantSecret") as? String
-        let urlString = NSUserDefaults.standardUserDefaults().valueForKey("serverURL") as? String
+    class fileprivate func sendMetrics(_ messageId: String, completionHandler: @escaping ((_ error: NSError? ) -> Void) = {(error: NSError?) in }) {
+        let variantId = UserDefaults.standard.value(forKey: "variantID") as? String
+        let variantSecret = UserDefaults.standard.value(forKey: "variantSecret") as? String
+        let urlString = UserDefaults.standard.value(forKey: "serverURL") as? String
         
         
         if let variantId = variantId, let variantSecret = variantSecret, let urlString = urlString {
-            let serverURL = NSURL(string: urlString)
+            let serverURL = URL(string: urlString)
             // set up our request
-            let request = NSMutableURLRequest(URL: serverURL!.URLByAppendingPathComponent("rest/registry/device/pushMessage/\(messageId)")!)
+            var request = URLRequest(url: serverURL!.appendingPathComponent("rest/registry/device/pushMessage/\(messageId)"))
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-            request.HTTPMethod = "PUT"
+            request.httpMethod = "PUT"
             
             // apply HTTP Basic
-            let basicAuthCredentials: NSData! = "\(variantId):\(variantSecret)".dataUsingEncoding(NSUTF8StringEncoding)
-            let base64Encoded = basicAuthCredentials.base64EncodedStringWithOptions(NSDataBase64EncodingOptions(rawValue: 0))
+            let basicAuthCredentials: Data! = "\(variantId):\(variantSecret)".data(using: String.Encoding.utf8)
+            let base64Encoded = basicAuthCredentials.base64EncodedString(options: NSData.Base64EncodingOptions(rawValue: 0))
             
             request.setValue("Basic \(base64Encoded)", forHTTPHeaderField: "Authorization")
             
-            let sessionConfig = NSURLSessionConfiguration.defaultSessionConfiguration()
-            let session = NSURLSession(configuration: sessionConfig)
+            let sessionConfig = URLSessionConfiguration.default
+            let session = URLSession(configuration: sessionConfig)
             
-            let task = session.dataTaskWithRequest(request) {(data, response, error) in
+            let task = session.dataTask(with: request, completionHandler: {(data, response, error) in
                 if error != nil {
-                    completionHandler(error: error)
+                    completionHandler(error as NSError?)
                     return
                 }
                 
                 // verity HTTP status
-                let httpResp = response as! NSHTTPURLResponse
+                let httpResp = response as! HTTPURLResponse
                 
                 // did we succeed?
                 if httpResp.statusCode == 200 {
-                    completionHandler(error: nil)
+                    completionHandler(nil)
                     
                 } else { // nope, client request error (e.g. 401 /* Unauthorized */)
-                    let userInfo = [NSLocalizedDescriptionKey : NSHTTPURLResponse.localizedStringForStatusCode(httpResp.statusCode),
-                        AGPushAnalyticsError.AGNetworkingOperationFailingURLRequestErrorKey: request,
-                        AGPushAnalyticsError.AGNetworkingOperationFailingURLResponseErrorKey: response!];
+                    let userInfo = [NSLocalizedDescriptionKey : HTTPURLResponse.localizedString(forStatusCode: httpResp.statusCode),
+                        PushAnalyticsError.NetworkingOperationFailingURLRequestErrorKey: request,
+                        PushAnalyticsError.NetworkingOperationFailingURLResponseErrorKey: response!] as [String : Any];
                     
-                    let error = NSError(domain:AGPushAnalyticsError.AGPushAnalyticsErrorDomain, code: NSURLErrorBadServerResponse, userInfo: userInfo)
+                    let error = NSError(domain:PushAnalyticsError.PushAnalyticsErrorDomain, code: NSURLErrorBadServerResponse, userInfo: userInfo)
                     
-                    completionHandler(error: error)
+                    completionHandler(error)
                 }
-            }
+            }) 
             
             task.resume()
         } else {
             let userInfo = [NSLocalizedDescriptionKey : "Registration should be done prior to metrics collection"];
-            let error = NSError(domain:AGPushAnalyticsError.AGPushAnalyticsErrorDomain, code: 0, userInfo: userInfo)
-            completionHandler(error: error)
+            let error = NSError(domain:PushAnalyticsError.PushAnalyticsErrorDomain, code: 0, userInfo: userInfo)
+            completionHandler(error)
         }
     }
 }

@@ -19,57 +19,57 @@ import Foundation
 /**
  Utility to register an iOS device with the AeroGear UnifiedPush Server.
  */
-public class AGDeviceRegistration: NSObject, NSURLSessionTaskDelegate {
+open class DeviceRegistration: NSObject, URLSessionTaskDelegate {
     
-    struct AGDeviceRegistrationError {
-        static let AGPushErrorDomain = "AGPushErrorDomain"
-        static let AGNetworkingOperationFailingURLRequestErrorKey = "AGNetworkingOperationFailingURLRequestErrorKey"
-        static let AGNetworkingOperationFailingURLResponseErrorKey = "AGNetworkingOperationFailingURLResponseErrorKey"
+    struct DeviceRegistrationError {
+        static let PushErrorDomain = "PushErrorDomain"
+        static let NetworkingOperationFailingURLRequestErrorKey = "NetworkingOperationFailingURLRequestErrorKey"
+        static let NetworkingOperationFailingURLResponseErrorKey = "NetworkingOperationFailingURLResponseErrorKey"
     }
     
-    var serverURL: NSURL!
-    var session: NSURLSession!
+    var serverURL: URL!
+    var session: Foundation.URLSession!
     var config: String?
     var overrrideProperties: [String: String]?
     
     /**
-    An initializer method to instantiate an AGDeviceRegistration object.
+    An initializer method to instantiate an DeviceRegistration object.
     
     :param: serverURL the URL of the AeroGear Push server.
     
-    :returns: the AGDeviceRegistration object.
+    :returns: the DeviceRegistration object.
     */
-    public init(serverURL: NSURL) {
+    public init(serverURL: URL) {
         self.serverURL = serverURL;
 
         super.init()
 
-        let sessionConfig = NSURLSessionConfiguration.defaultSessionConfiguration()
-        self.session = NSURLSession(configuration: sessionConfig, delegate: self, delegateQueue: NSOperationQueue.mainQueue())
+        let sessionConfig = URLSessionConfiguration.default
+        self.session = Foundation.URLSession(configuration: sessionConfig, delegate: self, delegateQueue: OperationQueue.main)
     }
     
     /**
-    An initializer method to instantiate an AGDeviceRegistration object with default app plist config file.
+    An initializer method to instantiate an DeviceRegistration object with default app plist config file.
     
     :param: config file name where to fetch AeroGear UnifiedPush server configuration.
-    :returns: the AGDeviceRegistration object.
+    :returns: the DeviceRegistration object.
     */
     public convenience init(config: String) {
         self.init()
         self.config = config
     }
     /**
-    An initializer method to instantiate an AGDeviceRegistration object.
+    An initializer method to instantiate an DeviceRegistration object.
     
-    :returns: the AGDeviceRegistration object.
+    :returns: the DeviceRegistration object.
     */
     public override init() {
         super.init()
-        let sessionConfig = NSURLSessionConfiguration.defaultSessionConfiguration()
-        self.session = NSURLSession(configuration: sessionConfig, delegate: self, delegateQueue: NSOperationQueue.mainQueue())
+        let sessionConfig = URLSessionConfiguration.default
+        self.session = Foundation.URLSession(configuration: sessionConfig, delegate: self, delegateQueue: OperationQueue.main)
     }
     
-    public func overridePushProperties(pushProperties: [String: String]) {
+    open func overridePushProperties(_ pushProperties: [String: String]) {
         overrrideProperties = pushProperties;
     }
     
@@ -89,7 +89,7 @@ public class AGDeviceRegistration: NSObject, NSURLSessionTaskDelegate {
        </dict>
       </plist>
     
-    :param: clientInfo A block object which passes in an implementation of the AGClientDeviceInformation protocol that
+    :param: clientInfo A block object which passes in an implementation of the ClientDeviceInformation protocol that
     holds configuration metadata that would be posted to the server during the registration process.
     
     :param: success A block object to be executed when the registration operation finishes successfully.
@@ -99,15 +99,15 @@ public class AGDeviceRegistration: NSObject, NSURLSessionTaskDelegate {
     This block has no return value and takes one argument: The `NSError` object describing
     the error that occurred during the registration process.
     */
-    public func registerWithClientInfo(clientInfo: ((config: AGClientDeviceInformation) -> Void)!,
+    open func registerWithClientInfo(_ clientInfo: ((_ config: ClientDeviceInformation) -> Void)!,
         success:(() -> Void)!, failure:((NSError) -> Void)!) -> Void {
             
             // can't proceed with no configuration block set
             assert(clientInfo != nil, "configuration block not set")
 
-            let clientInfoObject = AGClientDeviceInformationImpl()
+            let clientInfoObject = ClientDeviceInformationImpl()
         
-            clientInfo(config: clientInfoObject)
+            clientInfo(clientInfoObject)
             
             // Check if config is available in plist file
             if clientInfoObject.variantID == nil && self.configValueForKey("variantID") != nil {
@@ -119,7 +119,7 @@ public class AGDeviceRegistration: NSObject, NSURLSessionTaskDelegate {
             }
             
             if self.serverURL?.absoluteString == nil && self.configValueForKey("serverURL") != nil {
-                if let urlString = self.configValueForKey("serverURL"), let url = NSURL(string: urlString) {
+                if let urlString = self.configValueForKey("serverURL"), let url = URL(string: urlString) {
                     self.serverURL = url
                 } else {
                     assert(self.serverURL?.absoluteString != nil, "'serverURL' should be set")
@@ -129,7 +129,7 @@ public class AGDeviceRegistration: NSObject, NSURLSessionTaskDelegate {
             // deviceToken could be nil then retrieved it from local storage (from previous register).
             // This is the use case when you update categories.
             if clientInfoObject.deviceToken == nil {
-                clientInfoObject.deviceToken = NSUserDefaults.standardUserDefaults().objectForKey("deviceToken") as? NSData
+                clientInfoObject.deviceToken = UserDefaults.standard.object(forKey: "deviceToken") as? Data
             }
             
             // Fail if not all config mandatory items are present
@@ -138,55 +138,55 @@ public class AGDeviceRegistration: NSObject, NSURLSessionTaskDelegate {
             assert(clientInfoObject.variantSecret != nil, "'variantSecret' should be set");
             
             // locally stored information (used for metrics)
-            NSUserDefaults.standardUserDefaults().setObject(clientInfoObject.deviceToken, forKey: "deviceToken")
-            NSUserDefaults.standardUserDefaults().setObject(clientInfoObject.variantID, forKey: "variantID")
-            NSUserDefaults.standardUserDefaults().setObject(clientInfoObject.variantSecret, forKey: "variantSecret")
-            NSUserDefaults.standardUserDefaults().setObject(self.serverURL.absoluteString, forKey: "serverURL")
+            UserDefaults.standard.set(clientInfoObject.deviceToken, forKey: "deviceToken")
+            UserDefaults.standard.set(clientInfoObject.variantID, forKey: "variantID")
+            UserDefaults.standard.set(clientInfoObject.variantSecret, forKey: "variantSecret")
+            UserDefaults.standard.set(self.serverURL.absoluteString, forKey: "serverURL")
             
             // set up our request
-            let request = NSMutableURLRequest(URL: serverURL.URLByAppendingPathComponent("rest/registry/device")!)
+            var request = URLRequest(url: serverURL.appendingPathComponent("rest/registry/device"))
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-            request.HTTPMethod = "POST"
+            request.httpMethod = "POST"
             
             // apply HTTP Basic
-            let basicAuthCredentials: NSData! = "\(clientInfoObject.variantID!):\(clientInfoObject.variantSecret!)".dataUsingEncoding(NSUTF8StringEncoding)
-            let base64Encoded = basicAuthCredentials.base64EncodedStringWithOptions(NSDataBase64EncodingOptions(rawValue: 0))
+            let basicAuthCredentials: Data! = "\(clientInfoObject.variantID!):\(clientInfoObject.variantSecret!)".data(using: String.Encoding.utf8)
+            let base64Encoded = basicAuthCredentials.base64EncodedString(options: NSData.Base64EncodingOptions(rawValue: 0))
             
             request.setValue("Basic \(base64Encoded)", forHTTPHeaderField: "Authorization")
             
             // serialize request
-            let postData: NSData?
+            let postData: Data?
             do {
-                postData = try NSJSONSerialization.dataWithJSONObject(clientInfoObject.extractValues(), options:[])
+                postData = try JSONSerialization.data(withJSONObject: clientInfoObject.extractValues(), options:[])
             } catch _ {
                 postData = nil
             }
             
-            request.HTTPBody = postData
+            request.httpBody = postData
             
-            let task = session.dataTaskWithRequest(request) {(data, response, error) in
-                    if let error = error {
-                        failure(error)
+            let task = session.dataTask(with: request, completionHandler: {(data, response, error) in
+                    if error != nil {
+                        failure(error as NSError!)
                         return
                     }
-                    
+                
                     // verity HTTP status
-                    let httpResp = response as! NSHTTPURLResponse
+                    let httpResp = response as! HTTPURLResponse
 
                     // did we succeed?
                     if httpResp.statusCode == 200 {
                         success()
 
                     } else { // nope, client request error (e.g. 401 /* Unauthorized */)
-                        let userInfo = [NSLocalizedDescriptionKey : NSHTTPURLResponse.localizedStringForStatusCode(httpResp.statusCode),
-                            AGDeviceRegistrationError.AGNetworkingOperationFailingURLRequestErrorKey: request,
-                            AGDeviceRegistrationError.AGNetworkingOperationFailingURLResponseErrorKey: response!];
+                        let userInfo = [NSLocalizedDescriptionKey : HTTPURLResponse.localizedString(forStatusCode: httpResp.statusCode),
+                            DeviceRegistrationError.NetworkingOperationFailingURLRequestErrorKey: request,
+                            DeviceRegistrationError.NetworkingOperationFailingURLResponseErrorKey: response!] as [String : Any];
                         
-                        let error = NSError(domain:AGDeviceRegistrationError.AGPushErrorDomain, code: NSURLErrorBadServerResponse, userInfo: userInfo)
+                        let error = NSError(domain:DeviceRegistrationError.PushErrorDomain, code: NSURLErrorBadServerResponse, userInfo: userInfo)
 
                         failure(error)
                     }
-            }
+            }) 
             
             task.resume()
     }
@@ -204,33 +204,33 @@ public class AGDeviceRegistration: NSObject, NSURLSessionTaskDelegate {
           We need to 'override' that 'default' behaviour to return the original attempted NSURLRequest
           with the URL parameter updated to point to the new 'Location' header.
     */
-    public func URLSession(session: NSURLSession, task: NSURLSessionTask, willPerformHTTPRedirection redirectResponse: NSHTTPURLResponse, newRequest redirectReq: NSURLRequest, completionHandler: ((NSURLRequest?) -> Void)) {
+    open func urlSession(_ session: URLSession, task: URLSessionTask, willPerformHTTPRedirection redirectResponse: HTTPURLResponse, newRequest redirectReq: URLRequest, completionHandler: (@escaping (URLRequest?) -> Void)) {
         
         var request = redirectReq;
 
         // we need to redirect
         // update URL of the original request
         // to the 'new' redirected one
-        let origRequest = task.originalRequest!.mutableCopy() as! NSMutableURLRequest
-        origRequest.URL = redirectReq.URL
-        request = origRequest
+        let origRequest = (task.originalRequest! as NSURLRequest).mutableCopy() as! NSMutableURLRequest
+        origRequest.url = redirectReq.url
+        request = origRequest as URLRequest
         
         completionHandler(request)
     }
 
     
-    private func configValueForKey(key: String) -> String? {
+    fileprivate func configValueForKey(_ key: String) -> String? {
         var value: String?
-        if let overrideProperties = self.overrrideProperties, serverURLPropertie = overrideProperties[key] {
+        if let overrideProperties = self.overrrideProperties, let serverURLPropertie = overrideProperties[key] {
             value = serverURLPropertie
         } else if let config = self.config { // specified plist config file
-            let path = NSBundle.mainBundle().pathForResource(config, ofType: "plist")
+            let path = Bundle.main.path(forResource: config, ofType: "plist")
             let properties = NSMutableDictionary(contentsOfFile: path!)
             if let properties = properties {
                 value = properties[key as String] as? String
             }
         } else {
-            value = NSBundle.mainBundle().objectForInfoDictionaryKey(key) as? String
+            value = Bundle.main.object(forInfoDictionaryKey: key) as? String
         }
         if (value == nil && value!.isEmpty)  {
             return nil
