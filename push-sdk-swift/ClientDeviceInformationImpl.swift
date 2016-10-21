@@ -21,7 +21,7 @@ import Foundation
  * Internal implementation of the ClientDeviceInformation protocol
  */
 class ClientDeviceInformationImpl: NSObject, ClientDeviceInformation {
-    
+
     var deviceToken: Data?
     var variantID: String?
     var variantSecret: String?
@@ -34,7 +34,7 @@ class ClientDeviceInformationImpl: NSObject, ClientDeviceInformation {
     override init() {
         super.init()        
     }
-    
+
     func extractValues() -> [String: AnyObject] {
         var jsonObject =  [String: AnyObject]()
         
@@ -44,13 +44,13 @@ class ClientDeviceInformationImpl: NSObject, ClientDeviceInformation {
         jsonObject["operatingSystem"] = operatingSystem as AnyObject?
         jsonObject["osVersion"] = osVersion as AnyObject?
         jsonObject["deviceType"] = deviceType as AnyObject?
-        
+
         return jsonObject;
     }
-    
-    // Helper to transform the NSData-based token into a (useful) String:
+
+    // Helper to transform the Data-based token into a (useful) String:
     fileprivate func convertToString(_ deviceToken: Data?) -> String? {
-        if let token = deviceToken?.description {
+        if let token = (deviceToken as NSData?)?.description {
             return token.replacingOccurrences(of: "<", with: "")
                 .replacingOccurrences(of: ">", with: "")
                 .replacingOccurrences(of: " ", with: "")
@@ -58,5 +58,5 @@ class ClientDeviceInformationImpl: NSObject, ClientDeviceInformation {
         
         return nil
     }
-    
+
 }
