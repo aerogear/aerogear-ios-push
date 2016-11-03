@@ -21,12 +21,12 @@ import Foundation
  Represents the set of allowed device metadata.
  */
 @objc 
-public protocol AGClientDeviceInformation {
+public protocol ClientDeviceInformation {
     
     /**
     The Device Token which identifies the device within APNs.
      */
-    var deviceToken: NSData? { get set }
+    var deviceToken: Data? { get set }
     
     /**
     The ID of the mobile Variant, for which this client will be registered.

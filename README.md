@@ -5,7 +5,7 @@
 
 **iOS Push Notification Registration SDK for the AeroGear UnifiedPush Server**
 
-A small and handy library written in [Swift](https://developer.apple.com/swift/) that helps to register iOS applications with the [AeroGear UnifiedPush Server](https://github.com/aerogear/aerogear-unified-push-server).
+A small and handy library written in [Swift 3.0](https://developer.apple.com/swift/) that helps to register iOS applications with the [AeroGear UnifiedPush Server](https://github.com/aerogear/aerogear-unified-push-server).
 
 |                 | Project Info  |
 | --------------- | ------------- |
@@ -22,11 +22,11 @@ A small and handy library written in [Swift](https://developer.apple.com/swift/)
 
 2. Get the dependencies
 
-The project uses [OHHTTPStubs](https://github.com/AliSoftware/OHHTTPStubs) framework for stubbing its http network requests and utilizes [CocoaPods](http://cocoapods.org) for handling its dependencies. As a pre-requisite, install [CocoaPods](https://cocoapods.org/) and then install the pod. On the root directory of the project run:
+The project uses [OHHTTPStubs](https://github.com/AliSoftware/OHHTTPStubs) framework for stubbing its http network requests and utilizes [CocoaPods](http://cocoapods.org) for handling its dependencies. As a pre-requisite, install [CocoaPods](https://guides.cocoapods.org/using/getting-started.html) and then install the pod. On the root directory of the project run:
 ```bash
 pod install
 ```
-3. open AeroGearPushSwift.xcworkspace
+3. open AeroGearPush.xcworkspace
 
 ## Adding the library to your project 
 To add the library in your project, you can either use [CocoaPods](http://cocoapods.org) or manual install either by dragging the code or building a ```framework``` to install in your project. See the respective sections below for instructions:
@@ -52,10 +52,10 @@ to install your dependencies
 ```swift
   func application(application: UIApplication!, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData!) {
      // setup registration
-    let registration = AGDeviceRegistration(serverURL: NSURL(string: "<# URL of the running AeroGear UnifiedPush Server #>")!)
+    let registration = DeviceRegistration(serverURL: NSURL(string: "<# URL of the running AeroGear UnifiedPush Server #>")!)
     
     // attemp to register
-    registration.registerWithClientInfo({ (clientInfo: AGClientDeviceInformation!) in
+    registration.registerWithClientInfo({ (clientInfo: ClientDeviceInformation!) in
         // setup configuration
         clientInfo.deviceToken = deviceToken
         clientInfo.variantID = "<# Variant Id #>"
@@ -86,10 +86,10 @@ In the ```AppDelegate.swift``` file:
 ```swift
   func application(application: UIApplication!, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData!) {
      // setup registration
-    let registration = AGDeviceRegistration()
+    let registration = DeviceRegistration()
     
     // attemp to register
-    registration.registerWithClientInfo({ (clientInfo: AGClientDeviceInformation!) in
+    registration.registerWithClientInfo({ (clientInfo: ClientDeviceInformation!) in
         // setup configuration
         clientInfo.deviceToken = deviceToken
         let currentDevice = UIDevice()
@@ -130,7 +130,7 @@ If you are interested in monitoring how a push message relates to the usage of y
 * Send metrics when app is launched due to push notification
 ```swift
 func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        AGPushAnalytics.sendMetricsWhenAppLaunched(launchOptions)
+        PushAnalytics.sendMetricsWhenAppLaunched(launchOptions)
         return true
     }
 ```
@@ -138,7 +138,7 @@ func application(application: UIApplication, didFinishLaunchingWithOptions launc
 ```swift
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject: AnyObject], fetchCompletionHandler: (UIBackgroundFetchResult) -> Void) {      
         // Send metrics when app is launched due to push notification
-        AGPushAnalytics.sendMetricsWhenAppAwoken(application.applicationState, userInfo: userInfo)
+        PushAnalytics.sendMetricsWhenAppAwoken(application.applicationState, userInfo: userInfo)
         
         // Do stuff ...
         fetchCompletionHandler(UIBackgroundFetchResult.NoData)

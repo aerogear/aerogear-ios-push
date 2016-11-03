@@ -18,11 +18,11 @@
 import Foundation
 
 /**
- * Internal implementation of the AGClientDeviceInformation protocol
+ * Internal implementation of the ClientDeviceInformation protocol
  */
-class AGClientDeviceInformationImpl: NSObject, AGClientDeviceInformation {
-    
-    var deviceToken: NSData?
+class ClientDeviceInformationImpl: NSObject, ClientDeviceInformation {
+
+    var deviceToken: Data?
     var variantID: String?
     var variantSecret: String?
     var alias: String?
@@ -34,29 +34,29 @@ class AGClientDeviceInformationImpl: NSObject, AGClientDeviceInformation {
     override init() {
         super.init()        
     }
-    
+
     func extractValues() -> [String: AnyObject] {
         var jsonObject =  [String: AnyObject]()
         
-        jsonObject["deviceToken"] = convertToString(deviceToken)
-        jsonObject["alias"] = alias
-        jsonObject["categories"] = categories
-        jsonObject["operatingSystem"] = operatingSystem
-        jsonObject["osVersion"] = osVersion
-        jsonObject["deviceType"] = deviceType
-        
+        jsonObject["deviceToken"] = convertToString(deviceToken) as AnyObject?
+        jsonObject["alias"] = alias as AnyObject?
+        jsonObject["categories"] = categories as AnyObject?
+        jsonObject["operatingSystem"] = operatingSystem as AnyObject?
+        jsonObject["osVersion"] = osVersion as AnyObject?
+        jsonObject["deviceType"] = deviceType as AnyObject?
+
         return jsonObject;
     }
-    
-    // Helper to transform the NSData-based token into a (useful) String:
-    private func convertToString(deviceToken: NSData?) -> String? {
-        if let token = deviceToken?.description {
-            return token.stringByReplacingOccurrencesOfString("<", withString: "")
-                .stringByReplacingOccurrencesOfString(">", withString: "")
-                .stringByReplacingOccurrencesOfString(" ", withString: "")
+
+    // Helper to transform the Data-based token into a (useful) String:
+    fileprivate func convertToString(_ deviceToken: Data?) -> String? {
+        if let token = (deviceToken as NSData?)?.description {
+            return token.replacingOccurrences(of: "<", with: "")
+                .replacingOccurrences(of: ">", with: "")
+                .replacingOccurrences(of: " ", with: "")
         }
         
         return nil
     }
-    
+
 }

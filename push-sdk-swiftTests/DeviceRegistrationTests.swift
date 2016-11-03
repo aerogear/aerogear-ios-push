@@ -20,7 +20,7 @@ import UIKit
 import AeroGearPush
 import OHHTTPStubs
 
-class AGDeviceRegistrationTests: XCTestCase {
+class DeviceRegistrationTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
@@ -34,23 +34,23 @@ class AGDeviceRegistrationTests: XCTestCase {
 
     func testRegistrationWithServerShouldWork() {
         // set up http stub
-        OHHTTPStubs.stubRequestsPassingTest({ _ in
+        OHHTTPStubs.stubRequests(passingTest: { _ in
             return true
-        }, withStubResponse:( { (request: NSURLRequest!) -> OHHTTPStubsResponse in
-            return OHHTTPStubsResponse(data:NSData(), statusCode: 200, headers: ["Content-Type" : "text/json"])
+        }, withStubResponse:( { (request: URLRequest!) -> OHHTTPStubsResponse in
+            return OHHTTPStubsResponse(data:Data(), statusCode: 200, headers: ["Content-Type" : "text/json"])
         }))
         
         // async test expectation
-        let registrationExpectation = expectationWithDescription("UPS registration");
+        let registrationExpectation = expectation(description: "UPS registration");
         
         // setup registration
-        let registration = AGDeviceRegistration(serverURL: NSURL(string: "http://server.com")!)
+        let registration = DeviceRegistration(serverURL: URL(string: "http://server.com")!)
         
         // attemp to register
-        registration.registerWithClientInfo({ (clientInfo: AGClientDeviceInformation!) in
+        registration.registerWithClientInfo({ (clientInfo: ClientDeviceInformation!) in
 
             // setup configuration
-            clientInfo.deviceToken = "2c948a843e6404dd013e79d82e5a0009".dataUsingEncoding(NSUTF8StringEncoding) // dummy token
+            clientInfo.deviceToken = "2c948a843e6404dd013e79d82e5a0009".data(using: String.Encoding.utf8) // dummy token
             clientInfo.variantID = "8bd6e6a3-df6b-466c-8292-ed062f2427e8"
             clientInfo.variantSecret = "1c9a6066-e0e5-4bcb-ab78-994335f59874"
             
@@ -74,31 +74,31 @@ class AGDeviceRegistrationTests: XCTestCase {
                 registrationExpectation.fulfill()
             })
         
-        waitForExpectationsWithTimeout(10, handler: nil)
+        waitForExpectations(timeout: 10, handler: nil)
     }
     
     func testRegistrationWithServerURLOverridenShouldWork() {
         var urlString: String?
         // set up http stub
-        OHHTTPStubs.stubRequestsPassingTest({ request in
-            urlString =  request.URL?.absoluteString
+        OHHTTPStubs.stubRequests(passingTest: { request in
+            urlString =  request.url?.absoluteString
             return true
-            }, withStubResponse:( { (request: NSURLRequest!) -> OHHTTPStubsResponse in
-                return OHHTTPStubsResponse(data:NSData(), statusCode: 200, headers: ["Content-Type" : "text/json"])
+            }, withStubResponse:( { (request: URLRequest!) -> OHHTTPStubsResponse in
+                return OHHTTPStubsResponse(data:Data(), statusCode: 200, headers: ["Content-Type" : "text/json"])
             }))
         
         // async test expectation
-        let registrationExpectation = expectationWithDescription("UPS registration");
+        let registrationExpectation = expectation(description: "UPS registration");
         
         // setup registration
-        let registration = AGDeviceRegistration(config: "pushproperties")
+        let registration = DeviceRegistration(config: "pushproperties")
         registration.overridePushProperties(["serverURL": "http://serveroverridden.com"])
         
         // attemp to register
-        registration.registerWithClientInfo({ (clientInfo: AGClientDeviceInformation!) in
+        registration.registerWithClientInfo({ (clientInfo: ClientDeviceInformation!) in
             
             // setup configuration
-            clientInfo.deviceToken = "2c948a843e6404dd013e79d82e5a0009".dataUsingEncoding(NSUTF8StringEncoding) // dummy token
+            clientInfo.deviceToken = "2c948a843e6404dd013e79d82e5a0009".data(using: String.Encoding.utf8) // dummy token
             clientInfo.variantID = "8bd6e6a3-df6b-466c-8292-ed062f2427e8"
             clientInfo.variantSecret = "1c9a6066-e0e5-4bcb-ab78-994335f59874"
             
@@ -123,34 +123,34 @@ class AGDeviceRegistrationTests: XCTestCase {
                 registrationExpectation.fulfill()
         })
         
-        waitForExpectationsWithTimeout(10, handler: nil)
+        waitForExpectations(timeout: 10, handler: nil)
     }
 
     func testRedirectionAndRegistrationWithServerShouldWork() {
         // set up http stub
-        OHHTTPStubs.stubRequestsPassingTest({ _ in
+        OHHTTPStubs.stubRequests(passingTest: { _ in
             return true
-        }, withStubResponse:( { (request: NSURLRequest!) -> OHHTTPStubsResponse in
-            if request.URL!.absoluteString == "http://server.com/rest/registry/device" { // perform redirection
+        }, withStubResponse:( { (request: URLRequest!) -> OHHTTPStubsResponse in
+            if request.url!.absoluteString == "http://server.com/rest/registry/device" { // perform redirection
                 let headers = ["Location": "http://redirect.to/rest/registry/device"]
-                return OHHTTPStubsResponse(data:NSData(), statusCode: 311, headers: headers)
+                return OHHTTPStubsResponse(data:Data(), statusCode: 311, headers: headers)
 
             } else {
-                return OHHTTPStubsResponse(data:NSData(), statusCode: 200, headers: ["Content-Type" : "text/json"])
+                return OHHTTPStubsResponse(data:Data(), statusCode: 200, headers: ["Content-Type" : "text/json"])
             }
         }))
 
         // async test expectation
-        let registrationExpectation = expectationWithDescription("UPS registration with redirect");
+        let registrationExpectation = expectation(description: "UPS registration with redirect");
 
         // setup registration
-        let registration = AGDeviceRegistration(serverURL: NSURL(string: "http://server.com")!)
+        let registration = DeviceRegistration(serverURL: URL(string: "http://server.com")!)
         
         // attemp to register
-        registration.registerWithClientInfo({ (clientInfo: AGClientDeviceInformation!) in
+        registration.registerWithClientInfo({ (clientInfo: ClientDeviceInformation!) in
             
             // setup configuration
-            clientInfo.deviceToken = "2c948a843e6404dd013e79d82e5a0009".dataUsingEncoding(NSUTF8StringEncoding) // dummy token
+            clientInfo.deviceToken = "2c948a843e6404dd013e79d82e5a0009".data(using: String.Encoding.utf8) // dummy token
             clientInfo.variantID = "8bd6e6a3-df6b-466c-8292-ed062f2427e8"
             clientInfo.variantSecret = "1c9a6066-e0e5-4bcb-ab78-994335f59874"
             
@@ -174,7 +174,7 @@ class AGDeviceRegistrationTests: XCTestCase {
                 registrationExpectation.fulfill()
             })
         
-        waitForExpectationsWithTimeout(10, handler: nil)
+        waitForExpectations(timeout: 10, handler: nil)
     }
     
 }
