@@ -69,7 +69,7 @@ open class DeviceRegistration: NSObject, URLSessionTaskDelegate {
         self.session = Foundation.URLSession(configuration: sessionConfig, delegate: self, delegateQueue: OperationQueue.main)
     }
     
-    open func overridePushProperties(_ pushProperties: [String: String]) {
+    open func overridePushProperties(pushProperties: [String: String]) {
         overrrideProperties = pushProperties;
     }
     
@@ -99,7 +99,7 @@ open class DeviceRegistration: NSObject, URLSessionTaskDelegate {
     This block has no return value and takes one argument: The `NSError` object describing
     the error that occurred during the registration process.
     */
-    open func registerWithClientInfo(_ clientInfo: ((_ config: ClientDeviceInformation) -> Void)!,
+    open func register(clientInfo: ((ClientDeviceInformation) -> Void)!,
         success:(() -> Void)!, failure:((NSError) -> Void)!) -> Void {
             
             // can't proceed with no configuration block set
@@ -204,7 +204,7 @@ open class DeviceRegistration: NSObject, URLSessionTaskDelegate {
           We need to 'override' that 'default' behaviour to return the original attempted NSURLRequest
           with the URL parameter updated to point to the new 'Location' header.
     */
-    open func urlSession(_ session: URLSession, task: URLSessionTask, willPerformHTTPRedirection redirectResponse: HTTPURLResponse, newRequest redirectReq: URLRequest, completionHandler: (@escaping (URLRequest?) -> Void)) {
+    open func urlSession(session: URLSession, task: URLSessionTask, willPerformHTTPRedirection redirectResponse: HTTPURLResponse, newRequest redirectReq: URLRequest, completionHandler: (@escaping (URLRequest?) -> Void)) {
         
         var request = redirectReq;
 

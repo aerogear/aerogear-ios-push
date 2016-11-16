@@ -34,7 +34,7 @@ open class PushAnalytics {
     
     :param: completionHandler A block object to be executed when the send metrics operation finishes. Defaulted to no action.
     */
-    class open func sendMetricsWhenAppLaunched(_ launchOptions: [AnyHashable: Any]?, completionHandler: @escaping ((_ error: NSError? ) -> Void) = {(error: NSError?) in }) {
+    class open func sendMetricsWhenAppLaunched(launchOptions: [AnyHashable: Any]?, completionHandler: @escaping ((_ error: NSError? ) -> Void) = {(error: NSError?) in }) {
         if let options = launchOptions {
             if let option : NSDictionary = options[UIApplicationLaunchOptionsKey.remoteNotification] as? NSDictionary {
                 if let metrics = option["aerogear-push-id"] as? String {
@@ -52,7 +52,7 @@ open class PushAnalytics {
     :param: userInfo contains the message id used to collect metrics.
     :param: completionHandler A block object to be executed when the send metrics operation finishes. Defaulted to no action.
     */
-    class open func sendMetricsWhenAppAwoken(_ applicationState: UIApplicationState, userInfo: [AnyHashable: Any], completionHandler: @escaping ((_ error: NSError? ) -> Void) = {(error: NSError?) in }) {
+    class open func sendMetricsWhenAppAwoken(applicationState: UIApplicationState, userInfo: [AnyHashable: Any], completionHandler: @escaping ((_ error: NSError? ) -> Void) = {(error: NSError?) in }) {
         if applicationState == .inactive || applicationState == .background  {
             //opened from a push notification when the app was on background
             if let messageId = userInfo["aerogear-push-id"] as? String {

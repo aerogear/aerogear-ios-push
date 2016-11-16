@@ -47,21 +47,21 @@ class DeviceRegistrationTests: XCTestCase {
         let registration = DeviceRegistration(serverURL: URL(string: "http://server.com")!)
         
         // attemp to register
-        registration.registerWithClientInfo({ (clientInfo: ClientDeviceInformation!) in
+        registration.register(clientInfo: { (config: ClientDeviceInformation!) in
 
             // setup configuration
-            clientInfo.deviceToken = "2c948a843e6404dd013e79d82e5a0009".data(using: String.Encoding.utf8) // dummy token
-            clientInfo.variantID = "8bd6e6a3-df6b-466c-8292-ed062f2427e8"
-            clientInfo.variantSecret = "1c9a6066-e0e5-4bcb-ab78-994335f59874"
+            config.deviceToken = "2c948a843e6404dd013e79d82e5a0009".data(using: String.Encoding.utf8) // dummy token
+            config.variantID = "8bd6e6a3-df6b-466c-8292-ed062f2427e8"
+            config.variantSecret = "1c9a6066-e0e5-4bcb-ab78-994335f59874"
             
             // apply the token, to identify THIS device
             let currentDevice = UIDevice()
             
             // --optional config--
             // set some 'useful' hardware information params
-            clientInfo.operatingSystem = currentDevice.systemName
-            clientInfo.osVersion = currentDevice.systemVersion
-            clientInfo.deviceType = currentDevice.model
+            config.operatingSystem = currentDevice.systemName
+            config.osVersion = currentDevice.systemVersion
+            config.deviceType = currentDevice.model
             },
             
             success: {
@@ -92,24 +92,24 @@ class DeviceRegistrationTests: XCTestCase {
         
         // setup registration
         let registration = DeviceRegistration(config: "pushproperties")
-        registration.overridePushProperties(["serverURL": "http://serveroverridden.com"])
+        registration.overridePushProperties(pushProperties: ["serverURL": "http://serveroverridden.com"])
         
         // attemp to register
-        registration.registerWithClientInfo({ (clientInfo: ClientDeviceInformation!) in
+        registration.register(clientInfo: { (config: ClientDeviceInformation!) in
             
             // setup configuration
-            clientInfo.deviceToken = "2c948a843e6404dd013e79d82e5a0009".data(using: String.Encoding.utf8) // dummy token
-            clientInfo.variantID = "8bd6e6a3-df6b-466c-8292-ed062f2427e8"
-            clientInfo.variantSecret = "1c9a6066-e0e5-4bcb-ab78-994335f59874"
+            config.deviceToken = "2c948a843e6404dd013e79d82e5a0009".data(using: String.Encoding.utf8) // dummy token
+            config.variantID = "8bd6e6a3-df6b-466c-8292-ed062f2427e8"
+            config.variantSecret = "1c9a6066-e0e5-4bcb-ab78-994335f59874"
             
             // apply the token, to identify THIS device
             let currentDevice = UIDevice()
             
             // --optional config--
             // set some 'useful' hardware information params
-            clientInfo.operatingSystem = currentDevice.systemName
-            clientInfo.osVersion = currentDevice.systemVersion
-            clientInfo.deviceType = currentDevice.model
+            config.operatingSystem = currentDevice.systemName
+            config.osVersion = currentDevice.systemVersion
+            config.deviceType = currentDevice.model
             },
             
             success: {
@@ -147,21 +147,21 @@ class DeviceRegistrationTests: XCTestCase {
         let registration = DeviceRegistration(serverURL: URL(string: "http://server.com")!)
         
         // attemp to register
-        registration.registerWithClientInfo({ (clientInfo: ClientDeviceInformation!) in
+        registration.register(clientInfo: { (config: ClientDeviceInformation!) in
             
             // setup configuration
-            clientInfo.deviceToken = "2c948a843e6404dd013e79d82e5a0009".data(using: String.Encoding.utf8) // dummy token
-            clientInfo.variantID = "8bd6e6a3-df6b-466c-8292-ed062f2427e8"
-            clientInfo.variantSecret = "1c9a6066-e0e5-4bcb-ab78-994335f59874"
+            config.deviceToken = "2c948a843e6404dd013e79d82e5a0009".data(using: String.Encoding.utf8) // dummy token
+            config.variantID = "8bd6e6a3-df6b-466c-8292-ed062f2427e8"
+            config.variantSecret = "1c9a6066-e0e5-4bcb-ab78-994335f59874"
             
             // apply the token, to identify THIS device
             let currentDevice = UIDevice()
             
             // --optional config--
             // set some 'useful' hardware information params
-            clientInfo.operatingSystem = currentDevice.systemName
-            clientInfo.osVersion = currentDevice.systemVersion
-            clientInfo.deviceType = currentDevice.model
+            config.operatingSystem = currentDevice.systemName
+            config.osVersion = currentDevice.systemVersion
+            config.deviceType = currentDevice.model
             },
             
             success: {
