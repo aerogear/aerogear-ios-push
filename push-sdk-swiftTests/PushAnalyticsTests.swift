@@ -57,7 +57,7 @@ class PushAnalyticsTests: XCTestCase {
         var options: [AnyHashable: Any] = [:]
         options[UIApplicationLaunchOptionsKey.remoteNotification] = ["aerogear-push-id":"123456"]
         // attemp to register
-        PushAnalytics.sendMetricsWhenAppLaunched(options) { (error) -> Void in
+        PushAnalytics.sendMetricsWhenAppLaunched(launchOptions: options) { (error) -> Void in
             assert(error == nil, "Metrics sent without error")
             sendMetricsExpectation.fulfill()
         }
@@ -83,7 +83,7 @@ class PushAnalyticsTests: XCTestCase {
         options[UIApplicationLaunchOptionsKey.remoteNotification] = ["aerogear-push-id":"123456"]
         
         // attemp to register
-        PushAnalytics.sendMetricsWhenAppLaunched(options) { (error) -> Void in
+        PushAnalytics.sendMetricsWhenAppLaunched(launchOptions: options) { (error) -> Void in
             assert(error != nil, "Registration should happen before sending metrics")
             sendMetricsExpectation.fulfill()
         }

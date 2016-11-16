@@ -69,7 +69,7 @@ open class DeviceRegistration: NSObject, URLSessionTaskDelegate {
         self.session = Foundation.URLSession(configuration: sessionConfig, delegate: self, delegateQueue: OperationQueue.main)
     }
     
-    open func overridePushProperties(_ pushProperties: [String: String]) {
+    open func override(pushProperties: [String: String]) {
         overrrideProperties = pushProperties;
     }
     
@@ -99,7 +99,7 @@ open class DeviceRegistration: NSObject, URLSessionTaskDelegate {
     This block has no return value and takes one argument: The `NSError` object describing
     the error that occurred during the registration process.
     */
-    open func registerWithClientInfo(_ clientInfo: ((_ config: ClientDeviceInformation) -> Void)!,
+    open func register(clientInfo: ((ClientDeviceInformation) -> Void)!,
         success:(() -> Void)!, failure:((NSError) -> Void)!) -> Void {
             
             // can't proceed with no configuration block set
