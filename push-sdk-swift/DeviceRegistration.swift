@@ -69,7 +69,7 @@ open class DeviceRegistration: NSObject, URLSessionTaskDelegate {
         self.session = Foundation.URLSession(configuration: sessionConfig, delegate: self, delegateQueue: OperationQueue.main)
     }
     
-    open func overridePushProperties(pushProperties: [String: String]) {
+    open func override(pushProperties: [String: String]) {
         overrrideProperties = pushProperties;
     }
     
@@ -204,7 +204,7 @@ open class DeviceRegistration: NSObject, URLSessionTaskDelegate {
           We need to 'override' that 'default' behaviour to return the original attempted NSURLRequest
           with the URL parameter updated to point to the new 'Location' header.
     */
-    open func urlSession(session: URLSession, task: URLSessionTask, willPerformHTTPRedirection redirectResponse: HTTPURLResponse, newRequest redirectReq: URLRequest, completionHandler: (@escaping (URLRequest?) -> Void)) {
+    open func urlSession(_ session: URLSession, task: URLSessionTask, willPerformHTTPRedirection redirectResponse: HTTPURLResponse, newRequest redirectReq: URLRequest, completionHandler: (@escaping (URLRequest?) -> Void)) {
         
         var request = redirectReq;
 

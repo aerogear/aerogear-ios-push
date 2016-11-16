@@ -92,7 +92,7 @@ class DeviceRegistrationTests: XCTestCase {
         
         // setup registration
         let registration = DeviceRegistration(config: "pushproperties")
-        registration.overridePushProperties(pushProperties: ["serverURL": "http://serveroverridden.com"])
+        registration.override(pushProperties: ["serverURL": "http://serveroverridden.com"])
         
         // attemp to register
         registration.register(clientInfo: { (config: ClientDeviceInformation!) in
