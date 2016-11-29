@@ -50,32 +50,32 @@ to install your dependencies
 ### Push registration
 
 ```swift
-  func application(application: UIApplication!, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData!) {
+  func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
      // setup registration
     let registration = DeviceRegistration(serverURL: NSURL(string: "<# URL of the running AeroGear UnifiedPush Server #>")!)
     
     // attemp to register
-    registration.registerWithClientInfo({ (clientInfo: ClientDeviceInformation!) in
+    registration.register(clientInfo: { (clientDevice: ClientDeviceInformation!) in
         // setup configuration
-        clientInfo.deviceToken = deviceToken
-        clientInfo.variantID = "<# Variant Id #>"
-        clientInfo.variantSecret = "<# Variant Secret #>"
+        clientDevice.deviceToken = deviceToken
+        clientDevice.variantID = "<# Variant Id #>"
+        clientDevice.variantSecret = "<# Variant Secret #>"
         
         // apply the token, to identify THIS device
         let currentDevice = UIDevice()
         
         // --optional config--
         // set some 'useful' hardware information params
-        clientInfo.operatingSystem = currentDevice.systemName
-        clientInfo.osVersion = currentDevice.systemVersion
-        clientInfo.deviceType = currentDevice.model
+        clientDevice.operatingSystem = currentDevice.systemName
+        clientDevice.osVersion = currentDevice.systemVersion
+        clientDevice.deviceType = currentDevice.model
         },
         
         success: {
             println("UnifiedPush Server registration succeeded")
         },
-        failure: {(error: NSError!) in
-            println("failed to register, error: \(error.description)")
+        failure: {(error: Error!) in
+            println("failed to register, error: \(error.localizedDescription)")
         })
 }
 ```
@@ -84,25 +84,25 @@ to install your dependencies
 
 In the ```AppDelegate.swift``` file:
 ```swift
-  func application(application: UIApplication!, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData!) {
+  func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
      // setup registration
-    let registration = DeviceRegistration()
+    let registration = DeviceRegistration(config: "fhconfig")
     
     // attemp to register
-    registration.registerWithClientInfo({ (clientInfo: ClientDeviceInformation!) in
+    registration.register(clientInfo: { (clientDevice: ClientDeviceInformation!) in
         // setup configuration
-        clientInfo.deviceToken = deviceToken
+        clientDevice.deviceToken = deviceToken
         let currentDevice = UIDevice()
         // set some 'useful' hardware information params
-        clientInfo.operatingSystem = currentDevice.systemName
-        clientInfo.osVersion = currentDevice.systemVersion
-        clientInfo.deviceType = currentDevice.model
+        clientDevice.operatingSystem = currentDevice.systemName
+        clientDevice.osVersion = currentDevice.systemVersion
+        clientDevice.deviceType = currentDevice.model
         },       
         success: {
             println("UnifiedPush Server registration succeeded")
         },
-        failure: {(error: NSError!) in
-            println("failed to register, error: \(error.description)")
+        failure: {(error: Error!) in
+            println("failed to register, error: \(error.localizedDescription)")
         })
 }
 ```
@@ -129,16 +129,16 @@ If you are interested in monitoring how a push message relates to the usage of y
 
 * Send metrics when app is launched due to push notification
 ```swift
-func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        PushAnalytics.sendMetricsWhenAppLaunched(launchOptions)
+func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        PushAnalytics.sendMetricsWhenAppLaunched(launchOptions: launchOptions)
         return true
     }
 ```
 * Send metrics when the app is brought from background to foreground due to a push notification
 ```swift
-    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject: AnyObject], fetchCompletionHandler: (UIBackgroundFetchResult) -> Void) {      
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         // Send metrics when app is launched due to push notification
-        PushAnalytics.sendMetricsWhenAppAwoken(application.applicationState, userInfo: userInfo)
+        PushAnalytics.sendMetricsWhenAppAwoken(applicationState: application.applicationState, userInfo: userInfo)
         
         // Do stuff ...
         fetchCompletionHandler(UIBackgroundFetchResult.NoData)
