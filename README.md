@@ -43,7 +43,9 @@ and then:
 pod install
 ```
 
-to install your dependencies
+to install your dependencies.
+
+Finally, inside Xcode, go to the Capabilities section for your target and switch Push Notifications on.
 
 ## Example Usage
 
@@ -52,7 +54,7 @@ to install your dependencies
 ```swift
   func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
      // setup registration
-    let registration = DeviceRegistration(serverURL: NSURL(string: "<# URL of the running AeroGear UnifiedPush Server #>")!)
+    let registration = DeviceRegistration(serverURL: URL(string: "<# URL of the running AeroGear UnifiedPush Server #>")!)
     
     // attemp to register
     registration.register(clientInfo: { (clientDevice: ClientDeviceInformation!) in
@@ -72,10 +74,10 @@ to install your dependencies
         },
         
         success: {
-            println("UnifiedPush Server registration succeeded")
+            print("UnifiedPush Server registration succeeded")
         },
         failure: {(error: Error!) in
-            println("failed to register, error: \(error.localizedDescription)")
+            print("failed to register, error: \(error.localizedDescription)")
         })
 }
 ```
@@ -99,10 +101,10 @@ In the ```AppDelegate.swift``` file:
         clientDevice.deviceType = currentDevice.model
         },       
         success: {
-            println("UnifiedPush Server registration succeeded")
+            print("UnifiedPush Server registration succeeded")
         },
         failure: {(error: Error!) in
-            println("failed to register, error: \(error.localizedDescription)")
+            print("failed to register, error: \(error.localizedDescription)")
         })
 }
 ```
