@@ -88,7 +88,7 @@ In the ```AppDelegate.swift``` file:
 ```swift
   func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
      // setup registration
-    let registration = DeviceRegistration(config: "fhconfig")
+    let registration = DeviceRegistration(config: "pushconfig")
     
     // attemp to register
     registration.register(clientInfo: { (clientDevice: ClientDeviceInformation!) in
@@ -109,7 +109,7 @@ In the ```AppDelegate.swift``` file:
 }
 ```
 
-In your application ```info.plist```, add the following properties:
+In your application, create a new ```pushconfig.plist``` file, and add the following properties:
 ```xml
 <plist version="1.0">
 <dict>
@@ -127,7 +127,7 @@ In your application ```info.plist```, add the following properties:
 
 ### Push analytics
 
-If you are interested in monitoring how a push message relates to the usage of your app, you can use metrics. Those emtrics are displayed in the AeroGear UnifiedPush Server's console.
+If you are interested in monitoring how a push message relates to the usage of your app, you can use metrics. Those metrics are displayed in the AeroGear UnifiedPush Server's console.
 
 * Send metrics when app is launched due to push notification
 ```swift
@@ -143,7 +143,7 @@ func application(_ application: UIApplication, didFinishLaunchingWithOptions lau
         PushAnalytics.sendMetricsWhenAppAwoken(applicationState: application.applicationState, userInfo: userInfo)
         
         // Do stuff ...
-        fetchCompletionHandler(UIBackgroundFetchResult.NoData)
+        fetchCompletionHandler(UIBackgroundFetchResult.noData)
     }
 ```
 
