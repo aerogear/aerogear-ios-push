@@ -101,59 +101,74 @@ open class DeviceRegistration: NSObject, URLSessionTaskDelegate {
     */
     open func register(clientInfo: ((ClientDeviceInformation) -> Void)!,
         success:(() -> Void)!, failure:((NSError) -> Void)!) -> Void {
-            
+
             // can't proceed with no configuration block set
-            assert(clientInfo != nil, "configuration block not set")
+            guard let clientInfoConfigurationBlock = clientInfo else {
+                failure(NSError(domain: DeviceRegistrationError.PushErrorDomain, code: 0, userInfo: [NSLocalizedDescriptionKey: "configuration block not set"]))
+                return
+            }
 
             let clientInfoObject = ClientDeviceInformationImpl()
-        
-            clientInfo(clientInfoObject)
-            
+
+            clientInfoConfigurationBlock(clientInfoObject)
+
             // Check if config is available in plist file
             if clientInfoObject.variantID == nil && self.configValueForKey("variantID") != nil {
                 clientInfoObject.variantID = self.configValueForKey("variantID")
             }
-            
+
             if clientInfoObject.variantSecret == nil && self.configValueForKey("variantSecret") != nil {
                 clientInfoObject.variantSecret = self.configValueForKey("variantSecret")
             }
-            
+
             if self.serverURL?.absoluteString == nil && self.configValueForKey("serverURL") != nil {
-                if let urlString = self.configValueForKey("serverURL"), let url = URL(string: urlString) {
-                    self.serverURL = url
-                } else {
-                    assert(self.serverURL?.absoluteString != nil, "'serverURL' should be set")
-                }
+                self.serverURL = URL(string: self.configValueForKey("serverURL")!)
             }
-            
+
             // deviceToken could be nil then retrieved it from local storage (from previous register).
             // This is the use case when you update categories.
             if clientInfoObject.deviceToken == nil {
                 clientInfoObject.deviceToken = UserDefaults.standard.object(forKey: "deviceToken") as? Data
             }
-            
+
             // Fail if not all config mandatory items are present
-            assert(clientInfoObject.deviceToken != nil, "'token' should be set")
-            assert(clientInfoObject.variantID != nil, "'variantID' should be set")
-            assert(clientInfoObject.variantSecret != nil, "'variantSecret' should be set");
-            
+            guard let deviceToken = clientInfoObject.deviceToken else {
+                failure(NSError(domain: DeviceRegistrationError.PushErrorDomain, code: 0, userInfo: [NSLocalizedDescriptionKey: "'token' should be set"]))
+                return
+            }
+
+            guard let variantID = clientInfoObject.variantID else {
+                failure(NSError(domain: DeviceRegistrationError.PushErrorDomain, code: 0, userInfo: [NSLocalizedDescriptionKey: "'variantID' should be set"]))
+                return
+            }
+
+            guard let variantSecret = clientInfoObject.variantSecret else {
+                failure(NSError(domain: DeviceRegistrationError.PushErrorDomain, code: 0, userInfo: [NSLocalizedDescriptionKey: "'variantSecret' should be set"]))
+                return
+            }
+
+            guard let serverURLGuard = self.serverURL else {
+                failure(NSError(domain: DeviceRegistrationError.PushErrorDomain, code: 0, userInfo: [NSLocalizedDescriptionKey: "'serverURL' should be set"]))
+                return
+            }
+
             // locally stored information (used for metrics)
-            UserDefaults.standard.set(clientInfoObject.deviceToken, forKey: "deviceToken")
-            UserDefaults.standard.set(clientInfoObject.variantID, forKey: "variantID")
-            UserDefaults.standard.set(clientInfoObject.variantSecret, forKey: "variantSecret")
-            UserDefaults.standard.set(self.serverURL.absoluteString, forKey: "serverURL")
-            
+            UserDefaults.standard.set(deviceToken, forKey: "deviceToken")
+            UserDefaults.standard.set(variantID, forKey: "variantID")
+            UserDefaults.standard.set(variantSecret, forKey: "variantSecret")
+            UserDefaults.standard.set(serverURLGuard.absoluteString, forKey: "serverURL")
+
             // set up our request
-            var request = URLRequest(url: serverURL.appendingPathComponent("rest/registry/device"))
+            var request = URLRequest(url: serverURLGuard.appendingPathComponent("rest/registry/device"))
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")
             request.httpMethod = "POST"
-            
+
             // apply HTTP Basic
             let basicAuthCredentials: Data! = "\(clientInfoObject.variantID!):\(clientInfoObject.variantSecret!)".data(using: String.Encoding.utf8)
             let base64Encoded = basicAuthCredentials.base64EncodedString(options: NSData.Base64EncodingOptions(rawValue: 0))
-            
+
             request.setValue("Basic \(base64Encoded)", forHTTPHeaderField: "Authorization")
-            
+
             // serialize request
             let postData: Data?
             do {
@@ -161,9 +176,9 @@ open class DeviceRegistration: NSObject, URLSessionTaskDelegate {
             } catch _ {
                 postData = nil
             }
-            
+
             request.httpBody = postData
-            
+
             let task = session.dataTask(with: request, completionHandler: {(data, response, error) in
                     if error != nil {
                         failure(error as NSError!)
@@ -187,7 +202,7 @@ open class DeviceRegistration: NSObject, URLSessionTaskDelegate {
                         failure(error)
                     }
             }) 
-            
+
             task.resume()
     }
     
@@ -232,7 +247,7 @@ open class DeviceRegistration: NSObject, URLSessionTaskDelegate {
         } else {
             value = Bundle.main.object(forInfoDictionaryKey: key) as? String
         }
-        if (value == nil && value!.isEmpty)  {
+        if (value == nil || value!.isEmpty)  {
             return nil
         } else {
             return value
