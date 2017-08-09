@@ -1,16 +1,11 @@
 language: objective-c
-osx_image: xcode8
+osx_image: xcode9
 xcode_workspace: AeroGearPush.xcworkspace
 xcode_scheme: AeroGearPush
 xcode_sdk: iphonesimulator
 
 notifications:
   irc: "irc.freenode.org#aerogear"
-
-branches:
-  only:
-    - master
-    - 1.x_dev
 
 script:
   - xcodebuild -workspace AeroGearPush.xcworkspace -scheme AeroGearPush -sdk iphonesimulator build
