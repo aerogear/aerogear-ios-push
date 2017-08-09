@@ -250,11 +250,11 @@
 				TargetAttributes = {
 					6F71353019646266009B26D8 = {
 						CreatedOnToolsVersion = 6.0;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0900;
 					};
 					6F71353B19646266009B26D8 = {
 						CreatedOnToolsVersion = 6.0;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0900;
 						TestTargetID = 6F71353019646266009B26D8;
 					};
 				};
@@ -500,7 +500,7 @@
 				PRODUCT_NAME = AeroGearPush;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -519,7 +519,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.aerogear.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = AeroGearPush;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
@@ -538,7 +538,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.aerogear.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = AeroGearPushTests;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -553,7 +553,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.aerogear.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = AeroGearPushTests;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
