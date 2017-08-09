@@ -7,11 +7,6 @@ xcode_sdk: iphonesimulator
 notifications:
   irc: "irc.freenode.org#aerogear"
 
-branches:
-  only:
-    - master
-    - 1.x_dev
-
 script:
   - xcodebuild -workspace AeroGearPush.xcworkspace -scheme AeroGearPush -sdk iphonesimulator build
   - xcodebuild -workspace AeroGearPush.xcworkspace -scheme AeroGearPushTests -destination 'platform=iOS Simulator,name=iPhone 7,OS=10.0' test
