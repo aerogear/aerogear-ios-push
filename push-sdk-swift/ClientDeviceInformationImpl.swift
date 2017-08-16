@@ -35,7 +35,7 @@ class ClientDeviceInformationImpl: NSObject, ClientDeviceInformation {
         super.init()        
     }
 
-    func extractValues() -> [String: AnyObject] {
+    @objc func extractValues() -> [String: AnyObject] {
         var jsonObject =  [String: AnyObject]()
         
         jsonObject["deviceToken"] = convertToString(deviceToken) as AnyObject?
