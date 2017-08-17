@@ -1,11 +1,11 @@
 # aerogear-ios-push [![Build Status](https://travis-ci.org/aerogear/aerogear-ios-push.png)](https://travis-ci.org/aerogear/aerogear-ios-push)
 
-> This module currently build with Xcode 8 and supports iOS8, iOS9 and iOS 10.
-> For iOS7 support see [ObjC version in 1.x_dev branch](https://github.com/aerogear/aerogear-ios-push/tree/1.x_dev).
+> This module currently build with Xcode 9 and supports iOS9, iOS10, iOS11.
+> There is an [ObjC version in 1.x_dev branch](https://github.com/aerogear/aerogear-ios-push/tree/1.x_dev).
 
 **iOS Push Notification Registration SDK for the AeroGear UnifiedPush Server**
 
-A small and handy library written in [Swift 3.0](https://developer.apple.com/swift/) that helps to register iOS applications with the [AeroGear UnifiedPush Server](https://github.com/aerogear/aerogear-unified-push-server).
+A small and handy library written in [Swift 4.0](https://developer.apple.com/swift/) that helps to register iOS applications with the [AeroGear UnifiedPush Server](https://github.com/aerogear/aerogear-unified-push-server).
 
 |                 | Project Info  |
 | --------------- | ------------- |
@@ -28,7 +28,7 @@ pod install
 ```
 3. open AeroGearPush.xcworkspace
 
-## Adding the library to your project 
+## Adding the library to your project
 To add the library in your project, you can either use [CocoaPods](http://cocoapods.org) or manual install either by dragging the code or building a ```framework``` to install in your project. See the respective sections below for instructions:
 
 In your ```Podfile``` add:
@@ -55,24 +55,24 @@ Finally, inside Xcode, go to the Capabilities section for your target and switch
   func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
      // setup registration
     let registration = DeviceRegistration(serverURL: URL(string: "<# URL of the running AeroGear UnifiedPush Server #>")!)
-    
+
     // attemp to register
     registration.register(clientInfo: { (clientDevice: ClientDeviceInformation!) in
         // setup configuration
         clientDevice.deviceToken = deviceToken
         clientDevice.variantID = "<# Variant Id #>"
         clientDevice.variantSecret = "<# Variant Secret #>"
-        
+
         // apply the token, to identify THIS device
         let currentDevice = UIDevice()
-        
+
         // --optional config--
         // set some 'useful' hardware information params
         clientDevice.operatingSystem = currentDevice.systemName
         clientDevice.osVersion = currentDevice.systemVersion
         clientDevice.deviceType = currentDevice.model
         },
-        
+
         success: {
             print("UnifiedPush Server registration succeeded")
         },
@@ -89,7 +89,7 @@ In the ```AppDelegate.swift``` file:
   func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
      // setup registration
     let registration = DeviceRegistration(config: "pushconfig")
-    
+
     // attemp to register
     registration.register(clientInfo: { (clientDevice: ClientDeviceInformation!) in
         // setup configuration
@@ -141,7 +141,7 @@ func application(_ application: UIApplication, didFinishLaunchingWithOptions lau
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         // Send metrics when app is launched due to push notification
         PushAnalytics.sendMetricsWhenAppAwoken(applicationState: application.applicationState, userInfo: userInfo)
-        
+
         // Do stuff ...
         fetchCompletionHandler(UIBackgroundFetchResult.noData)
     }
