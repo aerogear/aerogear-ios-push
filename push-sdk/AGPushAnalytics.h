@@ -32,9 +32,9 @@ extern NSString * const AGPushAnalyticsNetworkingOperationFailingURLResponseErro
  * Send metrics to the AeroGear Push server when the app is first launched or bring from background to
  * foreground due to a push notification.
  *
- * @param messageId The identifier of this push notification.
+ * @param launchOptions Contains the message id used to collect metrics.
  *
- * @param completionHandler A block object to be executed when the send metrics operation finishes.
+ * @param handler A block object to be executed when the send metrics operation finishes.
  */
 + (void) sendMetricsWhenAppLaunched:(NSDictionary *)launchOptions
                completionHandler:(void (^)(NSError *error))handler;
@@ -43,7 +43,7 @@ extern NSString * const AGPushAnalyticsNetworkingOperationFailingURLResponseErro
  * Send metrics to the AeroGear Push server when the app is first launched or bring from background to
  * foreground due to a push notification.
  *
- * @param messageId The identifier of this push notification.
+ * @param launchOptions Contains the message id used to collect metrics.
  */
 + (void) sendMetricsWhenAppLaunched:(NSDictionary *)launchOptions;
 
@@ -51,9 +51,11 @@ extern NSString * const AGPushAnalyticsNetworkingOperationFailingURLResponseErro
  * Send metrics to the AeroGear Push server when the app is first launched or bring from background to
  * foreground due to a push notification.
  *
- * @param messageId The identifier of this push notification.
+ * @param applicationState Application state to make sure it was first launched or in background.
  *
- * @param completionHandler A block object to be executed when the send metrics operation finishes.
+ * @param userInfo Contains the message id used to collect metrics.
+ *
+ * @param handler A block object to be executed when the send metrics operation finishes.
  */
 + (void) sendMetricsWhenAppAwoken:(UIApplicationState) applicationState
                         userInfo:(NSDictionary *)userInfo
@@ -63,7 +65,9 @@ extern NSString * const AGPushAnalyticsNetworkingOperationFailingURLResponseErro
  * Send metrics to the AeroGear Push server when the app is first launched or bring from background to
  * foreground due to a push notification.
  *
- * @param messageId The identifier of this push notification.
+ * @param applicationState Application state to make sure it was first launched or in background.
+ *
+ * @param userInfo Contains the message id used to collect metrics.
  */
 + (void) sendMetricsWhenAppAwoken:(UIApplicationState) applicationState
                         userInfo:(NSDictionary *)userInfo;
