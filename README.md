@@ -25,16 +25,16 @@ A handy library that helps to register iOS applications with the AeroGear Unifie
 * [Installation](#installation)
   * [CocoaPods](#cocoapods)
 * [Usage](#usage)
-  * [Push registration (Programmatically)](#push-registration--programmatically-)
-  * [Push registration (plist)](#push-registration--plist-)
+  * [Push registration (Programmatically)](#push-registration-programmatically)
+  * [Push registration (plist)](#push-registration-plist)
   * [Push analytics](#push-analytics)
     * [Metrics when app is launched](#metrics-when-app-is-launched)
     * [Metrics when the app is brought from background to foreground](#metrics-when-the-app-is-brought-from-background-to-foreground)
 * [Documentation](#documentation)
 * [Demo apps](#demo-apps)
 * [Development](#development)
-* [Questions?](#questions-)
-* [Found a bug?](#found-a-bug-)
+* [Questions?](#questions)
+* [Found a bug?](#found-a-bug)
 
 ## Features
 
