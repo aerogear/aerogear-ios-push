@@ -27,10 +27,10 @@ open class DeviceRegistration: NSObject, URLSessionTaskDelegate {
         static let NetworkingOperationFailingURLResponseErrorKey = "NetworkingOperationFailingURLResponseErrorKey"
     }
     
-    var serverURL: URL!
-    var session: Foundation.URLSession!
-    var config: String?
-    var overrrideProperties: [String: String]?
+    @objc var serverURL: URL!
+    @objc var session: Foundation.URLSession!
+    @objc var config: String?
+    @objc var overrrideProperties: [String: String]?
     
     /**
     An initializer method to instantiate an DeviceRegistration object.
@@ -39,7 +39,7 @@ open class DeviceRegistration: NSObject, URLSessionTaskDelegate {
     
     :returns: the DeviceRegistration object.
     */
-    public init(serverURL: URL) {
+    @objc public init(serverURL: URL) {
         self.serverURL = serverURL;
 
         super.init()
@@ -54,7 +54,7 @@ open class DeviceRegistration: NSObject, URLSessionTaskDelegate {
     :param: config file name where to fetch AeroGear UnifiedPush server configuration.
     :returns: the DeviceRegistration object.
     */
-    public convenience init(config: String) {
+    @objc public convenience init(config: String) {
         self.init()
         self.config = config
     }
@@ -69,7 +69,7 @@ open class DeviceRegistration: NSObject, URLSessionTaskDelegate {
         self.session = Foundation.URLSession(configuration: sessionConfig, delegate: self, delegateQueue: OperationQueue.main)
     }
     
-    open func override(pushProperties: [String: String]) {
+    @objc open func override(pushProperties: [String: String]) {
         overrrideProperties = pushProperties;
     }
     
@@ -99,7 +99,7 @@ open class DeviceRegistration: NSObject, URLSessionTaskDelegate {
     This block has no return value and takes one argument: The `NSError` object describing
     the error that occurred during the registration process.
     */
-    open func register(clientInfo: ((ClientDeviceInformation) -> Void)!,
+    @objc open func register(clientInfo: ((ClientDeviceInformation) -> Void)!,
         success:(() -> Void)!, failure:((NSError) -> Void)!) -> Void {
 
             // can't proceed with no configuration block set
