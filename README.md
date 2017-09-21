@@ -1,39 +1,53 @@
-# aerogear-ios-push [![Build Status](https://travis-ci.org/aerogear/aerogear-ios-push.png)](https://travis-ci.org/aerogear/aerogear-ios-push)
+# AeroGear iOS Push
 
-> This module currently build with Xcode 9 and supports iOS9, iOS10, iOS11.
-> There is an [ObjC version in 1.x_dev branch](https://github.com/aerogear/aerogear-ios-push/tree/1.x_dev).
+![Maintenance](https://img.shields.io/maintenance/yes/2017.svg)
+[![circle-ci](https://img.shields.io/circleci/project/github/aerogear/aerogear-ios-push/master.svg)](https://circleci.com/gh/aerogear/aerogear-ios-push)
+[![License](https://img.shields.io/badge/-Apache%202.0-blue.svg)](https://opensource.org/s/Apache-2.0)
+[![GitHub release](https://img.shields.io/github/release/aerogear/aerogear-ios-push.svg)](https://github.com/aerogear/aerogear-ios-push/releases)
+[![CocoaPods](https://img.shields.io/cocoapods/v/AeroGear-Push-Swift.svg)](https://cocoapods.org/pods/AeroGear-Push-Swift)
+[![Platform](https://img.shields.io/cocoapods/p/AeroGear-Push-Swift.svg)](https://cocoapods.org/pods/AeroGear-Push-Swift)
 
-**iOS Push Notification Registration SDK for the AeroGear UnifiedPush Server**
+A handy library that helps to register iOS applications with the AeroGear UnifiedPush Server.
 
-A small and handy library written in [Swift 4.0](https://developer.apple.com/swift/) that helps to register iOS applications with the [AeroGear UnifiedPush Server](https://github.com/aerogear/aerogear-unified-push-server).
+|                 | Project Info                                 |
+| --------------- | -------------------------------------------- |
+| License:        | Apache License, Version 2.0                  |
+| Build:          | CocoaPods                                    |
+| Languague:      | Swift 4                                      |
+| Documentation:  | http://aerogear.org/ios/                     |
+| Issue tracker:  | https://issues.jboss.org/browse/AGIOS        |
+| Mailing lists:  | [aerogear-users](http://aerogear-users.1116366.n5.nabble.com/) ([subscribe](https://lists.jboss.org/mailman/listinfo/aerogear-users))                            |
+|                 | [aerogear-dev](http://aerogear-dev.1069024.n5.nabble.com/) ([subscribe](https://lists.jboss.org/mailman/listinfo/aerogear-dev))                              |
 
-|                 | Project Info  |
-| --------------- | ------------- |
-| License:        | Apache License, Version 2.0  |
-| Build:          | CocoaPods  |
-| Documentation:  | https://aerogear.org/docs/unifiedpush/aerogear-push-ios/ |
-| Issue tracker:  | https://issues.jboss.org/browse/AGIOS  |
-| Mailing lists:  | [aerogear-users](http://aerogear-users.1116366.n5.nabble.com/) ([subscribe](https://lists.jboss.org/mailman/listinfo/aerogear-users))  |
-|                 | [aerogear-dev](http://aerogear-dev.1069024.n5.nabble.com/) ([subscribe](https://lists.jboss.org/mailman/listinfo/aerogear-dev))  |
+## Table of Content
 
-### Build, test and play with aerogear-ios-push
+* [Features](#features)
+* [Installation](#installation)
+  * [CocoaPods](#cocoapods)
+* [Usage](#usage)
+  * [Push registration (Programmatically)](#push-registration--programmatically-)
+  * [Push registration (plist)](#push-registration--plist-)
+  * [Push analytics](#push-analytics)
+    * [Metrics when app is launched](#metrics-when-app-is-launched)
+    * [Metrics when the app is brought from background to foreground](#metrics-when-the-app-is-brought-from-background-to-foreground)
+* [Documentation](#documentation)
+* [Demo apps](#demo-apps)
+* [Development](#development)
+* [Questions?](#questions-)
+* [Found a bug?](#found-a-bug-)
 
-1. Clone this project
+## Features
 
-2. Get the dependencies
+* Register (Programmatically and plist) on [AeroGear UnifiedPush Server](https://github.com/aerogear/aerogear-unifiedpush-server/)
+* Send metrics to [AeroGear UnifiedPush Server](https://github.com/aerogear/aerogear-unifiedpush-server/)
 
-The project uses [OHHTTPStubs](https://github.com/AliSoftware/OHHTTPStubs) framework for stubbing its http network requests and utilizes [CocoaPods](http://cocoapods.org) for handling its dependencies. As a pre-requisite, install [CocoaPods](https://guides.cocoapods.org/using/getting-started.html) and then install the pod. On the root directory of the project run:
+## Installation
+
+### CocoaPods
+
+In your `Podfile` add:
+
 ```bash
-pod install
-```
-3. open AeroGearPush.xcworkspace
-
-## Adding the library to your project
-To add the library in your project, you can either use [CocoaPods](http://cocoapods.org) or manual install either by dragging the code or building a ```framework``` to install in your project. See the respective sections below for instructions:
-
-In your ```Podfile``` add:
-
-```
 pod 'AeroGear-Push-Swift'
 ```
 
@@ -43,73 +57,73 @@ and then:
 pod install
 ```
 
-to install your dependencies.
+to install your dependencies
 
-Finally, inside Xcode, go to the Capabilities section for your target and switch Push Notifications on.
+## Usage
 
-## Example Usage
-
-### Push registration
+### Push registration (Programmatically)
 
 ```swift
-  func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-     // setup registration
-    let registration = DeviceRegistration(serverURL: URL(string: "<# URL of the running AeroGear UnifiedPush Server #>")!)
+// setup registration
+let registration = DeviceRegistration(serverURL: URL(string: "<#AeroGear UnifiedPush Server URL#>")!)
 
-    // attemp to register
-    registration.register(clientInfo: { (clientDevice: ClientDeviceInformation!) in
-        // setup configuration
-        clientDevice.deviceToken = deviceToken
-        clientDevice.variantID = "<# Variant Id #>"
-        clientDevice.variantSecret = "<# Variant Secret #>"
+// attempt to register
+registration.register(
+        clientInfo: { (clientDevice: ClientDeviceInformation!) in
+            // setup configuration
+            clientDevice.deviceToken = deviceToken
+            clientDevice.variantID = "<# Variant Id #>"
+            clientDevice.variantSecret = "<# Variant Secret #>"
 
-        // apply the token, to identify THIS device
-        let currentDevice = UIDevice()
+            // apply the token, to identify THIS device
+            let currentDevice = UIDevice()
 
-        // --optional config--
-        // set some 'useful' hardware information params
-        clientDevice.operatingSystem = currentDevice.systemName
-        clientDevice.osVersion = currentDevice.systemVersion
-        clientDevice.deviceType = currentDevice.model
+            // -- optional config --
+            // set some 'useful' hardware information params
+            clientDevice.operatingSystem = currentDevice.systemName
+            clientDevice.osVersion = currentDevice.systemVersion
+            clientDevice.deviceType = currentDevice.model
         },
-
         success: {
             print("UnifiedPush Server registration succeeded")
         },
-        failure: {(error: Error!) in
+        failure: { (error: Error!) in
             print("failed to register, error: \(error.localizedDescription)")
-        })
-}
+        }
+)
 ```
 
-### Push registration using plist config file
+### Push registration (plist)
 
-In the ```AppDelegate.swift``` file:
 ```swift
-  func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-     // setup registration
-    let registration = DeviceRegistration(config: "pushconfig")
+// setup registration
+let registration = DeviceRegistration(config: "pushconfig")
 
-    // attemp to register
-    registration.register(clientInfo: { (clientDevice: ClientDeviceInformation!) in
-        // setup configuration
-        clientDevice.deviceToken = deviceToken
-        let currentDevice = UIDevice()
-        // set some 'useful' hardware information params
-        clientDevice.operatingSystem = currentDevice.systemName
-        clientDevice.osVersion = currentDevice.systemVersion
-        clientDevice.deviceType = currentDevice.model
-        },       
+// attempt to register
+registration.register(
+        clientInfo: { (clientDevice: ClientDeviceInformation!) in
+            // setup configuration
+            clientDevice.deviceToken = deviceToken
+
+            // apply the token, to identify THIS device
+            let currentDevice = UIDevice()
+            
+            // set some 'useful' hardware information params
+            clientDevice.operatingSystem = currentDevice.systemName
+            clientDevice.osVersion = currentDevice.systemVersion
+            clientDevice.deviceType = currentDevice.model
+        },
         success: {
             print("UnifiedPush Server registration succeeded")
         },
-        failure: {(error: Error!) in
+        failure: { (error: Error!) in
             print("failed to register, error: \(error.localizedDescription)")
-        })
-}
+        }
+)
 ```
 
-In your application, create a new ```pushconfig.plist``` file, and add the following properties:
+In your application, create a `pushconfig.plist` file, and add the following properties:
+
 ```xml
 <plist version="1.0">
 <dict>
@@ -123,37 +137,53 @@ In your application, create a new ```pushconfig.plist``` file, and add the follo
 </plist>
 ```
 
-> NOTE: If your UPS server installation uses a ```self-signed certificate```, you can find a quick solution on how to enable support on our [troubleshooting page](https://aerogear.org/docs/unifiedpush/aerogear-push-ios/troubleshooting/#_question_failure_to_connect_when_server_uses_a_self_signed_certificate), as well as links for further information on how to properly enable it on your iOS production applications.
+> NOTE: If your UPS server installation uses a `self-signed certificate`, you can find a quick solution on how to enable support on our [troubleshooting page](https://aerogear.org/docs/unifiedpush/aerogear-push-ios/troubleshooting/#_question_failure_to_connect_when_server_uses_a_self_signed_certificate), as well as links for further information on how to properly enable it on your iOS production applications.
 
 ### Push analytics
 
 If you are interested in monitoring how a push message relates to the usage of your app, you can use metrics. Those metrics are displayed in the AeroGear UnifiedPush Server's console.
 
-* Send metrics when app is launched due to push notification
-```swift
-func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        PushAnalytics.sendMetricsWhenAppLaunched(launchOptions: launchOptions)
-        return true
-    }
-```
-* Send metrics when the app is brought from background to foreground due to a push notification
-```swift
-    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        // Send metrics when app is launched due to push notification
-        PushAnalytics.sendMetricsWhenAppAwoken(applicationState: application.applicationState, userInfo: userInfo)
+#### Metrics when app is launched
 
-        // Do stuff ...
-        fetchCompletionHandler(UIBackgroundFetchResult.noData)
-    }
+```swift
+func application(_ application: UIApplication, 
+                 didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+
+    // Send metrics when app is launched due to push notification
+    PushAnalytics.sendMetricsWhenAppLaunched(launchOptions: launchOptions)
+    
+    return true
+}
 ```
 
-## AeroGear UnifiedPush Server
+#### Metrics when the app is brought from background to foreground
 
-For more information, checkout our [tutorial](http://aerogear.org/docs/unifiedpush/aerogear-push-ios/).
+```swift
+func application(_ application: UIApplication,
+                 didReceiveRemoteNotification userInfo: [AnyHashable: Any],
+                 fetchCompletionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+
+    // Send metrics when app is launched due to push notification
+    PushAnalytics.sendMetricsWhenAppAwoken(applicationState: application.applicationState, userInfo: userInfo)
+
+    // ... Some stuffs ...
+
+    // No additional data to fetch
+    fetchCompletionHandler(UIBackgroundFetchResult.noData)
+    
+}
+```
 
 ## Documentation
 
-For more details about the current release, please consult [our documentation](https://aerogear.org/docs/unifiedpush/aerogear-push-ios/).
+For more details about that please consult [our documentation](http://aerogear.org/ios/).
+
+## Demo apps
+
+Take a look in our demo apps:
+
+* [UnifiedPushHelloWorld](https://github.com/aerogear/aerogear-ios-cookbook/tree/master/UnifiedPushHelloWorld)
+* [Howdy](https://github.com/aerogear/aerogear-ios-cookbook/tree/master/Howdy)
 
 ## Development
 
