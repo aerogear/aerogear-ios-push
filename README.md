@@ -48,7 +48,7 @@ A handy library that helps to register iOS applications with the AeroGear Unifie
 In your `Podfile` add:
 
 ```bash
-pod 'AeroGear-Push-Swift'
+pod 'AeroGearPush-Swift'
 ```
 
 and then:
@@ -107,7 +107,7 @@ registration.register(
 
             // apply the token, to identify THIS device
             let currentDevice = UIDevice()
-            
+
             // set some 'useful' hardware information params
             clientDevice.operatingSystem = currentDevice.systemName
             clientDevice.osVersion = currentDevice.systemVersion
@@ -146,12 +146,12 @@ If you are interested in monitoring how a push message relates to the usage of y
 #### Metrics when app is launched
 
 ```swift
-func application(_ application: UIApplication, 
+func application(_ application: UIApplication,
                  didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
     // Send metrics when app is launched due to push notification
     PushAnalytics.sendMetricsWhenAppLaunched(launchOptions: launchOptions)
-    
+
     return true
 }
 ```
@@ -170,7 +170,7 @@ func application(_ application: UIApplication,
 
     // No additional data to fetch
     fetchCompletionHandler(UIBackgroundFetchResult.noData)
-    
+
 }
 ```
 
