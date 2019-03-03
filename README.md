@@ -4,8 +4,8 @@
 [![circle-ci](https://img.shields.io/circleci/project/github/aerogear/aerogear-ios-push/master.svg)](https://circleci.com/gh/aerogear/aerogear-ios-push)
 [![License](https://img.shields.io/badge/-Apache%202.0-blue.svg)](https://opensource.org/s/Apache-2.0)
 [![GitHub release](https://img.shields.io/github/release/aerogear/aerogear-ios-push.svg)](https://github.com/aerogear/aerogear-ios-push/releases)
-[![CocoaPods](https://img.shields.io/cocoapods/v/AeroGearPush-Swift.svg)](https://cocoapods.org/pods/AeroGearPush-Swift)
-[![Platform](https://img.shields.io/cocoapods/p/AeroGearPush-Swift.svg)](https://cocoapods.org/pods/AeroGearPush-Swift)
+[![CocoaPods](https://img.shields.io/cocoapods/v/AeroGearPush-Sw.svg)](https://cocoapods.org/pods/AeroGearPush-Sw)
+[![Platform](https://img.shields.io/cocoapods/p/AeroGearPush-Sw.svg)](https://cocoapods.org/pods/AeroGearPush-Sw)
 
 A handy library that helps to register iOS applications with the AeroGear UnifiedPush Server.
 
@@ -48,7 +48,7 @@ A handy library that helps to register iOS applications with the AeroGear Unifie
 In your `Podfile` add:
 
 ```bash
-pod 'AeroGearPush-Swift'
+pod 'AeroGearPush-Sw'
 ```
 
 and then:
@@ -147,7 +147,7 @@ If you are interested in monitoring how a push message relates to the usage of y
 
 ```swift
 func application(_ application: UIApplication,
-                 didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+                 didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
     // Send metrics when app is launched due to push notification
     PushAnalytics.sendMetricsWhenAppLaunched(launchOptions: launchOptions)
