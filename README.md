@@ -9,6 +9,8 @@
 
 A handy library that helps to register iOS applications with the AeroGear UnifiedPush Server.
 
+> NOTE: This is an experimental branch to enable Swift 4.2 builds to work with the new build system. The Swift4.2 branch is not a supported configuration.
+
 |                 | Project Info                                 |
 | --------------- | -------------------------------------------- |
 | License:        | Apache License, Version 2.0                  |
