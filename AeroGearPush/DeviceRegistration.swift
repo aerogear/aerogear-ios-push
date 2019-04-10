@@ -181,7 +181,7 @@ open class DeviceRegistration: NSObject, URLSessionTaskDelegate {
 
             let task = session.dataTask(with: request, completionHandler: {(data, response, error) in
                     if error != nil {
-                        failure(error as NSError!)
+                        failure((error as NSError?)!)
                         return
                     }
                 
