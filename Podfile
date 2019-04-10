@@ -1,7 +1,7 @@
 source 'https://github.com/CocoaPods/Specs.git'
 
 project 'AeroGearPush.xcodeproj'
-platform :ios, '12.0'
+platform :ios, '9.0'
 use_frameworks!
 
 target 'AeroGearPushTests' do
