@@ -59,12 +59,19 @@
 
 // little helper to transform the NSData-based token into a (useful) String:
 - (NSString *) convertToNSString:(NSData *)deviceToken {
-    NSString *tokenStr = [deviceToken description];
-    NSString *pushToken = [[[tokenStr
-                             stringByReplacingOccurrencesOfString:@"<" withString:@""]
-                            stringByReplacingOccurrencesOfString:@">" withString:@""]
-                           stringByReplacingOccurrencesOfString:@" " withString:@""];
-    return pushToken;
+    NSUInteger dataLength = deviceToken.length;
+    if (dataLength == 0) {
+        return nil;
+    }
+    
+    const unsigned char *dataBuffer = (const unsigned char *)deviceToken.bytes;
+    NSMutableString *hexString  = [NSMutableString stringWithCapacity:(dataLength * 2)];
+
+    for (int i = 0; i < dataLength; ++i) {
+        [hexString appendFormat:@"%02x", dataBuffer[i]];
+    }
+
+    return [hexString copy];
 }
 
 @end
