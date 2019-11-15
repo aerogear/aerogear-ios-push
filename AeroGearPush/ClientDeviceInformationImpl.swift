@@ -50,13 +50,18 @@ class ClientDeviceInformationImpl: NSObject, ClientDeviceInformation {
 
     // Helper to transform the Data-based token into a (useful) String:
     fileprivate func convertToString(_ deviceToken: Data?) -> String? {
-        if let token = (deviceToken as NSData?)?.description {
-            return token.replacingOccurrences(of: "<", with: "")
-                .replacingOccurrences(of: ">", with: "")
-                .replacingOccurrences(of: " ", with: "")
-        }
-        
-        return nil
-    }
+            NSUInteger dataLength = deviceToken.length;
+            if (dataLength == 0) {
+                return nil;
+            }
+            
+            const unsigned char *dataBuffer = (const unsigned char *)deviceToken.bytes;
+            NSMutableString *hexString  = [NSMutableString stringWithCapacity:(dataLength * 2)];
 
+            for (int i = 0; i < dataLength; ++i) {
+                [hexString appendFormat:@"%02x", dataBuffer[i]];
+            }
+
+            return [hexString copy];
+    }
 }
