@@ -50,13 +50,7 @@ class ClientDeviceInformationImpl: NSObject, ClientDeviceInformation {
 
     // Helper to transform the Data-based token into a (useful) String:
     fileprivate func convertToString(_ deviceToken: Data?) -> String? {
-        if let token = (deviceToken as NSData?)?.description {
-            return token.replacingOccurrences(of: "<", with: "")
-                .replacingOccurrences(of: ">", with: "")
-                .replacingOccurrences(of: " ", with: "")
-        }
-        
-        return nil
+        return deviceToken.map { String(format: "%02x", $0) }.joined()
     }
 
 }
