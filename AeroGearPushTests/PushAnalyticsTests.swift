@@ -55,7 +55,7 @@ class PushAnalyticsTests: XCTestCase {
         let sendMetricsExpectation = expectation(description: "Send Metrics");
         
         var options: [AnyHashable: Any] = [:]
-        options[UIApplicationLaunchOptionsKey.remoteNotification] = ["aerogear-push-id":"123456"]
+        options[UIApplication.LaunchOptionsKey.remoteNotification] = ["aerogear-push-id":"123456"]
         // attemp to register
         PushAnalytics.sendMetricsWhenAppLaunched(launchOptions: options) { (error) -> Void in
             assert(error == nil, "Metrics sent without error")
@@ -80,7 +80,7 @@ class PushAnalyticsTests: XCTestCase {
         _ = DeviceRegistration(serverURL: URL(string: "http://server.com")!)
         
         var options: [AnyHashable: Any] = [:]
-        options[UIApplicationLaunchOptionsKey.remoteNotification] = ["aerogear-push-id":"123456"]
+        options[UIApplication.LaunchOptionsKey.remoteNotification] = ["aerogear-push-id":"123456"]
         
         // attemp to register
         PushAnalytics.sendMetricsWhenAppLaunched(launchOptions: options) { (error) -> Void in
