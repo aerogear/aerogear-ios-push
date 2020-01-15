@@ -11,4 +11,5 @@ Pod::Spec.new do |s|
   s.module_name  = "AeroGearPush"
   s.framework    = "Foundation"
   s.requires_arc = true
+  s.swift_version = '5.0'
 end
