@@ -38,7 +38,7 @@ class ClientDeviceInformationImpl: NSObject, ClientDeviceInformation {
     @objc func extractValues() -> [String: AnyObject] {
         var jsonObject =  [String: AnyObject]()
         
-        jsonObject["deviceToken"] = convertToString(deviceToken) as AnyObject?
+        jsonObject["deviceToken"] = deviceToken?.toString() as AnyObject?
         jsonObject["alias"] = alias as AnyObject?
         jsonObject["categories"] = categories as AnyObject?
         jsonObject["operatingSystem"] = operatingSystem as AnyObject?
@@ -47,10 +47,10 @@ class ClientDeviceInformationImpl: NSObject, ClientDeviceInformation {
 
         return jsonObject;
     }
+}
 
-    // Helper to transform the Data-based token into a (useful) String:
-    fileprivate func convertToString(_ deviceToken: Data?) -> String? {
-        return deviceToken.map { String(format: "%02x", $0) }.joined()
+extension Data {
+    func toString() -> String {
+        return map { String(format: "%02x", $0) }.joined()
     }
-
 }
