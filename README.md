@@ -1,11 +1,10 @@
 # AeroGear iOS Push
 
-![Maintenance](https://img.shields.io/maintenance/yes/2017.svg)
-[![circle-ci](https://img.shields.io/circleci/project/github/aerogear/aerogear-ios-push/master.svg)](https://circleci.com/gh/aerogear/aerogear-ios-push)
+![Maintenance](https://img.shields.io/maintenance/yes/2020.svg)
 [![License](https://img.shields.io/badge/-Apache%202.0-blue.svg)](https://opensource.org/s/Apache-2.0)
 [![GitHub release](https://img.shields.io/github/release/aerogear/aerogear-ios-push.svg)](https://github.com/aerogear/aerogear-ios-push/releases)
-[![CocoaPods](https://img.shields.io/cocoapods/v/AeroGearPush-Swift.svg)](https://cocoapods.org/pods/AeroGearPush-Swift)
-[![Platform](https://img.shields.io/cocoapods/p/AeroGearPush-Swift.svg)](https://cocoapods.org/pods/AeroGearPush-Swift)
+[![CocoaPods](https://img.shields.io/cocoapods/v/AeroGear-UPS-Client.svg)](https://cocoapods.org/pods/AeroGear-UPS-Client-Swift)
+[![Platform](https://img.shields.io/cocoapods/p/AeroGear-UPS-Client.svg)](https://cocoapods.org/pods/AeroGear-UPS-Client-Swift)
 
 A handy library that helps to register iOS applications with the AeroGear UnifiedPush Server.
 
