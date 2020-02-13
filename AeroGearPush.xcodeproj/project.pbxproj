@@ -7,9 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		482A24ED1B09D4BF00CE5BDC /* PushAnalyticsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482A24EB1B09D45000CE5BDC /* PushAnalyticsTests.swift */; };
 		48AAA6E81C450DA90048C53A /* pushproperties.plist in Resources */ = {isa = PBXBuildFile; fileRef = 48AAA6E71C450DA90048C53A /* pushproperties.plist */; };
-		48EDFAE61B00E8D300F8D11F /* PushAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48EDFAE51B00E8D300F8D11F /* PushAnalytics.swift */; };
 		6F46417219654E4A00D2B1C9 /* DeviceRegistration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F46417119654E4A00D2B1C9 /* DeviceRegistration.swift */; };
 		6F464174196564A500D2B1C9 /* ClientDeviceInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F464173196564A500D2B1C9 /* ClientDeviceInformation.swift */; };
 		6F4641771965660300D2B1C9 /* ClientDeviceInformationImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4641761965660300D2B1C9 /* ClientDeviceInformationImpl.swift */; };
@@ -60,9 +58,7 @@
 
 /* Begin PBXFileReference section */
 		07B7A95683BA849A36EB18D1 /* Pods_AeroGearPushTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AeroGearPushTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		482A24EB1B09D45000CE5BDC /* PushAnalyticsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushAnalyticsTests.swift; sourceTree = "<group>"; };
 		48AAA6E71C450DA90048C53A /* pushproperties.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = pushproperties.plist; sourceTree = "<group>"; };
-		48EDFAE51B00E8D300F8D11F /* PushAnalytics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushAnalytics.swift; sourceTree = "<group>"; };
 		6F46417119654E4A00D2B1C9 /* DeviceRegistration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceRegistration.swift; sourceTree = "<group>"; };
 		6F464173196564A500D2B1C9 /* ClientDeviceInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientDeviceInformation.swift; sourceTree = "<group>"; };
 		6F4641761965660300D2B1C9 /* ClientDeviceInformationImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientDeviceInformationImpl.swift; sourceTree = "<group>"; };
@@ -148,7 +144,6 @@
 				6F464175196565EE00D2B1C9 /* Internal */,
 				6F46417119654E4A00D2B1C9 /* DeviceRegistration.swift */,
 				6F464173196564A500D2B1C9 /* ClientDeviceInformation.swift */,
-				48EDFAE51B00E8D300F8D11F /* PushAnalytics.swift */,
 				6F71353419646266009B26D8 /* Supporting Files */,
 			);
 			path = AeroGearPush;
@@ -166,7 +161,6 @@
 			isa = PBXGroup;
 			children = (
 				6F71354319646266009B26D8 /* DeviceRegistrationTests.swift */,
-				482A24EB1B09D45000CE5BDC /* PushAnalyticsTests.swift */,
 				6F71354119646266009B26D8 /* Supporting Files */,
 			);
 			path = AeroGearPushTests;
@@ -338,7 +332,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				48EDFAE61B00E8D300F8D11F /* PushAnalytics.swift in Sources */,
 				6F4641771965660300D2B1C9 /* ClientDeviceInformationImpl.swift in Sources */,
 				6F46417219654E4A00D2B1C9 /* DeviceRegistration.swift in Sources */,
 				6F464174196564A500D2B1C9 /* ClientDeviceInformation.swift in Sources */,
@@ -349,7 +342,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				482A24ED1B09D4BF00CE5BDC /* PushAnalyticsTests.swift in Sources */,
 				6F71354419646266009B26D8 /* DeviceRegistrationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
